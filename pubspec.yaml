@@ -9,8 +9,11 @@ environment:
 
 dependencies:
   # UI
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: ^1.0.3
   google_fonts: ^2.1.0
+  intl: ^0.17.0
 
   # Firebase
   firebase_core: ^1.5.0
@@ -18,17 +21,16 @@ dependencies:
   cloud_firestore: ^2.5.0
   firebase_crashlytics: ^2.2.0
   firebase_analytics: ^8.3.0
-  
+
   # State management
   bloc: ^7.1.0
   flutter_bloc: ^7.1.0
   hydrated_bloc: ^7.0.1
   get: ^4.3.8
-  
+
   # DI
   injectable: ^1.5.0
   get_it: ^7.2.0
-  
 
   flutter:
     sdk: flutter
@@ -38,7 +40,7 @@ dev_dependencies:
     sdk: flutter
   injectable_generator: ^1.4.1
   build_runner: ^2.1.1
-  
+
   lint: ^1.6.0
 
 flutter:
@@ -57,3 +59,5 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+flutter_intl:
+  enabled: true
