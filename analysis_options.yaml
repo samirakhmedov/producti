@@ -4,6 +4,7 @@ analyzer:
   exclude: [
     'lib/*.config.dart',
     'lib/*.g.dart',
+    'lib/generated/**/*.dart'
     ]
 
 linter:

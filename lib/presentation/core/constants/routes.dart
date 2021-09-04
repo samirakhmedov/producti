@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:producti/generated/l10n.dart';
 
 final routes = {
-  '/': (context) => const SizedBox(
+  '/': (BuildContext context) => SizedBox(
         child: Center(
-          child: Text('Hello world!'),
+          child: Text(S.of(context).test),
         ),
       ),
 };
