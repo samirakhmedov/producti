@@ -32,6 +32,8 @@ class AppWidget extends StatelessWidget {
         Locale('ru', ''), // Spanish, no country code
       ],
       initialRoute: '/',
+      theme: kLightTheme,
+      darkTheme: kDarkTheme,
     );
   }
 }
