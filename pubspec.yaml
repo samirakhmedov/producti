@@ -29,6 +29,10 @@ dependencies:
   hydrated_bloc: ^7.0.1
   get: ^4.3.8
 
+  # Dart features
+  equatable: ^2.0.3
+  dartz: ^0.10.0
+  
   # DI
   injectable: ^1.5.0
   get_it: ^7.2.0

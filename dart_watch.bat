@@ -1,1 +1,1 @@
-flutter packages pub run build_runner watch --delete-conflicting-output
+flutter packages pub run build_runner watch

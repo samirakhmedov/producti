@@ -103,7 +103,7 @@ final kDarkTheme = ThemeData(
       /// On launch text
 
       headline1: _kBiggerHeaderTextStyle.copyWith(
-        color: kDarkerGray,
+        color: _kWhite,
       ),
 
       /// Header on log in screens
@@ -169,7 +169,7 @@ final kLightTheme = ThemeData(
         color: _kBlack,
       ),
       headline1: _kBiggerHeaderTextStyle.copyWith(
-        color: _kBlack,
+        color: kDarkerGray,
       ),
       headline2: _kHeaderTextStyle.copyWith(
         color: _kMainLightColor,

@@ -11,7 +11,8 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart' as _i5;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/core/firebase_module.dart'
+import 'application/core/firebase_module.dart' as _i8;
+import 'application/launch/launch_bloc.dart'
     as _i7; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
@@ -24,7 +25,8 @@ _i1.GetIt initDependecies(_i1.GetIt get,
   gh.factory<_i4.FirebaseAuth>(() => firebaseModule.authentication);
   gh.factory<_i5.FirebaseCrashlytics>(() => firebaseModule.crashlytics);
   gh.factory<_i6.FirebaseFirestore>(() => firebaseModule.store);
+  gh.factory<_i7.LaunchBloc>(() => _i7.LaunchBloc());
   return get;
 }
 
-class _$FirebaseModule extends _i7.FirebaseModule {}
+class _$FirebaseModule extends _i8.FirebaseModule {}

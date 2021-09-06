@@ -31,7 +31,7 @@ class AppWidget extends StatelessWidget {
         Locale('en', ''), // English, no country code
         Locale('ru', ''), // Spanish, no country code
       ],
-      initialRoute: '/',
+      initialRoute: '/launch',
       theme: kLightTheme,
       darkTheme: kDarkTheme,
     );
