@@ -22,41 +22,28 @@ class TabData {
   });
 }
 
-class OnboardingPage extends StatefulWidget {
+class OnboardingPage extends StatelessWidget {
   const OnboardingPage({Key? key}) : super(key: key);
 
   @override
-  _OnboardingPageState createState() => _OnboardingPageState();
-}
-
-class _OnboardingPageState extends State<OnboardingPage>
-    with TickerProviderStateMixin {
-  final OnboardingPageController _controller = OnboardingPageController();
-
-  late final PageController _pageController;
-
-  @override
-  void initState() {
-    _pageController = PageController();
-
-    super.initState();
-  }
-
-  String _getImagePath(int index) {
-    final isDarkTheme = ThemeHelper.isDarkMode(context);
-
-    return "assets/onboarding_${isDarkTheme ? 'dark_' : ''}${index + 1}.svg";
-  }
-
-  void _next() {
-    context.read<LaunchBloc>().add(const LaunchSwitchOnboardingStatus());
-
-    Navigator.of(context).pushReplacementNamed(AppRoutes.launch);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    String _getImagePath(int index) {
+      final isDarkTheme = ThemeHelper.isDarkMode(context);
+
+      return "assets/onboarding_${isDarkTheme ? 'dark_' : ''}${index + 1}.svg";
+    }
+
+    void _next() {
+      context.read<LaunchBloc>().add(const LaunchSwitchOnboardingStatus());
+
+      Navigator.of(context).pushReplacementNamed(AppRoutes.launch);
+    }
+
     final size = MediaQuery.of(context).size;
+
+    final OnboardingPageController _controller = OnboardingPageController();
+
+    final PageController _pageController = PageController();
 
     final _tabDataList = [
       TabData(

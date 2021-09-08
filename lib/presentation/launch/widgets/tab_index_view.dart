@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:producti/presentation/core/constants/constants.dart';
 import 'package:producti_ui/producti_ui.dart';
 
 class TabIndexView extends StatefulWidget {
