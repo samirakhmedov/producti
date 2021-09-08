@@ -1,7 +1,13 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+class ThemeHelper {
+  static bool isDarkMode(BuildContext context) {
+    final brightness = MediaQuery.of(context).platformBrightness;
+
+    return brightness == Brightness.dark;
+  }
+}
 
 const _kBackgroundDark = Color(0xFF151414);
 const _kBackgroundLight = Color(0xFFFAFAFA);

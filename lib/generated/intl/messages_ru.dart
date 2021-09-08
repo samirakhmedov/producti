@@ -20,6 +20,17 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) =>
-      <String, Function>{"test": MessageLookupByLibrary.simpleMessage("Тест")};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "comfortable": MessageLookupByLibrary.simpleMessage("Удобно"),
+        "effective": MessageLookupByLibrary.simpleMessage("Эффективно"),
+        "fast": MessageLookupByLibrary.simpleMessage("Быстро"),
+        "next": MessageLookupByLibrary.simpleMessage("Далее"),
+        "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
+            "Прекрасный инструмент для быстрых действий и ежедневного пользования."),
+        "onboardingDesc2": MessageLookupByLibrary.simpleMessage(
+            "Изменяемый и уникальный вид приложения. \n Будь боссом, чел."),
+        "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
+            "Создай список дел, потом напоминание, скопируй все в новую доску и поделись ею с друзьями (если они у тебя есть). \n Вау. Довольно эффективно."),
+        "skip": MessageLookupByLibrary.simpleMessage("Пропустить")
+      };
 }

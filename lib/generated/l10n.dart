@@ -50,11 +50,81 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Test`
-  String get test {
+  /// `Incredible every day tool with incredible performance.`
+  String get onboardingDesc1 {
     return Intl.message(
-      'Test',
-      name: 'test',
+      'Incredible every day tool with incredible performance.',
+      name: 'onboardingDesc1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Managable and custom view of app. \n Be the boss, bruh.`
+  String get onboardingDesc2 {
+    return Intl.message(
+      'Managable and custom view of app. \n Be the boss, bruh.',
+      name: 'onboardingDesc2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create group with todos, then create reminder, add all this to new table and share with your freinds (if you have). \n Wooaah. Pretty effective tool.`
+  String get onboardingDesc3 {
+    return Intl.message(
+      'Create group with todos, then create reminder, add all this to new table and share with your freinds (if you have). \n Wooaah. Pretty effective tool.',
+      name: 'onboardingDesc3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skip`
+  String get skip {
+    return Intl.message(
+      'Skip',
+      name: 'skip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message(
+      'Next',
+      name: 'next',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fast`
+  String get fast {
+    return Intl.message(
+      'Fast',
+      name: 'fast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comfortable`
+  String get comfortable {
+    return Intl.message(
+      'Comfortable',
+      name: 'comfortable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Effective`
+  String get effective {
+    return Intl.message(
+      'Effective',
+      name: 'effective',
       desc: '',
       args: [],
     );

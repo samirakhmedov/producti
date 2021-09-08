@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:producti/application/launch/bloc/launch_bloc.dart';
 import 'package:producti/presentation/core/constants/constants.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LaunchPage extends StatelessWidget {
   const LaunchPage({Key? key}) : super(key: key);
@@ -11,9 +13,15 @@ class LaunchPage extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     Future.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 2),
       () {
-        Navigator.of(context).pushReplacementNamed('/onboarding');
+        final launchBloc = context.read<LaunchBloc>();
+
+        final state = launchBloc.state;
+
+        Navigator.of(context).pushReplacementNamed(
+          state.onboardingPassed ? AppRoutes.launch : AppRoutes.onboarding,
+        );
       },
     );
 

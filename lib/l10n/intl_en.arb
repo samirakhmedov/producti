@@ -1,3 +1,10 @@
 {
-    "test": "Test"
+    "onboardingDesc1": "Incredible every day tool with incredible performance.",
+    "onboardingDesc2": "Managable and custom view of app. \n Be the boss, bruh.",
+    "onboardingDesc3": "Create group with todos, then create reminder, add all this to new table and share with your freinds (if you have). \n Wooaah. Pretty effective tool.",
+    "skip": "Skip",
+    "next": "Next",
+    "fast": "Fast",
+    "comfortable": "Comfortable",
+    "effective": "Effective"
 }

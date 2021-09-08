@@ -547,12 +547,12 @@ packages:
     source: hosted
     version: "0.2.1"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.3"
   path_provider_linux:
     dependency: transitive
     description:
@@ -623,6 +623,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.3"
+  producti_ui:
+    dependency: "direct main"
+    description:
+      path: producti_ui
+      relative: true
+    source: path
+    version: "0.0.1"
   provider:
     dependency: transitive
     description:
