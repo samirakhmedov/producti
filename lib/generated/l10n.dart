@@ -70,10 +70,10 @@ class S {
     );
   }
 
-  /// `Create group with todos, then create reminder, add all this to new table and share with your freinds (if you have). \n Wooaah. Pretty effective tool.`
+  /// `Create group with todos, then create reminder, add all this to new table and share with your freinds (if you have). \n \n Wooaah. Pretty effective tool.`
   String get onboardingDesc3 {
     return Intl.message(
-      'Create group with todos, then create reminder, add all this to new table and share with your freinds (if you have). \n Wooaah. Pretty effective tool.',
+      'Create group with todos, then create reminder, add all this to new table and share with your freinds (if you have). \n \n Wooaah. Pretty effective tool.',
       name: 'onboardingDesc3',
       desc: '',
       args: [],

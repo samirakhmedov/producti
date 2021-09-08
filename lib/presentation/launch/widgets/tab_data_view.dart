@@ -14,9 +14,13 @@ class TabDataView extends StatelessWidget {
 
     final textTheme = theme.textTheme;
 
+    final size = MediaQuery.of(context).size;
+
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Gap(
+          size: size.height * .2,
+        ),
         Text(
           data.title,
           style: textTheme.headline1!.copyWith(
@@ -26,6 +30,7 @@ class TabDataView extends StatelessWidget {
         const Gap(size: 30),
         SvgPicture.asset(
           data.imagePath,
+          height: 115,
         ),
         const Gap(size: 30),
         Text(

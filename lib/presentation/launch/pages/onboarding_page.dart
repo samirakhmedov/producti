@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:producti/application/launch/bloc/launch_bloc.dart';
 import 'package:producti/application/launch/getx/onboarding_page_controller.dart';
@@ -32,15 +33,11 @@ class _OnboardingPageState extends State<OnboardingPage>
     with TickerProviderStateMixin {
   final OnboardingPageController _controller = OnboardingPageController();
 
-  late final TabController _tabController;
+  late final PageController _pageController;
 
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
-
-    _tabController.addListener(() {
-      _controller.currentIndex = _tabController.index;
-    });
+    _pageController = PageController();
 
     super.initState();
   }
@@ -61,6 +58,24 @@ class _OnboardingPageState extends State<OnboardingPage>
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
+    final _tabDataList = [
+      TabData(
+        imagePath: _getImagePath(0),
+        title: S.of(context).fast,
+        description: S.of(context).onboardingDesc1,
+      ),
+      TabData(
+        imagePath: _getImagePath(1),
+        title: S.of(context).comfortable,
+        description: S.of(context).onboardingDesc2,
+      ),
+      TabData(
+        imagePath: _getImagePath(2),
+        title: S.of(context).effective,
+        description: S.of(context).onboardingDesc3,
+      ),
+    ];
+
     return Scaffold(
       body: SafeArea(
         child: DefaultTabController(
@@ -68,32 +83,33 @@ class _OnboardingPageState extends State<OnboardingPage>
           child: Column(
             children: [
               Expanded(
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    TabData(
-                      imagePath: _getImagePath(0),
-                      title: S.of(context).fast,
-                      description: S.of(context).onboardingDesc1,
-                    ),
-                    TabData(
-                      imagePath: _getImagePath(1),
-                      title: S.of(context).comfortable,
-                      description: S.of(context).onboardingDesc2,
-                    ),
-                    TabData(
-                      imagePath: _getImagePath(2),
-                      title: S.of(context).effective,
-                      description: S.of(context).onboardingDesc3,
-                    ),
-                  ]
-                      .map(
-                        (e) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40),
-                          child: TabDataView(data: e),
+                child: NotificationListener<ScrollNotification>(
+                  onNotification: (notification) {
+                    if (notification is UserScrollNotification &&
+                        notification.direction != ScrollDirection.idle) {
+                      final change =
+                          notification.direction == ScrollDirection.reverse
+                              ? 1
+                              : -1;
+
+                      _controller.currentIndex =
+                          _controller.currentIndex + change;
+                    }
+
+                    return false;
+                  },
+                  child: PageView.builder(
+                    controller: _pageController,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        child: TabDataView(
+                          data: _tabDataList[index],
                         ),
-                      )
-                      .toList(),
+                      );
+                    },
+                    itemCount: 3,
+                  ),
                 ),
               ),
               SizedBox(
@@ -121,11 +137,19 @@ class _OnboardingPageState extends State<OnboardingPage>
                         ClickableText(
                           text: S.of(context).next,
                           onTap: () {
-                            if (_tabController.index == 2) {
+                            final page = _controller.currentIndex;
+
+                            if (page == 2) {
                               _next();
                             } else {
-                              _tabController
-                                  .animateTo(_tabController.index + 1);
+                              _pageController.animateToPage(
+                                page + 1,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.easeIn,
+                              );
+
+                              _controller.currentIndex =
+                                  _controller.currentIndex + 1;
                             }
                           },
                         ),

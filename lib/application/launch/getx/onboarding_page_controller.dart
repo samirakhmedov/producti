@@ -6,5 +6,7 @@ class OnboardingPageController extends GetxController {
 
   int get currentIndex => _currentIndex.value;
 
-  set currentIndex(int newIndex) => _currentIndex.value = newIndex;
+  set currentIndex(int newIndex) {
+    if (newIndex >= 0 && newIndex <= 2) _currentIndex.value = newIndex;
+  }
 }

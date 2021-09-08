@@ -30,7 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onboardingDesc2": MessageLookupByLibrary.simpleMessage(
             "Изменяемый и уникальный вид приложения. \n Будь боссом, чел."),
         "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
-            "Создай список дел, потом напоминание, скопируй все в новую доску и поделись ею с друзьями (если они у тебя есть). \n Вау. Довольно эффективно."),
+            "Создай список дел, потом напоминание, скопируй все в новую доску и поделись ею с друзьями (если они у тебя есть). \n \n Вау. Довольно эффективно."),
         "skip": MessageLookupByLibrary.simpleMessage("Пропустить")
       };
 }

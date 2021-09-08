@@ -30,7 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onboardingDesc2": MessageLookupByLibrary.simpleMessage(
             "Managable and custom view of app. \n Be the boss, bruh."),
         "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
-            "Create group with todos, then create reminder, add all this to new table and share with your freinds (if you have). \n Wooaah. Pretty effective tool."),
+            "Create group with todos, then create reminder, add all this to new table and share with your freinds (if you have). \n \n Wooaah. Pretty effective tool."),
         "skip": MessageLookupByLibrary.simpleMessage("Skip")
       };
 }
