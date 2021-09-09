@@ -129,6 +129,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Email was already used by other greedy user!`
+  String get emailAlreadyInUse {
+    return Intl.message(
+      'Email was already used by other greedy user!',
+      name: 'emailAlreadyInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This user was removed from system. Create new one.`
+  String get userRemoved {
+    return Intl.message(
+      'This user was removed from system. Create new one.',
+      name: 'userRemoved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are trying to sign in to not existing account. Create one firstly. :)`
+  String get userNotExists {
+    return Intl.message(
+      'You are trying to sign in to not existing account. Create one firstly. :)',
+      name: 'userNotExists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not correct password for this account!`
+  String get wrongPassword {
+    return Intl.message(
+      'Not correct password for this account!',
+      name: 'wrongPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No local account to sign in automatically!`
+  String get userNotLoggedIn {
+    return Intl.message(
+      'No local account to sign in automatically!',
+      name: 'userNotLoggedIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not valid email was typed!`
+  String get invalidEmail {
+    return Intl.message(
+      'Not valid email was typed!',
+      name: 'invalidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Too short password!`
+  String get invalidPassword {
+    return Intl.message(
+      'Too short password!',
+      name: 'invalidPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This is where the fun continues, boy.`
+  String get funContinues {
+    return Intl.message(
+      'This is where the fun continues, boy.',
+      name: 'funContinues',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in`
+  String get signIn {
+    return Intl.message(
+      'Sign in',
+      name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

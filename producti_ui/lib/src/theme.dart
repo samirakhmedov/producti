@@ -85,7 +85,6 @@ final kDarkTheme = ThemeData(
     color: _kMainDarkColor,
   ),
   primaryColor: _kMainDarkColor,
-  accentColor: _kMainDarkColor,
   primaryColorDark: _kMainDarkColor,
   textTheme: GoogleFonts.tajawalTextTheme(
     TextTheme(
@@ -161,7 +160,6 @@ final kLightTheme = ThemeData(
     color: _kMainLightColor,
   ),
   primaryColor: _kMainLightColor,
-  accentColor: _kMainLightColor,
   primaryColorDark: _kMainLightColor,
   textTheme: GoogleFonts.tajawalTextTheme(
     TextTheme(

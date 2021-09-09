@@ -9,5 +9,6 @@ analyzer:
 
 linter:
   rules:
-    sort_pub_dependecies: false
+    sort_pub_dependecies: none
+    invalid_use_of_protected_member: error
 

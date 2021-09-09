@@ -23,7 +23,15 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "comfortable": MessageLookupByLibrary.simpleMessage("Удобно"),
         "effective": MessageLookupByLibrary.simpleMessage("Эффективно"),
+        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "Этот e-mail уже был использован другим человеком!"),
         "fast": MessageLookupByLibrary.simpleMessage("Быстро"),
+        "funContinues": MessageLookupByLibrary.simpleMessage(
+            "Здесь начнется твое меселье, сладкий."),
+        "invalidEmail":
+            MessageLookupByLibrary.simpleMessage("Невалидный email!"),
+        "invalidPassword":
+            MessageLookupByLibrary.simpleMessage("Слишком короткий пароль!"),
         "next": MessageLookupByLibrary.simpleMessage("Далее"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
             "Прекрасный инструмент для быстрых действий и ежедневного пользования."),
@@ -31,6 +39,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Изменяемый и уникальный вид приложения. \n Будь боссом, чел."),
         "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
             "Создай список дел, потом напоминание, скопируй все в новую доску и поделись ею с друзьями (если они у тебя есть). \n \n Вау. Довольно эффективно."),
-        "skip": MessageLookupByLibrary.simpleMessage("Пропустить")
+        "signIn": MessageLookupByLibrary.simpleMessage("Вход"),
+        "skip": MessageLookupByLibrary.simpleMessage("Пропустить"),
+        "userNotExists": MessageLookupByLibrary.simpleMessage(
+            "Сначала надо создать аккаунт, чтобы потом войти в него. :)"),
+        "userNotLoggedIn": MessageLookupByLibrary.simpleMessage(
+            "Вы не зарегестрированы на этом устройстве!"),
+        "userRemoved": MessageLookupByLibrary.simpleMessage(
+            "Этого пользователь был удален из системы. Создайте нового."),
+        "wrongPassword":
+            MessageLookupByLibrary.simpleMessage("Неверный пароль!")
       };
 }

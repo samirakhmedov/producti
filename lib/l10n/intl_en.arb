@@ -6,5 +6,14 @@
     "next": "Next",
     "fast": "Fast",
     "comfortable": "Comfortable",
-    "effective": "Effective"
+    "effective": "Effective",
+    "emailAlreadyInUse": "Email was already used by other greedy user!",
+    "userRemoved": "This user was removed from system. Create new one.",
+    "userNotExists": "You are trying to sign in to not existing account. Create one firstly. :)",
+    "wrongPassword": "Not correct password for this account!",
+    "userNotLoggedIn": "No local account to sign in automatically!",
+    "invalidEmail": "Not valid email was typed!",
+    "invalidPassword": "Too short password!",
+    "funContinues": "This is where the fun continues, boy.",
+    "signIn": "Sign in"
 }

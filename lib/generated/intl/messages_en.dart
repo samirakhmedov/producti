@@ -23,7 +23,15 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "comfortable": MessageLookupByLibrary.simpleMessage("Comfortable"),
         "effective": MessageLookupByLibrary.simpleMessage("Effective"),
+        "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
+            "Email was already used by other greedy user!"),
         "fast": MessageLookupByLibrary.simpleMessage("Fast"),
+        "funContinues": MessageLookupByLibrary.simpleMessage(
+            "This is where the fun continues, boy."),
+        "invalidEmail":
+            MessageLookupByLibrary.simpleMessage("Not valid email was typed!"),
+        "invalidPassword":
+            MessageLookupByLibrary.simpleMessage("Too short password!"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
             "Incredible every day tool with incredible performance."),
@@ -31,6 +39,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Managable and custom view of app. \n Be the boss, bruh."),
         "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
             "Create group with todos, then create reminder, add all this to new table and share with your freinds (if you have). \n \n Wooaah. Pretty effective tool."),
-        "skip": MessageLookupByLibrary.simpleMessage("Skip")
+        "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
+        "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "userNotExists": MessageLookupByLibrary.simpleMessage(
+            "You are trying to sign in to not existing account. Create one firstly. :)"),
+        "userNotLoggedIn": MessageLookupByLibrary.simpleMessage(
+            "No local account to sign in automatically!"),
+        "userRemoved": MessageLookupByLibrary.simpleMessage(
+            "This user was removed from system. Create new one."),
+        "wrongPassword": MessageLookupByLibrary.simpleMessage(
+            "Not correct password for this account!")
       };
 }
