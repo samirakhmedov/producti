@@ -25,20 +25,20 @@ class TabData {
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({Key? key}) : super(key: key);
 
+  String _getImagePath(BuildContext context, int index) {
+    final isDarkTheme = ThemeHelper.isDarkMode(context);
+
+    return "assets/onboarding_${isDarkTheme ? 'dark_' : ''}${index + 1}.svg";
+  }
+
+  void _next(BuildContext context) {
+    context.read<LaunchBloc>().add(const LaunchSwitchOnboardingStatus());
+
+    Navigator.of(context).pushReplacementNamed(AppRoutes.launch);
+  }
+
   @override
   Widget build(BuildContext context) {
-    String _getImagePath(int index) {
-      final isDarkTheme = ThemeHelper.isDarkMode(context);
-
-      return "assets/onboarding_${isDarkTheme ? 'dark_' : ''}${index + 1}.svg";
-    }
-
-    void _next() {
-      context.read<LaunchBloc>().add(const LaunchSwitchOnboardingStatus());
-
-      Navigator.of(context).pushReplacementNamed(AppRoutes.launch);
-    }
-
     final size = MediaQuery.of(context).size;
 
     final OnboardingPageController _controller = OnboardingPageController();
@@ -47,17 +47,17 @@ class OnboardingPage extends StatelessWidget {
 
     final _tabDataList = [
       TabData(
-        imagePath: _getImagePath(0),
+        imagePath: _getImagePath(context, 0),
         title: S.of(context).fast,
         description: S.of(context).onboardingDesc1,
       ),
       TabData(
-        imagePath: _getImagePath(1),
+        imagePath: _getImagePath(context, 1),
         title: S.of(context).comfortable,
         description: S.of(context).onboardingDesc2,
       ),
       TabData(
-        imagePath: _getImagePath(2),
+        imagePath: _getImagePath(context, 2),
         title: S.of(context).effective,
         description: S.of(context).onboardingDesc3,
       ),
@@ -101,47 +101,51 @@ class OnboardingPage extends StatelessWidget {
               ),
               SizedBox(
                 width: size.width,
-                height: 50,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ClickableText(
+                height: 80,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                        left: 0,
+                        child: ClickableText(
                           text: S.of(context).skip,
                           color: kLightGray,
                           onTap: () {
-                            _next();
+                            _next(context);
                           },
                         ),
-                        Obx(
-                          () => TabIndexView(
-                            length: 3,
-                            current: _controller.currentIndex,
-                          ),
+                      ),
+                      Obx(
+                        () => TabIndexView(
+                          length: 3,
+                          current: _controller.currentIndex,
                         ),
-                        ClickableText(
+                      ),
+                      Positioned(
+                        right: 0,
+                        child: ClickableText(
                           text: S.of(context).next,
                           onTap: () {
                             final page = _controller.currentIndex;
 
                             if (page == 2) {
-                              _next();
-                            } else {
-                              _pageController.animateToPage(
-                                page + 1,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeIn,
-                              );
-
-                              _controller.currentIndex =
-                                  _controller.currentIndex + 1;
+                              return _next(context);
                             }
+
+                            _pageController.animateToPage(
+                              page + 1,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeIn,
+                            );
+
+                            _controller.currentIndex =
+                                _controller.currentIndex + 1;
                           },
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
