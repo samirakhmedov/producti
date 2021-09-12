@@ -15,5 +15,9 @@
     "invalidEmail": "Невалидный email!",
     "invalidPassword": "Слишком короткий пароль!",
     "funContinues": "Здесь начнется твое меселье, сладкий.",
-    "signIn": "Вход"
+    "signIn": "Вход",
+    "signInLongButtonText": "А НУ ПУСТИ МЕНЯЯЯ",
+    "email": "Email",
+    "password": "Пароль",
+    "repeatPassword": "Пароль снова"
 }

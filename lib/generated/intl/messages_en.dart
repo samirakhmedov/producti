@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "comfortable": MessageLookupByLibrary.simpleMessage("Comfortable"),
         "effective": MessageLookupByLibrary.simpleMessage("Effective"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "Email was already used by other greedy user!"),
         "fast": MessageLookupByLibrary.simpleMessage("Fast"),
@@ -39,7 +40,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Managable and custom view of app. \n Be the boss, bruh."),
         "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
             "Create group with todos, then create reminder, add all this to new table and share with your freinds (if you have). \n \n Wooaah. Pretty effective tool."),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "repeatPassword":
+            MessageLookupByLibrary.simpleMessage("Repeat password"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
+        "signInLongButtonText":
+            MessageLookupByLibrary.simpleMessage("LET ME IIIIN"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "userNotExists": MessageLookupByLibrary.simpleMessage(
             "You are trying to sign in to not existing account. Create one firstly. :)"),

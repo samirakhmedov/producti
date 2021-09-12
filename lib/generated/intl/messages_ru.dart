@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "comfortable": MessageLookupByLibrary.simpleMessage("Удобно"),
         "effective": MessageLookupByLibrary.simpleMessage("Эффективно"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "Этот e-mail уже был использован другим человеком!"),
         "fast": MessageLookupByLibrary.simpleMessage("Быстро"),
@@ -39,7 +40,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Изменяемый и уникальный вид приложения. \n Будь боссом, чел."),
         "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
             "Создай список дел, потом напоминание, скопируй все в новую доску и поделись ею с друзьями (если они у тебя есть). \n \n Вау. Довольно эффективно."),
+        "password": MessageLookupByLibrary.simpleMessage("Пароль"),
+        "repeatPassword": MessageLookupByLibrary.simpleMessage("Пароль снова"),
         "signIn": MessageLookupByLibrary.simpleMessage("Вход"),
+        "signInLongButtonText":
+            MessageLookupByLibrary.simpleMessage("А НУ ПУСТИ МЕНЯЯЯ"),
         "skip": MessageLookupByLibrary.simpleMessage("Пропустить"),
         "userNotExists": MessageLookupByLibrary.simpleMessage(
             "Сначала надо создать аккаунт, чтобы потом войти в него. :)"),

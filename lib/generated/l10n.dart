@@ -219,6 +219,46 @@ class S {
       args: [],
     );
   }
+
+  /// `LET ME IIIIN`
+  String get signInLongButtonText {
+    return Intl.message(
+      'LET ME IIIIN',
+      name: 'signInLongButtonText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Repeat password`
+  String get repeatPassword {
+    return Intl.message(
+      'Repeat password',
+      name: 'repeatPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

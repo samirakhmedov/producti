@@ -15,5 +15,9 @@
     "invalidEmail": "Not valid email was typed!",
     "invalidPassword": "Too short password!",
     "funContinues": "This is where the fun continues, boy.",
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "signInLongButtonText": "LET ME IIIIN",
+    "email": "Email",
+    "password": "Password",
+    "repeatPassword": "Repeat password"
 }

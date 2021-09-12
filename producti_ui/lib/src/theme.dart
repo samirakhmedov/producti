@@ -21,6 +21,7 @@ const _kMainLightColor = Color(0xFF3889E8);
 const kDarkerGray = Color(0xFF666666);
 const kGray = Color(0xFFCCCCCC);
 const kLightGray = Color(0xFFC4C4C4);
+const kLighterGray = Color(0xFFEBEBEB);
 
 const kRed = Color(0xFFDF2C2C);
 
@@ -75,6 +76,7 @@ const _kInputDecorationTheme = InputDecorationTheme(
     ),
     borderSide: BorderSide.none,
   ),
+  fillColor: kLighterGray,
   filled: true,
 );
 
@@ -86,7 +88,7 @@ final kDarkTheme = ThemeData(
   ),
   primaryColor: _kMainDarkColor,
   primaryColorDark: _kMainDarkColor,
-  textTheme: GoogleFonts.tajawalTextTheme(
+  textTheme: GoogleFonts.notoSansTextTheme(
     TextTheme(
       /// Onboarding text, subhead text
 
