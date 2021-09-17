@@ -20,7 +20,7 @@ class LaunchPage extends StatelessWidget {
         final state = launchBloc.state;
 
         Navigator.of(context).pushReplacementNamed(
-          state.onboardingPassed ? AppRoutes.signIn : AppRoutes.onboarding,
+          state.onboardingPassed ? AppRoutes.auth : AppRoutes.onboarding,
         );
       },
     );

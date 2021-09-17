@@ -15,9 +15,16 @@
     "invalidEmail": "Not valid email was typed!",
     "invalidPassword": "Too short password!",
     "funContinues": "This is where the fun continues, boy.",
+    "funBegins": "This is where the fun begins, boy.",
     "signIn": "Sign in",
     "signInLongButtonText": "LET ME IIIIN",
     "email": "Email",
     "password": "Password",
-    "repeatPassword": "Repeat password"
+    "repeatPassword": "Repeat password",
+    "notPartOfParty": "Still not part of our party?",
+    "join": "Just join it.",
+    "hatePeople": "You hate people?",
+    "signInAnonim": "Sign in anonimously.",
+    "alreadyCoolGuy": "Already in cool boys club?",
+    "letHim": "Let him in, boys."
 }

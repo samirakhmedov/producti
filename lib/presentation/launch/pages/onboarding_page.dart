@@ -34,7 +34,7 @@ class OnboardingPage extends StatelessWidget {
   void _next(BuildContext context) {
     context.read<LaunchBloc>().add(const LaunchSwitchOnboardingStatus());
 
-    Navigator.of(context).pushReplacementNamed(AppRoutes.signIn);
+    Navigator.of(context).pushReplacementNamed(AppRoutes.auth);
   }
 
   @override

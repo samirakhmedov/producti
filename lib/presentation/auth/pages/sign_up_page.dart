@@ -6,8 +6,8 @@ import 'package:producti/domain/auth/values/password.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti_ui/producti_ui.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +21,7 @@ class SignInPage extends StatelessWidget {
 
     final _email = TextEditingController();
     final _password = TextEditingController();
+    final _repeatPassword = TextEditingController();
 
     _email.addListener(() {
       authController.email = Email(_email.text);
@@ -30,10 +31,14 @@ class SignInPage extends StatelessWidget {
       authController.password = Password(_password.text);
     });
 
+    _repeatPassword.addListener(() {
+      authController.passwordRepeat = Password(_repeatPassword.text);
+    });
+
     return Column(
       children: [
         Text(
-          intl.funContinues,
+          intl.funBegins,
           style: textTheme.subtitle1,
         ),
         const Gap(size: 12),
@@ -54,9 +59,15 @@ class SignInPage extends StatelessWidget {
           controller: _password,
         ),
         const Gap(size: 14),
+        TextInputWidget(
+          prefixIcon: Icons.vpn_key,
+          hintText: intl.repeatPassword,
+          controller: _repeatPassword,
+        ),
+        const Gap(size: 14),
         OptionText(
-          start: intl.notPartOfParty,
-          end: ' ${intl.join}',
+          start: intl.alreadyCoolGuy,
+          end: ' ${intl.letHim}',
           onTap: () => authController.page = !authController.page,
         ),
         const Gap(size: 6),

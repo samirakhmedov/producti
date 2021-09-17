@@ -5,7 +5,7 @@ import 'package:producti/presentation/core/constants/constants.dart';
 import 'package:producti/application/core/error/error_codes.dart';
 
 class Email extends ValueObject<String> {
-  Email(String value) : super(value);
+  const Email(String value) : super(value);
 
   @override
   Either<Failure, String> get validatedValue => _validateEmail(currentValue);

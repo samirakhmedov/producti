@@ -4,7 +4,7 @@ import 'package:producti/application/core/error/failure.dart';
 import 'package:producti/domain/core/value_object.dart';
 
 class Password extends ValueObject<String> {
-  Password(String value) : super(value);
+  const Password(String value) : super(value);
 
   @override
   Either<Failure, String> get validatedValue => _validatePassword(currentValue);

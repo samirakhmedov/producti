@@ -2,7 +2,24 @@ import 'package:get/get.dart';
 import 'package:producti/domain/auth/values/email.dart';
 import 'package:producti/domain/auth/values/password.dart';
 
-class SignInPageController extends GetxController {
+class AuthPageController extends GetxController {
+  final _page = RxBool(true);
+
+  bool get page => _page.value;
+
+  set page(bool newValue) {
+    _page.value = newValue;
+
+    refreshState();
+  }
+
+  void refreshState() {
+    _enableValidation.value = false;
+    _email.value = Email('');
+    _password.value = Password('');
+    _passwordRepeat.value = Password('');
+  }
+
   final _enableValidation = RxBool(false);
 
   bool get enableValidation => _enableValidation.value;
@@ -20,4 +37,10 @@ class SignInPageController extends GetxController {
   Password get password => _password.value;
 
   set password(Password newValue) => _password.value = newValue;
+
+  final _passwordRepeat = Rx<Password>(Password(''));
+
+  Password get passwordRepeat => _passwordRepeat.value;
+
+  set passwordRepeat(Password newValue) => _passwordRepeat.value = newValue;
 }

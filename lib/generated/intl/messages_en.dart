@@ -21,19 +21,28 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "alreadyCoolGuy":
+            MessageLookupByLibrary.simpleMessage("Already in cool boys club?"),
         "comfortable": MessageLookupByLibrary.simpleMessage("Comfortable"),
         "effective": MessageLookupByLibrary.simpleMessage("Effective"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "Email was already used by other greedy user!"),
         "fast": MessageLookupByLibrary.simpleMessage("Fast"),
+        "funBegins": MessageLookupByLibrary.simpleMessage(
+            "This is where the fun begins, boy."),
         "funContinues": MessageLookupByLibrary.simpleMessage(
             "This is where the fun continues, boy."),
+        "hatePeople": MessageLookupByLibrary.simpleMessage("You hate people?"),
         "invalidEmail":
             MessageLookupByLibrary.simpleMessage("Not valid email was typed!"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Too short password!"),
+        "join": MessageLookupByLibrary.simpleMessage("Just join it."),
+        "letHim": MessageLookupByLibrary.simpleMessage("Let him in, boys."),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "notPartOfParty": MessageLookupByLibrary.simpleMessage(
+            "Still not part of our party?"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
             "Incredible every day tool with incredible performance."),
         "onboardingDesc2": MessageLookupByLibrary.simpleMessage(
@@ -44,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "repeatPassword":
             MessageLookupByLibrary.simpleMessage("Repeat password"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
+        "signInAnonim":
+            MessageLookupByLibrary.simpleMessage("Sign in anonimously."),
         "signInLongButtonText":
             MessageLookupByLibrary.simpleMessage("LET ME IIIIN"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),

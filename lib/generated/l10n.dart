@@ -210,6 +210,16 @@ class S {
     );
   }
 
+  /// `This is where the fun begins, boy.`
+  String get funBegins {
+    return Intl.message(
+      'This is where the fun begins, boy.',
+      name: 'funBegins',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sign in`
   String get signIn {
     return Intl.message(
@@ -255,6 +265,66 @@ class S {
     return Intl.message(
       'Repeat password',
       name: 'repeatPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Still not part of our party?`
+  String get notPartOfParty {
+    return Intl.message(
+      'Still not part of our party?',
+      name: 'notPartOfParty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Just join it.`
+  String get join {
+    return Intl.message(
+      'Just join it.',
+      name: 'join',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You hate people?`
+  String get hatePeople {
+    return Intl.message(
+      'You hate people?',
+      name: 'hatePeople',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in anonimously.`
+  String get signInAnonim {
+    return Intl.message(
+      'Sign in anonimously.',
+      name: 'signInAnonim',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already in cool boys club?`
+  String get alreadyCoolGuy {
+    return Intl.message(
+      'Already in cool boys club?',
+      name: 'alreadyCoolGuy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let him in, boys.`
+  String get letHim {
+    return Intl.message(
+      'Let him in, boys.',
+      name: 'letHim',
       desc: '',
       args: [],
     );

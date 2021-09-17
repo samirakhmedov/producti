@@ -6,7 +6,7 @@ import 'package:producti/application/core/error/failure.dart';
 abstract class ValueObject<T> extends Equatable {
   final T _value;
 
-  ValueObject(this._value);
+  const ValueObject(this._value);
 
   @protected
   T get currentValue => _value;

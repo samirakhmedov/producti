@@ -14,10 +14,17 @@
     "userNotLoggedIn": "Вы не зарегестрированы на этом устройстве!",
     "invalidEmail": "Невалидный email!",
     "invalidPassword": "Слишком короткий пароль!",
-    "funContinues": "Здесь начнется твое меселье, сладкий.",
+    "funContinues": "Здесь продолжится твое веселье, сладкий.",
+    "funBegins": "Здесь начнется твое веселье, сладкий.",
     "signIn": "Вход",
     "signInLongButtonText": "А НУ ПУСТИ МЕНЯЯЯ",
     "email": "Email",
     "password": "Пароль",
-    "repeatPassword": "Пароль снова"
+    "repeatPassword": "Пароль снова",
+    "notPartOfParty": "Ты еще не циркач в нашем цирке?",
+    "join": "Присоединяйся.",
+    "hatePeople": "Ты ненавидишь людей?",
+    "signInAnonim": "Я тоже. Войди без регистрации.",
+    "alreadyCoolGuy": "Уже часть нашего цирка?",
+    "letHim": "Представление уже началось!"
 }

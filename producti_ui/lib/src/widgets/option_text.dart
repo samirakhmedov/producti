@@ -20,6 +20,7 @@ class OptionText extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     return RichText(
+      textAlign: TextAlign.center,
       text: TextSpan(
         text: start,
         style: textTheme.subtitle1,
