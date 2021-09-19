@@ -200,6 +200,16 @@ class S {
     );
   }
 
+  /// `Passwords are not equal!`
+  String get passswordsNotMatch {
+    return Intl.message(
+      'Passwords are not equal!',
+      name: 'passswordsNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `This is where the fun continues, boy.`
   String get funContinues {
     return Intl.message(
@@ -225,6 +235,16 @@ class S {
     return Intl.message(
       'Sign in',
       name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up`
+  String get signUp {
+    return Intl.message(
+      'Sign up',
+      name: 'signUp',
       desc: '',
       args: [],
     );

@@ -51,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Изменяемый и уникальный вид приложения. \n Будь боссом, чел."),
         "onboardingDesc3": MessageLookupByLibrary.simpleMessage(
             "Создай список дел, потом напоминание, скопируй все в новую доску и поделись ею с друзьями (если они у тебя есть). \n \n Вау. Довольно эффективно."),
+        "passswordsNotMatch":
+            MessageLookupByLibrary.simpleMessage("Пароли не совпадают!"),
         "password": MessageLookupByLibrary.simpleMessage("Пароль"),
         "repeatPassword": MessageLookupByLibrary.simpleMessage("Пароль снова"),
         "signIn": MessageLookupByLibrary.simpleMessage("Вход"),
@@ -58,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Я тоже. Войди без регистрации."),
         "signInLongButtonText":
             MessageLookupByLibrary.simpleMessage("А НУ ПУСТИ МЕНЯЯЯ"),
+        "signUp": MessageLookupByLibrary.simpleMessage("Регистрация"),
         "skip": MessageLookupByLibrary.simpleMessage("Пропустить"),
         "userNotExists": MessageLookupByLibrary.simpleMessage(
             "Сначала надо создать аккаунт, чтобы потом войти в него. :)"),

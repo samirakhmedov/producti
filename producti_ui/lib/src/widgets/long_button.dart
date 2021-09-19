@@ -29,7 +29,9 @@ class LongButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: textTheme.bodyText2,
+            style: textTheme.bodyText2!.copyWith(
+              color: theme.backgroundColor,
+            ),
           ),
         ),
       ),

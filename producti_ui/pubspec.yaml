@@ -10,12 +10,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_fonts: ^2.1.0
   flutter_keyboard_visibility: ^5.0.3
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  lint: ^1.7.2
 
 flutter: null
 

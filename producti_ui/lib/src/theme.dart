@@ -78,6 +78,12 @@ const _kInputDecorationTheme = InputDecorationTheme(
   ),
   fillColor: kLighterGray,
   filled: true,
+  errorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(20),
+    ),
+    borderSide: BorderSide.none,
+  ),
 );
 
 final kDarkTheme = ThemeData(
@@ -200,4 +206,5 @@ final kLightTheme = ThemeData(
       ),
     ),
   ),
+  inputDecorationTheme: _kInputDecorationTheme,
 );

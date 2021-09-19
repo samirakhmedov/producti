@@ -12,7 +12,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i7;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/core/app_module.dart' as _i11;
+import 'application/auth/bloc/auth_bloc.dart' as _i11;
+import 'application/core/app_module.dart' as _i12;
 import 'application/launch/bloc/launch_bloc.dart' as _i8;
 import 'data/auth/auth_repository_impl.dart' as _i10;
 import 'domain/auth/auth_repository.dart'
@@ -32,7 +33,8 @@ _i1.GetIt initDependecies(_i1.GetIt get,
   gh.factory<_i8.LaunchBloc>(() => _i8.LaunchBloc());
   gh.factory<_i9.AuthRepository>(() => _i10.AuthRepositoryImpl(
       get<_i7.FlutterSecureStorage>(), get<_i4.FirebaseAuth>()));
+  gh.factory<_i11.AuthBloc>(() => _i11.AuthBloc(get<_i9.AuthRepository>()));
   return get;
 }
 
-class _$FirebaseModule extends _i11.FirebaseModule {}
+class _$FirebaseModule extends _i12.FirebaseModule {}

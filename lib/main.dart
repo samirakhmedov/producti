@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:producti/application/auth/bloc/auth_bloc.dart';
 import 'package:producti/application/launch/bloc/launch_bloc.dart';
 import 'package:producti/presentation/core/widgets/app_widget.dart';
 
@@ -41,6 +42,9 @@ Future<void> main() async {
             providers: [
               BlocProvider<LaunchBloc>(
                 create: (context) => sl.get<LaunchBloc>(),
+              ),
+              BlocProvider<AuthBloc>(
+                create: (context) => sl.get<AuthBloc>(),
               ),
             ],
             child: const AppWidget(),

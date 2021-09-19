@@ -6,4 +6,5 @@ enum ErrorCode {
   userNotLoggedIn,
   invalidEmail,
   invalidPassword,
+  passwordsNotMatch,
 }

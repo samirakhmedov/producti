@@ -21,6 +21,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.invalidEmail;
       case ErrorCode.invalidPassword:
         return intl.invalidPassword;
+      case ErrorCode.passwordsNotMatch:
+        return intl.passswordsNotMatch;
     }
   }
 }

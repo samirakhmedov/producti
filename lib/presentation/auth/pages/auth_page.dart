@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:producti/application/auth/bloc/auth_bloc.dart';
 import 'package:producti/application/auth/getx/auth_page_controller.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/auth/pages/sign_in_page.dart';
 import 'package:producti/presentation/auth/pages/sign_up_page.dart';
 import 'package:producti/presentation/core/constants/constants.dart';
 import 'package:producti_ui/producti_ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -29,7 +31,26 @@ class AuthPage extends StatelessWidget {
         ),
         child: LongButton(
           onTap: () {
-            // Get.delete<AuthPageController>();
+            final valid = _authController.isValid();
+
+            if (!valid) {
+              _authController.enableValidation = true;
+
+              return;
+            }
+
+            context.read<AuthBloc>().add(
+                  _authController.page
+                      ? AuthSignIn(
+                          _authController.email,
+                          _authController.password,
+                        )
+                      : AuthSignUp(
+                          _authController.email,
+                          _authController.password,
+                          _authController.passwordRepeat,
+                        ),
+                );
           },
           text: intl.signInLongButtonText,
         ),
@@ -37,22 +58,23 @@ class AuthPage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: Column(
+          child: ListView(
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               SizedBox(
                 width: double.infinity,
               ),
               const Gap(size: 16),
-              Text(
-                kAppName,
-                style: textTheme.headline1!.copyWith(
-                  color: theme.primaryColor,
+              Align(
+                child: Text(
+                  kAppName,
+                  style: textTheme.headline1!.copyWith(
+                    color: theme.primaryColor,
+                  ),
                 ),
               ),
               Obx(
-                () {
-                  return _authController.page ? SignInPage() : SignUpPage();
-                },
+                () => _authController.page ? SignInPage() : SignUpPage(),
               ),
             ],
           ),
