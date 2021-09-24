@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:get/get.dart';
-import 'package:producti/application/launch/bloc/launch_bloc.dart';
-import 'package:producti/application/launch/getx/onboarding_page_controller.dart';
+import 'package:producti/application/launch/logic/launch_bloc.dart';
+import 'package:producti/application/launch/pages/onboarding_page_cubit.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/constants.dart';
 import 'package:producti/presentation/launch/widgets/tab_data_view.dart';
@@ -41,7 +40,7 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    final OnboardingPageController _controller = OnboardingPageController();
+    final OnboardingPageCubit cubit = OnboardingPageCubit();
 
     final PageController _pageController = PageController();
 
@@ -79,8 +78,7 @@ class OnboardingPage extends StatelessWidget {
                               ? 1
                               : -1;
 
-                      _controller.currentIndex =
-                          _controller.currentIndex + change;
+                      cubit.change(change);
                     }
 
                     return false;
@@ -114,13 +112,16 @@ class OnboardingPage extends StatelessWidget {
                           color: kLightGray,
                           onTap: () {
                             _next(context);
+
+                            cubit.close();
                           },
                         ),
                       ),
-                      Obx(
-                        () => TabIndexView(
+                      BlocBuilder<OnboardingPageCubit, OnboardingPageState>(
+                        bloc: cubit,
+                        builder: (_, state) => TabIndexView(
                           length: 3,
-                          current: _controller.currentIndex,
+                          current: state.currentIndex,
                         ),
                       ),
                       Positioned(
@@ -128,10 +129,14 @@ class OnboardingPage extends StatelessWidget {
                         child: ClickableText(
                           text: S.of(context).next,
                           onTap: () {
-                            final page = _controller.currentIndex;
+                            final page = cubit.state.currentIndex;
 
                             if (page == 2) {
-                              return _next(context);
+                              _next(context);
+
+                              cubit.close();
+
+                              return;
                             }
 
                             _pageController.animateToPage(
@@ -140,8 +145,7 @@ class OnboardingPage extends StatelessWidget {
                               curve: Curves.easeIn,
                             );
 
-                            _controller.currentIndex =
-                                _controller.currentIndex + 1;
+                            cubit.change(1);
                           },
                         ),
                       ),

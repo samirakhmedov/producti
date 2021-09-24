@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:producti/application/auth/bloc/auth_bloc.dart';
-import 'package:producti/application/launch/bloc/launch_bloc.dart';
+import 'package:producti/application/auth/logic/auth_bloc.dart';
+import 'package:producti/application/launch/logic/launch_bloc.dart';
 import 'package:producti/presentation/core/widgets/app_widget.dart';
 
 import 'injection.dart';

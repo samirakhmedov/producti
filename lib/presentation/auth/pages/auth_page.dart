@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:producti/application/auth/bloc/auth_bloc.dart';
-import 'package:producti/application/auth/getx/auth_page_controller.dart';
+import 'package:producti/application/auth/logic/auth_bloc.dart';
+import 'package:producti/application/auth/pages/auth_page_cubit.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/auth/pages/sign_in_page.dart';
 import 'package:producti/presentation/auth/pages/sign_up_page.dart';
@@ -14,9 +13,7 @@ class AuthPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _authController = AuthPageController();
-
-    Get.put<AuthPageController>(_authController);
+    final cubit = AuthPageCubit();
 
     final intl = S.of(context);
 
@@ -24,59 +21,67 @@ class AuthPage extends StatelessWidget {
 
     final textTheme = theme.textTheme;
 
-    return Scaffold(
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40).copyWith(
-          bottom: 25,
+    return BlocProvider<AuthPageCubit>.value(
+      value: cubit,
+      child: Scaffold(
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40).copyWith(
+            bottom: 25,
+          ),
+          child: LongButton(
+            onTap: () {
+              final valid = cubit.state.isValid;
+
+              if (!valid) {
+                return cubit.mutate(enableValidation: true);
+              }
+
+              final currentState = cubit.state;
+
+              context.read<AuthBloc>().add(
+                    currentState.page
+                        ? AuthSignIn(
+                            currentState.email,
+                            currentState.password,
+                          )
+                        : AuthSignUp(
+                            currentState.email,
+                            currentState.password,
+                            currentState.repeatPassword,
+                          ),
+                  );
+
+              cubit.close();
+            },
+            text: intl.signInLongButtonText,
+          ),
         ),
-        child: LongButton(
-          onTap: () {
-            final valid = _authController.isValid();
-
-            if (!valid) {
-              _authController.enableValidation = true;
-
-              return;
-            }
-
-            context.read<AuthBloc>().add(
-                  _authController.page
-                      ? AuthSignIn(
-                          _authController.email,
-                          _authController.password,
-                        )
-                      : AuthSignUp(
-                          _authController.email,
-                          _authController.password,
-                          _authController.passwordRepeat,
-                        ),
-                );
-          },
-          text: intl.signInLongButtonText,
-        ),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40),
-          child: ListView(
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              SizedBox(
-                width: double.infinity,
-              ),
-              const Gap(size: 16),
-              Align(
-                child: Text(
-                  kAppName,
-                  style: textTheme.headline1!.copyWith(
-                    color: theme.primaryColor,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+            child: ListView(
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                ),
+                const Gap(size: 16),
+                Align(
+                  child: Text(
+                    kAppName,
+                    style: textTheme.headline1!.copyWith(
+                      color: theme.primaryColor,
+                    ),
                   ),
                 ),
-              ),
-              Obx(
-                () => _authController.page ? SignInPage() : SignUpPage(),
-              ),
-            ],
+                BlocBuilder<AuthPageCubit, AuthPageState>(
+                  buildWhen: (previous, current) =>
+                      previous.page != current.page,
+                  builder: (context, state) =>
+                      state.page ? SignInPage() : SignUpPage(),
+                ),
+              ],
+            ),
           ),
         ),
       ),

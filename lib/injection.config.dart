@@ -12,9 +12,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i7;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/auth/bloc/auth_bloc.dart' as _i11;
+import 'application/auth/logic/auth_bloc.dart' as _i11;
 import 'application/core/app_module.dart' as _i12;
-import 'application/launch/bloc/launch_bloc.dart' as _i8;
+import 'application/launch/logic/launch_bloc.dart' as _i8;
 import 'data/auth/auth_repository_impl.dart' as _i10;
 import 'domain/auth/auth_repository.dart'
     as _i9; // ignore_for_file: unnecessary_lambdas
