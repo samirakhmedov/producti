@@ -7,6 +7,7 @@ import 'package:producti/presentation/auth/pages/sign_up_page.dart';
 import 'package:producti/presentation/core/constants/constants.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:producti/presentation/core/errors/error_code_ext.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -28,32 +29,54 @@ class AuthPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 40).copyWith(
             bottom: 25,
           ),
-          child: LongButton(
-            onTap: () {
-              final valid = cubit.state.isValid;
-
-              if (!valid) {
-                return cubit.mutate(enableValidation: true);
+          child: BlocConsumer<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is AuthLoggedIn) {
+              } else if (state is AuthErrorState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: kRed,
+                    content: Text(
+                      state.failure.messageCode.translate(context),
+                      style: textTheme.caption,
+                    ),
+                  ),
+                );
               }
-
-              final currentState = cubit.state;
-
-              context.read<AuthBloc>().add(
-                    currentState.page
-                        ? AuthSignIn(
-                            currentState.email,
-                            currentState.password,
-                          )
-                        : AuthSignUp(
-                            currentState.email,
-                            currentState.password,
-                            currentState.repeatPassword,
-                          ),
-                  );
-
-              cubit.close();
             },
-            text: intl.signInLongButtonText,
+            builder: (context, state) => state is AuthLoadingState
+                ? SizedBox(
+                    width: 35,
+                    height: 35,
+                    child: const CircularProgressIndicator.adaptive(),
+                  )
+                : LongButton(
+                    onTap: () {
+                      final valid = cubit.state.isValid;
+
+                      if (!valid) {
+                        return cubit.mutate(enableValidation: true);
+                      }
+
+                      final currentState = cubit.state;
+
+                      context.read<AuthBloc>().add(
+                            currentState.page
+                                ? AuthSignIn(
+                                    currentState.email,
+                                    currentState.password,
+                                  )
+                                : AuthSignUp(
+                                    currentState.email,
+                                    currentState.password,
+                                    currentState.repeatPassword,
+                                  ),
+                          );
+
+                      cubit.close();
+                    },
+                    text: intl.signInLongButtonText,
+                  ),
           ),
         ),
         body: SafeArea(
@@ -80,6 +103,7 @@ class AuthPage extends StatelessWidget {
                   builder: (context, state) =>
                       state.page ? SignInPage() : SignUpPage(),
                 ),
+                const Gap(size: 16),
               ],
             ),
           ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:producti_ui/producti_ui.dart';
 
 class TextInputWidget extends StatefulWidget {

@@ -50,7 +50,6 @@ class SignInPage extends StatelessWidget {
         const Gap(size: 14),
         BlocBuilder<AuthPageCubit, AuthPageState>(
           buildWhen: (previous, current) =>
-              previous.email != current.email ||
               previous.enableValidation != current.enableValidation,
           builder: (context, state) => TextInputWidget(
             prefixIcon: Icons.email,
@@ -67,7 +66,6 @@ class SignInPage extends StatelessWidget {
         const Gap(size: 14),
         BlocBuilder<AuthPageCubit, AuthPageState>(
           buildWhen: (previous, current) =>
-              previous.password != current.password ||
               previous.enableValidation != current.enableValidation,
           builder: (context, state) => PasswordTextField(
             controller: _password,
