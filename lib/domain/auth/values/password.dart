@@ -13,5 +13,7 @@ class Password extends ValueObject<String> {
 Either<Failure, String> _validatePassword(String password) {
   if (password.length > 9) return right(password);
 
+  if (password.isEmpty) return left(ValidationFailure(ErrorCode.voidValue));
+
   return left(ValidationFailure(ErrorCode.invalidPassword));
 }

@@ -38,12 +38,12 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
     }
 
     if (event is AuthSignUp) {
-      yield AuthLoadingState();
-
       final password = event.password.getOrCrash();
       final repeatPassword = event.repeatPassword.getOrCrash();
 
       if (password == repeatPassword) {
+        yield AuthLoadingState();
+
         final result = await _authRepository.register(
           email: event.email,
           password: event.password,

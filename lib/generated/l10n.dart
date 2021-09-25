@@ -349,6 +349,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Field is empty!`
+  String get voidValue {
+    return Intl.message(
+      'Field is empty!',
+      name: 'voidValue',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

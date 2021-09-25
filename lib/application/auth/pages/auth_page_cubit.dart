@@ -33,10 +33,12 @@ class AuthPageCubit extends Cubit<AuthPageState> {
     Password? repeatPassword,
     bool? enableValidation,
   }) =>
-      emit(state.copyWith(
-        email: email,
-        password: password,
-        repeatPassword: repeatPassword,
-        enableValidation: enableValidation,
-      ));
+      emit(
+        state.copyWith(
+          email: email,
+          password: password,
+          repeatPassword: repeatPassword,
+          enableValidation: enableValidation != null ? enableValidation : false,
+        ),
+      );
 }

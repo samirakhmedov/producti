@@ -7,4 +7,5 @@ enum ErrorCode {
   invalidEmail,
   invalidPassword,
   passwordsNotMatch,
+  voidValue,
 }

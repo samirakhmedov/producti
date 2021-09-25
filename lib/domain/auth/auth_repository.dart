@@ -5,8 +5,6 @@ import 'package:producti/domain/auth/values/email.dart';
 import 'package:producti/domain/auth/values/password.dart';
 
 abstract class AuthRepository {
-  Future<Either<Failure, User>> autoSignIn();
-
   Future<Either<Failure, User>> signIn({
     required Email email,
     required Password password,

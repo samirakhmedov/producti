@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:producti_ui/producti_ui.dart';
+import 'package:producti_ui/src/constants.dart';
 
 class TextInputWidget extends StatefulWidget {
   final TextEditingController? controller;
@@ -31,6 +32,12 @@ class _TextInputWidgetState extends State<TextInputWidget> {
     final textTheme = theme.textTheme;
 
     final focus = FocusNode();
+
+    keyboardVisibility.onChange.listen((v) {
+      if (focus.hasFocus && !v) {
+        focus.unfocus();
+      }
+    });
 
     return TextField(
       focusNode: focus,

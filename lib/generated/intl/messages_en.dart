@@ -67,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "No local account to sign in automatically!"),
         "userRemoved": MessageLookupByLibrary.simpleMessage(
             "This user was removed from system. Create new one."),
+        "voidValue": MessageLookupByLibrary.simpleMessage("Field is empty!"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Not correct password for this account!")
       };

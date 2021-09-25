@@ -23,6 +23,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.invalidPassword;
       case ErrorCode.passwordsNotMatch:
         return intl.passswordsNotMatch;
+      case ErrorCode.voidValue:
+        return intl.voidValue;
     }
   }
 }

@@ -5,6 +5,7 @@ import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/auth/pages/sign_in_page.dart';
 import 'package:producti/presentation/auth/pages/sign_up_page.dart';
 import 'package:producti/presentation/core/constants/constants.dart';
+import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/presentation/core/errors/error_code_ext.dart';
@@ -26,13 +27,21 @@ class AuthPage extends StatelessWidget {
       value: cubit,
       child: Scaffold(
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40).copyWith(
-            bottom: 25,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 40)
+              .copyWith(bottom: 25, top: 25),
           child: BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {
               if (state is AuthLoggedIn) {
+                final navigator = Navigator.of(context);
+
+                navigator.pop();
+
+                cubit.close();
+
+                navigator.pushReplacementNamed(AppRoutes.launch);
               } else if (state is AuthErrorState) {
+                Navigator.of(context).pop();
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     backgroundColor: kRed,
@@ -45,11 +54,7 @@ class AuthPage extends StatelessWidget {
               }
             },
             builder: (context, state) => state is AuthLoadingState
-                ? SizedBox(
-                    width: 35,
-                    height: 35,
-                    child: const CircularProgressIndicator.adaptive(),
-                  )
+                ? const SizedBox()
                 : LongButton(
                     onTap: () {
                       final valid = cubit.state.isValid;
@@ -59,6 +64,18 @@ class AuthPage extends StatelessWidget {
                       }
 
                       final currentState = cubit.state;
+
+                      showDialog(
+                        context: context,
+                        builder: (context) => WillPopScope(
+                          child: Center(
+                            child: CircularProgressIndicator.adaptive(),
+                          ),
+                          onWillPop: () {
+                            return Future.value(false);
+                          },
+                        ),
+                      );
 
                       context.read<AuthBloc>().add(
                             currentState.page
@@ -72,8 +89,6 @@ class AuthPage extends StatelessWidget {
                                     currentState.repeatPassword,
                                   ),
                           );
-
-                      cubit.close();
                     },
                     text: intl.signInLongButtonText,
                   ),

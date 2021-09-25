@@ -17,16 +17,6 @@ class AuthRepositoryImpl extends AuthRepository {
 
   AuthRepositoryImpl(this._storage, this._auth);
 
-  @override
-  Future<Either<Failure, User>> autoSignIn() async {
-    final currentUser = _auth.currentUser;
-
-    if (currentUser == null)
-      return left(AuthFailure(ErrorCode.userNotLoggedIn));
-
-    return right(currentUser.toDomain());
-  }
-
   String _getPasswordKey(String uid) => 'USER_PASSWORD_$uid';
 
   Future<void> _savePassword(String uid, String password) async {
