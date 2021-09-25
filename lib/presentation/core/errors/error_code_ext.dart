@@ -25,6 +25,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.passswordsNotMatch;
       case ErrorCode.voidValue:
         return intl.voidValue;
+      case ErrorCode.invalidLink:
+        return intl.invalidLink;
     }
   }
 }

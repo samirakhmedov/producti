@@ -33,6 +33,7 @@ dependencies:
   # Dart features
   equatable: ^2.0.3
   dartz: ^0.10.0
+  tuple: ^2.0.0
   
   # DI
   injectable: ^1.5.0

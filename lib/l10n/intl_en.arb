@@ -29,5 +29,6 @@
     "signInAnonim": "Sign in anonimously.",
     "alreadyCoolGuy": "Already in cool boys club?",
     "letHim": "Let him in, boys.",
-    "voidValue": "Field is empty!"
+    "voidValue": "Field is empty!",
+    "invalidLink": "Invalid link!"
 }

@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hatePeople": MessageLookupByLibrary.simpleMessage("You hate people?"),
         "invalidEmail":
             MessageLookupByLibrary.simpleMessage("Not valid email was typed!"),
+        "invalidLink": MessageLookupByLibrary.simpleMessage("Invalid link!"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Too short password!"),
         "join": MessageLookupByLibrary.simpleMessage("Just join it."),

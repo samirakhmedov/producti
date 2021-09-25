@@ -8,4 +8,5 @@ enum ErrorCode {
   invalidPassword,
   passwordsNotMatch,
   voidValue,
+  invalidLink,
 }

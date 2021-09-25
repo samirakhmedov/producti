@@ -359,6 +359,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Invalid link!`
+  String get invalidLink {
+    return Intl.message(
+      'Invalid link!',
+      name: 'invalidLink',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
