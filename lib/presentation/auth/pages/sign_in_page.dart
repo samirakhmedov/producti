@@ -8,9 +8,14 @@ import 'package:producti_ui/producti_ui.dart';
 import 'package:producti/presentation/core/errors/error_code_ext.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -48,35 +53,47 @@ class SignInPage extends StatelessWidget {
           style: textTheme.headline3,
         ),
         const Gap(size: 14),
+        TextInputWidget(
+          prefixIcon: Icons.email,
+          hintText: intl.email,
+          controller: _email,
+        ),
+        const Gap(size: 7),
         BlocBuilder<AuthPageCubit, AuthPageState>(
           buildWhen: (previous, current) =>
-              previous.enableValidation != current.enableValidation,
-          builder: (context, state) => TextInputWidget(
-            prefixIcon: Icons.email,
-            hintText: intl.email,
-            controller: _email,
-            errorText: state.enableValidation
+              previous.email != current.email ||
+              previous.enableValidation != previous.enableValidation,
+          builder: (context, state) {
+            return state.enableValidation
                 ? state.email.validatedValue.fold(
-                    (failure) => failure.messageCode.translate(context),
-                    (r) => null,
+                    (failure) => FieldErrorIndicator(
+                      message: failure.messageCode.translate(context),
+                    ),
+                    (r) => const SizedBox(),
                   )
-                : null,
-          ),
+                : const SizedBox();
+          },
         ),
         const Gap(size: 14),
+        PasswordTextField(
+          controller: _password,
+          hintText: intl.password,
+        ),
+        const Gap(size: 7),
         BlocBuilder<AuthPageCubit, AuthPageState>(
           buildWhen: (previous, current) =>
-              previous.enableValidation != current.enableValidation,
-          builder: (context, state) => PasswordTextField(
-            controller: _password,
-            hintText: intl.password,
-            errorText: state.enableValidation
-                ? state.password.validatedValue.fold(
-                    (failure) => failure.messageCode.translate(context),
-                    (r) => null,
+              previous.password != current.password ||
+              previous.enableValidation != previous.enableValidation,
+          builder: (context, state) {
+            return state.enableValidation
+                ? state.repeatPassword.validatedValue.fold(
+                    (failure) => FieldErrorIndicator(
+                      message: failure.messageCode.translate(context),
+                    ),
+                    (r) => const SizedBox(),
                   )
-                : null,
-          ),
+                : const SizedBox();
+          },
         ),
         const Gap(size: 14),
         OptionText(

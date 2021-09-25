@@ -35,9 +35,9 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
         (failure) => AuthErrorState(failure),
         (user) => AuthLoggedIn(user),
       );
-    }
-
-    if (event is AuthSignUp) {
+    } else if (event is AuthAnonymousEvent)
+      yield AuthAnonymousState();
+    else if (event is AuthSignUp) {
       final password = event.password.getOrCrash();
       final repeatPassword = event.repeatPassword.getOrCrash();
 

@@ -4,13 +4,11 @@ import 'package:producti_ui/producti_ui.dart';
 class PasswordTextField extends StatefulWidget {
   final TextEditingController? controller;
   final String? hintText;
-  final String? errorText;
 
   const PasswordTextField({
     Key? key,
     this.controller,
     this.hintText,
-    this.errorText,
   }) : super(key: key);
 
   @override
@@ -28,7 +26,6 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       controller: widget.controller,
       obscureText: _obscureText,
       hintText: widget.hintText,
-      errorText: widget.errorText,
       prefixIcon: Icons.vpn_key,
       suffixWidget: InkWell(
         onTap: () {

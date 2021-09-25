@@ -8,7 +8,6 @@ class TextInputWidget extends StatefulWidget {
   final String? hintText;
   final bool obscureText;
   final Widget? suffixWidget;
-  final String? errorText;
 
   const TextInputWidget({
     Key? key,
@@ -17,7 +16,6 @@ class TextInputWidget extends StatefulWidget {
     this.hintText,
     this.obscureText = false,
     this.suffixWidget,
-    this.errorText,
   }) : super(key: key);
 
   @override
@@ -49,10 +47,6 @@ class _TextInputWidgetState extends State<TextInputWidget> {
       ),
       textAlignVertical: TextAlignVertical.center,
       decoration: InputDecoration(
-        errorText: widget.errorText,
-        errorStyle: textTheme.caption!.copyWith(
-          color: kRed,
-        ),
         hintText: widget.hintText,
         contentPadding: EdgeInsets.zero,
         hintStyle: textTheme.caption!.copyWith(

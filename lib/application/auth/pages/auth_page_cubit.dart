@@ -38,7 +38,7 @@ class AuthPageCubit extends Cubit<AuthPageState> {
           email: email,
           password: password,
           repeatPassword: repeatPassword,
-          enableValidation: enableValidation != null ? enableValidation : false,
+          enableValidation: enableValidation,
         ),
       );
 }
