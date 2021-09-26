@@ -67,7 +67,9 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         const Gap(size: 10),
         BlocBuilder<AuthPageCubit, AuthPageState>(
-          buildWhen: (previous, current) => previous.email != current.email,
+          buildWhen: (previous, current) =>
+              previous.password == current.password &&
+              previous.repeatPassword == current.repeatPassword,
           builder: (context, state) {
             return state.enableValidation
                 ? state.email.validatedValue.fold(
@@ -90,13 +92,16 @@ class _SignUpPageState extends State<SignUpPage> {
         const Gap(size: 7),
         BlocBuilder<AuthPageCubit, AuthPageState>(
           buildWhen: (previous, current) =>
-              previous.password != current.password ||
-              previous.enableValidation != previous.enableValidation,
+              previous.email == current.email &&
+              previous.repeatPassword == previous.repeatPassword,
           builder: (context, state) {
             return state.enableValidation
                 ? state.password.validatedValue.fold(
-                    (failure) => FieldErrorIndicator(
-                      message: failure.messageCode.translate(context),
+                    (failure) => Align(
+                      alignment: Alignment.centerLeft,
+                      child: FieldErrorIndicator(
+                        message: failure.messageCode.translate(context),
+                      ),
                     ),
                     (r) => const SizedBox(),
                   )
@@ -111,13 +116,16 @@ class _SignUpPageState extends State<SignUpPage> {
         const Gap(size: 7),
         BlocBuilder<AuthPageCubit, AuthPageState>(
           buildWhen: (previous, current) =>
-              previous.repeatPassword != current.repeatPassword ||
-              previous.enableValidation != previous.enableValidation,
+              previous.password == current.password &&
+              previous.email == current.email,
           builder: (context, state) {
             return state.enableValidation
                 ? state.repeatPassword.validatedValue.fold(
-                    (failure) => FieldErrorIndicator(
-                      message: failure.messageCode.translate(context),
+                    (failure) => Align(
+                      alignment: Alignment.centerLeft,
+                      child: FieldErrorIndicator(
+                        message: failure.messageCode.translate(context),
+                      ),
                     ),
                     (r) => const SizedBox(),
                   )

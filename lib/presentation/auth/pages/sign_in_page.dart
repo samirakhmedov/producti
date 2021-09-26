@@ -8,14 +8,9 @@ import 'package:producti_ui/producti_ui.dart';
 import 'package:producti/presentation/core/errors/error_code_ext.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignInPage extends StatefulWidget {
+class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
 
-  @override
-  State<SignInPage> createState() => _SignInPageState();
-}
-
-class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -61,13 +56,15 @@ class _SignInPageState extends State<SignInPage> {
         const Gap(size: 7),
         BlocBuilder<AuthPageCubit, AuthPageState>(
           buildWhen: (previous, current) =>
-              previous.email != current.email ||
-              previous.enableValidation != previous.enableValidation,
+              previous.password == current.password,
           builder: (context, state) {
             return state.enableValidation
                 ? state.email.validatedValue.fold(
-                    (failure) => FieldErrorIndicator(
-                      message: failure.messageCode.translate(context),
+                    (failure) => Align(
+                      alignment: Alignment.centerLeft,
+                      child: FieldErrorIndicator(
+                        message: failure.messageCode.translate(context),
+                      ),
                     ),
                     (r) => const SizedBox(),
                   )
@@ -81,14 +78,15 @@ class _SignInPageState extends State<SignInPage> {
         ),
         const Gap(size: 7),
         BlocBuilder<AuthPageCubit, AuthPageState>(
-          buildWhen: (previous, current) =>
-              previous.password != current.password ||
-              previous.enableValidation != previous.enableValidation,
+          buildWhen: (previous, current) => previous.email == current.email,
           builder: (context, state) {
             return state.enableValidation
-                ? state.repeatPassword.validatedValue.fold(
-                    (failure) => FieldErrorIndicator(
-                      message: failure.messageCode.translate(context),
+                ? state.password.validatedValue.fold(
+                    (failure) => Align(
+                      alignment: Alignment.centerLeft,
+                      child: FieldErrorIndicator(
+                        message: failure.messageCode.translate(context),
+                      ),
                     ),
                     (r) => const SizedBox(),
                   )

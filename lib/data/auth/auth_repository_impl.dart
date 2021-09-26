@@ -55,6 +55,8 @@ class AuthRepositoryImpl extends AuthRepository {
         case 'email-already-in-use':
           messageCode = ErrorCode.emailAlreadyInUse;
           break;
+        case 'invalid-email':
+          messageCode = ErrorCode.invalidEmail;
       }
 
       return left(AuthFailure(messageCode));
