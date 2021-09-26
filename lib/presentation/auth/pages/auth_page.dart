@@ -29,8 +29,11 @@ class AuthPage extends StatelessWidget {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40)
               .copyWith(bottom: 25, top: 25),
-          child: BlocConsumer<AuthBloc, AuthState>(
+          child: BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
+              if (state is AuthAnonymousState) {
+                Navigator.of(context).pushReplacementNamed(AppRoutes.launch);
+              }
               if (state is AuthLoggedIn) {
                 final navigator = Navigator.of(context);
 
@@ -53,45 +56,41 @@ class AuthPage extends StatelessWidget {
                 );
               }
             },
-            builder: (context, state) => state is AuthLoadingState
-                ? const SizedBox()
-                : LongButton(
-                    onTap: () {
-                      final valid = cubit.state.isValid;
+            child: LongButton(
+              onTap: () {
+                final valid = cubit.state.isValid;
 
-                      if (!valid) {
-                        return cubit.mutate(enableValidation: true);
-                      }
+                if (!valid) {
+                  return cubit.mutate(enableValidation: true);
+                }
 
-                      final currentState = cubit.state;
+                final currentState = cubit.state;
 
-                      showDialog(
-                        context: context,
-                        builder: (context) => WillPopScope(
-                          child: Center(
-                            child: CircularProgressIndicator.adaptive(),
-                          ),
-                          onWillPop: () {
-                            return Future.value(false);
-                          },
-                        ),
-                      );
-
-                      context.read<AuthBloc>().add(
-                            currentState.page
-                                ? AuthSignIn(
-                                    currentState.email,
-                                    currentState.password,
-                                  )
-                                : AuthSignUp(
-                                    currentState.email,
-                                    currentState.password,
-                                    currentState.repeatPassword,
-                                  ),
-                          );
-                    },
-                    text: intl.signInLongButtonText,
+                showDialog(
+                  context: context,
+                  builder: (context) => WillPopScope(
+                    child: Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    ),
+                    onWillPop: () => Future.value(false),
                   ),
+                );
+
+                context.read<AuthBloc>().add(
+                      currentState.page
+                          ? AuthSignIn(
+                              currentState.email,
+                              currentState.password,
+                            )
+                          : AuthSignUp(
+                              currentState.email,
+                              currentState.password,
+                              currentState.repeatPassword,
+                            ),
+                    );
+              },
+              text: intl.signInLongButtonText,
+            ),
           ),
         ),
         body: SafeArea(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/auth/pages/auth_page_cubit.dart';
 import 'package:producti/domain/auth/values/email.dart';
 import 'package:producti/domain/auth/values/password.dart';
@@ -20,6 +21,8 @@ class SignInPage extends StatelessWidget {
     final intl = S.of(context);
 
     final cubit = context.read<AuthPageCubit>();
+
+    final auth = context.read<AuthBloc>();
 
     final _email = TextEditingController();
     final _password = TextEditingController();
@@ -103,7 +106,9 @@ class SignInPage extends StatelessWidget {
         OptionText(
           start: intl.hatePeople,
           end: ' ${intl.signInAnonim}',
-          onTap: () {},
+          onTap: () {
+            auth.add(AuthAnonymousEvent());
+          },
         ),
       ],
     );
