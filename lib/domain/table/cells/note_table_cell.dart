@@ -1,5 +1,4 @@
-import 'package:producti/domain/table/table_cell.dart';
-import 'package:producti/domain/table/values/link.dart';
+part of 'table_cell.dart';
 
 class NoteTableCell extends TableCell {
   final String description;

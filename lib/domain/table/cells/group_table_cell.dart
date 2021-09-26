@@ -1,4 +1,4 @@
-import 'package:producti/domain/table/table_cell.dart';
+part of 'table_cell.dart';
 
 class GroupTableCell extends TableCell {
   final List<TableCell> children;
