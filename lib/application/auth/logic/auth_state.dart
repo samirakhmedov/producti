@@ -71,6 +71,9 @@ class AuthLoggedIn extends AuthState {
 
   @override
   List<Object> get props => [user];
+
+  @override
+  String toString() => 'AuthLoggedIn(${user.id})';
 }
 
 class AuthLoggedOut extends AuthState {

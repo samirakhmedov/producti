@@ -35,4 +35,7 @@ class LaunchState extends Equatable {
       showcaseShown: json['showcaseShown'] as bool,
     );
   }
+
+  String toString() =>
+      'LaunchState(onboarding: $onboardingPassed, showcase: $showcaseShown)';
 }

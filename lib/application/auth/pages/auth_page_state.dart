@@ -55,4 +55,8 @@ class AuthPageState extends Equatable {
 
     return email.isRight() && password.isRight() && additional;
   }
+
+  @override
+  String toString() =>
+      'AuthPageState(email: ${email.validatedValue}, password: ${password.validatedValue}, repeat: ${repeatPassword.validatedValue}, enableValidation: $enableValidation, page: $page)';
 }
