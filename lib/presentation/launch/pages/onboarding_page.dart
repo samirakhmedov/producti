@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:producti/application/launch/logic/launch_bloc.dart';
 import 'package:producti/application/launch/pages/onboarding_page_cubit.dart';
 import 'package:producti/generated/l10n.dart';
-import 'package:producti/presentation/core/constants/constants.dart';
+import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti/presentation/launch/widgets/tab_data_view.dart';
 import 'package:producti/presentation/launch/widgets/tab_index_view.dart';
 import 'package:producti_ui/producti_ui.dart';
@@ -31,7 +31,7 @@ class OnboardingPage extends StatelessWidget {
   }
 
   void _next(BuildContext context) {
-    context.read<LaunchBloc>().add(const LaunchSwitchOnboardingStatus());
+    context.read<LaunchBloc>().mutate(onboardingPassed: true);
 
     Navigator.of(context).pushReplacementNamed(AppRoutes.auth);
   }

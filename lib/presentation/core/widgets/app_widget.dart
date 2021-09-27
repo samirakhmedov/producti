@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:producti/generated/l10n.dart';
-import 'package:producti/presentation/core/constants/constants.dart';
+import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti_ui/producti_ui.dart';
 
 class AppWidget extends StatelessWidget {
