@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "Email was already used by other greedy user!"),
+        "failedToFetchUserData": MessageLookupByLibrary.simpleMessage(
+            "Failed to fetch your data, something went wrong!"),
         "fast": MessageLookupByLibrary.simpleMessage("Fast"),
         "funBegins": MessageLookupByLibrary.simpleMessage(
             "This is where the fun begins, boy."),

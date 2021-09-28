@@ -9,4 +9,5 @@ enum ErrorCode {
   passwordsNotMatch,
   voidValue,
   invalidLink,
+  failedToFetchUserData,
 }

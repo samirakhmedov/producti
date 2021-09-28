@@ -30,5 +30,6 @@
     "alreadyCoolGuy": "Already in cool boys club?",
     "letHim": "Let him in, boys.",
     "voidValue": "Field is empty!",
-    "invalidLink": "Invalid link!"
+    "invalidLink": "Invalid link!",
+    "failedToFetchUserData": "Failed to fetch your data, something went wrong!"
 }

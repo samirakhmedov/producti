@@ -44,6 +44,8 @@ dependencies:
 
   # Storages
   flutter_secure_storage: ^4.2.1
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0
 
   flutter:
     sdk: flutter
@@ -53,6 +55,7 @@ dev_dependencies:
     sdk: flutter
   injectable_generator: ^1.4.1
   build_runner: ^2.1.1
+  hive_generator: ^1.1.1
 
   lint: ^1.6.0
 

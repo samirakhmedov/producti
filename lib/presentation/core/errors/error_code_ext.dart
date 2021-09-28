@@ -27,6 +27,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.voidValue;
       case ErrorCode.invalidLink:
         return intl.invalidLink;
+      case ErrorCode.failedToFetchUserData:
+        return intl.failedToFetchUserData;
     }
   }
 }

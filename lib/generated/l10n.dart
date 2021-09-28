@@ -369,6 +369,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Failed to fetch your data, something went wrong!`
+  String get failedToFetchUserData {
+    return Intl.message(
+      'Failed to fetch your data, something went wrong!',
+      name: 'failedToFetchUserData',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
