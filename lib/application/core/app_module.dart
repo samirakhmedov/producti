@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -16,4 +17,6 @@ abstract class FirebaseModule {
   FirebaseAnalytics get analytics => FirebaseAnalytics();
 
   FlutterSecureStorage get secureStorage => FlutterSecureStorage();
+
+  Connectivity get connectivity => Connectivity();
 }

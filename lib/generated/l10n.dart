@@ -379,6 +379,26 @@ class S {
       args: [],
     );
   }
+
+  /// `You are connected to the internet!`
+  String get connected {
+    return Intl.message(
+      'You are connected to the internet!',
+      name: 'connected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oops! Looks like you are out of interntet...`
+  String get disconnected {
+    return Intl.message(
+      'Oops! Looks like you are out of interntet...',
+      name: 'disconnected',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

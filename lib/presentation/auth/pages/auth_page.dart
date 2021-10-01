@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/auth/pages/auth_page_cubit.dart';
+import 'package:producti/application/core/cubit/connection_cubit.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/auth/pages/sign_in_page.dart';
 import 'package:producti/presentation/auth/pages/sign_up_page.dart';
 import 'package:producti/presentation/core/constants/constants.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
+import 'package:producti/presentation/core/widgets/connection/connectivity_listener.dart';
+import 'package:producti/presentation/core/widgets/connection/connectivity_messenger.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/presentation/core/errors/error_code_ext.dart';
@@ -29,67 +32,69 @@ class AuthPage extends StatelessWidget {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40)
               .copyWith(bottom: 25, top: 25),
-          child: BlocListener<AuthBloc, AuthState>(
-            listener: (context, state) {
-              if (state is AuthAnonymousState) {
-                Navigator.of(context).pushReplacementNamed(AppRoutes.launch);
-              }
-              if (state is AuthLoggedIn) {
-                final navigator = Navigator.of(context);
-
-                navigator.pop();
-
-                cubit.close();
-
-                navigator.pushReplacementNamed(AppRoutes.launch);
-              } else if (state is AuthErrorState) {
-                Navigator.of(context).pop();
-
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: kRed,
-                    content: Text(
-                      state.failure.messageCode.translate(context),
-                      style: textTheme.caption,
-                    ),
-                  ),
-                );
-              }
-            },
-            child: LongButton(
-              onTap: () {
-                final valid = cubit.state.isValid;
-
-                if (!valid) {
-                  return cubit.mutate(enableValidation: true);
+          child: ConnectivityListener(
+            child: BlocListener<AuthBloc, AuthState>(
+              listener: (context, state) {
+                if (state is AuthAnonymousState) {
+                  Navigator.of(context).pushReplacementNamed(AppRoutes.launch);
                 }
+                if (state is AuthLoggedIn) {
+                  final navigator = Navigator.of(context);
 
-                final currentState = cubit.state;
+                  navigator.pop();
 
-                showDialog(
-                  context: context,
-                  builder: (context) => WillPopScope(
-                    child: Center(
-                      child: CircularProgressIndicator.adaptive(),
+                  cubit.close();
+
+                  navigator.pushReplacementNamed(AppRoutes.launch);
+                } else if (state is AuthErrorState) {
+                  Navigator.of(context).pop();
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: kRed,
+                      content: Text(
+                        state.failure.messageCode.translate(context),
+                        style: textTheme.caption,
+                      ),
                     ),
-                    onWillPop: () => Future.value(false),
-                  ),
-                );
-
-                context.read<AuthBloc>().add(
-                      currentState.page
-                          ? AuthSignIn(
-                              currentState.email,
-                              currentState.password,
-                            )
-                          : AuthSignUp(
-                              currentState.email,
-                              currentState.password,
-                              currentState.repeatPassword,
-                            ),
-                    );
+                  );
+                }
               },
-              text: intl.signInLongButtonText,
+              child: LongButton(
+                onTap: () {
+                  final valid = cubit.state.isValid;
+
+                  if (!valid) {
+                    return cubit.mutate(enableValidation: true);
+                  }
+
+                  final currentState = cubit.state;
+
+                  showDialog(
+                    context: context,
+                    builder: (context) => WillPopScope(
+                      child: Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      ),
+                      onWillPop: () => Future.value(false),
+                    ),
+                  );
+
+                  context.read<AuthBloc>().add(
+                        currentState.page
+                            ? AuthSignIn(
+                                currentState.email,
+                                currentState.password,
+                              )
+                            : AuthSignUp(
+                                currentState.email,
+                                currentState.password,
+                                currentState.repeatPassword,
+                              ),
+                      );
+                },
+                text: intl.signInLongButtonText,
+              ),
             ),
           ),
         ),

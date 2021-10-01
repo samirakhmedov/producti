@@ -31,5 +31,7 @@
     "letHim": "Let him in, boys.",
     "voidValue": "Field is empty!",
     "invalidLink": "Invalid link!",
-    "failedToFetchUserData": "Failed to fetch your data, something went wrong!"
+    "failedToFetchUserData": "Failed to fetch your data, something went wrong!",
+    "connected": "You are connected to the internet!",
+    "disconnected": "Oops! Looks like you are out of interntet..."
 }

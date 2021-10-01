@@ -24,6 +24,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "alreadyCoolGuy":
             MessageLookupByLibrary.simpleMessage("Already in cool boys club?"),
         "comfortable": MessageLookupByLibrary.simpleMessage("Comfortable"),
+        "connected": MessageLookupByLibrary.simpleMessage(
+            "You are connected to the internet!"),
+        "disconnected": MessageLookupByLibrary.simpleMessage(
+            "Oops! Looks like you are out of interntet..."),
         "effective": MessageLookupByLibrary.simpleMessage("Effective"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(

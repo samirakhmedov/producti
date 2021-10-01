@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:producti/application/auth/logic/auth_bloc.dart';
+import 'package:producti/application/core/cubit/connection_cubit.dart';
 import 'package:producti/application/core/simple_bloc_observer.dart';
 import 'package:producti/application/launch/logic/launch_bloc.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
@@ -26,8 +27,6 @@ Future<void> main() async {
     NotificationTableCellAdapter(),
     GroupTableCellAdapter()
   ].map((e) => Hive.registerAdapter(e));
-
-  Hive.registerAdapter(NoteTableCellAdapter());
 
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -61,6 +60,9 @@ Future<void> main() async {
               ),
               BlocProvider<AuthBloc>(
                 create: (context) => sl.get<AuthBloc>(),
+              ),
+              BlocProvider<ConnectionCubit>(
+                create: (context) => sl.get<ConnectionCubit>(),
               ),
             ],
             child: const AppWidget(),

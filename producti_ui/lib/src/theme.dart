@@ -24,6 +24,7 @@ const kLightGray = Color(0xFFC4C4C4);
 const kLighterGray = Color(0xFFEBEBEB);
 
 const kRed = Color(0xFFDF2C2C);
+const kGreen = Color(0xFF2CAE17);
 
 const _kBiggerHeaderTextStyle = TextStyle(
   fontSize: 50,
