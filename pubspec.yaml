@@ -21,6 +21,8 @@ dependencies:
   producti_ui:
     path: ./producti_ui/
   simple_animations: ^4.0.0
+  showcaseview: ^1.1.1
+
   
   # Firebase
   firebase_core: ^1.5.0

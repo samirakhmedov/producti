@@ -1,7 +1,9 @@
 import 'package:hive/hive.dart';
+import 'package:injectable/injectable.dart';
 import 'package:producti/domain/table/local_table_repository.dart';
 import 'package:producti/domain/table/table.dart';
 
+@Injectable(as: LocalTableRepository)
 class LocalTableRepositoryImpl extends LocalTableRepository {
   final Box<Table> _tablesBox;
   final Box<List<String>> _constantsBox;
