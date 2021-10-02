@@ -51,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "letHim":
             MessageLookupByLibrary.simpleMessage("Представление уже началось!"),
         "next": MessageLookupByLibrary.simpleMessage("Далее"),
+        "notConnectedToInternet": MessageLookupByLibrary.simpleMessage(
+            "У вас нету подключения к интернету!"),
         "notPartOfParty": MessageLookupByLibrary.simpleMessage(
             "Ты еще не циркач в нашем цирке?"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(

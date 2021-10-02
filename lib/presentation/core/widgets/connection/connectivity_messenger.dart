@@ -14,7 +14,8 @@ class ConnectivityMessenger {
         onComplete: () {
           overlayEntry.remove();
         },
-        hasConnection: connection.state.hasConnection,
+        hasConnection:
+            connection.state.connectionStatus == ConnectionStatus.connected,
       ),
     );
 

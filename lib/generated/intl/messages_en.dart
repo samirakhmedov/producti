@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "join": MessageLookupByLibrary.simpleMessage("Just join it."),
         "letHim": MessageLookupByLibrary.simpleMessage("Let him in, boys."),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "notConnectedToInternet": MessageLookupByLibrary.simpleMessage(
+            "You have no connection to internet!"),
         "notPartOfParty": MessageLookupByLibrary.simpleMessage(
             "Still not part of our party?"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(

@@ -11,6 +11,11 @@ class ConnectivityListener extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ConnectionCubit, ConnectionCubitState>(
+      listenWhen: (previous, current) =>
+          current.showStatus == ConnectionShowStatus.show ||
+          (current.connectionStatus == ConnectionStatus.disconnected &&
+                  current.showStatus == ConnectionShowStatus.hide) &&
+              current.connectionStatus != ConnectionStatus.unknown,
       listener: (context, state) =>
           ConnectivityMessenger.showConnectionMessage(context),
       child: child,

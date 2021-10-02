@@ -1,14 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
-import 'package:producti/application/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:producti/data/core/error/error_codes.dart';
+import 'package:producti/data/core/error/failure.dart';
 import 'package:producti/domain/auth/auth_repository.dart';
 import 'package:producti/domain/auth/values/password.dart';
 import 'package:producti/domain/auth/values/email.dart';
 import 'package:producti/domain/auth/user.dart';
 import 'package:producti/data/core/extensions/firebase_user_ext.dart';
-import 'package:producti/application/core/error/error_codes.dart';
 
 @Injectable(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {

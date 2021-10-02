@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:producti/application/core/error/error_codes.dart';
-import 'package:producti/application/core/error/failure.dart';
+import 'package:producti/data/core/error/error_codes.dart';
+import 'package:producti/data/core/error/failure.dart';
 import 'package:producti/domain/core/value_object.dart';
 
 class Password extends ValueObject<String> {

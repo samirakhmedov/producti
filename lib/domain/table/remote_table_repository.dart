@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:producti/application/core/error/failure.dart';
+import 'package:producti/data/core/error/failure.dart';
 import 'package:producti/domain/table/table.dart';
 
 abstract class RemoteTableRepository {

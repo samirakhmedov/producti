@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:producti/application/core/error/error_codes.dart';
-import 'package:producti/application/core/error/failure.dart';
+import 'package:producti/application/core/cubit/connection_cubit.dart';
+import 'package:producti/data/core/error/error_codes.dart';
+import 'package:producti/data/core/error/failure.dart';
 import 'package:producti/domain/auth/auth_repository.dart';
 import 'package:producti/domain/auth/user.dart';
 import 'package:producti/domain/auth/values/email.dart';
@@ -16,13 +17,21 @@ part 'auth_state.dart';
 @injectable
 class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;
+  final ConnectionCubit _connection;
 
-  AuthBloc(this._authRepository) : super(AuthInitial());
+  AuthBloc(this._authRepository, this._connection) : super(AuthInitial());
 
   @override
   Stream<AuthState> mapEventToState(
     AuthEvent event,
   ) async* {
+    if (!_connection.connected &&
+        (event is AuthSignIn || event is AuthSignUp)) {
+      yield AuthErrorState(ConnectionFailure(ErrorCode.notConnectedToInternet));
+
+      return;
+    }
+
     if (event is AuthSignIn) {
       yield AuthLoadingState();
 

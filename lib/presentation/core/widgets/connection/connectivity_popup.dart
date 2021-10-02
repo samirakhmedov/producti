@@ -20,7 +20,9 @@ class ConnectivityPopup extends StatelessWidget {
     final _position = TimelineTween<_AnimationProps>()
       ..addScene(
         begin: Duration.zero,
-        duration: const Duration(seconds: 4),
+        duration: const Duration(
+          seconds: 2,
+        ),
         curve: Curves.easeIn,
       ).animate(
         _AnimationProps.one,
@@ -28,24 +30,25 @@ class ConnectivityPopup extends StatelessWidget {
       )
       ..addScene(
         begin: const Duration(
-          milliseconds: 4750,
+          seconds: 3,
         ),
-        duration: const Duration(
-          milliseconds: 750,
-        ),
+        duration: const Duration(seconds: 1),
         curve: Curves.easeIn,
       ).animate(
         _AnimationProps.one,
         tween: Tween<double>(begin: 1, end: 0),
       );
 
+    final query = MediaQuery.of(context);
+
     return PlayAnimation<TimelineValue<_AnimationProps>>(
       tween: _position,
+      duration: const Duration(seconds: 3),
       onComplete: onComplete,
       builder: (context, child, value) {
         return Positioned(
           left: 0,
-          top: 30 * value.get(_AnimationProps.one) - 30,
+          top: 75 * value.get(_AnimationProps.one) - (30 + query.padding.top),
           child: child!,
         );
       },
@@ -78,7 +81,7 @@ class _ConnectivityPopupContent extends StatelessWidget {
     final intl = S.of(context);
 
     return Container(
-      height: 60 + query.padding.top,
+      height: 45 + query.padding.top,
       width: query.size.width,
       decoration: BoxDecoration(
         color: hasConnection ? kGreen : kRed,
@@ -90,7 +93,7 @@ class _ConnectivityPopupContent extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 30 + query.padding.top,
+            height: 15 + query.padding.top,
           ),
           Center(
             child: Text(

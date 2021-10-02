@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:producti/application/core/error/failure.dart';
+import 'package:producti/data/core/error/failure.dart';
 import 'package:producti/domain/auth/user.dart';
 import 'package:producti/domain/auth/values/email.dart';
 import 'package:producti/domain/auth/values/password.dart';

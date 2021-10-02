@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:producti/application/core/error/failure.dart';
+import 'package:producti/data/core/error/failure.dart';
 
 abstract class ValueObject<T> extends Equatable {
   final T _value;

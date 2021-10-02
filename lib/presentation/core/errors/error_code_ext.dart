@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:producti/application/core/error/error_codes.dart';
+import 'package:producti/data/core/error/error_codes.dart';
 import 'package:producti/generated/l10n.dart';
 
 extension ErrorCodeExt on ErrorCode {
@@ -29,6 +29,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.invalidLink;
       case ErrorCode.failedToFetchUserData:
         return intl.failedToFetchUserData;
+      case ErrorCode.notConnectedToInternet:
+        return intl.notConnectedToInternet;
     }
   }
 }

@@ -33,5 +33,6 @@
     "invalidLink": "Invalid link!",
     "failedToFetchUserData": "Failed to fetch your data, something went wrong!",
     "connected": "You are connected to the internet!",
-    "disconnected": "Oops! Looks like you are out of interntet..."
+    "disconnected": "Oops! Looks like you are out of interntet...",
+    "notConnectedToInternet": "You have no connection to internet!"
 }

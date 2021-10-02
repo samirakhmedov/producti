@@ -1,18 +1,26 @@
 part of 'connection_cubit.dart';
 
-class ConnectionCubitState extends Equatable {
-  final bool hasConnection;
+enum ConnectionStatus { unknown, connected, disconnected }
 
-  const ConnectionCubitState(this.hasConnection);
+enum ConnectionShowStatus { show, hide }
+
+class ConnectionCubitState extends Equatable {
+  final ConnectionStatus connectionStatus;
+  final ConnectionShowStatus showStatus;
+
+  const ConnectionCubitState(this.connectionStatus,
+      {this.showStatus = ConnectionShowStatus.hide});
 
   @override
-  List<Object> get props => [hasConnection];
+  List<Object> get props => [connectionStatus];
 
   ConnectionCubitState copyWith({
-    bool? hasConnection,
+    ConnectionStatus? connectionStatus,
+    ConnectionShowStatus? showStatus,
   }) {
     return ConnectionCubitState(
-      hasConnection ?? this.hasConnection,
+      connectionStatus ?? this.connectionStatus,
+      showStatus: showStatus ?? this.showStatus,
     );
   }
 }

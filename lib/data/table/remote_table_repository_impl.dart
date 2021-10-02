@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:producti/application/core/error/error_codes.dart';
-import 'package:producti/application/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:producti/data/core/error/error_codes.dart';
+import 'package:producti/data/core/error/failure.dart';
 import 'package:producti/domain/table/remote_table_repository.dart';
 import 'package:producti/domain/table/table.dart';
 

@@ -38,7 +38,8 @@ _i1.GetIt initDependecies(_i1.GetIt get,
       get<_i8.FlutterSecureStorage>(), get<_i5.FirebaseAuth>()));
   gh.factory<_i12.ConnectionCubit>(
       () => _i12.ConnectionCubit(get<_i3.Connectivity>()));
-  gh.factory<_i13.AuthBloc>(() => _i13.AuthBloc(get<_i10.AuthRepository>()));
+  gh.factory<_i13.AuthBloc>(() =>
+      _i13.AuthBloc(get<_i10.AuthRepository>(), get<_i12.ConnectionCubit>()));
   return get;
 }
 

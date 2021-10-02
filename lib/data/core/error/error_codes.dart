@@ -10,4 +10,5 @@ enum ErrorCode {
   voidValue,
   invalidLink,
   failedToFetchUserData,
+  notConnectedToInternet,
 }

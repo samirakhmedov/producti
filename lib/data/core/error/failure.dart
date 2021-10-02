@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:producti/application/core/error/error_codes.dart';
+
+import 'error_codes.dart';
 
 abstract class Failure extends Equatable {
   final ErrorCode messageCode;
@@ -20,4 +21,8 @@ class TableFailure extends Failure {
 
 class ValidationFailure extends Failure {
   const ValidationFailure(ErrorCode messageCode) : super(messageCode);
+}
+
+class ConnectionFailure extends Failure {
+  const ConnectionFailure(ErrorCode messageCode) : super(messageCode);
 }

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/auth/pages/auth_page_cubit.dart';
-import 'package:producti/application/core/cubit/connection_cubit.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/auth/pages/sign_in_page.dart';
 import 'package:producti/presentation/auth/pages/sign_up_page.dart';
 import 'package:producti/presentation/core/constants/constants.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti/presentation/core/widgets/connection/connectivity_listener.dart';
-import 'package:producti/presentation/core/widgets/connection/connectivity_messenger.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/presentation/core/errors/error_code_ext.dart';
@@ -54,7 +52,9 @@ class AuthPage extends StatelessWidget {
                       backgroundColor: kRed,
                       content: Text(
                         state.failure.messageCode.translate(context),
-                        style: textTheme.caption,
+                        style: textTheme.caption!.copyWith(
+                          color: theme.backgroundColor,
+                        ),
                       ),
                     ),
                   );
