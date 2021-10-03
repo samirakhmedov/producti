@@ -22,6 +22,8 @@ import 'injection.dart';
 Future<void> main() async {
   await Hive.initFlutter();
 
+  configureDependecies();
+
   <TypeAdapter>[
     NoteTableCellAdapter(),
     NotificationTableCellAdapter(),
@@ -31,8 +33,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-
-  configureDependecies();
 
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),

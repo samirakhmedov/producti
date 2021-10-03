@@ -34,7 +34,9 @@ class AuthPage extends StatelessWidget {
             child: BlocListener<AuthBloc, AuthState>(
               listener: (context, state) {
                 if (state is AuthAnonymousState) {
-                  Navigator.of(context).pushReplacementNamed(AppRoutes.launch);
+                  cubit.close();
+
+                  Navigator.of(context).pushReplacementNamed(AppRoutes.tables);
                 }
                 if (state is AuthLoggedIn) {
                   final navigator = Navigator.of(context);
@@ -43,7 +45,7 @@ class AuthPage extends StatelessWidget {
 
                   cubit.close();
 
-                  navigator.pushReplacementNamed(AppRoutes.launch);
+                  navigator.pushReplacementNamed(AppRoutes.tables);
                 } else if (state is AuthErrorState) {
                   Navigator.of(context).pop();
 

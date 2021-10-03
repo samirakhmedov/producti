@@ -26,8 +26,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "comfortable": MessageLookupByLibrary.simpleMessage("Удобно"),
         "connected": MessageLookupByLibrary.simpleMessage(
             "Вы подключились к интернету!"),
+        "createAccount":
+            MessageLookupByLibrary.simpleMessage("Создать аккаунт."),
         "disconnected": MessageLookupByLibrary.simpleMessage(
             "Приём, приём...никого не слышно."),
+        "doNotLoggedIn":
+            MessageLookupByLibrary.simpleMessage("Вы не создали аккаунта!"),
         "effective": MessageLookupByLibrary.simpleMessage("Эффективно"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(

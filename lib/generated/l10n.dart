@@ -409,6 +409,26 @@ class S {
       args: [],
     );
   }
+
+  /// `You are not logged in!`
+  String get doNotLoggedIn {
+    return Intl.message(
+      'You are not logged in!',
+      name: 'doNotLoggedIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create account.`
+  String get createAccount {
+    return Intl.message(
+      'Create account.',
+      name: 'createAccount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

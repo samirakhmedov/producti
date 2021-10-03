@@ -34,5 +34,7 @@
     "failedToFetchUserData": "Произошла какая то ошибка, не удалось запросить данные!",
     "connected": "Вы подключились к интернету!",
     "disconnected": "Приём, приём...никого не слышно.",
-    "notConnectedToInternet": "У вас нету подключения к интернету!"
+    "notConnectedToInternet": "У вас нету подключения к интернету!",
+    "doNotLoggedIn": "Вы не создали аккаунта!",
+    "createAccount": "Создать аккаунт."
 }

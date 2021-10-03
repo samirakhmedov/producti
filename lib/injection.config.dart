@@ -16,14 +16,14 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import 'application/auth/logic/auth_bloc.dart' as _i21;
 import 'application/core/app_module.dart' as _i22;
-import 'application/core/cubit/connection_cubit.dart' as _i20;
+import 'application/core/cubit/connection_cubit.dart' as _i19;
 import 'application/launch/logic/launch_bloc.dart' as _i11;
-import 'application/tables/logic/anonymous/anonymous_table_bloc.dart' as _i17;
-import 'application/tables/logic/user/table_bloc.dart' as _i16;
-import 'data/auth/auth_repository_impl.dart' as _i19;
+import 'application/tables/logic/anonymous/anonymous_table_bloc.dart' as _i16;
+import 'application/tables/logic/user/table_bloc.dart' as _i20;
+import 'data/auth/auth_repository_impl.dart' as _i18;
 import 'data/table/local_table_repository.dart' as _i13;
 import 'data/table/remote_table_repository_impl.dart' as _i15;
-import 'domain/auth/auth_repository.dart' as _i18;
+import 'domain/auth/auth_repository.dart' as _i17;
 import 'domain/table/local_table_repository.dart' as _i12;
 import 'domain/table/remote_table_repository.dart' as _i14;
 import 'domain/table/table.dart' as _i4; // ignore_for_file: unnecessary_lambdas
@@ -49,16 +49,18 @@ Future<_i1.GetIt> initDependecies(_i1.GetIt get,
       get<_i3.Box<_i4.Table>>(), get<_i3.Box<List<String>>>()));
   gh.factory<_i14.RemoteTableRepository>(
       () => _i15.RemoteTableRepositoryImpl(get<_i9.FirebaseFirestore>()));
-  gh.lazySingleton<_i16.TableBloc>(() => _i16.TableBloc(
-      get<_i14.RemoteTableRepository>(), get<_i12.LocalTableRepository>()));
-  gh.lazySingleton<_i17.AnonymousTableBloc>(
-      () => _i17.AnonymousTableBloc(get<_i12.LocalTableRepository>()));
-  gh.factory<_i18.AuthRepository>(() => _i19.AuthRepositoryImpl(
+  gh.lazySingleton<_i16.AnonymousTableBloc>(
+      () => _i16.AnonymousTableBloc(get<_i12.LocalTableRepository>()));
+  gh.factory<_i17.AuthRepository>(() => _i18.AuthRepositoryImpl(
       get<_i10.FlutterSecureStorage>(), get<_i7.FirebaseAuth>()));
-  gh.factory<_i20.ConnectionCubit>(
-      () => _i20.ConnectionCubit(get<_i5.Connectivity>()));
+  gh.factory<_i19.ConnectionCubit>(
+      () => _i19.ConnectionCubit(get<_i5.Connectivity>()));
+  gh.lazySingleton<_i20.TableBloc>(() => _i20.TableBloc(
+      get<_i14.RemoteTableRepository>(),
+      get<_i12.LocalTableRepository>(),
+      get<_i19.ConnectionCubit>()));
   gh.factory<_i21.AuthBloc>(() =>
-      _i21.AuthBloc(get<_i18.AuthRepository>(), get<_i20.ConnectionCubit>()));
+      _i21.AuthBloc(get<_i17.AuthRepository>(), get<_i19.ConnectionCubit>()));
   return get;
 }
 

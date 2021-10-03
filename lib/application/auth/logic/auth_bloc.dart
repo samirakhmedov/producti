@@ -32,6 +32,10 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
       return;
     }
 
+    if (event is AuthSignOut) {
+      yield AuthInitial();
+    }
+
     if (event is AuthSignIn) {
       yield AuthLoadingState();
 

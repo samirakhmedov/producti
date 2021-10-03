@@ -24,8 +24,9 @@ class LaunchPage extends StatelessWidget {
 
         Navigator.of(context).pushReplacementNamed(
           state.onboardingPassed
-              ? authBloc.state is AuthLoggedIn
-                  ? AppRoutes.launch
+              ? authBloc.state is AuthLoggedIn ||
+                      authBloc.state is AuthAnonymousState
+                  ? AppRoutes.tables
                   : AppRoutes.auth
               : AppRoutes.onboarding,
         );
