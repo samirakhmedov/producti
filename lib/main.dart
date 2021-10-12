@@ -13,6 +13,7 @@ import 'package:producti/application/core/cubit/connection_cubit.dart';
 import 'package:producti/application/core/simple_bloc_observer.dart';
 import 'package:producti/application/launch/logic/launch_bloc.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
+import 'package:producti/domain/table/table.dart';
 import 'package:producti/presentation/core/widgets/app_widget.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -22,13 +23,12 @@ import 'injection.dart';
 Future<void> main() async {
   await Hive.initFlutter();
 
-  configureDependecies();
+  Hive.registerAdapter(TableAdapter());
+  Hive.registerAdapter(NoteTableCellAdapter());
+  Hive.registerAdapter(NotificationTableCellAdapter());
+  Hive.registerAdapter(GroupTableCellAdapter());
 
-  <TypeAdapter>[
-    NoteTableCellAdapter(),
-    NotificationTableCellAdapter(),
-    GroupTableCellAdapter()
-  ].map((e) => Hive.registerAdapter(e));
+  configureDependecies();
 
   WidgetsFlutterBinding.ensureInitialized();
 

@@ -6,3 +6,4 @@ export 'option_text.dart';
 export 'field_error_indicator.dart';
 export 'user_avatar.dart';
 export 'app_divider.dart';
+export 'list_tile.dart';

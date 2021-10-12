@@ -12,8 +12,8 @@ class ThemeHelper {
 const _kBackgroundDark = Color(0xFF151414);
 const _kBackgroundLight = Color(0xFFFAFAFA);
 
-const _kBlack = Color(0xFF000000);
-const _kWhite = Color(0xFFFFFFFF);
+const kBlack = Color(0xFF000000);
+const kWhite = Color(0xFFFFFFFF);
 
 const _kMainDarkColor = Color(0xFFE8AC13);
 const _kMainLightColor = Color(0xFF3889E8);
@@ -95,7 +95,7 @@ final kDarkTheme = ThemeData(
   ),
   primaryColor: _kMainDarkColor,
   primaryColorDark: _kMainDarkColor,
-  textTheme: GoogleFonts.notoSansTextTheme(
+  textTheme: GoogleFonts.robotoTextTheme(
     TextTheme(
       /// Onboarding text, subhead text
 
@@ -105,19 +105,19 @@ final kDarkTheme = ThemeData(
 
       /// Subhead text 2, group header
       bodyText2: _kBodyText2TextStyle.copyWith(
-        color: _kWhite,
+        color: kWhite,
       ),
 
       /// Text on main screen
 
       caption: _kCaptionTextStyle.copyWith(
-        color: _kWhite,
+        color: kWhite,
       ),
 
       /// On launch text
 
       headline1: _kBiggerHeaderTextStyle.copyWith(
-        color: _kWhite,
+        color: kWhite,
       ),
 
       /// Header on log in screens
@@ -129,13 +129,13 @@ final kDarkTheme = ThemeData(
       /// Same, but even board name
 
       headline3: _kSubheadTextStyle.copyWith(
-        color: _kWhite,
+        color: kWhite,
       ),
 
       /// Text under inputs.
 
       subtitle1: _kSubtitleTextStyle.copyWith(
-        color: _kWhite,
+        color: kWhite,
       ),
 
       /// New text mark
@@ -155,7 +155,7 @@ final kDarkTheme = ThemeData(
 
       /// Pin code button text
       headline4: _kPinCodeTextStyle.copyWith(
-        color: _kBlack,
+        color: kBlack,
       ),
     ),
   ),
@@ -170,16 +170,16 @@ final kLightTheme = ThemeData(
   ),
   primaryColor: _kMainLightColor,
   primaryColorDark: _kMainLightColor,
-  textTheme: GoogleFonts.tajawalTextTheme(
+  textTheme: GoogleFonts.robotoTextTheme(
     TextTheme(
       bodyText1: _kBodyText1TextStyle.copyWith(
         color: _kMainLightColor,
       ),
       bodyText2: _kBodyText2TextStyle.copyWith(
-        color: _kBlack,
+        color: kBlack,
       ),
       caption: _kCaptionTextStyle.copyWith(
-        color: _kBlack,
+        color: kBlack,
       ),
       headline1: _kBiggerHeaderTextStyle.copyWith(
         color: kDarkerGray,
@@ -188,10 +188,10 @@ final kLightTheme = ThemeData(
         color: _kMainLightColor,
       ),
       headline3: _kSubheadTextStyle.copyWith(
-        color: _kBlack,
+        color: kBlack,
       ),
       subtitle1: _kSubtitleTextStyle.copyWith(
-        color: _kBlack,
+        color: kBlack,
       ),
       overline: _kSmallTextStyle.copyWith(
         color: kRed,
@@ -203,7 +203,7 @@ final kLightTheme = ThemeData(
         color: kGray,
       ),
       headline4: _kPinCodeTextStyle.copyWith(
-        color: _kWhite,
+        color: kWhite,
       ),
     ),
   ),

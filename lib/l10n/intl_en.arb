@@ -36,5 +36,8 @@
     "disconnected": "Oops! Looks like you are out of interntet...",
     "notConnectedToInternet": "You have no connection to internet!",
     "doNotLoggedIn": "You are not logged in!",
-    "createAccount": "Create account."
+    "createAccount": "Create account.",
+    "settings": "Settings",
+    "logOut": "Log out",
+    "addOne": "Add one"
 }

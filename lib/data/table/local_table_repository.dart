@@ -14,7 +14,7 @@ class LocalTableRepositoryImpl extends LocalTableRepository {
   );
 
   @override
-  Future<List<Table>> loadData() {
+  List<Table> loadData() {
     final order = _constantsBox.get('TABLES_ORDER') ?? [];
 
     List<Table> result = [];
@@ -25,7 +25,23 @@ class LocalTableRepositoryImpl extends LocalTableRepository {
       result.add(table!);
     }
 
-    return Future.value(result);
+    if (result.isEmpty) {
+      Future.wait([
+        _tablesBox.put(
+          'Main',
+          const Table(title: 'Main'),
+        ),
+        _constantsBox.put('TABLES_ORDER', ['Main']),
+      ]);
+
+      return const [
+        Table(
+          title: 'Main',
+        ),
+      ];
+    }
+
+    return result;
   }
 
   @override

@@ -5,12 +5,14 @@ class OptionText extends StatelessWidget {
   final String start;
   final String end;
   final void Function() onTap;
+  final TextAlign? textAlign;
 
   const OptionText({
     Key? key,
     required this.start,
     required this.end,
     required this.onTap,
+    this.textAlign,
   }) : super(key: key);
 
   @override
@@ -20,7 +22,7 @@ class OptionText extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     return RichText(
-      textAlign: TextAlign.center,
+      textAlign: textAlign ?? TextAlign.center,
       text: TextSpan(
         text: start,
         style: textTheme.subtitle1,

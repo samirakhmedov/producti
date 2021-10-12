@@ -13,7 +13,7 @@ class Table extends Equatable {
   @HiveField(1, defaultValue: [])
   final List<TableCell> cells;
 
-  Table({
+  const Table({
     required this.title,
     this.cells = const [],
   });

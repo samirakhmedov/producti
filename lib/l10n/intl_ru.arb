@@ -36,5 +36,8 @@
     "disconnected": "Приём, приём...никого не слышно.",
     "notConnectedToInternet": "У вас нету подключения к интернету!",
     "doNotLoggedIn": "Вы не создали аккаунта!",
-    "createAccount": "Создать аккаунт."
+    "createAccount": "Создать аккаунт.",
+    "settings": "Настройки",
+    "logOut": "Выйти",
+    "addOne": "Добавить"
 }

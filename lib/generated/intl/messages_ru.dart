@@ -21,6 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addOne": MessageLookupByLibrary.simpleMessage("Добавить"),
         "alreadyCoolGuy":
             MessageLookupByLibrary.simpleMessage("Уже часть нашего цирка?"),
         "comfortable": MessageLookupByLibrary.simpleMessage("Удобно"),
@@ -54,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "join": MessageLookupByLibrary.simpleMessage("Присоединяйся."),
         "letHim":
             MessageLookupByLibrary.simpleMessage("Представление уже началось!"),
+        "logOut": MessageLookupByLibrary.simpleMessage("Выйти"),
         "next": MessageLookupByLibrary.simpleMessage("Далее"),
         "notConnectedToInternet": MessageLookupByLibrary.simpleMessage(
             "У вас нету подключения к интернету!"),
@@ -69,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Пароли не совпадают!"),
         "password": MessageLookupByLibrary.simpleMessage("Пароль"),
         "repeatPassword": MessageLookupByLibrary.simpleMessage("Пароль снова"),
+        "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "signIn": MessageLookupByLibrary.simpleMessage("Вход"),
         "signInAnonim": MessageLookupByLibrary.simpleMessage(
             "Я тоже. Войди без регистрации."),
