@@ -20,7 +20,7 @@ class AuthPage extends StatelessWidget {
 
     final intl = S.of(context);
 
-    final theme = Theme.of(context);
+    final theme = ThemeHelper.getTheme(context);
 
     final textTheme = theme.textTheme;
 

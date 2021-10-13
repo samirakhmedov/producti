@@ -19,9 +19,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    final textTheme = theme.textTheme;
+    final textTheme = ThemeHelper.getTextTheme(context);
 
     final intl = S.of(context);
 

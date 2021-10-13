@@ -14,9 +14,7 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    final textTheme = theme.textTheme;
+    final textTheme = ThemeHelper.getTextTheme(context);
 
     final intl = S.of(context);
 

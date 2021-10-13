@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
-import 'package:producti/domain/table/cells/table_cell.dart';
+import 'package:producti/domain/table/cells/table_cell.dart' as c;
 import 'package:producti/domain/table/table.dart' as t;
 import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/generated/l10n.dart';
@@ -11,12 +11,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnonymousTablesPage extends StatelessWidget {
   final TableLink? path;
+  final int tableIndex;
   final t.Table table;
 
   const AnonymousTablesPage({
     Key? key,
     this.path,
     required this.table,
+    required this.tableIndex,
   }) : super(key: key);
 
   @override
@@ -27,7 +29,9 @@ class AnonymousTablesPage extends StatelessWidget {
 
     return Scaffold(
       key: _scaffoldKey,
-      endDrawer: _TablesDrawer(),
+      endDrawer: _TablesDrawer(
+        tableIndex: tableIndex,
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -75,17 +79,9 @@ class _TablesBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final query = MediaQuery.of(context);
 
-    String? title;
+    final textTheme = ThemeHelper.getTextTheme(context);
 
-    if (path != null) {
-      title = '${table.title} > ${path!.getParticle(table).title}';
-    }
-
-    title ??= table.title;
-
-    final theme = Theme.of(context);
-
-    final textTheme = theme.textTheme;
+    final intl = S.of(context);
 
     return SizedBox.fromSize(
       size: query.size,
@@ -94,34 +90,43 @@ class _TablesBody extends StatelessWidget {
           Positioned(
             top: 12,
             left: 12,
-            child: Text(
-              title,
-              style: textTheme.headline3!.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+            child: Builder(
+              builder: (context) {
+                String? title;
+
+                if (path != null) {
+                  title = '${table.title} > ${path!.getParticle(table).title}';
+                }
+
+                title ??= table.title;
+
+                return Text(
+                  title,
+                  style: textTheme.headline3!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              },
             ),
           ),
           Builder(
             builder: (context) {
               if (path != null) {
-                final group = path!.getParticle(table) as GroupTableCell;
+                final group = path!.getParticle(table) as c.GroupTableCell;
 
                 if (group.children.isEmpty) return const EmptyWidget();
 
-                return const SizedBox();
+                return _TableCellsList(cells: group.children);
               }
 
-              if (table.cells.isEmpty) {
-                final intl = S.of(context);
-
+              if (table.cells.isEmpty)
                 return Center(
                   child: EmptyWidget(
                     description: intl.nothingToSee,
                   ),
                 );
-              }
 
-              return const SizedBox();
+              return _TableCellsList(cells: table.cells);
             },
           ),
         ],
@@ -130,8 +135,24 @@ class _TablesBody extends StatelessWidget {
   }
 }
 
+class _TableCellsList extends StatelessWidget {
+  final List<c.TableCell> cells;
+
+  const _TableCellsList({
+    Key? key,
+    required this.cells,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
 class _TablesDrawer extends StatelessWidget {
-  const _TablesDrawer({Key? key}) : super(key: key);
+  final int tableIndex;
+
+  const _TablesDrawer({Key? key, required this.tableIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -199,7 +220,7 @@ class _TablesDrawer extends StatelessWidget {
                               ? DrawerListTile(
                                   text: state.tables[index].title,
                                   icon: Icons.grid_view_outlined,
-                                  selected: true,
+                                  selected: index == tableIndex,
                                 )
                               : DrawerListTile(
                                   text: intl.addOne,

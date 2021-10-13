@@ -74,7 +74,7 @@ class _ConnectivityPopupContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final query = MediaQuery.of(context);
 
-    final theme = Theme.of(context);
+    final theme = ThemeHelper.getTheme(context);
 
     final textTheme = theme.textTheme;
 

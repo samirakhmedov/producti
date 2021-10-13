@@ -34,6 +34,7 @@ class TablesPage extends StatelessWidget {
                   if (state is AnonymousTableLoaded)
                     return AnonymousTablesPage(
                       table: state.tables[tableIndex],
+                      tableIndex: tableIndex,
                       path: path,
                     );
 
