@@ -24,4 +24,12 @@ class TableLink {
 
     return tableCell as TableCell;
   }
+
+  TableLink addPath(int index) => TableLink(
+        List<int>.of(path)..add(index),
+      );
+
+  TableLink popPath() => TableLink(
+        List<int>.of(path)..removeLast(),
+      );
 }

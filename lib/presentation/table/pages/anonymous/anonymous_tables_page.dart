@@ -32,15 +32,6 @@ class AnonymousTablesPage extends StatelessWidget {
       endDrawer: _TablesDrawer(
         tableIndex: tableIndex,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: theme.primaryColor,
-        child: Icon(
-          Icons.add,
-          color: theme.backgroundColor,
-        ),
-      ),
       body: SafeArea(
         child: Stack(
           alignment: Alignment.center,
@@ -52,6 +43,22 @@ class AnonymousTablesPage extends StatelessWidget {
                   _scaffoldKey.currentState!.openEndDrawer();
                 },
                 icon: Icon(Icons.menu),
+              ),
+            ),
+            Positioned(
+              left: 15,
+              bottom: 15,
+              child: FloatingActionButton(
+                onPressed: () {
+                  _scaffoldKey.currentState!.showBottomSheet(
+                    (context) => AppBottomSheet(),
+                  );
+                },
+                backgroundColor: theme.primaryColor,
+                child: Icon(
+                  Icons.add,
+                  color: theme.backgroundColor,
+                ),
               ),
             ),
             _TablesBody(
