@@ -10,16 +10,22 @@ import 'package:hive/hive.dart';
 
 @module
 abstract class AppModule {
-  FirebaseCrashlytics get crashlytics => FirebaseCrashlytics.instance;
-
+  @singleton
   FirebaseAuth get authentication => FirebaseAuth.instance;
 
+  @singleton
   FirebaseFirestore get store => FirebaseFirestore.instance;
 
+  @singleton
+  FirebaseCrashlytics get crashlytics => FirebaseCrashlytics.instance;
+
+  @singleton
   FirebaseAnalytics get analytics => FirebaseAnalytics();
 
+  @singleton
   FlutterSecureStorage get secureStorage => FlutterSecureStorage();
 
+  @singleton
   Connectivity get connectivity => Connectivity();
 
   @preResolve

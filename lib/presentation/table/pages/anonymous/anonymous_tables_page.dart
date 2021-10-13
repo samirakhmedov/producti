@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
+import 'package:producti/domain/table/cells/table_cell.dart';
+import 'package:producti/domain/table/table.dart' as t;
 import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
@@ -9,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnonymousTablesPage extends StatelessWidget {
   final TableLink? path;
-  final Table table;
+  final t.Table table;
 
   const AnonymousTablesPage({
     Key? key,
@@ -19,11 +21,22 @@ class AnonymousTablesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ThemeHelper.getTheme(context);
+
     final _scaffoldKey = GlobalKey<ScaffoldState>();
 
     return Scaffold(
       key: _scaffoldKey,
       endDrawer: _TablesDrawer(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: theme.primaryColor,
+        child: Icon(
+          Icons.add,
+          color: theme.backgroundColor,
+        ),
+      ),
       body: SafeArea(
         child: Stack(
           alignment: Alignment.center,
@@ -39,6 +52,7 @@ class AnonymousTablesPage extends StatelessWidget {
             ),
             _TablesBody(
               path: path,
+              table: table,
             ),
           ],
         ),
@@ -49,21 +63,68 @@ class AnonymousTablesPage extends StatelessWidget {
 
 class _TablesBody extends StatelessWidget {
   final TableLink? path;
+  final t.Table table;
 
-  const _TablesBody({Key? key, this.path}) : super(key: key);
+  const _TablesBody({
+    Key? key,
+    this.path,
+    required this.table,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final query = MediaQuery.of(context);
 
+    String? title;
+
+    if (path != null) {
+      title = '${table.title} > ${path!.getParticle(table).title}';
+    }
+
+    title ??= table.title;
+
+    final theme = Theme.of(context);
+
+    final textTheme = theme.textTheme;
+
     return SizedBox.fromSize(
       size: query.size,
-      child: BlocBuilder<AnonymousTableBloc, AnonymousTableState>(
-        builder: (context, state) {
-          return Stack(
-            children: [],
-          );
-        },
+      child: Stack(
+        children: [
+          Positioned(
+            top: 12,
+            left: 12,
+            child: Text(
+              title,
+              style: textTheme.headline3!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Builder(
+            builder: (context) {
+              if (path != null) {
+                final group = path!.getParticle(table) as GroupTableCell;
+
+                if (group.children.isEmpty) return const EmptyWidget();
+
+                return const SizedBox();
+              }
+
+              if (table.cells.isEmpty) {
+                final intl = S.of(context);
+
+                return Center(
+                  child: EmptyWidget(
+                    description: intl.nothingToSee,
+                  ),
+                );
+              }
+
+              return const SizedBox();
+            },
+          ),
+        ],
       ),
     );
   }

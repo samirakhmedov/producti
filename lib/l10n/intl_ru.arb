@@ -39,5 +39,6 @@
     "createAccount": "Создать аккаунт.",
     "settings": "Настройки",
     "logOut": "Выйти",
-    "addOne": "Добавить"
+    "addOne": "Добавить",
+    "nothingToSee": "Здесь ничего нет..."
 }

@@ -14,7 +14,7 @@ import 'package:producti/domain/auth/values/password.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
-@injectable
+@lazySingleton
 class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;
   final ConnectionCubit _connection;

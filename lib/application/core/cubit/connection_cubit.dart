@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 
 part 'connection_state.dart';
 
-@injectable
+@lazySingleton
 class ConnectionCubit extends Cubit<ConnectionCubitState> {
   final Connectivity _connectivity;
 

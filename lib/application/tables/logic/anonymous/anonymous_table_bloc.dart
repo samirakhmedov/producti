@@ -7,7 +7,7 @@ import 'package:producti/domain/table/table.dart';
 part 'anonymous_table_event.dart';
 part 'anonymous_table_state.dart';
 
-@lazySingleton
+@injectable
 class AnonymousTableBloc
     extends Bloc<AnonymousTableEvent, AnonymousTableState> {
   final LocalTableRepository _localTableRepository;

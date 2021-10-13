@@ -39,5 +39,6 @@
     "createAccount": "Create account.",
     "settings": "Settings",
     "logOut": "Log out",
-    "addOne": "Add one"
+    "addOne": "Add one",
+    "nothingToSee": "Nothing to see here..."
 }

@@ -22,10 +22,11 @@ class LaunchPage extends StatelessWidget {
 
         final state = launchBloc.state;
 
+        final authState = authBloc.state;
+
         Navigator.of(context).pushReplacementNamed(
           state.onboardingPassed
-              ? authBloc.state is AuthLoggedIn ||
-                      authBloc.state is AuthAnonymousState
+              ? authState is AuthLoggedIn || authState is AuthAnonymousState
                   ? AppRoutes.tables
                   : AppRoutes.auth
               : AppRoutes.onboarding,

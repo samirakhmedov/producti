@@ -8,4 +8,4 @@ final sl = GetIt.instance;
 @InjectableInit(
   initializerName: 'initDependecies',
 )
-void configureDependecies() => initDependecies(sl);
+Future<void> configureDependecies() => initDependecies(sl);

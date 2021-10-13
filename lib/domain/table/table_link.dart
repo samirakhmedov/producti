@@ -6,7 +6,7 @@ class TableLink {
 
   const TableLink(this.path);
 
-  TableCell? getParticle(Table table) {
+  TableCell getParticle(Table table) {
     TableCell cell = table.cells[path[0]];
 
     if (cell is! GroupTableCell) return cell;
@@ -21,5 +21,7 @@ class TableLink {
 
       tableCell = c;
     }
+
+    return tableCell as TableCell;
   }
 }

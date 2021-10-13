@@ -7,6 +7,11 @@ class ThemeHelper {
 
     return brightness == Brightness.dark;
   }
+
+  static ThemeData getTheme(BuildContext context) => Theme.of(context);
+
+  static TextTheme getTextTheme(BuildContext context) =>
+      Theme.of(context).textTheme;
 }
 
 const _kBackgroundDark = Color(0xFF151414);

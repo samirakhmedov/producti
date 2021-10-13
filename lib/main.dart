@@ -21,6 +21,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'injection.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
 
   Hive.registerAdapter(TableAdapter());
@@ -28,19 +30,18 @@ Future<void> main() async {
   Hive.registerAdapter(NotificationTableCellAdapter());
   Hive.registerAdapter(GroupTableCellAdapter());
 
-  configureDependecies();
-
-  WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
 
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: await getApplicationDocumentsDirectory(),
+    storageDirectory: await getTemporaryDirectory(),
   );
+
+  await configureDependecies();
 
   final crashlytics = sl.get<FirebaseCrashlytics>();
 
-  await crashlytics.setCrashlyticsCollectionEnabled(kReleaseMode);
+  await FirebaseCrashlytics.instance
+      .setCrashlyticsCollectionEnabled(kReleaseMode);
 
   Bloc.observer = SimpleBlocObserver();
 

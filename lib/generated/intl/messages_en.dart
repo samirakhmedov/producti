@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "You have no connection to internet!"),
         "notPartOfParty": MessageLookupByLibrary.simpleMessage(
             "Still not part of our party?"),
+        "nothingToSee":
+            MessageLookupByLibrary.simpleMessage("Nothing to see here..."),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
             "Incredible every day tool with incredible performance."),
         "onboardingDesc2": MessageLookupByLibrary.simpleMessage(
