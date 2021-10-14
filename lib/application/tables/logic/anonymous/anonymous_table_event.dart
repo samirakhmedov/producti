@@ -17,3 +17,5 @@ class AnonymousTableCreate extends AnonymousTableEvent {
   @override
   List<Object> get props => [name];
 }
+
+class AnonymousTableSave extends AnonymousTableEvent {}

@@ -38,5 +38,11 @@ class AnonymousTableBloc
           ),
       );
     }
+
+    if (event is AnonymousTableSave) {
+      final loadedState = state as AnonymousTableLoaded;
+
+      await _localTableRepository.updateData(loadedState.tables);
+    }
   }
 }
