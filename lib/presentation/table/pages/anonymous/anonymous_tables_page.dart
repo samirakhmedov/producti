@@ -6,6 +6,8 @@ import 'package:producti/domain/table/table.dart' as t;
 import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
+import 'package:producti/presentation/table/pages/tables_page.dart';
+import 'package:producti/presentation/table/widgets/create_table_body.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -64,6 +66,147 @@ class AnonymousTablesPage extends StatelessWidget {
             _TablesBody(
               path: path,
               table: table,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TablesDrawer extends StatelessWidget {
+  final int tableIndex;
+
+  const _TablesDrawer({Key? key, required this.tableIndex}) : super(key: key);
+
+  void _moveToPage(BuildContext context, int tableIndex) {
+    final navigator = Navigator.of(context);
+
+    navigator.popUntil((route) => route.settings.name == AppRoutes.tables);
+
+    navigator.pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => TablesPage(
+          tableIndex: tableIndex,
+        ),
+        settings: RouteSettings(
+          name: AppRoutes.tables,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final query = MediaQuery.of(context);
+
+    final size = query.size;
+
+    final intl = S.of(context);
+
+    final theme = Theme.of(context);
+
+    return Drawer(
+      elevation: 0.0,
+      child: Container(
+        color: theme.backgroundColor,
+        child: Column(
+          children: [
+            Container(
+              height: size.height * 0.13,
+              width: double.maxFinite,
+              color: theme.backgroundColor,
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const UserAvatar(),
+                      const Gap(),
+                      Expanded(
+                        child: OptionText(
+                          textAlign: TextAlign.left,
+                          start: intl.doNotLoggedIn + ' ',
+                          end: intl.createAccount,
+                          onTap: () {
+                            final authBloc = context.read<AuthBloc>();
+
+                            authBloc.add(AuthSignOut());
+
+                            final navigator = Navigator.of(context);
+
+                            navigator.popUntil((route) =>
+                                route.settings.name == AppRoutes.tables);
+
+                            navigator.pushReplacementNamed(AppRoutes.auth);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const Gap(),
+            Expanded(
+              child: BlocBuilder<AnonymousTableBloc, AnonymousTableState>(
+                builder: (context, state) {
+                  if (state is AnonymousTableLoaded) {
+                    return ListView.separated(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => InkWell(
+                        onTap: () {
+                          if (index == tableIndex)
+                            return Navigator.of(context).pop();
+
+                          _moveToPage(context, index);
+                        },
+                        child: DrawerListTile(
+                          text: state.tables[index].title,
+                          icon: Icons.grid_view_outlined,
+                          selected: index == tableIndex,
+                        ),
+                      ),
+                      separatorBuilder: (context, index) => const AppDivider(),
+                      itemCount: state.tables.length,
+                    );
+                  }
+
+                  return const SizedBox();
+                },
+              ),
+            ),
+            DrawerListTile(
+              onTap: () {
+                final navigator = Navigator.of(context);
+
+                navigator.pop();
+
+                showBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return AppBottomSheet(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 42,
+                        ),
+                        child: CreateTableBody(),
+                      ),
+                    );
+                  },
+                );
+              },
+              text: intl.addOne,
+              icon: Icons.add,
+            ),
+            AppDivider(),
+            DrawerListTile(
+              text: intl.settings,
+              icon: Icons.settings,
             ),
           ],
         ),
@@ -153,103 +296,5 @@ class _TableCellsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container();
-  }
-}
-
-class _TablesDrawer extends StatelessWidget {
-  final int tableIndex;
-
-  const _TablesDrawer({Key? key, required this.tableIndex}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final query = MediaQuery.of(context);
-
-    final size = query.size;
-
-    final intl = S.of(context);
-
-    final theme = Theme.of(context);
-
-    return Drawer(
-      elevation: 0.0,
-      child: Container(
-        color: theme.backgroundColor,
-        child: Column(
-          children: [
-            Container(
-              height: size.height * 0.13,
-              width: double.maxFinite,
-              color: theme.backgroundColor,
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const UserAvatar(),
-                      const Gap(),
-                      Expanded(
-                        child: OptionText(
-                          textAlign: TextAlign.left,
-                          start: intl.doNotLoggedIn + ' ',
-                          end: intl.createAccount,
-                          onTap: () {
-                            final authBloc = context.read<AuthBloc>();
-
-                            authBloc.add(AuthSignOut());
-
-                            final navigator = Navigator.of(context);
-
-                            navigator
-                                .popUntil((route) => route != AppRoutes.tables);
-
-                            navigator.pushReplacementNamed(AppRoutes.auth);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const Gap(),
-            Expanded(
-              child: BlocBuilder<AnonymousTableBloc, AnonymousTableState>(
-                builder: (context, state) {
-                  if (state is AnonymousTableLoaded) {
-                    return ListView.separated(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) =>
-                          index + 1 == state.tables.length
-                              ? DrawerListTile(
-                                  text: state.tables[index].title,
-                                  icon: Icons.grid_view_outlined,
-                                  selected: index == tableIndex,
-                                )
-                              : DrawerListTile(
-                                  text: intl.addOne,
-                                  icon: Icons.add,
-                                ),
-                      separatorBuilder: (context, index) => const AppDivider(),
-                      itemCount: state.tables.length + 1,
-                    );
-                  }
-
-                  return const SizedBox();
-                },
-              ),
-            ),
-            AppDivider(),
-            DrawerListTile(
-              text: intl.settings,
-              icon: Icons.settings,
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

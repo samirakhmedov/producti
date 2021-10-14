@@ -43,13 +43,13 @@ Future<_i1.GetIt> initDependecies(_i1.GetIt get,
       get<_i3.Box<_i4.Table>>(), get<_i3.Box<List<String>>>()));
   gh.factory<_i8.RemoteTableRepository>(
       () => _i9.RemoteTableRepositoryImpl(get<_i10.FirebaseFirestore>()));
-  gh.factory<_i11.AnonymousTableBloc>(
+  gh.lazySingleton<_i11.AnonymousTableBloc>(
       () => _i11.AnonymousTableBloc(get<_i6.LocalTableRepository>()));
   gh.factory<_i12.AuthRepository>(() => _i13.AuthRepositoryImpl(
       get<_i14.FlutterSecureStorage>(), get<_i15.FirebaseAuth>()));
   gh.lazySingleton<_i16.ConnectionCubit>(
       () => _i16.ConnectionCubit(get<_i17.Connectivity>()));
-  gh.factory<_i18.TableBloc>(() => _i18.TableBloc(
+  gh.lazySingleton<_i18.TableBloc>(() => _i18.TableBloc(
       get<_i8.RemoteTableRepository>(),
       get<_i6.LocalTableRepository>(),
       get<_i16.ConnectionCubit>()));

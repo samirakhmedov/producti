@@ -12,6 +12,8 @@ import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/core/cubit/connection_cubit.dart';
 import 'package:producti/application/core/simple_bloc_observer.dart';
 import 'package:producti/application/launch/logic/launch_bloc.dart';
+import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
+import 'package:producti/application/tables/logic/user/table_bloc.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
 import 'package:producti/domain/table/table.dart';
 import 'package:producti/presentation/core/widgets/app_widget.dart';
@@ -61,6 +63,12 @@ Future<void> main() async {
               ),
               BlocProvider<AuthBloc>(
                 create: (context) => sl.get<AuthBloc>(),
+              ),
+              BlocProvider<TableBloc>(
+                create: (context) => sl.get<TableBloc>(),
+              ),
+              BlocProvider<AnonymousTableBloc>(
+                create: (context) => sl.get<AnonymousTableBloc>(),
               ),
               BlocProvider<ConnectionCubit>(
                 create: (context) => sl.get<ConnectionCubit>(),

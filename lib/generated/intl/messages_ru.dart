@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "comfortable": MessageLookupByLibrary.simpleMessage("Удобно"),
         "connected": MessageLookupByLibrary.simpleMessage(
             "Вы подключились к интернету!"),
+        "create": MessageLookupByLibrary.simpleMessage("Создать"),
         "createAccount":
             MessageLookupByLibrary.simpleMessage("Создать аккаунт."),
         "disconnected": MessageLookupByLibrary.simpleMessage(
@@ -81,6 +82,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("А НУ ПУСТИ МЕНЯЯЯ"),
         "signUp": MessageLookupByLibrary.simpleMessage("Регистрация"),
         "skip": MessageLookupByLibrary.simpleMessage("Пропустить"),
+        "tableAlreadyExists":
+            MessageLookupByLibrary.simpleMessage("Эта таблица уже существует!"),
+        "tableName": MessageLookupByLibrary.simpleMessage("Название таблицы"),
         "userNotExists": MessageLookupByLibrary.simpleMessage(
             "Сначала надо создать аккаунт, чтобы потом войти в него. :)"),
         "userNotLoggedIn": MessageLookupByLibrary.simpleMessage(

@@ -11,14 +11,14 @@ class AppBottomSheet extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     final screenWidth = size.width;
-    final popupHeight = size.height * 0.57;
+    final popupHeight = size.height * 0.3;
 
     final theme = ThemeHelper.getTheme(context);
 
     return Container(
       width: screenWidth,
       height: popupHeight,
-      color: Colors.transparent,
+      color: theme.backgroundColor,
       padding: EdgeInsets.zero,
       child: Container(
         padding: EdgeInsets.zero,
@@ -30,31 +30,25 @@ class AppBottomSheet extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               blurRadius: 4,
-              color: kLightGray,
+              color: ThemeHelper.isDarkMode(context) ? kGray : kLightGray,
             ),
           ],
           color: theme.backgroundColor,
         ),
         child: Stack(
           children: [
+            if (child != null) child!,
             Positioned(
-              right: 30,
+              right: 16,
               top: 16,
-              child: IconButton(
-                constraints: BoxConstraints.expand(
-                  height: 15,
-                  width: 15,
-                ),
-                icon: Icon(
+              child: InkWell(
+                onTap: () => Navigator.of(context).pop(),
+                child: Icon(
                   Icons.close,
-                  color: kBlack,
+                  color: ThemeHelper.isDarkMode(context) ? kWhite : kBlack,
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
               ),
             ),
-            if (child != null) child!,
           ],
         ),
       ),

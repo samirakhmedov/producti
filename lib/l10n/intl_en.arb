@@ -40,5 +40,8 @@
     "settings": "Settings",
     "logOut": "Log out",
     "addOne": "Add one",
-    "nothingToSee": "Nothing to see here..."
+    "nothingToSee": "Nothing to see here...",
+    "create": "Create",
+    "tableAlreadyExists": "This table already created!",
+    "tableName": "Table name"
 }

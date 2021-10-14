@@ -11,4 +11,5 @@ enum ErrorCode {
   invalidLink,
   failedToFetchUserData,
   notConnectedToInternet,
+  tableAlreadyExists,
 }

@@ -7,7 +7,7 @@ import 'package:producti/domain/table/table.dart';
 part 'anonymous_table_event.dart';
 part 'anonymous_table_state.dart';
 
-@injectable
+@lazySingleton
 class AnonymousTableBloc
     extends Bloc<AnonymousTableEvent, AnonymousTableState> {
   final LocalTableRepository _localTableRepository;
@@ -24,6 +24,19 @@ class AnonymousTableBloc
       final result = await _localTableRepository.loadData();
 
       yield AnonymousTableLoaded(result);
+    }
+
+    if (event is AnonymousTableCreate) {
+      final loadedState = state as AnonymousTableLoaded;
+
+      yield loadedState.copyWith(
+        tables: List.of(loadedState.tables)
+          ..add(
+            Table(
+              title: event.name,
+            ),
+          ),
+      );
     }
   }
 }

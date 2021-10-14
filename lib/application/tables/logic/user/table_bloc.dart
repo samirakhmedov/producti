@@ -10,7 +10,7 @@ import 'package:producti/domain/table/table.dart';
 part 'table_event.dart';
 part 'table_state.dart';
 
-@injectable
+@lazySingleton
 class TableBloc extends Bloc<TableEvent, TableState> {
   final RemoteTableRepository _remoteTableRepository;
   final LocalTableRepository _localTableRepository;

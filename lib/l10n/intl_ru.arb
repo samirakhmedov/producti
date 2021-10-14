@@ -40,5 +40,8 @@
     "settings": "Настройки",
     "logOut": "Выйти",
     "addOne": "Добавить",
-    "nothingToSee": "Здесь ничего нет..."
+    "nothingToSee": "Здесь ничего нет...",
+    "create": "Создать",
+    "tableAlreadyExists": "Эта таблица уже существует!",
+    "tableName": "Название таблицы"
 }

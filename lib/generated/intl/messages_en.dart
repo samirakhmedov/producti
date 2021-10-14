@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "comfortable": MessageLookupByLibrary.simpleMessage("Comfortable"),
         "connected": MessageLookupByLibrary.simpleMessage(
             "You are connected to the internet!"),
+        "create": MessageLookupByLibrary.simpleMessage("Create"),
         "createAccount":
             MessageLookupByLibrary.simpleMessage("Create account."),
         "disconnected": MessageLookupByLibrary.simpleMessage(
@@ -79,6 +80,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("LET ME IIIIN"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "tableAlreadyExists":
+            MessageLookupByLibrary.simpleMessage("This table already created!"),
+        "tableName": MessageLookupByLibrary.simpleMessage("Table name"),
         "userNotExists": MessageLookupByLibrary.simpleMessage(
             "You are trying to sign in to not existing account. Create one firstly. :)"),
         "userNotLoggedIn": MessageLookupByLibrary.simpleMessage(

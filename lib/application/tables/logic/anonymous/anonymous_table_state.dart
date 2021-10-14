@@ -16,4 +16,12 @@ class AnonymousTableLoaded extends AnonymousTableState {
 
   @override
   List<Object> get props => [tables];
+
+  AnonymousTableLoaded copyWith({
+    List<Table>? tables,
+  }) {
+    return AnonymousTableLoaded(
+      tables ?? this.tables,
+    );
+  }
 }

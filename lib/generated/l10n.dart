@@ -469,6 +469,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Create`
+  String get create {
+    return Intl.message(
+      'Create',
+      name: 'create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This table already created!`
+  String get tableAlreadyExists {
+    return Intl.message(
+      'This table already created!',
+      name: 'tableAlreadyExists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Table name`
+  String get tableName {
+    return Intl.message(
+      'Table name',
+      name: 'tableName',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

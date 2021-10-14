@@ -4,6 +4,7 @@ import 'package:producti_ui/src/constants.dart';
 
 class TextInputWidget extends StatefulWidget {
   final TextEditingController? controller;
+  final void Function(String value)? onChange;
   final IconData? prefixIcon;
   final String? hintText;
   final bool obscureText;
@@ -16,6 +17,7 @@ class TextInputWidget extends StatefulWidget {
     this.hintText,
     this.obscureText = false,
     this.suffixWidget,
+    this.onChange,
   }) : super(key: key);
 
   @override
@@ -40,6 +42,7 @@ class _TextInputWidgetState extends State<TextInputWidget> {
     return TextField(
       focusNode: focus,
       controller: widget.controller,
+      onChanged: widget.onChange,
       cursorColor: theme.primaryColor,
       obscureText: widget.obscureText,
       style: textTheme.bodyText2!.copyWith(

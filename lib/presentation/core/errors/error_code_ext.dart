@@ -31,6 +31,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.failedToFetchUserData;
       case ErrorCode.notConnectedToInternet:
         return intl.notConnectedToInternet;
+      case ErrorCode.tableAlreadyExists:
+        return intl.tableAlreadyExists;
     }
   }
 }
