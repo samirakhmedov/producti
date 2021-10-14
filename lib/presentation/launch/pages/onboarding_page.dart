@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:producti/application/launch/logic/launch_bloc.dart';
@@ -38,6 +39,8 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final analytics = RepositoryProvider.of<FirebaseAnalytics>(context);
+
     final size = MediaQuery.of(context).size;
 
     final OnboardingPageCubit cubit = OnboardingPageCubit();
@@ -78,6 +81,11 @@ class OnboardingPage extends StatelessWidget {
                               ? 1
                               : -1;
 
+                      analytics.logEvent(
+                        name:
+                            'onboarding_swipe_${change == 1 ? "right" : "left"}',
+                      );
+
                       cubit.change(change);
                     }
 
@@ -111,6 +119,8 @@ class OnboardingPage extends StatelessWidget {
                           text: S.of(context).skip,
                           color: kLightGray,
                           onTap: () {
+                            analytics.logEvent(name: 'onboarding_skipped');
+
                             _next(context);
 
                             cubit.close();
@@ -132,12 +142,21 @@ class OnboardingPage extends StatelessWidget {
                             final page = cubit.state.currentIndex;
 
                             if (page == 2) {
+                              analytics.logEvent(
+                                name: 'onboarding_full_view',
+                              );
+
                               _next(context);
 
                               cubit.close();
 
                               return;
                             }
+
+                            analytics.logEvent(
+                              name: 'onboarding_next',
+                              parameters: {'page': page + 1},
+                            );
 
                             _pageController.animateToPage(
                               page + 1,
