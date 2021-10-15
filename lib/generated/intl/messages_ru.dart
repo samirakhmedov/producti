@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Здесь начнется твое веселье, сладкий."),
         "funContinues": MessageLookupByLibrary.simpleMessage(
             "Здесь продолжится твое веселье, сладкий."),
+        "group": MessageLookupByLibrary.simpleMessage("Группа"),
         "hatePeople":
             MessageLookupByLibrary.simpleMessage("Ты ненавидишь людей?"),
         "invalidEmail":
@@ -62,8 +63,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "У вас нету подключения к интернету!"),
         "notPartOfParty": MessageLookupByLibrary.simpleMessage(
             "Ты еще не циркач в нашем цирке?"),
+        "note": MessageLookupByLibrary.simpleMessage("Запись"),
         "nothingToSee":
             MessageLookupByLibrary.simpleMessage("Здесь ничего нет..."),
+        "notification": MessageLookupByLibrary.simpleMessage("Уведомление"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
             "Прекрасный инструмент для быстрых действий и ежедневного пользования."),
         "onboardingDesc2": MessageLookupByLibrary.simpleMessage(

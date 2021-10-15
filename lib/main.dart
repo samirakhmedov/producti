@@ -42,8 +42,7 @@ Future<void> main() async {
 
   final crashlytics = sl.get<FirebaseCrashlytics>();
 
-  await FirebaseCrashlytics.instance
-      .setCrashlyticsCollectionEnabled(kReleaseMode);
+  await crashlytics.setCrashlyticsCollectionEnabled(kReleaseMode);
 
   Bloc.observer = SimpleBlocObserver();
 

@@ -43,5 +43,8 @@
     "nothingToSee": "Nothing to see here...",
     "create": "Create",
     "tableAlreadyExists": "This table already created!",
-    "tableName": "Table name"
+    "tableName": "Table name",
+    "group": "Group",
+    "note": "Note",
+    "notification": "Notification"
 }

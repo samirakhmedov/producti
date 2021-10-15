@@ -7,6 +7,7 @@ import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti/presentation/table/pages/tables_page.dart';
+import 'package:producti/presentation/table/widgets/create_popup_tile.dart';
 import 'package:producti/presentation/table/widgets/create_table_body.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +29,8 @@ class AnonymousTablesPage extends StatelessWidget {
     final theme = ThemeHelper.getTheme(context);
 
     final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+    final intl = S.of(context);
 
     return Scaffold(
       key: _scaffoldKey,
@@ -52,8 +55,43 @@ class AnonymousTablesPage extends StatelessWidget {
               bottom: 15,
               child: FloatingActionButton(
                 onPressed: () {
+                  final navigator = Navigator.of(context);
+
                   _scaffoldKey.currentState!.showBottomSheet(
-                    (context) => AppBottomSheet(),
+                    (context) => AppBottomSheet(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 28,
+                        ).copyWith(top: 20),
+                        child: Column(
+                          children: [
+                            CreatePopupTile(
+                              icon: Icons.menu,
+                              title: intl.group,
+                              onTap: () {
+                                navigator.pop();
+                              },
+                            ),
+                            const Gap(size: 12),
+                            CreatePopupTile(
+                              icon: Icons.edit,
+                              title: intl.note,
+                              onTap: () {
+                                navigator.pop();
+                              },
+                            ),
+                            const Gap(size: 12),
+                            CreatePopupTile(
+                              icon: Icons.access_time,
+                              title: intl.notification,
+                              onTap: () {
+                                navigator.pop();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   );
                 },
                 backgroundColor: theme.primaryColor,

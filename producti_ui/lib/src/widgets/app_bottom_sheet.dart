@@ -11,7 +11,7 @@ class AppBottomSheet extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     final screenWidth = size.width;
-    final popupHeight = size.height * 0.3;
+    final popupHeight = size.height * 0.37;
 
     final theme = ThemeHelper.getTheme(context);
 

@@ -43,5 +43,8 @@
     "nothingToSee": "Здесь ничего нет...",
     "create": "Создать",
     "tableAlreadyExists": "Эта таблица уже существует!",
-    "tableName": "Название таблицы"
+    "tableName": "Название таблицы",
+    "group": "Группа",
+    "note": "Запись",
+    "notification": "Уведомление"
 }

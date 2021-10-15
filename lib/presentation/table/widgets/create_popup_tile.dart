@@ -36,12 +36,14 @@ class CreatePopupTile extends StatelessWidget {
                 children: [
                   Icon(
                     icon,
-                    size: 18,
+                    size: 25,
                   ),
                   const Gap(size: 18),
                   Text(
                     title,
-                    style: textTheme.caption,
+                    style: textTheme.caption!.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ],
               ),
