@@ -46,6 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "funContinues": MessageLookupByLibrary.simpleMessage(
             "Здесь продолжится твое веселье, сладкий."),
         "group": MessageLookupByLibrary.simpleMessage("Группа"),
+        "groupAlreadyExists":
+            MessageLookupByLibrary.simpleMessage("Группа уже существует!"),
+        "groupName": MessageLookupByLibrary.simpleMessage("Навзание группы"),
         "hatePeople":
             MessageLookupByLibrary.simpleMessage("Ты ненавидишь людей?"),
         "invalidEmail":

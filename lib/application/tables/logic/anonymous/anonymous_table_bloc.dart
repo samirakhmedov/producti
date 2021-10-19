@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:producti/domain/table/local_table_repository.dart';
 import 'package:producti/domain/table/table.dart';
+import 'package:producti/domain/table/table_link.dart';
 
 part 'anonymous_table_event.dart';
 part 'anonymous_table_state.dart';
@@ -37,6 +38,10 @@ class AnonymousTableBloc
             ),
           ),
       );
+    }
+
+    if (event is AnonymousTableGroupCreate) {
+      final loadedState = state as AnonymousTableLoaded;
     }
 
     if (event is AnonymousTableSave) {

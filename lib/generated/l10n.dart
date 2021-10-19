@@ -529,6 +529,26 @@ class S {
       args: [],
     );
   }
+
+  /// `This group already exists!`
+  String get groupAlreadyExists {
+    return Intl.message(
+      'This group already exists!',
+      name: 'groupAlreadyExists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group name`
+  String get groupName {
+    return Intl.message(
+      'Group name',
+      name: 'groupName',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

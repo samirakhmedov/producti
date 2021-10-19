@@ -46,5 +46,7 @@
     "tableName": "Название таблицы",
     "group": "Группа",
     "note": "Запись",
-    "notification": "Уведомление"
+    "notification": "Уведомление",
+    "groupName": "Навзание группы",
+    "groupAlreadyExists": "Группа уже существует!"
 }

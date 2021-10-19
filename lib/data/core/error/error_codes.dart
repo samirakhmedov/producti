@@ -12,4 +12,5 @@ enum ErrorCode {
   failedToFetchUserData,
   notConnectedToInternet,
   tableAlreadyExists,
+  groupAlreadyExists,
 }

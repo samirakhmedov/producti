@@ -7,8 +7,9 @@ import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti/presentation/table/pages/tables_page.dart';
+import 'package:producti/presentation/table/widgets/anonymous/create_group_body.dart';
+import 'package:producti/presentation/table/widgets/anonymous/create_table_body.dart';
 import 'package:producti/presentation/table/widgets/create_popup_tile.dart';
-import 'package:producti/presentation/table/widgets/create_table_body.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -62,7 +63,7 @@ class AnonymousTablesPage extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 28,
-                        ).copyWith(top: 20),
+                        ).copyWith(top: 46),
                         child: Column(
                           children: [
                             CreatePopupTile(
@@ -70,6 +71,24 @@ class AnonymousTablesPage extends StatelessWidget {
                               title: intl.group,
                               onTap: () {
                                 navigator.pop();
+
+                                showBottomSheet(
+                                  context: context,
+                                  builder: (context) {
+                                    return AppBottomSheet(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 40,
+                                          vertical: 42,
+                                        ),
+                                        child: CreateGroupBody(
+                                          tableIndex: tableIndex,
+                                          path: path,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
                               },
                             ),
                             const Gap(size: 12),

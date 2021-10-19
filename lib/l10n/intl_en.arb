@@ -46,5 +46,7 @@
     "tableName": "Table name",
     "group": "Group",
     "note": "Note",
-    "notification": "Notification"
+    "notification": "Notification",
+    "groupAlreadyExists": "This group already exists!",
+    "groupName": "Group name"
 }

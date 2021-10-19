@@ -33,6 +33,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.notConnectedToInternet;
       case ErrorCode.tableAlreadyExists:
         return intl.tableAlreadyExists;
+      case ErrorCode.groupAlreadyExists:
+        return intl.groupAlreadyExists;
     }
   }
 }
