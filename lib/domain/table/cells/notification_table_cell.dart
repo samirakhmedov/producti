@@ -1,6 +1,7 @@
 part of 'table_cell.dart';
 
 @HiveType(typeId: HiveConstants.notificationTableCellId)
+@immutable
 class NotificationTableCell extends TableCell {
   @HiveField(0)
   final DateTime time;
@@ -14,10 +15,11 @@ class NotificationTableCell extends TableCell {
     this.description = '',
     this.links = const [],
     @HiveField(3) String title = '',
-  }) : super(title);
+    TableCell? parent,
+  }) : super(title, parent);
 
   @override
-  List<Object?> get props => [time, description, links, title];
+  List<Object?> get props => [time, description, links, title, parent];
 
   Map<String, dynamic> toJson() => {
         'description': description,

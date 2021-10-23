@@ -1,10 +1,10 @@
 part of 'anonymous_table_bloc.dart';
 
-abstract class AnonymousTableState extends Equatable {
+abstract class AnonymousTableState {
   const AnonymousTableState();
 
-  @override
-  List<Object> get props => [];
+  // @override
+  // List<Object> get props => [];
 }
 
 class AnonymousTableInitial extends AnonymousTableState {}
@@ -14,8 +14,8 @@ class AnonymousTableLoaded extends AnonymousTableState {
 
   AnonymousTableLoaded(this.tables);
 
-  @override
-  List<Object> get props => [tables];
+  // @override
+  // List<Object> get props => [tables];
 
   AnonymousTableLoaded copyWith({
     List<Table>? tables,

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:producti/domain/core/hive_constants.dart';
 import 'package:producti/domain/table/values/link.dart';
@@ -10,10 +11,13 @@ part 'notification_table_cell.dart';
 
 part 'table_cell.g.dart';
 
+@immutable
 abstract class TableCell extends Equatable {
   final String title;
 
-  TableCell(this.title);
+  final TableCell? parent;
+
+  TableCell(this.title, this.parent);
 
   Map<String, dynamic> toJson();
 

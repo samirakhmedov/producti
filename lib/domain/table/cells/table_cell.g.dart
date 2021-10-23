@@ -17,6 +17,7 @@ class GroupTableCellAdapter extends TypeAdapter<GroupTableCell> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GroupTableCell(
+      title: fields[1] as String,
       children: (fields[0] as List).cast<TableCell>(),
     );
   }
@@ -24,9 +25,11 @@ class GroupTableCellAdapter extends TypeAdapter<GroupTableCell> {
   @override
   void write(BinaryWriter writer, GroupTableCell obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.children);
+      ..write(obj.children)
+      ..writeByte(1)
+      ..write(obj.title);
   }
 
   @override

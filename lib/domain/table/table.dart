@@ -1,22 +1,25 @@
-import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
+
 import 'package:producti/domain/core/hive_constants.dart';
-import 'package:producti/domain/table/cells/table_cell.dart';
+import 'package:producti/domain/table/cells/table_cell.dart' as t;
+import 'package:producti/domain/table/table_link.dart';
 
 part 'table.g.dart';
 
 @HiveType(typeId: HiveConstants.tableId)
-class Table extends Equatable {
+@immutable
+class Table extends t.TableCell {
   @HiveField(0)
   final String title;
 
   @HiveField(1, defaultValue: [])
-  final List<TableCell> cells;
+  List<t.TableCell> cells;
 
-  const Table({
+  Table({
     required this.title,
     this.cells = const [],
-  });
+  }) : super(title, null);
 
   @override
   List<Object?> get props => [title, cells];
@@ -35,9 +38,31 @@ class Table extends Equatable {
       title: json['title'] as String,
       cells: (json['cells'] as List<Map<String, dynamic>>)
           .map(
-            (e) => TableCell.fromJson(e),
+            (e) => t.TableCell.fromJson(e),
           )
           .toList(),
+    );
+  }
+
+  void addCell(t.TableCell cell, {TableLink? path}) {
+    if (path != null) {
+      final group = path.getParticle(this) as t.GroupTableCell;
+
+      group.children = [...group.children, cell];
+
+      return;
+    }
+
+    cells = [...cells, cell];
+  }
+
+  Table copyWith({
+    String? title,
+    List<t.TableCell>? cells,
+  }) {
+    return Table(
+      title: title ?? this.title,
+      cells: cells ?? this.cells,
     );
   }
 }

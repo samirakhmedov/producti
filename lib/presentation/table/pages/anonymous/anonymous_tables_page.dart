@@ -10,6 +10,7 @@ import 'package:producti/presentation/table/pages/tables_page.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_group_body.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_table_body.dart';
 import 'package:producti/presentation/table/widgets/create_popup_tile.dart';
+import 'package:producti/presentation/table/widgets/table_cell_tile.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,98 +34,117 @@ class AnonymousTablesPage extends StatelessWidget {
 
     final intl = S.of(context);
 
-    return Scaffold(
-      key: _scaffoldKey,
-      endDrawer: _TablesDrawer(
-        tableIndex: tableIndex,
-      ),
-      body: SafeArea(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                onPressed: () {
-                  _scaffoldKey.currentState!.openEndDrawer();
-                },
-                icon: Icon(Icons.menu),
+    return WillPopScope(
+      onWillPop: () async {
+        if (path != null && !path!.isEmpty) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => TablesPage(
+                tableIndex: tableIndex,
+                path: path!.popPath(),
               ),
             ),
-            Positioned(
-              left: 15,
-              bottom: 15,
-              child: FloatingActionButton(
-                onPressed: () {
-                  final navigator = Navigator.of(context);
+          );
 
-                  _scaffoldKey.currentState!.showBottomSheet(
-                    (context) => AppBottomSheet(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 28,
-                        ).copyWith(top: 46),
-                        child: Column(
-                          children: [
-                            CreatePopupTile(
-                              icon: Icons.menu,
-                              title: intl.group,
-                              onTap: () {
-                                navigator.pop();
+          return false;
+        }
 
-                                showBottomSheet(
-                                  context: context,
-                                  builder: (context) {
-                                    return AppBottomSheet(
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 40,
-                                          vertical: 42,
+        return true;
+      },
+      child: Scaffold(
+        key: _scaffoldKey,
+        endDrawer: _TablesDrawer(
+          tableIndex: tableIndex,
+        ),
+        body: SafeArea(
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              _TablesBody(
+                path: path,
+                table: table,
+                tableIndex: tableIndex,
+              ),
+              Positioned(
+                left: 15,
+                bottom: 15,
+                child: FloatingActionButton(
+                  onPressed: () {
+                    final navigator = Navigator.of(context);
+
+                    _scaffoldKey.currentState!.showBottomSheet(
+                      (context) => AppBottomSheet(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 28,
+                          ).copyWith(top: 46),
+                          child: Column(
+                            children: [
+                              CreatePopupTile(
+                                icon: Icons.menu,
+                                title: intl.group,
+                                onTap: () {
+                                  navigator.pop();
+
+                                  showBottomSheet(
+                                    context: context,
+                                    builder: (context) {
+                                      return AppBottomSheet(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 40,
+                                            vertical: 42,
+                                          ),
+                                          child: CreateGroupBody(
+                                            tableIndex: tableIndex,
+                                            path: path,
+                                          ),
                                         ),
-                                        child: CreateGroupBody(
-                                          tableIndex: tableIndex,
-                                          path: path,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                            const Gap(size: 12),
-                            CreatePopupTile(
-                              icon: Icons.edit,
-                              title: intl.note,
-                              onTap: () {
-                                navigator.pop();
-                              },
-                            ),
-                            const Gap(size: 12),
-                            CreatePopupTile(
-                              icon: Icons.access_time,
-                              title: intl.notification,
-                              onTap: () {
-                                navigator.pop();
-                              },
-                            ),
-                          ],
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                              const Gap(size: 12),
+                              CreatePopupTile(
+                                icon: Icons.edit,
+                                title: intl.note,
+                                onTap: () {
+                                  navigator.pop();
+                                },
+                              ),
+                              const Gap(size: 12),
+                              CreatePopupTile(
+                                icon: Icons.access_time,
+                                title: intl.notification,
+                                onTap: () {
+                                  navigator.pop();
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-                backgroundColor: theme.primaryColor,
-                child: Icon(
-                  Icons.add,
-                  color: theme.backgroundColor,
+                    );
+                  },
+                  backgroundColor: theme.primaryColor,
+                  child: Icon(
+                    Icons.add,
+                    color: theme.backgroundColor,
+                  ),
                 ),
               ),
-            ),
-            _TablesBody(
-              path: path,
-              table: table,
-            ),
-          ],
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  onPressed: () {
+                    _scaffoldKey.currentState!.openEndDrawer();
+                  },
+                  icon: Icon(Icons.menu),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -275,11 +295,13 @@ class _TablesDrawer extends StatelessWidget {
 class _TablesBody extends StatelessWidget {
   final TableLink? path;
   final t.Table table;
+  final int tableIndex;
 
   const _TablesBody({
     Key? key,
     this.path,
     required this.table,
+    required this.tableIndex,
   }) : super(key: key);
 
   @override
@@ -301,7 +323,7 @@ class _TablesBody extends StatelessWidget {
               builder: (context) {
                 String? title;
 
-                if (path != null) {
+                if (path != null && !path!.isEmpty) {
                   title = '${table.title} > ${path!.getParticle(table).title}';
                 }
 
@@ -318,12 +340,21 @@ class _TablesBody extends StatelessWidget {
           ),
           Builder(
             builder: (context) {
-              if (path != null) {
+              if (path != null && !path!.isEmpty) {
                 final group = path!.getParticle(table) as c.GroupTableCell;
 
-                if (group.children.isEmpty) return const EmptyWidget();
+                if (group.children.isEmpty)
+                  return Center(
+                    child: EmptyWidget(
+                      description: intl.nothingToSee,
+                    ),
+                  );
 
-                return _TableCellsList(cells: group.children);
+                return _TableCellsList(
+                  cells: group.children,
+                  path: path,
+                  tableIndex: tableIndex,
+                );
               }
 
               if (table.cells.isEmpty)
@@ -333,7 +364,11 @@ class _TablesBody extends StatelessWidget {
                   ),
                 );
 
-              return _TableCellsList(cells: table.cells);
+              return _TableCellsList(
+                cells: table.cells,
+                path: path,
+                tableIndex: tableIndex,
+              );
             },
           ),
         ],
@@ -344,14 +379,46 @@ class _TablesBody extends StatelessWidget {
 
 class _TableCellsList extends StatelessWidget {
   final List<c.TableCell> cells;
+  final TableLink? path;
+  final int tableIndex;
 
   const _TableCellsList({
     Key? key,
     required this.cells,
+    this.path,
+    required this.tableIndex,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ListView.builder(
+      padding: EdgeInsets.symmetric(
+        horizontal: 30,
+      ).copyWith(
+        top: 40,
+      ),
+      itemCount: cells.length,
+      itemBuilder: (context, index) {
+        final cell = cells[index];
+
+        final navigator = Navigator.of(context);
+
+        return TableCellTile(
+          cell: cell,
+          onTap: () {
+            if (cell is c.GroupTableCell) {
+              navigator.pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => TablesPage(
+                    tableIndex: tableIndex,
+                    path: path?.addPath(index) ?? TableLink([index]),
+                  ),
+                ),
+              );
+            }
+          },
+        );
+      },
+    );
   }
 }

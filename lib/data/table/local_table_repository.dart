@@ -29,12 +29,12 @@ class LocalTableRepositoryImpl extends LocalTableRepository {
       Future.wait([
         _tablesBox.put(
           'Main',
-          const Table(title: 'Main'),
+          Table(title: 'Main'),
         ),
         _constantsBox.put('TABLES_ORDER', ['Main']),
       ]);
 
-      return const [
+      return [
         Table(
           title: 'Main',
         ),

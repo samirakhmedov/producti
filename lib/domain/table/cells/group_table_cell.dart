@@ -1,17 +1,22 @@
 part of 'table_cell.dart';
 
 @HiveType(typeId: HiveConstants.groupTableCellId)
+@immutable
 class GroupTableCell extends TableCell {
   @HiveField(0)
-  final List<TableCell> children;
+  List<TableCell> children;
+
+  @HiveField(1)
+  String title;
 
   GroupTableCell({
-    @HiveField(1) String title = '',
+    required this.title,
     this.children = const [],
-  }) : super(title);
+    TableCell? parent,
+  }) : super(title, parent);
 
   @override
-  List<Object?> get props => [title, children];
+  List<Object?> get props => [title, children, parent];
 
   Map<String, dynamic> toJson() => {
         'title': title,

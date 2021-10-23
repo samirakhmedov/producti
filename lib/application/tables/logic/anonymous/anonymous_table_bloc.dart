@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
+import 'package:producti/domain/table/cells/table_cell.dart' as t;
 import 'package:producti/domain/table/local_table_repository.dart';
 import 'package:producti/domain/table/table.dart';
 import 'package:producti/domain/table/table_link.dart';
@@ -42,6 +43,20 @@ class AnonymousTableBloc
 
     if (event is AnonymousTableGroupCreate) {
       final loadedState = state as AnonymousTableLoaded;
+
+      final currentTable = loadedState.tables[event.tableIndex];
+
+      currentTable.addCell(
+        t.GroupTableCell(
+          title: event.name,
+          parent: event.path?.getParticle(currentTable) ?? currentTable,
+        ),
+        path: event.path,
+      );
+
+      yield loadedState.copyWith(
+        tables: loadedState.tables,
+      );
     }
 
     if (event is AnonymousTableSave) {

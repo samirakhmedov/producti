@@ -18,7 +18,7 @@ class TableAdapter extends TypeAdapter<Table> {
     };
     return Table(
       title: fields[0] as String,
-      cells: fields[1] == null ? [] : (fields[1] as List).cast<TableCell>(),
+      cells: fields[1] == null ? [] : (fields[1] as List).cast<t.TableCell>(),
     );
   }
 

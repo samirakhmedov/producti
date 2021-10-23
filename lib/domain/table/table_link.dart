@@ -6,23 +6,28 @@ class TableLink {
 
   const TableLink(this.path);
 
+  bool get isEmpty => path.isEmpty;
+
   TableCell getParticle(Table table) {
     TableCell cell = table.cells[path[0]];
 
     if (cell is! GroupTableCell) return cell;
 
-    GroupTableCell? tableCell;
+    if (path.length >= 2) {
+      GroupTableCell tableCell = cell;
 
-    for (int i = 1; i < path.length; i++) {
-      TableCell c =
-          tableCell != null ? tableCell.children[i] : cell.children[i];
+      for (int i = 1; i < path.length; i++) {
+        TableCell c = tableCell.children[path[i]];
 
-      if (c is! GroupTableCell) return c;
+        if (c is! GroupTableCell) return c;
 
-      tableCell = c;
+        tableCell = c;
+      }
+
+      return tableCell;
     }
 
-    return tableCell as TableCell;
+    return cell;
   }
 
   TableLink addPath(int index) => TableLink(

@@ -1,6 +1,7 @@
 part of 'table_cell.dart';
 
 @HiveType(typeId: HiveConstants.noteTableCellId)
+@immutable
 class NoteTableCell extends TableCell {
   @HiveField(0)
   final String description;
@@ -11,10 +12,11 @@ class NoteTableCell extends TableCell {
     this.description = '',
     this.links = const [],
     @HiveField(2) String title = '',
-  }) : super(title);
+    TableCell? parent,
+  }) : super(title, parent);
 
   @override
-  List<Object?> get props => [description, links, title];
+  List<Object?> get props => [description, links, title, parent];
 
   Map<String, dynamic> toJson() => {
         'description': description,
