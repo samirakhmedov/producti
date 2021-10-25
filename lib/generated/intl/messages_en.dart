@@ -89,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tableAlreadyExists":
             MessageLookupByLibrary.simpleMessage("This table already created!"),
         "tableName": MessageLookupByLibrary.simpleMessage("Table name"),
+        "tooBigValue":
+            MessageLookupByLibrary.simpleMessage("Too big, sempai..."),
         "userNotExists": MessageLookupByLibrary.simpleMessage(
             "You are trying to sign in to not existing account. Create one firstly. :)"),
         "userNotLoggedIn": MessageLookupByLibrary.simpleMessage(

@@ -549,6 +549,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Too big, sempai...`
+  String get tooBigValue {
+    return Intl.message(
+      'Too big, sempai...',
+      name: 'tooBigValue',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

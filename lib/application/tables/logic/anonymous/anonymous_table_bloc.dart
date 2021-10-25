@@ -59,6 +59,22 @@ class AnonymousTableBloc
       );
     }
 
+    if (event is AnonymousTableReorderCells) {
+      final loadedState = state as AnonymousTableLoaded;
+
+      final currentTable = loadedState.tables[event.tableIndex];
+
+      currentTable.reorderCells(
+        event.oldIndex,
+        event.newIndex,
+        path: event.path,
+      );
+
+      yield loadedState.copyWith(
+        tables: loadedState.tables,
+      );
+    }
+
     if (event is AnonymousTableSave) {
       final loadedState = state as AnonymousTableLoaded;
 

@@ -6,6 +6,7 @@ import 'package:producti/domain/table/table.dart' as t;
 import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
+import 'package:producti/presentation/table/core/table_helper.dart';
 import 'package:producti/presentation/table/pages/tables_page.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_group_body.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_table_body.dart';
@@ -15,7 +16,7 @@ import 'package:producti_ui/producti_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnonymousTablesPage extends StatelessWidget {
-  final TableLink path;
+  final TableLink? path;
   final int tableIndex;
   final t.Table table;
 
@@ -36,12 +37,14 @@ class AnonymousTablesPage extends StatelessWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        if (!path.isEmpty) {
+        if (path != null) {
+          final newPath = path!.popPath();
+
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => TablesPage(
                 tableIndex: tableIndex,
-                path: path.popPath(),
+                path: newPath.isEmpty ? null : newPath,
               ),
             ),
           );
@@ -156,23 +159,6 @@ class _TablesDrawer extends StatelessWidget {
 
   const _TablesDrawer({Key? key, required this.tableIndex}) : super(key: key);
 
-  void _moveToPage(BuildContext context, int tableIndex) {
-    final navigator = Navigator.of(context);
-
-    navigator.popUntil((route) => route.settings.name == AppRoutes.tables);
-
-    navigator.pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => TablesPage(
-          tableIndex: tableIndex,
-        ),
-        settings: const RouteSettings(
-          name: AppRoutes.tables,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final query = MediaQuery.of(context);
@@ -214,10 +200,10 @@ class _TablesDrawer extends StatelessWidget {
 
                             final navigator = Navigator.of(context);
 
-                            navigator.popUntil((route) =>
-                                route.settings.name == AppRoutes.tables);
-
-                            navigator.pushReplacementNamed(AppRoutes.auth);
+                            navigator.pushNamedAndRemoveUntil(
+                              AppRoutes.auth,
+                              (route) => false,
+                            );
                           },
                         ),
                       ),
@@ -236,11 +222,11 @@ class _TablesDrawer extends StatelessWidget {
                       shrinkWrap: true,
                       itemBuilder: (context, index) => InkWell(
                         onTap: () {
-                          if (index == tableIndex) {
-                            return Navigator.of(context).pop();
-                          }
+                          Navigator.of(context).pop();
 
-                          _moveToPage(context, index);
+                          if (index != tableIndex) {
+                            TableHelper.moveToTable(context, index);
+                          }
                         },
                         child: DrawerListTile(
                           text: state.tables[index].title,
@@ -325,7 +311,8 @@ class _TablesBody extends StatelessWidget {
                 String? title;
 
                 if (path != null && !path!.isEmpty) {
-                  title = '${table.title} > ${path!.getParticle(table).title}';
+                  title =
+                      '${table.title} >${path!.path.length > 1 ? " ... > " : ""} ${path!.getParticle(table).title}';
                 }
 
                 title ??= table.title;
@@ -394,19 +381,18 @@ class _TableCellsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 30,
-      ).copyWith(
-        top: 40,
+    return ReorderableListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(
+        top: 45,
       ),
-      itemCount: cells.length,
+      shrinkWrap: true,
       itemBuilder: (context, index) {
         final cell = cells[index];
 
         final navigator = Navigator.of(context);
 
         return TableCellTile(
+          key: Key(index.toString()),
           cell: cell,
           onTap: () {
             if (cell is c.GroupTableCell) {
@@ -422,6 +408,15 @@ class _TableCellsList extends StatelessWidget {
           },
         );
       },
+      itemCount: cells.length,
+      onReorder: (oldIndex, newIndex) => context.read<AnonymousTableBloc>().add(
+            AnonymousTableReorderCells(
+              oldIndex,
+              newIndex,
+              tableIndex,
+              path: path,
+            ),
+          ),
     );
   }
 }

@@ -91,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tableAlreadyExists":
             MessageLookupByLibrary.simpleMessage("Эта таблица уже существует!"),
         "tableName": MessageLookupByLibrary.simpleMessage("Название таблицы"),
+        "tooBigValue":
+            MessageLookupByLibrary.simpleMessage("Слишком большой..."),
         "userNotExists": MessageLookupByLibrary.simpleMessage(
             "Сначала надо создать аккаунт, чтобы потом войти в него. :)"),
         "userNotLoggedIn": MessageLookupByLibrary.simpleMessage(

@@ -19,6 +19,8 @@ class GroupCreateState extends Equatable {
   ErrorCode? get error {
     if (groupName.isEmpty) return ErrorCode.voidValue;
 
+    if (groupName.length > 60) return ErrorCode.tooBigValue;
+
     if (cells.any((element) => element.title == groupName)) {
       return ErrorCode.groupAlreadyExists;
     }

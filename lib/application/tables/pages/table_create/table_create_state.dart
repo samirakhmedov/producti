@@ -19,6 +19,8 @@ class TableCreateState extends Equatable {
   ErrorCode? get error {
     if (tableName.isEmpty) return ErrorCode.voidValue;
 
+    if (tableName.length > 60) return ErrorCode.tooBigValue;
+
     if (tables.any((element) => element.title == tableName)) {
       return ErrorCode.tableAlreadyExists;
     }

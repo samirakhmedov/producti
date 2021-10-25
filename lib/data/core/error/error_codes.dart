@@ -13,4 +13,5 @@ enum ErrorCode {
   notConnectedToInternet,
   tableAlreadyExists,
   groupAlreadyExists,
+  tooBigValue,
 }

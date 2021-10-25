@@ -34,3 +34,17 @@ class AnonymousTableGroupCreate extends AnonymousTableEvent {
 }
 
 class AnonymousTableSave extends AnonymousTableEvent {}
+
+class AnonymousTableReorderCells extends AnonymousTableEvent {
+  final int oldIndex;
+  final int newIndex;
+  final int tableIndex;
+  final TableLink? path;
+
+  const AnonymousTableReorderCells(
+    this.oldIndex,
+    this.newIndex,
+    this.tableIndex, {
+    this.path,
+  });
+}

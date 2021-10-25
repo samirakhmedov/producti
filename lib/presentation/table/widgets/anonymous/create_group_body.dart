@@ -25,7 +25,7 @@ class CreateGroupBody extends StatelessWidget {
 
     final table = tableState.tables[tableIndex];
 
-    if (path != null) {
+    if (path != null && !path!.isEmpty) {
       final groupCell = path!.getParticle(table) as GroupTableCell;
 
       cells = groupCell.children.whereType<GroupTableCell>().toList();

@@ -48,5 +48,6 @@
     "note": "Note",
     "notification": "Notification",
     "groupAlreadyExists": "This group already exists!",
-    "groupName": "Group name"
+    "groupName": "Group name",
+    "tooBigValue": "Too big, sempai..."
 }

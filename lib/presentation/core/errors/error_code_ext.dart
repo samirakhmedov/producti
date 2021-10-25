@@ -35,6 +35,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.tableAlreadyExists;
       case ErrorCode.groupAlreadyExists:
         return intl.groupAlreadyExists;
+      case ErrorCode.tooBigValue:
+        return intl.tooBigValue;
     }
   }
 }

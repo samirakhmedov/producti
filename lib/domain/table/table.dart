@@ -58,6 +58,34 @@ class Table extends t.TableCell {
     cells = [...cells, cell];
   }
 
+  void reorderCells(int oldIndex, int newIndex, {TableLink? path}) {
+    late int newIndexValue;
+
+    if (path != null) {
+      final group = path.getParticle(this) as t.GroupTableCell;
+
+      newIndexValue = newIndex == group.children.length
+          ? group.children.length - 1
+          : newIndex;
+
+      final cell = group.children[newIndexValue];
+
+      group.children[newIndexValue] = group.children[oldIndex];
+
+      group.children[oldIndex] = cell;
+
+      return;
+    }
+
+    newIndexValue = newIndex == cells.length ? cells.length - 1 : newIndex;
+
+    final cell = cells[newIndexValue];
+
+    cells[newIndexValue] = cells[oldIndex];
+
+    cells[oldIndex] = cell;
+  }
+
   Table copyWith({
     String? title,
     List<t.TableCell>? cells,

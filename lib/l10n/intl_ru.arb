@@ -48,5 +48,6 @@
     "note": "Запись",
     "notification": "Уведомление",
     "groupName": "Навзание группы",
-    "groupAlreadyExists": "Группа уже существует!"
+    "groupAlreadyExists": "Группа уже существует!",
+    "tooBigValue": "Слишком большой..."
 }

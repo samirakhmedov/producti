@@ -3,30 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
 import 'package:producti/application/tables/pages/table_create/table_create_cubit.dart';
 import 'package:producti/generated/l10n.dart';
-import 'package:producti/presentation/core/constants/routes.dart';
-import 'package:producti/presentation/table/pages/tables_page.dart';
+import 'package:producti/presentation/table/core/table_helper.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:producti/presentation/core/errors/error_code_ext.dart';
 
 class CreateTableBody extends StatelessWidget {
   const CreateTableBody({Key? key}) : super(key: key);
-
-  void _moveToPage(BuildContext context, int tableIndex) {
-    final navigator = Navigator.of(context);
-
-    navigator.popUntil((route) => route.settings.name == AppRoutes.tables);
-
-    navigator.pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => TablesPage(
-          tableIndex: tableIndex,
-        ),
-        settings: const RouteSettings(
-          name: AppRoutes.tables,
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +68,9 @@ class CreateTableBody extends StatelessWidget {
 
             await tableBloc.stream.first;
 
-            _moveToPage(context, tableState.tables.length);
+            Navigator.of(context).pop();
+
+            TableHelper.moveToTable(context, tableState.tables.length);
           },
           text: intl.create,
         ),
