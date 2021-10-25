@@ -48,7 +48,7 @@ class RemoteTableRepositoryImpl extends RemoteTableRepository {
 
       return right(result);
     } catch (e) {
-      return left(TableFailure(ErrorCode.failedToFetchUserData));
+      return left(const TableFailure(ErrorCode.failedToFetchUserData));
     }
   }
 
@@ -74,7 +74,7 @@ class RemoteTableRepositoryImpl extends RemoteTableRepository {
 
       return right(null);
     } catch (e) {
-      return left(TableFailure(ErrorCode.failedToFetchUserData));
+      return left(const TableFailure(ErrorCode.failedToFetchUserData));
     }
   }
 }

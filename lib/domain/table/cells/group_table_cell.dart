@@ -6,6 +6,7 @@ class GroupTableCell extends TableCell {
   @HiveField(0)
   List<TableCell> children;
 
+  @override
   @HiveField(1)
   String title;
 
@@ -18,6 +19,7 @@ class GroupTableCell extends TableCell {
   @override
   List<Object?> get props => [title, children, parent];
 
+  @override
   Map<String, dynamic> toJson() => {
         'title': title,
         'children': children

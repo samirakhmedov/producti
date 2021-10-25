@@ -23,7 +23,7 @@ class AnonymousTableBloc
   Stream<AnonymousTableState> mapEventToState(
       AnonymousTableEvent event) async* {
     if (event is AnonymousTableLoad) {
-      final result = await _localTableRepository.loadData();
+      final result = _localTableRepository.loadData();
 
       yield AnonymousTableLoaded(result);
     }

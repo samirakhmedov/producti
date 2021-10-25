@@ -14,7 +14,7 @@ class Email extends ValueObject<String> {
 Either<Failure, String> _validateEmail(String email) {
   if (kEmailRegexp.hasMatch(email)) return right(email);
 
-  if (email.isEmpty) return left(ValidationFailure(ErrorCode.voidValue));
+  if (email.isEmpty) return left(const ValidationFailure(ErrorCode.voidValue));
 
-  return left(ValidationFailure(ErrorCode.invalidEmail));
+  return left(const ValidationFailure(ErrorCode.invalidEmail));
 }

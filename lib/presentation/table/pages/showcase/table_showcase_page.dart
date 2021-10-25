@@ -14,7 +14,7 @@ class TableShowcasePage extends StatelessWidget {
             body: Center(
               child: IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.menu),
+                icon: const Icon(Icons.menu),
               ),
             ),
           );

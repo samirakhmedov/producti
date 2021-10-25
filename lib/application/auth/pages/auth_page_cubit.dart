@@ -6,7 +6,7 @@ import 'package:producti/domain/auth/values/password.dart';
 part 'auth_page_state.dart';
 
 class AuthPageCubit extends Cubit<AuthPageState> {
-  AuthPageCubit() : super(AuthPageState());
+  AuthPageCubit() : super(const AuthPageState());
 
   void _refreshState() => emit(
         state.copyWith(

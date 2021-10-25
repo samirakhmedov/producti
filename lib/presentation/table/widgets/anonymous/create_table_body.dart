@@ -21,7 +21,7 @@ class CreateTableBody extends StatelessWidget {
         builder: (context) => TablesPage(
           tableIndex: tableIndex,
         ),
-        settings: RouteSettings(
+        settings: const RouteSettings(
           name: AppRoutes.tables,
         ),
       ),

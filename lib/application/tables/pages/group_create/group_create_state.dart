@@ -19,8 +19,9 @@ class GroupCreateState extends Equatable {
   ErrorCode? get error {
     if (groupName.isEmpty) return ErrorCode.voidValue;
 
-    if (cells.any((element) => element.title == groupName))
+    if (cells.any((element) => element.title == groupName)) {
       return ErrorCode.groupAlreadyExists;
+    }
   }
 
   GroupCreateState copyWith({

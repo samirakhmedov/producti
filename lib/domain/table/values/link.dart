@@ -5,7 +5,7 @@ import 'package:producti/domain/core/value_object.dart';
 import 'package:producti/presentation/core/constants/regular_expressions.dart';
 
 class Link extends ValueObject<String> {
-  Link(String value) : super(value);
+  const Link(String value) : super(value);
 
   @override
   Either<Failure, String> get validatedValue => _validateLink(currentValue);
@@ -14,7 +14,7 @@ class Link extends ValueObject<String> {
 Either<Failure, String> _validateLink(String link) {
   if (kLinkRegexp.hasMatch(link)) return right(link);
 
-  if (link.isEmpty) return left(ValidationFailure(ErrorCode.voidValue));
+  if (link.isEmpty) return left(const ValidationFailure(ErrorCode.voidValue));
 
-  return left(ValidationFailure(ErrorCode.invalidLink));
+  return left(const ValidationFailure(ErrorCode.invalidLink));
 }

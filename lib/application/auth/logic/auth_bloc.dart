@@ -27,7 +27,8 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
   ) async* {
     if (!_connection.connected &&
         (event is AuthSignIn || event is AuthSignUp)) {
-      yield AuthErrorState(ConnectionFailure(ErrorCode.notConnectedToInternet));
+      yield const AuthErrorState(
+          ConnectionFailure(ErrorCode.notConnectedToInternet));
 
       return;
     }
@@ -48,9 +49,9 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
         (failure) => AuthErrorState(failure),
         (user) => AuthLoggedIn(user),
       );
-    } else if (event is AuthAnonymousEvent)
+    } else if (event is AuthAnonymousEvent) {
       yield AuthAnonymousState();
-    else if (event is AuthSignUp) {
+    } else if (event is AuthSignUp) {
       final password = event.password.getOrCrash();
       final repeatPassword = event.repeatPassword.getOrCrash();
 
@@ -67,7 +68,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
           (user) => AuthLoggedIn(user),
         );
       } else {
-        yield AuthErrorState(
+        yield const AuthErrorState(
           ValidationFailure(
             ErrorCode.passwordsNotMatch,
           ),

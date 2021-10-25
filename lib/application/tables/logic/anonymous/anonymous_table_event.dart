@@ -12,7 +12,7 @@ class AnonymousTableLoad extends AnonymousTableEvent {}
 class AnonymousTableCreate extends AnonymousTableEvent {
   final String name;
 
-  AnonymousTableCreate(this.name);
+  const AnonymousTableCreate(this.name);
 
   @override
   List<Object> get props => [name];
@@ -23,7 +23,7 @@ class AnonymousTableGroupCreate extends AnonymousTableEvent {
   final TableLink? path;
   final int tableIndex;
 
-  AnonymousTableGroupCreate({
+  const AnonymousTableGroupCreate({
     required this.name,
     this.path,
     required this.tableIndex,

@@ -23,7 +23,7 @@ abstract class AppModule {
   FirebaseAnalytics get analytics => FirebaseAnalytics();
 
   @singleton
-  FlutterSecureStorage get secureStorage => FlutterSecureStorage();
+  FlutterSecureStorage get secureStorage => const FlutterSecureStorage();
 
   @singleton
   Connectivity get connectivity => Connectivity();

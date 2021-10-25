@@ -19,8 +19,9 @@ class TableCreateState extends Equatable {
   ErrorCode? get error {
     if (tableName.isEmpty) return ErrorCode.voidValue;
 
-    if (tables.any((element) => element.title == tableName))
+    if (tables.any((element) => element.title == tableName)) {
       return ErrorCode.tableAlreadyExists;
+    }
   }
 
   TableCreateState copyWith({

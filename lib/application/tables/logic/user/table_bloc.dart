@@ -32,14 +32,14 @@ class TableBloc extends Bloc<TableEvent, TableState> {
 
         yield await result.fold(
           (failure) async {
-            final tables = await _localTableRepository.loadData();
+            final tables = _localTableRepository.loadData();
 
             return TableLoadedState(tables, failure: failure);
           },
           (tables) => TableLoadedState(tables),
         );
       } else {
-        final tables = await _localTableRepository.loadData();
+        final tables = _localTableRepository.loadData();
 
         yield TableLoadedState(tables);
       }

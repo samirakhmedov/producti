@@ -86,8 +86,8 @@ class _ConnectivityPopupContent extends StatelessWidget {
       decoration: BoxDecoration(
         color: hasConnection ? kGreen : kRed,
         borderRadius: const BorderRadius.only(
-          bottomLeft: const Radius.circular(12),
-          bottomRight: const Radius.circular(12),
+          bottomLeft: Radius.circular(12),
+          bottomRight: Radius.circular(12),
         ),
       ),
       child: Column(

@@ -40,7 +40,7 @@ class AuthInitial extends AuthState {
 class AuthErrorState extends AuthState {
   final Failure failure;
 
-  AuthErrorState(this.failure);
+  const AuthErrorState(this.failure);
 
   @override
   List<Object> get props => [failure];
@@ -61,7 +61,7 @@ class AuthLoadingState extends AuthState {
 class AuthLoggedIn extends AuthState {
   final User user;
 
-  AuthLoggedIn(this.user);
+  const AuthLoggedIn(this.user);
 
   @override
   Map<String, dynamic> toJson() => {

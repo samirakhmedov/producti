@@ -10,7 +10,7 @@ class ConnectionCubit extends Cubit<ConnectionCubitState> {
   final Connectivity _connectivity;
 
   ConnectionCubit(this._connectivity)
-      : super(ConnectionCubitState(ConnectionStatus.unknown)) {
+      : super(const ConnectionCubitState(ConnectionStatus.unknown)) {
     _connectivity.checkConnectivity().then(
           (value) => emit(
             state.copyWith(

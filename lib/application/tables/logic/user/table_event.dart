@@ -10,7 +10,7 @@ abstract class TableEvent extends Equatable {
 class TableLoad extends TableEvent {
   final String uid;
 
-  TableLoad(this.uid);
+  const TableLoad(this.uid);
 
   @override
   List<Object> get props => [uid];

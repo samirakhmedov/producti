@@ -18,6 +18,7 @@ class NoteTableCell extends TableCell {
   @override
   List<Object?> get props => [description, links, title, parent];
 
+  @override
   Map<String, dynamic> toJson() => {
         'description': description,
         'links': links

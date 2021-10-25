@@ -15,13 +15,13 @@ import 'package:producti_ui/producti_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnonymousTablesPage extends StatelessWidget {
-  final TableLink? path;
+  final TableLink path;
   final int tableIndex;
   final t.Table table;
 
   const AnonymousTablesPage({
     Key? key,
-    this.path,
+    required this.path,
     required this.table,
     required this.tableIndex,
   }) : super(key: key);
@@ -36,12 +36,12 @@ class AnonymousTablesPage extends StatelessWidget {
 
     return WillPopScope(
       onWillPop: () async {
-        if (path != null && !path!.isEmpty) {
+        if (!path.isEmpty) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => TablesPage(
                 tableIndex: tableIndex,
-                path: path!.popPath(),
+                path: path.popPath(),
               ),
             ),
           );
@@ -140,7 +140,7 @@ class AnonymousTablesPage extends StatelessWidget {
                   onPressed: () {
                     _scaffoldKey.currentState!.openEndDrawer();
                   },
-                  icon: Icon(Icons.menu),
+                  icon: const Icon(Icons.menu),
                 ),
               ),
             ],
@@ -166,7 +166,7 @@ class _TablesDrawer extends StatelessWidget {
         builder: (context) => TablesPage(
           tableIndex: tableIndex,
         ),
-        settings: RouteSettings(
+        settings: const RouteSettings(
           name: AppRoutes.tables,
         ),
       ),
@@ -236,8 +236,9 @@ class _TablesDrawer extends StatelessWidget {
                       shrinkWrap: true,
                       itemBuilder: (context, index) => InkWell(
                         onTap: () {
-                          if (index == tableIndex)
+                          if (index == tableIndex) {
                             return Navigator.of(context).pop();
+                          }
 
                           _moveToPage(context, index);
                         },
@@ -265,9 +266,9 @@ class _TablesDrawer extends StatelessWidget {
                 showBottomSheet(
                   context: context,
                   builder: (context) {
-                    return AppBottomSheet(
+                    return const AppBottomSheet(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                           horizontal: 40,
                           vertical: 42,
                         ),
@@ -280,7 +281,7 @@ class _TablesDrawer extends StatelessWidget {
               text: intl.addOne,
               icon: Icons.add,
             ),
-            AppDivider(),
+            const AppDivider(),
             DrawerListTile(
               text: intl.settings,
               icon: Icons.settings,
@@ -343,12 +344,13 @@ class _TablesBody extends StatelessWidget {
               if (path != null && !path!.isEmpty) {
                 final group = path!.getParticle(table) as c.GroupTableCell;
 
-                if (group.children.isEmpty)
+                if (group.children.isEmpty) {
                   return Center(
                     child: EmptyWidget(
                       description: intl.nothingToSee,
                     ),
                   );
+                }
 
                 return _TableCellsList(
                   cells: group.children,
@@ -357,12 +359,13 @@ class _TablesBody extends StatelessWidget {
                 );
               }
 
-              if (table.cells.isEmpty)
+              if (table.cells.isEmpty) {
                 return Center(
                   child: EmptyWidget(
                     description: intl.nothingToSee,
                   ),
                 );
+              }
 
               return _TableCellsList(
                 cells: table.cells,
@@ -392,7 +395,7 @@ class _TableCellsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 30,
       ).copyWith(
         top: 40,

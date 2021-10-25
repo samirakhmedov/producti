@@ -11,11 +11,12 @@ class TableCellTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (cell is t.GroupTableCell)
+    if (cell is t.GroupTableCell) {
       return _GroupTableCellTile(
         cell as t.GroupTableCell,
         onTap: onTap,
       );
+    }
 
     return const SizedBox();
   }

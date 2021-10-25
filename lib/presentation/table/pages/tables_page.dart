@@ -21,15 +21,16 @@ class TablesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) => state is AuthLoggedIn
-          ? UserTablesPage()
+          ? const UserTablesPage()
           : BlocBuilder<AnonymousTableBloc, AnonymousTableState>(
               builder: (context, state) {
-                if (state is AnonymousTableLoaded)
+                if (state is AnonymousTableLoaded) {
                   return AnonymousTablesPage(
                     table: state.tables[tableIndex],
                     tableIndex: tableIndex,
-                    path: path,
+                    path: path ?? const TableLink([]),
                   );
+                }
 
                 return const PlaceholderPage();
               },

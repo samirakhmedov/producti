@@ -21,6 +21,7 @@ class NotificationTableCell extends TableCell {
   @override
   List<Object?> get props => [time, description, links, title, parent];
 
+  @override
   Map<String, dynamic> toJson() => {
         'description': description,
         'links': links,

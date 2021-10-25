@@ -36,6 +36,7 @@ class LaunchState extends Equatable {
     );
   }
 
+  @override
   String toString() =>
       'LaunchState(onboarding: $onboardingPassed, showcase: $showcaseShown)';
 }

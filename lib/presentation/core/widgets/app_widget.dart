@@ -38,8 +38,9 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       } else {
         final anonymous = context.read<AnonymousTableBloc>();
 
-        if (anonymous.state is AnonymousTableLoaded)
+        if (anonymous.state is AnonymousTableLoaded) {
           anonymous.add(AnonymousTableSave());
+        }
       }
     }
   }

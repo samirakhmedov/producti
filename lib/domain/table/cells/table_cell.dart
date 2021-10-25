@@ -17,7 +17,7 @@ abstract class TableCell extends Equatable {
 
   final TableCell? parent;
 
-  TableCell(this.title, this.parent);
+  const TableCell(this.title, this.parent);
 
   Map<String, dynamic> toJson();
 

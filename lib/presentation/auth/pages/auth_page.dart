@@ -75,7 +75,7 @@ class AuthPage extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (context) => WillPopScope(
-                      child: Center(
+                      child: const Center(
                         child: CircularProgressIndicator.adaptive(),
                       ),
                       onWillPop: () => Future.value(false),
@@ -106,7 +106,7 @@ class AuthPage extends StatelessWidget {
             child: ListView(
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                SizedBox(
+                const SizedBox(
                   width: double.infinity,
                 ),
                 const Gap(size: 16),
@@ -122,7 +122,7 @@ class AuthPage extends StatelessWidget {
                   buildWhen: (previous, current) =>
                       previous.page != current.page,
                   builder: (context, state) =>
-                      state.page ? SignInPage() : SignUpPage(),
+                      state.page ? const SignInPage() : const SignUpPage(),
                 ),
                 const Gap(size: 16),
               ],

@@ -10,6 +10,7 @@ part 'table.g.dart';
 @HiveType(typeId: HiveConstants.tableId)
 @immutable
 class Table extends t.TableCell {
+  @override
   @HiveField(0)
   final String title;
 
@@ -24,6 +25,7 @@ class Table extends t.TableCell {
   @override
   List<Object?> get props => [title, cells];
 
+  @override
   Map<String, dynamic> toJson() => {
         'title': title,
         'cells': cells
