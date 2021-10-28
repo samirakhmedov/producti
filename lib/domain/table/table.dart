@@ -20,7 +20,7 @@ class Table extends t.TableCell {
   Table({
     required this.title,
     this.cells = const [],
-  }) : super(title, null);
+  }) : super(title);
 
   @override
   List<Object?> get props => [title, cells];

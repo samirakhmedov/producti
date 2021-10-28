@@ -64,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notPartOfParty": MessageLookupByLibrary.simpleMessage(
             "Still not part of our party?"),
         "note": MessageLookupByLibrary.simpleMessage("Note"),
+        "noteCreation": MessageLookupByLibrary.simpleMessage("Note creation"),
         "nothingToSee":
             MessageLookupByLibrary.simpleMessage("Nothing to see here..."),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),

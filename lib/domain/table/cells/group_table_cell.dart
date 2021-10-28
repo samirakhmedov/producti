@@ -13,11 +13,10 @@ class GroupTableCell extends TableCell {
   GroupTableCell({
     required this.title,
     this.children = const [],
-    TableCell? parent,
-  }) : super(title, parent);
+  }) : super(title);
 
   @override
-  List<Object?> get props => [title, children, parent];
+  List<Object?> get props => [title, children];
 
   @override
   Map<String, dynamic> toJson() => {

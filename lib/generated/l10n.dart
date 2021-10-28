@@ -559,6 +559,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Note creation`
+  String get noteCreation {
+    return Intl.message(
+      'Note creation',
+      name: 'noteCreation',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

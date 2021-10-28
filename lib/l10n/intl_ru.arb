@@ -45,9 +45,10 @@
     "tableAlreadyExists": "Эта таблица уже существует!",
     "tableName": "Название таблицы",
     "group": "Группа",
-    "note": "Запись",
+    "note": "Заметка",
     "notification": "Уведомление",
     "groupName": "Навзание группы",
     "groupAlreadyExists": "Группа уже существует!",
-    "tooBigValue": "Слишком большой..."
+    "tooBigValue": "Слишком большой...",
+    "noteCreation": "Создание заметки"
 }

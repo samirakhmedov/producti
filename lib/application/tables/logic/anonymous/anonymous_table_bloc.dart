@@ -49,12 +49,13 @@ class AnonymousTableBloc
       currentTable.addCell(
         t.GroupTableCell(
           title: event.name,
-          parent: event.path?.getParticle(currentTable) ?? currentTable,
         ),
         path: event.path,
       );
 
-      yield loadedState;
+      yield loadedState.copyWith(
+        tables: loadedState.tables,
+      );
     }
 
     if (event is AnonymousTableReorderCells) {
@@ -68,7 +69,9 @@ class AnonymousTableBloc
         path: event.path,
       );
 
-      yield loadedState;
+      yield loadedState.copyWith(
+        tables: loadedState.tables,
+      );
     }
 
     if (event is AnonymousTableRenameTable) {
@@ -78,7 +81,9 @@ class AnonymousTableBloc
 
       currentTable.title = event.tableName;
 
-      yield loadedState;
+      yield loadedState.copyWith(
+        tables: loadedState.tables,
+      );
     }
 
     if (event is AnonymousTableRenameCell) {
@@ -90,7 +95,9 @@ class AnonymousTableBloc
 
       cell.title = event.name;
 
-      yield loadedState;
+      yield loadedState.copyWith(
+        tables: loadedState.tables,
+      );
     }
 
     if (event is AnonymousTableSave) {

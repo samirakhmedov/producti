@@ -66,7 +66,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "У вас нету подключения к интернету!"),
         "notPartOfParty": MessageLookupByLibrary.simpleMessage(
             "Ты еще не циркач в нашем цирке?"),
-        "note": MessageLookupByLibrary.simpleMessage("Запись"),
+        "note": MessageLookupByLibrary.simpleMessage("Заметка"),
+        "noteCreation":
+            MessageLookupByLibrary.simpleMessage("Создание заметки"),
         "nothingToSee":
             MessageLookupByLibrary.simpleMessage("Здесь ничего нет..."),
         "notification": MessageLookupByLibrary.simpleMessage("Уведомление"),

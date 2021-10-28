@@ -12,11 +12,14 @@ class NoteTableCell extends TableCell {
     this.description = '',
     this.links = const [],
     @HiveField(2) String title = '',
-    TableCell? parent,
-  }) : super(title, parent);
+  }) : super(title);
 
   @override
-  List<Object?> get props => [description, links, title, parent];
+  List<Object?> get props => [
+        description,
+        links,
+        title,
+      ];
 
   @override
   Map<String, dynamic> toJson() => {

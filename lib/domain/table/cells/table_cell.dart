@@ -15,9 +15,7 @@ part 'table_cell.g.dart';
 abstract class TableCell extends Equatable {
   String title;
 
-  TableCell? parent;
-
-  TableCell(this.title, this.parent);
+  TableCell(this.title);
 
   Map<String, dynamic> toJson();
 
