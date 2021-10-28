@@ -12,7 +12,7 @@ part 'table.g.dart';
 class Table extends t.TableCell {
   @override
   @HiveField(0)
-  final String title;
+  String title;
 
   @HiveField(1, defaultValue: [])
   List<t.TableCell> cells;

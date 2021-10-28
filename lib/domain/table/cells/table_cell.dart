@@ -13,11 +13,11 @@ part 'table_cell.g.dart';
 
 @immutable
 abstract class TableCell extends Equatable {
-  final String title;
+  String title;
 
-  final TableCell? parent;
+  TableCell? parent;
 
-  const TableCell(this.title, this.parent);
+  TableCell(this.title, this.parent);
 
   Map<String, dynamic> toJson();
 

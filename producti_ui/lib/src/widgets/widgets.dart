@@ -9,3 +9,4 @@ export 'app_divider.dart';
 export 'list_tile.dart';
 export 'empty_widget.dart';
 export 'app_bottom_sheet.dart';
+export 'inline_text_field.dart';

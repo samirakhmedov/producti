@@ -54,9 +54,7 @@ class AnonymousTableBloc
         path: event.path,
       );
 
-      yield loadedState.copyWith(
-        tables: loadedState.tables,
-      );
+      yield loadedState;
     }
 
     if (event is AnonymousTableReorderCells) {
@@ -70,9 +68,29 @@ class AnonymousTableBloc
         path: event.path,
       );
 
-      yield loadedState.copyWith(
-        tables: loadedState.tables,
-      );
+      yield loadedState;
+    }
+
+    if (event is AnonymousTableRenameTable) {
+      final loadedState = state as AnonymousTableLoaded;
+
+      final currentTable = loadedState.tables[event.tableIndex];
+
+      currentTable.title = event.tableName;
+
+      yield loadedState;
+    }
+
+    if (event is AnonymousTableRenameCell) {
+      final loadedState = state as AnonymousTableLoaded;
+
+      final currentTable = loadedState.tables[event.tableIndex];
+
+      final cell = event.path.getParticle(currentTable);
+
+      cell.title = event.name;
+
+      yield loadedState;
     }
 
     if (event is AnonymousTableSave) {

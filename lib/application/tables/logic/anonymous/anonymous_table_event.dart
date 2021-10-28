@@ -47,4 +47,32 @@ class AnonymousTableReorderCells extends AnonymousTableEvent {
     this.tableIndex, {
     this.path,
   });
+
+  @override
+  List<Object> get props => [oldIndex, newIndex, path ?? 0, tableIndex];
+}
+
+class AnonymousTableRenameTable extends AnonymousTableEvent {
+  final int tableIndex;
+  final String tableName;
+
+  const AnonymousTableRenameTable(this.tableIndex, this.tableName);
+
+  @override
+  List<Object> get props => [tableName, tableIndex];
+}
+
+class AnonymousTableRenameCell extends AnonymousTableEvent {
+  final TableLink path;
+  final int tableIndex;
+  final String name;
+
+  const AnonymousTableRenameCell(this.path, this.name, this.tableIndex);
+
+  @override
+  List<Object> get props => [
+        path,
+        name,
+        tableIndex,
+      ];
 }

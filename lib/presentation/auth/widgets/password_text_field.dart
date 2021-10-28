@@ -23,7 +23,6 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
     final theme = Theme.of(context);
 
     return TextInputWidget(
-      controller: widget.controller,
       obscureText: _obscureText,
       hintText: widget.hintText,
       prefixIcon: Icons.vpn_key,

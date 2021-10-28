@@ -11,6 +11,7 @@ import 'package:producti/presentation/table/pages/tables_page.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_group_body.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_table_body.dart';
 import 'package:producti/presentation/table/widgets/create_popup_tile.dart';
+import 'package:producti/presentation/table/widgets/path_name_widget.dart';
 import 'package:producti/presentation/table/widgets/table_cell_tile.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -295,8 +296,6 @@ class _TablesBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final query = MediaQuery.of(context);
 
-    final textTheme = ThemeHelper.getTextTheme(context);
-
     final intl = S.of(context);
 
     return SizedBox.fromSize(
@@ -306,24 +305,10 @@ class _TablesBody extends StatelessWidget {
           Positioned(
             top: 12,
             left: 12,
-            child: Builder(
-              builder: (context) {
-                String? title;
-
-                if (path != null && !path!.isEmpty) {
-                  title =
-                      '${table.title} >${path!.path.length > 1 ? " ... > " : ""} ${path!.getParticle(table).title}';
-                }
-
-                title ??= table.title;
-
-                return Text(
-                  title,
-                  style: textTheme.headline3!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              },
+            child: PathNameWidget(
+              table: table,
+              tableIndex: tableIndex,
+              path: path,
             ),
           ),
           Builder(

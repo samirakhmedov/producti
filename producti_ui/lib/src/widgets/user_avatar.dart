@@ -28,7 +28,7 @@ class UserAvatar extends StatelessWidget {
         color: kLightGray,
       ),
       child: imageProvider == null
-          ? Icon(
+          ? const Icon(
               Icons.perm_identity_outlined,
             )
           : null,
