@@ -569,6 +569,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Type title here...`
+  String get typeTitle {
+    return Intl.message(
+      'Type title here...',
+      name: 'typeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type description here...`
+  String get typeDescription {
+    return Intl.message(
+      'Type description here...',
+      name: 'typeDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type link here...`
+  String get typeLink {
+    return Intl.message(
+      'Type link here...',
+      name: 'typeLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Another one...`
+  String get anotherOne {
+    return Intl.message(
+      'Another one...',
+      name: 'anotherOne',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

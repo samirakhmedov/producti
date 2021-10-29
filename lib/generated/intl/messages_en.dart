@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addOne": MessageLookupByLibrary.simpleMessage("Add one"),
         "alreadyCoolGuy":
             MessageLookupByLibrary.simpleMessage("Already in cool boys club?"),
+        "anotherOne": MessageLookupByLibrary.simpleMessage("Another one..."),
         "comfortable": MessageLookupByLibrary.simpleMessage("Comfortable"),
         "connected": MessageLookupByLibrary.simpleMessage(
             "You are connected to the internet!"),
@@ -92,6 +93,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "tableName": MessageLookupByLibrary.simpleMessage("Table name"),
         "tooBigValue":
             MessageLookupByLibrary.simpleMessage("Too big, sempai..."),
+        "typeDescription":
+            MessageLookupByLibrary.simpleMessage("Type description here..."),
+        "typeLink": MessageLookupByLibrary.simpleMessage("Type link here..."),
+        "typeTitle": MessageLookupByLibrary.simpleMessage("Type title here..."),
         "userNotExists": MessageLookupByLibrary.simpleMessage(
             "You are trying to sign in to not existing account. Create one firstly. :)"),
         "userNotLoggedIn": MessageLookupByLibrary.simpleMessage(

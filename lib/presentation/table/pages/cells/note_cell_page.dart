@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/application/tables/pages/note_validation/note_validation_cubit.dart';
+import 'package:producti/data/core/error/error_codes.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
+import 'package:producti/generated/l10n.dart';
 import 'package:producti_ui/producti_ui.dart';
+import 'package:producti/presentation/core/errors/error_code_ext.dart';
 
 class NoteCellPage extends StatelessWidget {
   final String title;
@@ -25,6 +29,8 @@ class NoteCellPage extends StatelessWidget {
     final query = MediaQuery.of(context);
 
     final size = query.size;
+
+    final intl = S.of(context);
 
     return WillPopScope(
       onWillPop: () async {
@@ -96,7 +102,7 @@ class NoteCellPage extends StatelessWidget {
                               : kGray,
                           fontWeight: FontWeight.bold,
                         ),
-                        hintText: 'WOW',
+                        hintText: intl.typeTitle,
                         autofocus: true,
                         initialValue: noteValidationCubit.state.title,
                         onChange: (value) => noteValidationCubit.mutate(
@@ -104,6 +110,91 @@ class NoteCellPage extends StatelessWidget {
                         ),
                       ),
                     ),
+                    const Gap(size: 7),
+                    SizedBox(
+                      height: 18,
+                      child: InlineTextField(
+                        textStyle: textTheme.caption!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                        hintStyle: textTheme.caption!.copyWith(
+                          color: ThemeHelper.isDarkMode(context)
+                              ? kLightGray
+                              : kGray,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        hintText: intl.typeDescription,
+                        autofocus: true,
+                        initialValue: noteValidationCubit.state.title,
+                        onChange: (value) => noteValidationCubit.mutate(
+                          description: value,
+                        ),
+                      ),
+                    ),
+                    BlocBuilder<NoteValidationCubit, NoteValidationState>(
+                      builder: (context, state) {
+                        if (state.error == ErrorCode.voidValue) {
+                          return FieldErrorIndicator(
+                            message: state.error!.translate(
+                              context,
+                            ),
+                          );
+                        }
+
+                        return const SizedBox();
+                      },
+                    ),
+                    const Gap(size: 7),
+                    BlocBuilder<NoteValidationCubit, NoteValidationState>(
+                      bloc: noteValidationCubit,
+                      builder: (context, state) {
+                        final int count = state.links.length + 1;
+
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: count,
+                          itemBuilder: (context, index) {
+                            final link = state.links[index];
+
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 18,
+                                  child: InlineTextField(
+                                    textStyle: textTheme.caption!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    hintStyle: textTheme.caption!.copyWith(
+                                      color: ThemeHelper.isDarkMode(context)
+                                          ? kLightGray
+                                          : kGray,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    hintText: intl.typeDescription,
+                                    autofocus: true,
+                                    initialValue:
+                                        noteValidationCubit.state.title,
+                                    onChange: (value) =>
+                                        noteValidationCubit.mutate(
+                                      description: value,
+                                    ),
+                                  ),
+                                ),
+                                link.validatedValue.fold(
+                                  (failure) => FieldErrorIndicator(
+                                      message: failure.messageCode
+                                          .translate(context)),
+                                  (_) => const SizedBox(),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    )
                   ],
                 ),
               ),

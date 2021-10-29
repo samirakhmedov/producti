@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addOne": MessageLookupByLibrary.simpleMessage("Добавить"),
         "alreadyCoolGuy":
             MessageLookupByLibrary.simpleMessage("Уже часть нашего цирка?"),
+        "anotherOne": MessageLookupByLibrary.simpleMessage("Еще..."),
         "comfortable": MessageLookupByLibrary.simpleMessage("Удобно"),
         "connected": MessageLookupByLibrary.simpleMessage(
             "Вы подключились к интернету!"),
@@ -95,6 +96,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "tableName": MessageLookupByLibrary.simpleMessage("Название таблицы"),
         "tooBigValue":
             MessageLookupByLibrary.simpleMessage("Слишком большой..."),
+        "typeDescription":
+            MessageLookupByLibrary.simpleMessage("А тут описание..."),
+        "typeLink": MessageLookupByLibrary.simpleMessage("Ссылочки..."),
+        "typeTitle": MessageLookupByLibrary.simpleMessage(
+            "Введите название заметки здесь..."),
         "userNotExists": MessageLookupByLibrary.simpleMessage(
             "Сначала надо создать аккаунт, чтобы потом войти в него. :)"),
         "userNotLoggedIn": MessageLookupByLibrary.simpleMessage(

@@ -50,5 +50,9 @@
     "groupName": "Навзание группы",
     "groupAlreadyExists": "Группа уже существует!",
     "tooBigValue": "Слишком большой...",
-    "noteCreation": "Создание заметки"
+    "noteCreation": "Создание заметки",
+    "typeTitle": "Введите название заметки здесь...",
+    "typeDescription": "А тут описание...",
+    "typeLink": "Ссылочки...",
+    "anotherOne": "Еще..."
 }

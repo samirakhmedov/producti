@@ -50,5 +50,9 @@
     "groupAlreadyExists": "This group already exists!",
     "groupName": "Group name",
     "tooBigValue": "Too big, sempai...",
-    "noteCreation": "Note creation"
+    "noteCreation": "Note creation",
+    "typeTitle": "Type title here...",
+    "typeDescription": "Type description here...",
+    "typeLink": "Type link here...",
+    "anotherOne": "Another one..."
 }
