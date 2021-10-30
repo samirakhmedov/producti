@@ -16,13 +16,17 @@ class NoteValidationState extends Equatable {
   ErrorCode? get error {
     if (title.isEmpty && description.isEmpty) return ErrorCode.voidValue;
 
+    if (links.any((element) => element.currentValue.isEmpty)) {
+      return ErrorCode.voidLinkValue;
+    }
+
     if (links.any((element) => element.validatedValue.isLeft())) {
       return ErrorCode.invalidLink;
     }
   }
 
   @override
-  List<Object> get props => [title, description, links];
+  List<Object> get props => [title, description, links, showErrors];
 
   NoteValidationState copyWith({
     String? title,

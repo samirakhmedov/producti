@@ -21,6 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addLink": MessageLookupByLibrary.simpleMessage("Add link"),
         "addOne": MessageLookupByLibrary.simpleMessage("Add one"),
         "alreadyCoolGuy":
             MessageLookupByLibrary.simpleMessage("Already in cool boys club?"),
@@ -103,7 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "No local account to sign in automatically!"),
         "userRemoved": MessageLookupByLibrary.simpleMessage(
             "This user was removed from system. Create new one."),
-        "voidValue": MessageLookupByLibrary.simpleMessage("Field is empty!"),
+        "voidValue": MessageLookupByLibrary.simpleMessage("Field is empty"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Not correct password for this account!")
       };

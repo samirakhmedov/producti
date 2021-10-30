@@ -18,19 +18,15 @@ class AnonymousTableCreate extends AnonymousTableEvent {
   List<Object> get props => [name];
 }
 
-class AnonymousTableGroupCreate extends AnonymousTableEvent {
-  final String name;
+class AnonymousTableCellCreate extends AnonymousTableEvent {
+  final t.TableCell cell;
   final TableLink? path;
   final int tableIndex;
 
-  const AnonymousTableGroupCreate({
-    required this.name,
-    this.path,
-    required this.tableIndex,
-  });
+  const AnonymousTableCellCreate(this.cell, this.path, this.tableIndex);
 
   @override
-  List<Object> get props => [name, path ?? 0, tableIndex];
+  List<Object> get props => [cell, path ?? 0, tableIndex];
 }
 
 class AnonymousTableSave extends AnonymousTableEvent {}

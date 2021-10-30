@@ -98,6 +98,10 @@ final kDarkTheme = ThemeData(
   iconTheme: const IconThemeData(
     color: _kMainDarkColor,
   ),
+  appBarTheme: const AppBarTheme(
+    elevation: 0.0,
+    color: Colors.transparent,
+  ),
   primaryColor: _kMainDarkColor,
   primaryColorDark: _kMainDarkColor,
   textTheme: GoogleFonts.robotoTextTheme(

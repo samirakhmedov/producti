@@ -29,7 +29,7 @@
     "signInAnonim": "Sign in anonimously.",
     "alreadyCoolGuy": "Already in cool boys club?",
     "letHim": "Let him in, boys.",
-    "voidValue": "Field is empty!",
+    "voidValue": "Field is empty",
     "invalidLink": "Invalid link!",
     "failedToFetchUserData": "Failed to fetch your data, something went wrong!",
     "connected": "You are connected to the internet!",
@@ -54,5 +54,6 @@
     "typeTitle": "Type title here...",
     "typeDescription": "Type description here...",
     "typeLink": "Type link here...",
-    "anotherOne": "Another one..."
+    "anotherOne": "Another one...",
+    "addLink": "Add link"
 }

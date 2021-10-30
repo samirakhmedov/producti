@@ -69,16 +69,19 @@ class _PathNameWidgetState extends State<PathNameWidget> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        InkWell(
-          onTap: () {
-            setState(() {
-              _editTableName = true;
-            });
-          },
-          child: Text(
-            title,
-            style: textTheme.headline3!.copyWith(
-              fontWeight: FontWeight.bold,
+        Expanded(
+          child: InkWell(
+            onTap: () {
+              setState(() {
+                _editTableName = true;
+              });
+            },
+            child: Text(
+              title,
+              overflow: TextOverflow.ellipsis,
+              style: textTheme.headline3!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -98,16 +101,19 @@ class _PathNameWidgetState extends State<PathNameWidget> {
             ),
         ],
         if (subTitle != null)
-          InkWell(
-            onTap: () {
-              setState(() {
-                _editGroupName = true;
-              });
-            },
-            child: Text(
-              subTitle,
-              style: textTheme.headline3!.copyWith(
-                fontWeight: FontWeight.bold,
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  _editGroupName = true;
+                });
+              },
+              child: Text(
+                subTitle,
+                overflow: TextOverflow.ellipsis,
+                style: textTheme.headline3!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -155,11 +161,11 @@ class _GroupNameEdit extends StatelessWidget {
 
           return Column(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 45,
+                height: 26,
                 child: InlineTextField(
                   focusNode: focus,
                   autofocus: true,
@@ -269,11 +275,11 @@ class _TableNameEdit extends StatelessWidget {
 
           return Column(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 45,
+                height: 26,
                 child: InlineTextField(
                   focusNode: focus,
                   autofocus: true,

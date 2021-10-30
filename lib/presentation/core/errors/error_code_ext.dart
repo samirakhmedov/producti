@@ -37,6 +37,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.groupAlreadyExists;
       case ErrorCode.tooBigValue:
         return intl.tooBigValue;
+      case ErrorCode.voidLinkValue:
+        return intl.voidValue;
     }
   }
 }

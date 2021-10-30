@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
+import 'package:producti/application/tables/pages/note_validation/note_validation_cubit.dart';
 import 'package:producti/domain/table/cells/table_cell.dart' as c;
 import 'package:producti/domain/table/table.dart' as t;
 import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti/presentation/table/core/table_helper.dart';
-import 'package:producti/presentation/table/pages/cells/note_cell_page.dart';
+import 'package:producti/presentation/table/pages/cells/note_cell_create_page.dart';
 import 'package:producti/presentation/table/pages/tables_page.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_group_body.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_table_body.dart';
@@ -37,6 +38,8 @@ class AnonymousTablesPage extends StatelessWidget {
 
     final intl = S.of(context);
 
+    final bloc = context.read<AnonymousTableBloc>();
+
     return WillPopScope(
       onWillPop: () async {
         if (path != null) {
@@ -60,6 +63,24 @@ class AnonymousTablesPage extends StatelessWidget {
         key: _scaffoldKey,
         endDrawer: _TablesDrawer(
           tableIndex: tableIndex,
+        ),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(50.0),
+          child: AppBar(
+            actions: [
+              IconButton(
+                onPressed: () {
+                  _scaffoldKey.currentState!.openEndDrawer();
+                },
+                icon: const Icon(Icons.menu),
+              ),
+            ],
+            title: PathNameWidget(
+              table: table,
+              tableIndex: tableIndex,
+              path: path,
+            ),
+          ),
         ),
         body: SafeArea(
           child: Stack(
@@ -117,11 +138,23 @@ class AnonymousTablesPage extends StatelessWidget {
                                 onTap: () async {
                                   navigator.pop();
 
+                                  final noteValidationCubit =
+                                      NoteValidationCubit(null);
+
                                   final result = await navigator.push(
                                     MaterialPageRoute(
-                                      builder: (context) => NoteCellPage(
-                                        title: intl.noteCreation,
+                                      builder: (context) => BlocProvider.value(
+                                        value: noteValidationCubit,
+                                        child: const NoteCellCreatePage(),
                                       ),
+                                    ),
+                                  );
+
+                                  bloc.add(
+                                    AnonymousTableCellCreate(
+                                      result,
+                                      path,
+                                      tableIndex,
                                     ),
                                   );
                                 },
@@ -145,15 +178,6 @@ class AnonymousTablesPage extends StatelessWidget {
                     Icons.add,
                     color: theme.backgroundColor,
                   ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: IconButton(
-                  onPressed: () {
-                    _scaffoldKey.currentState!.openEndDrawer();
-                  },
-                  icon: const Icon(Icons.menu),
                 ),
               ),
             ],
@@ -311,15 +335,6 @@ class _TablesBody extends StatelessWidget {
       size: query.size,
       child: Stack(
         children: [
-          Positioned(
-            top: 12,
-            left: 12,
-            child: PathNameWidget(
-              table: table,
-              tableIndex: tableIndex,
-              path: path,
-            ),
-          ),
           Builder(
             builder: (context) {
               if (path != null && !path!.isEmpty) {
@@ -376,9 +391,7 @@ class _TableCellsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReorderableListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 30).copyWith(
-        top: 45,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       shrinkWrap: true,
       itemBuilder: (context, index) {
         final cell = cells[index];

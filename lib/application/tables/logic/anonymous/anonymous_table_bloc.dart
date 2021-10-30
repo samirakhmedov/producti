@@ -41,15 +41,13 @@ class AnonymousTableBloc
       );
     }
 
-    if (event is AnonymousTableGroupCreate) {
+    if (event is AnonymousTableCellCreate) {
       final loadedState = state as AnonymousTableLoaded;
 
       final currentTable = loadedState.tables[event.tableIndex];
 
       currentTable.addCell(
-        t.GroupTableCell(
-          title: event.name,
-        ),
+        event.cell,
         path: event.path,
       );
 

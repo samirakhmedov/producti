@@ -8,6 +8,7 @@ enum ErrorCode {
   invalidPassword,
   passwordsNotMatch,
   voidValue,
+  voidLinkValue,
   invalidLink,
   failedToFetchUserData,
   notConnectedToInternet,

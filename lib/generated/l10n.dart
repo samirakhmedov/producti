@@ -350,10 +350,10 @@ class S {
     );
   }
 
-  /// `Field is empty!`
+  /// `Field is empty`
   String get voidValue {
     return Intl.message(
-      'Field is empty!',
+      'Field is empty',
       name: 'voidValue',
       desc: '',
       args: [],
@@ -605,6 +605,16 @@ class S {
     return Intl.message(
       'Another one...',
       name: 'anotherOne',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add link`
+  String get addLink {
+    return Intl.message(
+      'Add link',
+      name: 'addLink',
       desc: '',
       args: [],
     );

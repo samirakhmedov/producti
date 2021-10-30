@@ -78,10 +78,10 @@ class CreateGroupBody extends StatelessWidget {
             cubit.close();
 
             tableBloc.add(
-              AnonymousTableGroupCreate(
-                name: createState.groupName,
-                tableIndex: tableIndex,
-                path: path,
+              AnonymousTableCellCreate(
+                GroupTableCell(title: createState.groupName),
+                path,
+                tableIndex,
               ),
             );
           },

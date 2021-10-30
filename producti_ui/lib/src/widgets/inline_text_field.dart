@@ -11,6 +11,8 @@ class InlineTextField extends StatelessWidget {
   final Widget? suffixWidget;
   final String? hintText;
   final TextStyle? hintStyle;
+  final bool multiline;
+  final TextInputType? textInputType;
 
   const InlineTextField({
     Key? key,
@@ -23,11 +25,21 @@ class InlineTextField extends StatelessWidget {
     this.suffixWidget,
     this.hintText,
     this.hintStyle,
+    this.multiline = false,
+    this.textInputType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final theme = ThemeHelper.getTheme(context);
+
+    final focus = FocusNode();
+
+    keyboardVisibility.onChange.listen((value) {
+      if (!value && (focusNode ?? focus).hasFocus) {
+        (focusNode ?? focus).unfocus();
+      }
+    });
 
     return TextFormField(
       focusNode: focusNode,
@@ -36,6 +48,8 @@ class InlineTextField extends StatelessWidget {
       onFieldSubmitted: onSubmit,
       onChanged: onChange,
       style: textStyle,
+      keyboardType: multiline ? TextInputType.multiline : textInputType,
+      maxLines: multiline ? null : 1,
       decoration: InputDecoration(
         border: InputBorder.none,
         filled: true,
