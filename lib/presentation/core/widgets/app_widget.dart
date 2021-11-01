@@ -9,6 +9,10 @@ import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti_ui/producti_ui.dart';
 
+/// Root app widget.
+///
+/// Responsible for [AppLifeCycle], setting up
+/// theme, locales, creating [WidgetsApp] instance.
 class AppWidget extends StatefulWidget {
   const AppWidget({Key? key}) : super(key: key);
 
@@ -16,21 +20,34 @@ class AppWidget extends StatefulWidget {
   State<AppWidget> createState() => _AppWidgetState();
 }
 
+/// Adds bindings callbacks to specific [Widget] instance.
+///
+/// For example, [Navigator] moves or [Locale] change.
 class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
   @override
   void initState() {
-    super.initState();
+    /// Registeres this widget in [WidgetsBinding], that calls callbacks
+    /// of that specific [BaseBinding].
     WidgetsBinding.instance!.addObserver(this);
+
+    super.initState();
   }
 
   @override
   void dispose() {
+    /// Removes this widget from list of registeted
+    /// widgets in [WidgetsBinding].
+    ///
+    /// No longer reacts on binding callbacks.
     WidgetsBinding.instance!.removeObserver(this);
+
     super.dispose();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    /// The application is not currently visible to the user, not responding to
+    /// user input, and running in the background.
     if (state == AppLifecycleState.paused) {
       final authBloc = context.read<AuthBloc>();
 
