@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:producti/domain/core/hive_constants.dart';
-import 'package:producti/domain/table/values/link.dart';
 
 part 'group_table_cell.dart';
 part 'note_table_cell.dart';

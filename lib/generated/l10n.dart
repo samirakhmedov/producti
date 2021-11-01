@@ -629,6 +629,16 @@ class S {
       args: [],
     );
   }
+
+  /// `For what reason you creating notifications and not let me show them to you??`
+  String get notificationsInitializationFailure {
+    return Intl.message(
+      'For what reason you creating notifications and not let me show them to you??',
+      name: 'notificationsInitializationFailure',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

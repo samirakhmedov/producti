@@ -56,5 +56,6 @@
     "typeDescription": "А тут описание...",
     "typeLink": "Ссылочки...",
     "anotherOne": "Еще...",
-    "addLink": "Добавить ссылку"
+    "addLink": "Добавить ссылку",
+    "notificationsInitializationFailure": "Зачем ты создаешь напоминания и потом не даешь мне...напоминать??"
 }

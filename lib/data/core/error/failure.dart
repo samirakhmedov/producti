@@ -26,3 +26,7 @@ class ValidationFailure extends Failure {
 class ConnectionFailure extends Failure {
   const ConnectionFailure(ErrorCode messageCode) : super(messageCode);
 }
+
+class NotificationFailure extends Failure {
+  const NotificationFailure(ErrorCode messageCode) : super(messageCode);
+}

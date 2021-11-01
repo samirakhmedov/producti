@@ -15,4 +15,5 @@ enum ErrorCode {
   tableAlreadyExists,
   groupAlreadyExists,
   tooBigValue,
+  notificationsInitializationFailure,
 }

@@ -56,5 +56,6 @@
     "typeDescription": "Type description here...",
     "typeLink": "Type link here...",
     "anotherOne": "Another one...",
-    "addLink": "Add link"
+    "addLink": "Add link",
+    "notificationsInitializationFailure": "For what reason you creating notifications and not let me show them to you??"
 }

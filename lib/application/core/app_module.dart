@@ -3,6 +3,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:producti/domain/table/table.dart';
@@ -27,6 +28,14 @@ abstract class AppModule {
 
   @singleton
   Connectivity get connectivity => Connectivity();
+
+  @singleton
+  FlutterLocalNotificationsPlugin get localNotifications =>
+      FlutterLocalNotificationsPlugin();
+
+  @singleton
+  IOSFlutterLocalNotificationsPlugin get localNotificationsIOS =>
+      IOSFlutterLocalNotificationsPlugin();
 
   @preResolve
   Future<Box<Table>> get tablesBox => Hive.openBox<Table>('APP_TABLES');

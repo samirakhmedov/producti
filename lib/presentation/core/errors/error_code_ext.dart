@@ -39,6 +39,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.tooBigValue;
       case ErrorCode.voidLinkValue:
         return intl.voidValue;
+      case ErrorCode.notificationsInitializationFailure:
+        return intl.notificationsInitializationFailure;
     }
   }
 }

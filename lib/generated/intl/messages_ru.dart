@@ -75,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nothingToSee":
             MessageLookupByLibrary.simpleMessage("Здесь ничего нет..."),
         "notification": MessageLookupByLibrary.simpleMessage("Уведомление"),
+        "notificationsInitializationFailure": MessageLookupByLibrary.simpleMessage(
+            "Зачем ты создаешь напоминания и потом не даешь мне...напоминать??"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
             "Прекрасный инструмент для быстрых действий и ежедневного пользования."),
         "onboardingDesc2": MessageLookupByLibrary.simpleMessage(

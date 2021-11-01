@@ -10,7 +10,7 @@ import 'package:producti/domain/auth/values/email.dart';
 import 'package:producti/domain/auth/user.dart';
 import 'package:producti/data/core/extensions/firebase_user_ext.dart';
 
-@Injectable(as: AuthRepository)
+@LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
   final FlutterSecureStorage _storage;
   final auth.FirebaseAuth _auth;
