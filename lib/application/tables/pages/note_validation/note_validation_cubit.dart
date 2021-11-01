@@ -14,7 +14,7 @@ class NoteValidationCubit extends Cubit<NoteValidationState> {
     emit(
       state.copyWith(
         description: initialData?.description,
-        links: initialData?.links,
+        links: initialData?.links.map((e) => Link(e)).toList(),
         title: initialData?.title,
       ),
     );

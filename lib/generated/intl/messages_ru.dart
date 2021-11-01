@@ -71,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "note": MessageLookupByLibrary.simpleMessage("Заметка"),
         "noteCreation":
             MessageLookupByLibrary.simpleMessage("Создание заметки"),
+        "noteDetails": MessageLookupByLibrary.simpleMessage("Детали заметки"),
         "nothingToSee":
             MessageLookupByLibrary.simpleMessage("Здесь ничего нет..."),
         "notification": MessageLookupByLibrary.simpleMessage("Уведомление"),

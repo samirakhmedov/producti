@@ -9,6 +9,7 @@ import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti/presentation/table/core/table_helper.dart';
 import 'package:producti/presentation/table/pages/cells/note_cell_create_page.dart';
+import 'package:producti/presentation/table/pages/cells/note_cell_view_page.dart';
 import 'package:producti/presentation/table/pages/tables_page.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_group_body.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_table_body.dart';
@@ -408,6 +409,17 @@ class _TableCellsList extends StatelessWidget {
                   builder: (context) => TablesPage(
                     tableIndex: tableIndex,
                     path: path?.addPath(index) ?? TableLink([index]),
+                  ),
+                ),
+              );
+            }
+            if (cell is c.NoteTableCell) {
+              navigator.push(
+                MaterialPageRoute(
+                  builder: (context) => NoteCellViewPage(
+                    cell: cell,
+                    pathToNote: path?.addPath(index) ?? TableLink([index]),
+                    tableIndex: tableIndex,
                   ),
                 ),
               );

@@ -51,6 +51,7 @@
     "groupAlreadyExists": "Группа уже существует!",
     "tooBigValue": "Слишком большой...",
     "noteCreation": "Создание заметки",
+    "noteDetails": "Детали заметки",
     "typeTitle": "Введите название заметки здесь...",
     "typeDescription": "А тут описание...",
     "typeLink": "Ссылочки...",

@@ -6,7 +6,7 @@ class NoteTableCell extends TableCell {
   @HiveField(0)
   final String description;
   @HiveField(1)
-  final List<Link> links;
+  final List<String> links;
 
   NoteTableCell({
     this.description = '',
@@ -24,22 +24,14 @@ class NoteTableCell extends TableCell {
   @override
   Map<String, dynamic> toJson() => {
         'description': description,
-        'links': links
-            .map(
-              (e) => e.getOrCrash(),
-            )
-            .toList(),
+        'links': links.toList(),
         'title': title,
       };
 
   factory NoteTableCell.fromJson(Map<String, dynamic> json) {
     return NoteTableCell(
       description: json['description'] as String,
-      links: (json['links'] as List<String>)
-          .map(
-            (e) => Link(e),
-          )
-          .toList(),
+      links: json['links'] as List<String>,
       title: json['title'] as String,
     );
   }

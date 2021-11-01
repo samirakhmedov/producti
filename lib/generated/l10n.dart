@@ -570,6 +570,16 @@ class S {
     );
   }
 
+  /// `Note details`
+  String get noteDetails {
+    return Intl.message(
+      'Note details',
+      name: 'noteDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Type title here...`
   String get typeTitle {
     return Intl.message(

@@ -72,3 +72,22 @@ class AnonymousTableRenameCell extends AnonymousTableEvent {
         tableIndex,
       ];
 }
+
+class AnonymousTableChangeCell extends AnonymousTableEvent {
+  final int tableIndex;
+  final TableLink pathToNote;
+  final t.TableCell newCell;
+
+  const AnonymousTableChangeCell({
+    required this.tableIndex,
+    required this.pathToNote,
+    required this.newCell,
+  });
+
+  @override
+  List<Object> get props => [
+        pathToNote,
+        newCell,
+        tableIndex,
+      ];
+}

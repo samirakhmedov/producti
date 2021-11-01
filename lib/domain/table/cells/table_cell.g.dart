@@ -55,7 +55,7 @@ class NoteTableCellAdapter extends TypeAdapter<NoteTableCell> {
     };
     return NoteTableCell(
       description: fields[0] as String,
-      links: (fields[1] as List).cast<Link>(),
+      links: (fields[1] as List).cast<String>(),
     );
   }
 

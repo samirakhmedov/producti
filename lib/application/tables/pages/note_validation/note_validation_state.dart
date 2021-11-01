@@ -45,7 +45,7 @@ class NoteValidationState extends Equatable {
   NoteTableCell toNoteCell() {
     return NoteTableCell(
       description: description,
-      links: links,
+      links: links.map((e) => e.getOrCrash()).toList(),
       title: title,
     );
   }

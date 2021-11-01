@@ -123,7 +123,7 @@ class _NoteTableCellTile extends StatelessWidget {
                       const _Dot(),
                       const Gap(),
                       if (cell.title.isEmpty)
-                        const _VoidTextValue()
+                        const VoidTextValue()
                       else
                         Text(
                           cell.title,
@@ -142,12 +142,16 @@ class _NoteTableCellTile extends StatelessWidget {
                 ],
               ),
               if (cell.description.isEmpty)
-                const _VoidTextValue()
+                const VoidTextValue()
               else
-                Text(
-                  cell.description,
-                  style: textTheme.caption!.copyWith(
-                    fontWeight: FontWeight.w300,
+                LimitedBox(
+                  maxHeight: 150,
+                  child: Text(
+                    cell.description,
+                    style: textTheme.caption!.copyWith(
+                      fontWeight: FontWeight.w300,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
             ],
@@ -176,8 +180,10 @@ class _Dot extends StatelessWidget {
   }
 }
 
-class _VoidTextValue extends StatelessWidget {
-  const _VoidTextValue({Key? key}) : super(key: key);
+class VoidTextValue extends StatelessWidget {
+  final TextStyle? style;
+
+  const VoidTextValue({Key? key, this.style}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -187,10 +193,14 @@ class _VoidTextValue extends StatelessWidget {
 
     return Text(
       intl.voidValue,
-      style: textTheme.bodyText2!.copyWith(
-        fontWeight: FontWeight.bold,
-        color: ThemeHelper.isDarkMode(context) ? kLightGray : kGray,
-      ),
+      style: style?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: ThemeHelper.isDarkMode(context) ? kLightGray : kGray,
+          ) ??
+          textTheme.bodyText2!.copyWith(
+            fontWeight: FontWeight.bold,
+            color: ThemeHelper.isDarkMode(context) ? kLightGray : kGray,
+          ),
     );
   }
 }

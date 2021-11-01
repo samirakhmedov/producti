@@ -72,6 +72,30 @@ class AnonymousTableBloc
       );
     }
 
+    if (event is AnonymousTableChangeCell) {
+      final loadedState = state as AnonymousTableLoaded;
+
+      final currentTable = loadedState.tables[event.tableIndex];
+
+      final newPathList = List.of(event.pathToNote.path);
+
+      newPathList.removeLast();
+
+      final pathToGroup = TableLink(newPathList);
+
+      if (pathToGroup.isEmpty) {
+        currentTable.cells[event.pathToNote.path.last] = event.newCell;
+      } else {
+        final group = pathToGroup.getParticle(currentTable) as t.GroupTableCell;
+
+        group.children[event.pathToNote.path.last] = event.newCell;
+      }
+
+      yield loadedState.copyWith(
+        tables: loadedState.tables,
+      );
+    }
+
     if (event is AnonymousTableRenameTable) {
       final loadedState = state as AnonymousTableLoaded;
 
