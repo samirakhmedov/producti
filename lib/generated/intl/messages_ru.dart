@@ -78,6 +78,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nothingToSee":
             MessageLookupByLibrary.simpleMessage("Здесь ничего нет..."),
         "notification": MessageLookupByLibrary.simpleMessage("Уведомление"),
+        "notificationInPast": MessageLookupByLibrary.simpleMessage(
+            "Увы, вы не можете напомнить себе что то в прошлом. :("),
         "notificationsInitializationFailure": MessageLookupByLibrary.simpleMessage(
             "Зачем ты создаешь напоминания и потом не даешь мне...напоминать??"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
@@ -89,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "passswordsNotMatch":
             MessageLookupByLibrary.simpleMessage("Пароли не совпадают!"),
         "password": MessageLookupByLibrary.simpleMessage("Пароль"),
+        "pickDate": MessageLookupByLibrary.simpleMessage(
+            "Установить время напоминания..."),
         "rename": MessageLookupByLibrary.simpleMessage("Переименовать"),
         "repeatPassword": MessageLookupByLibrary.simpleMessage("Пароль снова"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),

@@ -63,5 +63,8 @@
     "rename": "Rename",
     "yes": "Yes.",
     "no": "No.",
-    "youSureToDelete": "Are you sure you want to delete that element? All their children would be deleted also."
+    "youSureToDelete": "Are you sure you want to delete that element? All their children would be deleted also.",
+    "notificationInPast": "You cannot remind something to yourself in past. :)",
+    "pickDate": "Pick date here..."
+
 }

@@ -74,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nothingToSee":
             MessageLookupByLibrary.simpleMessage("Nothing to see here..."),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
+        "notificationInPast": MessageLookupByLibrary.simpleMessage(
+            "You cannot remind something to yourself in past. :)"),
         "notificationsInitializationFailure": MessageLookupByLibrary.simpleMessage(
             "For what reason you creating notifications and not let me show them to you??"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
@@ -85,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passswordsNotMatch":
             MessageLookupByLibrary.simpleMessage("Passwords are not equal!"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "pickDate": MessageLookupByLibrary.simpleMessage("Pick date here..."),
         "rename": MessageLookupByLibrary.simpleMessage("Rename"),
         "repeatPassword":
             MessageLookupByLibrary.simpleMessage("Repeat password"),

@@ -16,4 +16,5 @@ enum ErrorCode {
   groupAlreadyExists,
   tooBigValue,
   notificationsInitializationFailure,
+  notificationInPast,
 }

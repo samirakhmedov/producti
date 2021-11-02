@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
 import 'package:producti/application/tables/pages/note_validation/note_validation_cubit.dart';
+import 'package:producti/application/tables/pages/notification_validation/notification_validation_cubit.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
 import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/generated/l10n.dart';
-import 'package:producti/presentation/table/pages/cells/note_cell_create_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:producti/presentation/table/pages/cells/notifications/notification_cell_create_page.dart';
 import 'package:producti/presentation/table/widgets/table_cell_tile.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class NoteCellViewPage extends StatefulWidget {
-  final NoteTableCell cell;
+class NotificationCellViewPage extends StatefulWidget {
+  final NotificationTableCell cell;
   final TableLink pathToNote;
   final int tableIndex;
 
-  const NoteCellViewPage({
+  const NotificationCellViewPage({
     Key? key,
     required this.cell,
     required this.pathToNote,
@@ -23,11 +25,12 @@ class NoteCellViewPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<NoteCellViewPage> createState() => _NoteCellViewPageState();
+  State<NotificationCellViewPage> createState() =>
+      _NotificationCellViewPageState();
 }
 
-class _NoteCellViewPageState extends State<NoteCellViewPage> {
-  late NoteTableCell _cell;
+class _NotificationCellViewPageState extends State<NotificationCellViewPage> {
+  late NotificationTableCell _cell;
 
   @override
   void initState() {
@@ -55,28 +58,31 @@ class _NoteCellViewPageState extends State<NoteCellViewPage> {
         actions: [
           IconButton(
             onPressed: () async {
-              final noteValidationCubit = NoteValidationCubit(_cell);
+              final noteValidationCubit = NotificationValidationCubit(_cell);
 
-              final result = await Navigator.of(context).push(
+              final result =
+                  await Navigator.of(context).push<NotificationTableCell>(
                 MaterialPageRoute(
                   builder: (context) => BlocProvider.value(
                     value: noteValidationCubit,
-                    child: const NoteCellCreatePage(),
+                    child: const NotificationCellCreatePage(),
                   ),
                 ),
               );
 
-              context.read<AnonymousTableBloc>().add(
-                    AnonymousTableChangeCell(
-                      tableIndex: widget.tableIndex,
-                      pathToNote: widget.pathToNote,
-                      newCell: result,
-                    ),
-                  );
+              if (result != null) {
+                context.read<AnonymousTableBloc>().add(
+                      AnonymousTableChangeCell(
+                        tableIndex: widget.tableIndex,
+                        pathToNote: widget.pathToNote,
+                        newCell: result,
+                      ),
+                    );
 
-              setState(() {
-                _cell = result;
-              });
+                setState(() {
+                  _cell = result;
+                });
+              }
             },
             icon: const Icon(Icons.edit),
           ),
@@ -88,6 +94,24 @@ class _NoteCellViewPageState extends State<NoteCellViewPage> {
         ),
         child: CustomScrollView(
           slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.only(bottom: 15),
+              sliver: SliverToBoxAdapter(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.access_time),
+                    const Gap(),
+                    Text(
+                      DateFormat('dd.MM.yyyy, kk:mm').format(_cell.time),
+                      style: textTheme.bodyText1!.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
             SliverPadding(
               padding: const EdgeInsets.only(bottom: 7),
               sliver: SliverToBoxAdapter(

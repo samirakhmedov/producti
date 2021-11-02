@@ -699,6 +699,26 @@ class S {
       args: [],
     );
   }
+
+  /// `You cannot remind something to yourself in past. :)`
+  String get notificationInPast {
+    return Intl.message(
+      'You cannot remind something to yourself in past. :)',
+      name: 'notificationInPast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick date here...`
+  String get pickDate {
+    return Intl.message(
+      'Pick date here...',
+      name: 'pickDate',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

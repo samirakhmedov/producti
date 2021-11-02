@@ -4,6 +4,7 @@ import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
 import 'package:producti/application/tables/pages/group_create/group_create_cubit.dart';
 import 'package:producti/application/tables/pages/note_validation/note_validation_cubit.dart';
+import 'package:producti/application/tables/pages/notification_validation/notification_validation_cubit.dart';
 import 'package:producti/domain/table/cells/table_cell.dart' as c;
 import 'package:producti/domain/table/cells/table_cell.dart';
 import 'package:producti/domain/table/table.dart' as t;
@@ -11,8 +12,10 @@ import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti/presentation/table/core/table_helper.dart';
-import 'package:producti/presentation/table/pages/cells/note_cell_create_page.dart';
-import 'package:producti/presentation/table/pages/cells/note_cell_view_page.dart';
+import 'package:producti/presentation/table/pages/cells/note/note_cell_create_page.dart';
+import 'package:producti/presentation/table/pages/cells/note/note_cell_view_page.dart';
+import 'package:producti/presentation/table/pages/cells/notifications/notification_cell_create_page.dart';
+import 'package:producti/presentation/table/pages/cells/notifications/notification_cell_view_page.dart';
 import 'package:producti/presentation/table/pages/tables_page.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_group_body.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_table_body.dart';
@@ -180,7 +183,8 @@ class AnonymousTablesPage extends StatelessWidget {
                                   final noteValidationCubit =
                                       NoteValidationCubit(null);
 
-                                  final result = await navigator.push(
+                                  final result =
+                                      await navigator.push<c.NoteTableCell>(
                                     MaterialPageRoute(
                                       builder: (context) => BlocProvider.value(
                                         value: noteValidationCubit,
@@ -189,21 +193,47 @@ class AnonymousTablesPage extends StatelessWidget {
                                     ),
                                   );
 
-                                  bloc.add(
-                                    AnonymousTableCellCreate(
-                                      result,
-                                      path,
-                                      tableIndex,
-                                    ),
-                                  );
+                                  if (result != null) {
+                                    bloc.add(
+                                      AnonymousTableCellCreate(
+                                        result,
+                                        path,
+                                        tableIndex,
+                                      ),
+                                    );
+                                  }
                                 },
                               ),
                               const Gap(size: 12),
                               CreatePopupTile(
                                 icon: Icons.access_time,
                                 title: intl.notification,
-                                onTap: () {
+                                onTap: () async {
                                   navigator.pop();
+
+                                  final notificationValidationCubit =
+                                      NotificationValidationCubit(null);
+
+                                  final result = await navigator
+                                      .push<c.NotificationTableCell>(
+                                    MaterialPageRoute(
+                                      builder: (context) => BlocProvider.value(
+                                        value: notificationValidationCubit,
+                                        child:
+                                            const NotificationCellCreatePage(),
+                                      ),
+                                    ),
+                                  );
+
+                                  if (result != null) {
+                                    bloc.add(
+                                      AnonymousTableCellCreate(
+                                        result,
+                                        path,
+                                        tableIndex,
+                                      ),
+                                    );
+                                  }
                                 },
                               ),
                             ],
@@ -534,11 +564,29 @@ class _TableCellsList extends StatelessWidget {
                   if (cell is c.NoteTableCell) {
                     final noteValidationCubit = NoteValidationCubit(cell);
 
-                    final result = await Navigator.of(context).push(
+                    final result =
+                        await Navigator.of(context).push<c.NoteTableCell>(
                       MaterialPageRoute(
                         builder: (context) => BlocProvider.value(
                           value: noteValidationCubit,
                           child: const NoteCellCreatePage(),
+                        ),
+                      ),
+                    );
+
+                    newCell = result;
+                  }
+
+                  if (cell is c.NotificationTableCell) {
+                    final noteValidationCubit =
+                        NotificationValidationCubit(cell);
+
+                    final result = await Navigator.of(context)
+                        .push<c.NotificationTableCell>(
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider.value(
+                          value: noteValidationCubit,
+                          child: const NotificationCellCreatePage(),
                         ),
                       ),
                     );
@@ -575,6 +623,17 @@ class _TableCellsList extends StatelessWidget {
                 navigator.push(
                   MaterialPageRoute(
                     builder: (context) => NoteCellViewPage(
+                      cell: cell,
+                      pathToNote: path.addPath(index),
+                      tableIndex: tableIndex,
+                    ),
+                  ),
+                );
+              }
+              if (cell is c.NotificationTableCell) {
+                navigator.push(
+                  MaterialPageRoute(
+                    builder: (context) => NotificationCellViewPage(
                       cell: cell,
                       pathToNote: path.addPath(index),
                       tableIndex: tableIndex,

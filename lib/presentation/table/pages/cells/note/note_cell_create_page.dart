@@ -17,6 +17,45 @@ class NoteCellCreatePage extends StatelessWidget {
     this.cell,
   }) : super(key: key);
 
+  Future<bool> _onPop(
+      BuildContext context, NoteValidationCubit noteValidationCubit) async {
+    final intl = S.of(context);
+
+    if (noteValidationCubit.state.error != null) {
+      if (!noteValidationCubit.state.showErrors) {
+        noteValidationCubit.mutate(
+          showErrors: true,
+        );
+      } else {
+        bool? agreement;
+
+        await showDialog(
+          context: context,
+          builder: (context) => AppDialog(
+            child: AppDialogQuestionBody(
+              onSelect: (answer) => agreement = answer,
+              options: [
+                intl.yes,
+                intl.no,
+              ],
+              title: intl.youSureToDelete,
+            ),
+          ),
+        );
+
+        if (agreement != null && agreement!) {
+          Navigator.of(context).pop<NoteTableCell?>(null);
+        }
+      }
+    } else {
+      Navigator.of(context).pop<NoteTableCell>(
+        noteValidationCubit.state.toNoteCell(),
+      );
+    }
+
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final noteValidationCubit = context.read<NoteValidationCubit>();
@@ -28,19 +67,7 @@ class NoteCellCreatePage extends StatelessWidget {
     final intl = S.of(context);
 
     return WillPopScope(
-      onWillPop: () async {
-        if (noteValidationCubit.state.error != null) {
-          noteValidationCubit.mutate(
-            showErrors: true,
-          );
-        } else {
-          Navigator.of(context).pop<NoteTableCell>(
-            noteValidationCubit.state.toNoteCell(),
-          );
-        }
-
-        return false;
-      },
+      onWillPop: () async => _onPop(context, noteValidationCubit),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -50,17 +77,7 @@ class NoteCellCreatePage extends StatelessWidget {
             ),
           ),
           leading: InkWell(
-            onTap: () {
-              if (noteValidationCubit.state.error != null) {
-                return noteValidationCubit.mutate(
-                  showErrors: true,
-                );
-              }
-
-              Navigator.of(context).pop<NoteTableCell>(
-                noteValidationCubit.state.toNoteCell(),
-              );
-            },
+            onTap: () => _onPop(context, noteValidationCubit),
             child: const Icon(
               Icons.arrow_back,
             ),

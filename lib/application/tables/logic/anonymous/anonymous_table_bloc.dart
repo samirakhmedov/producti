@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
+import 'package:producti/data/notifications/local_notification_repository.dart';
+import 'package:producti/domain/notifications/notification.dart';
 import 'package:producti/domain/table/cells/table_cell.dart' as t;
 import 'package:producti/domain/table/local_table_repository.dart';
 import 'package:producti/domain/table/table.dart';
@@ -13,9 +15,12 @@ part 'anonymous_table_state.dart';
 class AnonymousTableBloc
     extends Bloc<AnonymousTableEvent, AnonymousTableState> {
   final LocalTableRepository _localTableRepository;
+  final LocalNotificationRepository _localNotificationRepository;
 
-  AnonymousTableBloc(this._localTableRepository)
-      : super(AnonymousTableInitial()) {
+  AnonymousTableBloc(
+    this._localTableRepository,
+    this._localNotificationRepository,
+  ) : super(AnonymousTableInitial()) {
     add(AnonymousTableLoad());
   }
 
@@ -50,6 +55,22 @@ class AnonymousTableBloc
         event.cell,
         event.path,
       );
+
+      if (event.cell is t.NotificationTableCell) {
+        final cell = event.cell as t.NotificationTableCell;
+
+        final cells = event.path.getParticles(currentTable);
+
+        // _localNotificationRepository.setNotification(
+        //   Notification(
+        //     time: cell.time,
+        //     body: cell.description,
+        //     // id: cell.id,
+        //     title: cell.title,
+        //     pathToNotification: event.path,
+        //   ),
+        // );
+      }
 
       yield loadedState.copyWith(
         tables: loadedState.tables,

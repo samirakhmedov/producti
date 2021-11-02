@@ -41,6 +41,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.voidValue;
       case ErrorCode.notificationsInitializationFailure:
         return intl.notificationsInitializationFailure;
+      case ErrorCode.notificationInPast:
+        return intl.notificationInPast;
     }
   }
 }

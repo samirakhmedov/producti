@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:producti/domain/table/cells/table_cell.dart' as t;
 import 'package:producti/generated/l10n.dart';
 import 'package:producti_ui/producti_ui.dart';
@@ -22,6 +23,13 @@ class TableCellTile extends StatelessWidget {
     if (cell is t.NoteTableCell) {
       return _NoteTableCellTile(
         cell: cell as t.NoteTableCell,
+        onTap: onTap,
+      );
+    }
+
+    if (cell is t.NotificationTableCell) {
+      return _NotificationTableCellTile(
+        cell: cell as t.NotificationTableCell,
         onTap: onTap,
       );
     }
@@ -151,6 +159,100 @@ class _NoteTableCellTile extends StatelessWidget {
                     style: textTheme.caption!.copyWith(
                       fontWeight: FontWeight.w300,
                     ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _NotificationTableCellTile extends StatelessWidget {
+  final t.NotificationTableCell cell;
+  final void Function()? onTap;
+
+  const _NotificationTableCellTile({
+    Key? key,
+    required this.cell,
+    this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = ThemeHelper.getTheme(context);
+    final textTheme = theme.textTheme;
+    final size = MediaQuery.of(context).size;
+
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+        ),
+        decoration: BoxDecoration(
+          border: Border(
+            left: BorderSide(
+              color: theme.primaryColor,
+              width: 3,
+            ),
+          ),
+        ),
+        width: size.width,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.access_time),
+                      const Gap(),
+                      Text(
+                        DateFormat('MMMM dd, kk:mm').format(cell.time),
+                        style: textTheme.bodyText2,
+                      ),
+                    ],
+                  ),
+                  if (cell.links.isNotEmpty)
+                    Icon(
+                      Icons.link,
+                      color:
+                          ThemeHelper.isDarkMode(context) ? kLightGray : kGray,
+                    ),
+                ],
+              ),
+              const Gap(),
+              if (cell.title.isEmpty)
+                const VoidTextValue()
+              else
+                Text(
+                  cell.title,
+                  style: textTheme.bodyText2!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              const Gap(),
+              if (cell.description.isEmpty)
+                const VoidTextValue()
+              else
+                LimitedBox(
+                  maxHeight: 150,
+                  child: Text(
+                    cell.description,
+                    style: textTheme.caption!.copyWith(
+                      fontWeight: FontWeight.w300,
+                    ),
+                    maxLines: null,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
