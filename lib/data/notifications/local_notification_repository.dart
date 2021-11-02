@@ -7,7 +7,7 @@ import 'package:producti/data/core/error/error_codes.dart';
 import 'package:producti/data/core/error/failure.dart';
 import 'package:producti/domain/notifications/notification.dart';
 import 'package:producti/domain/notifications/notification_repository.dart';
-import 'package:timezone/browser.dart';
+import 'package:timezone/timezone.dart';
 
 @lazySingleton
 class LocalNotificationRepository extends NotificationRepositry {
