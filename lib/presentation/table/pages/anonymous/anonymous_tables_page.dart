@@ -418,8 +418,6 @@ class _TableCellsList extends StatelessWidget {
 
     final theme = ThemeHelper.getTheme(context);
 
-    final navigator = Navigator.of(context);
-
     return ReorderableListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       shrinkWrap: true,
@@ -437,12 +435,35 @@ class _TableCellsList extends StatelessWidget {
               color: kRed,
               icon: Icons.delete,
               foregroundColor: theme.backgroundColor,
-              onTap: () => bloc.add(
-                AnonymousTableDeleteCell(
-                  tableIndex,
-                  path.addPath(index),
-                ),
-              ),
+              onTap: () async {
+                if (cell is c.GroupTableCell && cell.children.isNotEmpty) {
+                  bool? agreement;
+
+                  await showDialog(
+                    context: context,
+                    builder: (context) => AppDialog(
+                      child: AppDialogQuestionBody(
+                        onSelect: (answer) => agreement = answer,
+                        options: [
+                          intl.yes,
+                          intl.no,
+                        ],
+                        title: intl.youSureToDelete,
+                      ),
+                    ),
+                  );
+
+                  if (agreement == null) return;
+                  if (!agreement!) return;
+                }
+
+                bloc.add(
+                  AnonymousTableDeleteCell(
+                    tableIndex,
+                    path.addPath(index),
+                  ),
+                );
+              },
             ),
             if (cell is c.GroupTableCell)
               IconSlideAction(
@@ -507,7 +528,34 @@ class _TableCellsList extends StatelessWidget {
                 color: Colors.blue,
                 icon: Icons.edit,
                 foregroundColor: theme.backgroundColor,
-                onTap: () {},
+                onTap: () async {
+                  c.TableCell? newCell;
+
+                  if (cell is c.NoteTableCell) {
+                    final noteValidationCubit = NoteValidationCubit(cell);
+
+                    final result = await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider.value(
+                          value: noteValidationCubit,
+                          child: const NoteCellCreatePage(),
+                        ),
+                      ),
+                    );
+
+                    newCell = result;
+                  }
+
+                  if (newCell != null) {
+                    context.read<AnonymousTableBloc>().add(
+                          AnonymousTableChangeCell(
+                            tableIndex: tableIndex,
+                            pathToNote: path.addPath(index),
+                            newCell: newCell,
+                          ),
+                        );
+                  }
+                },
               ),
           ],
           child: TableCellTile(

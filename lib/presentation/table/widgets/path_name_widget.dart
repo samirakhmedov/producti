@@ -76,11 +76,13 @@ class _PathNameWidgetState extends State<PathNameWidget> {
                 _editTableName = true;
               });
             },
-            child: Text(
-              title,
-              overflow: TextOverflow.ellipsis,
-              style: textTheme.headline3!.copyWith(
-                fontWeight: FontWeight.bold,
+            child: Center(
+              child: Text(
+                title,
+                overflow: TextOverflow.ellipsis,
+                style: textTheme.headline3!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -108,11 +110,13 @@ class _PathNameWidgetState extends State<PathNameWidget> {
                   _editGroupName = true;
                 });
               },
-              child: Text(
-                subTitle,
-                overflow: TextOverflow.ellipsis,
-                style: textTheme.headline3!.copyWith(
-                  fontWeight: FontWeight.bold,
+              child: Center(
+                child: Text(
+                  subTitle,
+                  overflow: TextOverflow.ellipsis,
+                  style: textTheme.headline3!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Представление уже началось!"),
         "logOut": MessageLookupByLibrary.simpleMessage("Выйти"),
         "next": MessageLookupByLibrary.simpleMessage("Далее"),
+        "no": MessageLookupByLibrary.simpleMessage("Нет."),
         "notConnectedToInternet": MessageLookupByLibrary.simpleMessage(
             "У вас нету подключения к интернету!"),
         "notPartOfParty": MessageLookupByLibrary.simpleMessage(
@@ -116,6 +117,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Этого пользователь был удален из системы. Создайте нового."),
         "voidValue": MessageLookupByLibrary.simpleMessage("Пустое поле"),
         "wrongPassword":
-            MessageLookupByLibrary.simpleMessage("Неверный пароль!")
+            MessageLookupByLibrary.simpleMessage("Неверный пароль!"),
+        "yes": MessageLookupByLibrary.simpleMessage("Да."),
+        "youSureToDelete": MessageLookupByLibrary.simpleMessage(
+            "Вы уверены, что хотите удалить данный элемент? Все дочерние элементы будут тоже удалены.")
       };
 }

@@ -669,6 +669,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Yes.`
+  String get yes {
+    return Intl.message(
+      'Yes.',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No.`
+  String get no {
+    return Intl.message(
+      'No.',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete that element? All their children would be deleted also.`
+  String get youSureToDelete {
+    return Intl.message(
+      'Are you sure you want to delete that element? All their children would be deleted also.',
+      name: 'youSureToDelete',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

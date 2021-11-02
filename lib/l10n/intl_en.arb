@@ -60,5 +60,8 @@
     "notificationsInitializationFailure": "For what reason you creating notifications and not let me show them to you??",
     "edit": "Edit",
     "delete": "Delete",
-    "rename": "Rename"
+    "rename": "Rename",
+    "yes": "Yes.",
+    "no": "No.",
+    "youSureToDelete": "Are you sure you want to delete that element? All their children would be deleted also."
 }

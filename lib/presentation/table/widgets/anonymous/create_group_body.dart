@@ -27,6 +27,9 @@ class CreateGroupBody extends StatelessWidget {
           onChange: (value) => cubit.mutate(groupName: value),
           hintText: intl.groupName,
           prefixIcon: Icons.grid_view_outlined,
+          controller: TextEditingController(
+            text: cubit.state.groupName,
+          ),
         ),
         const Gap(
           size: 20,

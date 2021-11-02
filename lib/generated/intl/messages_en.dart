@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "letHim": MessageLookupByLibrary.simpleMessage("Let him in, boys."),
         "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "no": MessageLookupByLibrary.simpleMessage("No."),
         "notConnectedToInternet": MessageLookupByLibrary.simpleMessage(
             "You have no connection to internet!"),
         "notPartOfParty": MessageLookupByLibrary.simpleMessage(
@@ -112,6 +113,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "This user was removed from system. Create new one."),
         "voidValue": MessageLookupByLibrary.simpleMessage("Field is empty"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
-            "Not correct password for this account!")
+            "Not correct password for this account!"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes."),
+        "youSureToDelete": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete that element? All their children would be deleted also.")
       };
 }
