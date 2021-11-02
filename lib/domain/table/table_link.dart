@@ -8,6 +8,16 @@ class TableLink {
 
   bool get isEmpty => path.isEmpty;
 
+  List<TableCell> getParticles(Table table) {
+    if (path.isEmpty) return table.cells;
+
+    final group = getParticle(table);
+
+    if (group is GroupTableCell) return group.children;
+
+    return [];
+  }
+
   TableCell getParticle(Table table) {
     TableCell cell = table.cells[path[0]];
 

@@ -6,4 +6,6 @@ abstract class NotificationRepositry {
   Future<Either<Failure, void>> setup();
 
   Future<void> setNotification(Notification notification);
+
+  Future<void> deleteNotifications(List<int> ids);
 }

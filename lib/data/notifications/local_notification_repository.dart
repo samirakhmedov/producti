@@ -98,4 +98,13 @@ class LocalNotificationRepository extends NotificationRepositry {
       androidAllowWhileIdle: true,
     );
   }
+
+  @override
+  Future<void> deleteNotifications(List<int> ids) => Future.wait(
+        ids
+            .map(
+              (e) => _flutterLocalNotificationsPlugin.cancel(e),
+            )
+            .toList(),
+      );
 }

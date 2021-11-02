@@ -32,10 +32,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "create": MessageLookupByLibrary.simpleMessage("Create"),
         "createAccount":
             MessageLookupByLibrary.simpleMessage("Create account."),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "disconnected": MessageLookupByLibrary.simpleMessage(
             "Oops! Looks like you are out of interntet..."),
         "doNotLoggedIn":
             MessageLookupByLibrary.simpleMessage("You are not logged in!"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "effective": MessageLookupByLibrary.simpleMessage("Effective"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
@@ -82,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passswordsNotMatch":
             MessageLookupByLibrary.simpleMessage("Passwords are not equal!"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "rename": MessageLookupByLibrary.simpleMessage("Rename"),
         "repeatPassword":
             MessageLookupByLibrary.simpleMessage("Repeat password"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),

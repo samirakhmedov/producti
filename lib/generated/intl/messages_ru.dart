@@ -32,10 +32,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "create": MessageLookupByLibrary.simpleMessage("Создать"),
         "createAccount":
             MessageLookupByLibrary.simpleMessage("Создать аккаунт."),
+        "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "disconnected": MessageLookupByLibrary.simpleMessage(
             "Приём, приём...никого не слышно."),
         "doNotLoggedIn":
             MessageLookupByLibrary.simpleMessage("Вы не создали аккаунта!"),
+        "edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
         "effective": MessageLookupByLibrary.simpleMessage("Эффективно"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
@@ -86,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passswordsNotMatch":
             MessageLookupByLibrary.simpleMessage("Пароли не совпадают!"),
         "password": MessageLookupByLibrary.simpleMessage("Пароль"),
+        "rename": MessageLookupByLibrary.simpleMessage("Переименовать"),
         "repeatPassword": MessageLookupByLibrary.simpleMessage("Пароль снова"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "signIn": MessageLookupByLibrary.simpleMessage("Вход"),

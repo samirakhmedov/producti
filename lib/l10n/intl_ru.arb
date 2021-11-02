@@ -57,5 +57,8 @@
     "typeLink": "Ссылочки...",
     "anotherOne": "Еще...",
     "addLink": "Добавить ссылку",
-    "notificationsInitializationFailure": "Зачем ты создаешь напоминания и потом не даешь мне...напоминать??"
+    "notificationsInitializationFailure": "Зачем ты создаешь напоминания и потом не даешь мне...напоминать??",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "rename": "Переименовать"
 }

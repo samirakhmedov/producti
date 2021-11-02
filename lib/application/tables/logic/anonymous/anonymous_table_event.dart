@@ -20,13 +20,13 @@ class AnonymousTableCreate extends AnonymousTableEvent {
 
 class AnonymousTableCellCreate extends AnonymousTableEvent {
   final t.TableCell cell;
-  final TableLink? path;
+  final TableLink path;
   final int tableIndex;
 
   const AnonymousTableCellCreate(this.cell, this.path, this.tableIndex);
 
   @override
-  List<Object> get props => [cell, path ?? 0, tableIndex];
+  List<Object> get props => [cell, path, tableIndex];
 }
 
 class AnonymousTableSave extends AnonymousTableEvent {}
@@ -35,17 +35,17 @@ class AnonymousTableReorderCells extends AnonymousTableEvent {
   final int oldIndex;
   final int newIndex;
   final int tableIndex;
-  final TableLink? path;
+  final TableLink path;
 
   const AnonymousTableReorderCells(
     this.oldIndex,
     this.newIndex,
-    this.tableIndex, {
+    this.tableIndex,
     this.path,
-  });
+  );
 
   @override
-  List<Object> get props => [oldIndex, newIndex, path ?? 0, tableIndex];
+  List<Object> get props => [oldIndex, newIndex, path, tableIndex];
 }
 
 class AnonymousTableRenameTable extends AnonymousTableEvent {
@@ -90,4 +90,14 @@ class AnonymousTableChangeCell extends AnonymousTableEvent {
         newCell,
         tableIndex,
       ];
+}
+
+class AnonymousTableDeleteCell extends AnonymousTableEvent {
+  final int tableIndex;
+  final TableLink pathToCell;
+
+  const AnonymousTableDeleteCell(
+    this.tableIndex,
+    this.pathToCell,
+  );
 }

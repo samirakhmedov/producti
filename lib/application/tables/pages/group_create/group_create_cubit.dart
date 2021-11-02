@@ -6,9 +6,12 @@ import 'package:producti/domain/table/cells/table_cell.dart';
 part 'group_create_state.dart';
 
 class GroupCreateCubit extends Cubit<GroupCreateState> {
-  GroupCreateCubit(List<GroupTableCell> cells)
-      : super(
+  GroupCreateCubit(
+    List<GroupTableCell> cells, {
+    String? initialName,
+  }) : super(
           GroupCreateState(
+            groupName: initialName ?? '',
             cells: cells,
           ),
         );

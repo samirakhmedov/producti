@@ -46,8 +46,8 @@ class Table extends t.TableCell {
     );
   }
 
-  void addCell(t.TableCell cell, {TableLink? path}) {
-    if (path != null) {
+  void addCell(t.TableCell cell, TableLink path) {
+    if (!path.isEmpty) {
       final group = path.getParticle(this) as t.GroupTableCell;
 
       group.children = [...group.children, cell];
@@ -58,10 +58,10 @@ class Table extends t.TableCell {
     cells = [...cells, cell];
   }
 
-  void reorderCells(int oldIndex, int newIndex, {TableLink? path}) {
+  void reorderCells(int oldIndex, int newIndex, TableLink path) {
     late int newIndexValue;
 
-    if (path != null) {
+    if (!path.isEmpty) {
       final group = path.getParticle(this) as t.GroupTableCell;
 
       newIndexValue = newIndex == group.children.length

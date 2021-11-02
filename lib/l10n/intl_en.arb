@@ -57,5 +57,8 @@
     "typeLink": "Type link here...",
     "anotherOne": "Another one...",
     "addLink": "Add link",
-    "notificationsInitializationFailure": "For what reason you creating notifications and not let me show them to you??"
+    "notificationsInitializationFailure": "For what reason you creating notifications and not let me show them to you??",
+    "edit": "Edit",
+    "delete": "Delete",
+    "rename": "Rename"
 }

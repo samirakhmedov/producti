@@ -10,13 +10,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/presentation/core/errors/error_code_ext.dart';
 
 class PathNameWidget extends StatefulWidget {
-  final TableLink? path;
+  final TableLink path;
   final t.Table table;
   final int tableIndex;
 
   const PathNameWidget({
     Key? key,
-    this.path,
+    required this.path,
     required this.table,
     required this.tableIndex,
   }) : super(key: key);
@@ -36,8 +36,8 @@ class _PathNameWidgetState extends State<PathNameWidget> {
 
     final textTheme = ThemeHelper.getTextTheme(context);
 
-    if (widget.path != null && !widget.path!.isEmpty) {
-      subTitle = widget.path!.getParticle(widget.table).title;
+    if (!widget.path.isEmpty) {
+      subTitle = widget.path.getParticle(widget.table).title;
     }
 
     if (_editTableName) {
@@ -85,14 +85,14 @@ class _PathNameWidgetState extends State<PathNameWidget> {
             ),
           ),
         ),
-        if (widget.path != null) ...[
+        if (!widget.path.isEmpty) ...[
           Text(
             " > ",
             style: textTheme.headline3!.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
-          if (widget.path!.path.length >= 2)
+          if (widget.path.path.length >= 2)
             Text(
               "... > ",
               style: textTheme.headline3!.copyWith(
@@ -124,7 +124,7 @@ class _PathNameWidgetState extends State<PathNameWidget> {
 
 class _GroupNameEdit extends StatelessWidget {
   final t.Table table;
-  final TableLink? path;
+  final TableLink path;
   final int tableIndex;
 
   final void Function()? onComplete;
@@ -132,7 +132,7 @@ class _GroupNameEdit extends StatelessWidget {
   const _GroupNameEdit({
     Key? key,
     required this.table,
-    this.path,
+    required this.path,
     this.onComplete,
     required this.tableIndex,
   }) : super(key: key);
@@ -150,11 +150,12 @@ class _GroupNameEdit extends StatelessWidget {
           final tableBloc = context.read<AnonymousTableBloc>();
 
           final cubit = GroupCreateCubit(
-            (path?.getParticle(table) as GroupTableCell?)
-                    ?.children
-                    .whereType<GroupTableCell>()
-                    .toList() ??
-                table.cells.whereType<GroupTableCell>().toList(),
+            path
+                .getParticles(
+                  table,
+                )
+                .whereType<GroupTableCell>()
+                .toList(),
           );
 
           final focus = FocusNode();
@@ -185,7 +186,7 @@ class _GroupNameEdit extends StatelessWidget {
 
                     tableBloc.add(
                       AnonymousTableRenameCell(
-                        path!,
+                        path,
                         cubit.state.groupName,
                         tableIndex,
                       ),
@@ -195,7 +196,7 @@ class _GroupNameEdit extends StatelessWidget {
 
                     onComplete?.call();
                   },
-                  initialValue: path!.getParticle(table).title,
+                  initialValue: path.getParticle(table).title,
                   textStyle: textTheme.headline3!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -205,7 +206,7 @@ class _GroupNameEdit extends StatelessWidget {
                           cubit.state.groupName.isNotEmpty) {
                         tableBloc.add(
                           AnonymousTableRenameCell(
-                            path!,
+                            path,
                             cubit.state.groupName,
                             tableIndex,
                           ),

@@ -48,7 +48,7 @@ class AnonymousTableBloc
 
       currentTable.addCell(
         event.cell,
-        path: event.path,
+        event.path,
       );
 
       yield loadedState.copyWith(
@@ -64,7 +64,7 @@ class AnonymousTableBloc
       currentTable.reorderCells(
         event.oldIndex,
         event.newIndex,
-        path: event.path,
+        event.path,
       );
 
       yield loadedState.copyWith(
@@ -116,6 +116,22 @@ class AnonymousTableBloc
       final cell = event.path.getParticle(currentTable);
 
       cell.title = event.name;
+
+      yield loadedState.copyWith(
+        tables: loadedState.tables,
+      );
+    }
+
+    if (event is AnonymousTableDeleteCell) {
+      final loadedState = state as AnonymousTableLoaded;
+
+      final currentTable = loadedState.tables[event.tableIndex];
+
+      final parentGroupLink = event.pathToCell.popPath();
+
+      final cells = parentGroupLink.getParticles(currentTable);
+
+      cells.removeAt(event.pathToCell.path.last);
 
       yield loadedState.copyWith(
         tables: loadedState.tables,

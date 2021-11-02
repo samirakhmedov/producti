@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
 import 'package:producti/application/tables/pages/group_create/group_create_cubit.dart';
-import 'package:producti/domain/table/cells/table_cell.dart';
 import 'package:producti/domain/table/table_link.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/generated/l10n.dart';
@@ -9,31 +7,18 @@ import 'package:producti_ui/producti_ui.dart';
 import 'package:producti/presentation/core/errors/error_code_ext.dart';
 
 class CreateGroupBody extends StatelessWidget {
-  final TableLink? path;
+  final TableLink path;
   final int tableIndex;
 
-  const CreateGroupBody({Key? key, this.path, required this.tableIndex})
-      : super(key: key);
+  const CreateGroupBody({
+    Key? key,
+    required this.path,
+    required this.tableIndex,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<GroupTableCell>? cells;
-
-    final tableBloc = context.read<AnonymousTableBloc>();
-
-    final tableState = tableBloc.state as AnonymousTableLoaded;
-
-    final table = tableState.tables[tableIndex];
-
-    if (path != null && !path!.isEmpty) {
-      final groupCell = path!.getParticle(table) as GroupTableCell;
-
-      cells = groupCell.children.whereType<GroupTableCell>().toList();
-    }
-
-    cells ??= table.cells.whereType<GroupTableCell>().toList();
-
-    final cubit = GroupCreateCubit(cells);
+    final cubit = context.read<GroupCreateCubit>();
     final intl = S.of(context);
 
     return Column(
@@ -77,13 +62,7 @@ class CreateGroupBody extends StatelessWidget {
 
             cubit.close();
 
-            tableBloc.add(
-              AnonymousTableCellCreate(
-                GroupTableCell(title: createState.groupName),
-                path,
-                tableIndex,
-              ),
-            );
+            Navigator.of(context).pop<String>();
           },
           text: intl.create,
         ),

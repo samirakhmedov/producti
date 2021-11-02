@@ -28,7 +28,7 @@ class TablesPage extends StatelessWidget {
                   return AnonymousTablesPage(
                     table: state.tables[tableIndex],
                     tableIndex: tableIndex,
-                    path: path,
+                    path: path ?? const TableLink([]),
                   );
                 }
 
