@@ -11,6 +11,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/core/cubit/connection_cubit.dart';
 import 'package:producti/application/launch/logic/launch_bloc.dart';
+import 'package:producti/application/notifications/notifications_bloc.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
 import 'package:producti/application/tables/logic/user/table_bloc.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
@@ -120,6 +121,12 @@ Future<void> main() async {
                 ),
                 BlocProvider<ConnectionCubit>(
                   create: (context) => sl.get<ConnectionCubit>(),
+                ),
+                BlocProvider<LocalNotificationsBloc>(
+                  create: (context) => sl.get<LocalNotificationsBloc>()
+                    ..add(
+                      LocalNotificationsInitialise(),
+                    ),
                 ),
               ],
               child: const AppWidget(),

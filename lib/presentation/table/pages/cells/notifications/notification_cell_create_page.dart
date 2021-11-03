@@ -241,7 +241,10 @@ class NotificationCellCreatePage extends StatelessWidget {
                     builder: (context, state) {
                       if (state.showErrors &&
                           state.error != null &&
-                          state.error != ErrorCode.voidLinkValue) {
+                          ![
+                            ErrorCode.voidLinkValue,
+                            ErrorCode.notificationInPast
+                          ].contains(state.error)) {
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,

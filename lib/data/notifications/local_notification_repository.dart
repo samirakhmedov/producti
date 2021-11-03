@@ -10,7 +10,7 @@ import 'package:producti/domain/notifications/notification_repository.dart';
 import 'package:timezone/timezone.dart';
 
 @lazySingleton
-class LocalNotificationRepository extends NotificationRepositry {
+class LocalNotificationRepository extends NotificationRepository {
   static const AndroidInitializationSettings _initializationSettingsAndroid =
       AndroidInitializationSettings('@drawable/ic_notification_icon');
   static const IOSInitializationSettings _initializationSettingsIOS =
@@ -40,10 +40,13 @@ class LocalNotificationRepository extends NotificationRepositry {
   );
 
   @override
-  Future<Either<Failure, void>> setup() async {
+  Future<Either<Failure, void>> setup(
+    void Function(String?) onSelectNotification,
+  ) async {
     final initializationResult =
         await _flutterLocalNotificationsPlugin.initialize(
       _initializationSettings,
+      onSelectNotification: onSelectNotification,
     );
 
     if (!initializationResult!) {
@@ -55,7 +58,7 @@ class LocalNotificationRepository extends NotificationRepositry {
           badge: true,
         );
 
-        if (permissionRequestResult!) return setup();
+        if (permissionRequestResult!) return setup(onSelectNotification);
       }
 
       return left(
@@ -69,33 +72,29 @@ class LocalNotificationRepository extends NotificationRepositry {
   }
 
   @override
-  Future<void> setNotification(Notification notification) async {
+  Future<void> setNotification(
+    Notification notification, {
+    required int tableIndex,
+  }) async {
     final time = notification.time;
-
-    final timeZoneName = time.timeZoneName;
 
     return _flutterLocalNotificationsPlugin.zonedSchedule(
       notification.id,
       notification.title,
       notification.body,
-      TZDateTime(
-        Location(
-          timeZoneName,
-          [],
-          [],
-          [],
-        ),
+      TZDateTime.utc(
         time.year,
         time.month,
         time.day,
-        time.day,
         time.hour,
         time.minute,
+        time.second + 1,
       ),
       _notificationsDetails,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.wallClockTime,
       androidAllowWhileIdle: true,
+      payload: notification.pathToNotification.toRawString(tableIndex),
     );
   }
 
@@ -107,4 +106,8 @@ class LocalNotificationRepository extends NotificationRepositry {
             )
             .toList(),
       );
+
+  @override
+  Future<NotificationAppLaunchDetails?> getAppLaunchDetails() =>
+      _flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
 }

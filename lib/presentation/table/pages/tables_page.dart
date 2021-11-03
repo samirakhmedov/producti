@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/application/auth/logic/auth_bloc.dart';
+import 'package:producti/application/notifications/notifications_bloc.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
 import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/presentation/table/pages/anonymous/anonymous_tables_page.dart';

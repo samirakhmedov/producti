@@ -17,9 +17,10 @@ import 'package:hive/hive.dart' as _i3;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'application/auth/logic/auth_bloc.dart' as _i21;
-import 'application/core/app_module.dart' as _i24;
+import 'application/core/app_module.dart' as _i25;
 import 'application/core/cubit/connection_cubit.dart' as _i18;
 import 'application/launch/logic/launch_bloc.dart' as _i5;
+import 'application/notifications/notifications_bloc.dart' as _i24;
 import 'application/tables/logic/anonymous/anonymous_table_bloc.dart' as _i13;
 import 'application/tables/logic/user/table_bloc.dart' as _i20;
 import 'data/auth/auth_repository_impl.dart' as _i15;
@@ -72,7 +73,9 @@ Future<_i1.GetIt> initDependecies(_i1.GetIt get,
   gh.singleton<_i16.FlutterSecureStorage>(appModule.secureStorage);
   gh.singleton<_i7.IOSFlutterLocalNotificationsPlugin>(
       appModule.localNotificationsIOS);
+  gh.singleton<_i24.LocalNotificationsBloc>(
+      _i24.LocalNotificationsBloc(get<_i6.LocalNotificationRepository>()));
   return get;
 }
 
-class _$AppModule extends _i24.AppModule {}
+class _$AppModule extends _i25.AppModule {}

@@ -1,12 +1,16 @@
+import 'package:dartz/dartz.dart';
+import 'package:equatable/equatable.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
 import 'package:producti/domain/table/table.dart';
 
-class TableLink {
+class TableLink extends Equatable {
   final List<int> path;
 
   const TableLink(this.path);
 
   bool get isEmpty => path.isEmpty;
+
+  int get first => path.first;
 
   List<TableCell> getParticles(Table table) {
     if (path.isEmpty) return table.cells;
@@ -40,6 +44,47 @@ class TableLink {
     return cell;
   }
 
+  int getId(int tableIndex) {
+    String strPath = path
+        .map(
+          (e) => e.toString(),
+        )
+        .join();
+
+    strPath = (tableIndex + 1).toString() + strPath;
+
+    return int.parse(strPath);
+  }
+
+  String toRawString(int tableIndex) {
+    String strPath = path
+        .map(
+          (e) => e.toString(),
+        )
+        .join('-');
+
+    return '$tableIndex-$strPath';
+  }
+
+  static Tuple2<int, TableLink> parsefromId(String id) {
+    final markIndex = id.indexOf('-');
+
+    final tableIndex = int.parse(
+      id.substring(0, markIndex),
+    );
+
+    final pathStr = id.substring(markIndex + 1);
+
+    final path = pathStr
+        .split('-')
+        .map(
+          (e) => int.parse(e),
+        )
+        .toList();
+
+    return Tuple2(tableIndex, TableLink(path));
+  }
+
   TableLink addPath(int index) => TableLink(
         List<int>.of(path)..add(index),
       );
@@ -47,4 +92,7 @@ class TableLink {
   TableLink popPath() => TableLink(
         List<int>.of(path)..removeLast(),
       );
+
+  @override
+  List<Object?> get props => path;
 }

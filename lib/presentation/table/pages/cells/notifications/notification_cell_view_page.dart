@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:producti/application/notifications/notifications_bloc.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
-import 'package:producti/application/tables/pages/note_validation/note_validation_cubit.dart';
 import 'package:producti/application/tables/pages/notification_validation/notification_validation_cubit.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
 import 'package:producti/domain/table/table_link.dart';
@@ -11,6 +11,7 @@ import 'package:producti/presentation/table/pages/cells/notifications/notificati
 import 'package:producti/presentation/table/widgets/table_cell_tile.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:producti/domain/notifications/notification.dart' as t;
 
 class NotificationCellViewPage extends StatefulWidget {
   final NotificationTableCell cell;
@@ -71,14 +72,49 @@ class _NotificationCellViewPageState extends State<NotificationCellViewPage> {
               );
 
               if (result != null) {
-                context.read<AnonymousTableBloc>().add(
-                      AnonymousTableChangeCell(
-                        tableIndex: widget.tableIndex,
-                        pathToNote: widget.pathToNote,
-                        newCell: result,
-                      ),
-                    );
+                final bloc = context.read<AnonymousTableBloc>();
 
+                bloc.add(
+                  AnonymousTableChangeCell(
+                    tableIndex: widget.tableIndex,
+                    pathToNote: widget.pathToNote,
+                    newCell: result,
+                  ),
+                );
+
+                if (!result.time.isAtSameMomentAs(_cell.time)) {
+                  final notificationsBloc =
+                      context.read<LocalNotificationsBloc>();
+
+                  final state = bloc.state as AnonymousTableLoaded;
+
+                  final currentTable = state.tables[widget.tableIndex];
+
+                  notificationsBloc.add(
+                    LocalNotificationsCellDelete(
+                      currentTable,
+                      widget.pathToNote,
+                      widget.tableIndex,
+                    ),
+                  );
+
+                  notificationsBloc.add(
+                    LocalNotificationsAddNotification(
+                      t.Notification(
+                        body: result.description.isEmpty
+                            ? intl.voidValue
+                            : result.description,
+                        title: result.title.isEmpty
+                            ? intl.voidValue
+                            : result.title,
+                        id: widget.pathToNote.getId(widget.tableIndex),
+                        pathToNotification: widget.pathToNote,
+                        time: result.time,
+                      ),
+                      widget.tableIndex,
+                    ),
+                  );
+                }
                 setState(() {
                   _cell = result;
                 });

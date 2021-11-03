@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:producti/application/auth/logic/auth_bloc.dart';
+import 'package:producti/application/notifications/notifications_bloc.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
 import 'package:producti/application/tables/pages/group_create/group_create_cubit.dart';
 import 'package:producti/application/tables/pages/note_validation/note_validation_cubit.dart';
@@ -23,6 +24,7 @@ import 'package:producti/presentation/table/widgets/create_popup_tile.dart';
 import 'package:producti/presentation/table/widgets/path_name_widget.dart';
 import 'package:producti/presentation/table/widgets/table_cell_tile.dart';
 import 'package:producti_ui/producti_ui.dart';
+import 'package:producti/domain/notifications/notification.dart' as t;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnonymousTablesPage extends StatelessWidget {
@@ -66,190 +68,244 @@ class AnonymousTablesPage extends StatelessWidget {
 
         return true;
       },
-      child: Scaffold(
-        key: _scaffoldKey,
-        endDrawer: _TablesDrawer(
-          tableIndex: tableIndex,
-        ),
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(50.0),
-          child: AppBar(
-            actions: [
-              IconButton(
-                onPressed: () {
-                  _scaffoldKey.currentState!.openEndDrawer();
-                },
-                icon: const Icon(Icons.menu),
-              ),
-            ],
-            title: PathNameWidget(
-              table: table,
-              tableIndex: tableIndex,
-              path: path,
-            ),
-          ),
-        ),
-        body: SafeArea(
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              _TablesBody(
-                path: path,
-                table: table,
-                tableIndex: tableIndex,
-              ),
-              Positioned(
-                left: 15,
-                bottom: 15,
-                child: FloatingActionButton(
-                  onPressed: () {
-                    final navigator = Navigator.of(context);
+      child: BlocListener<LocalNotificationsBloc, LocalNotificationsState>(
+        listener: (context, state) {
+          if (state.pathToNotification != null && state.tableIndex != null) {
+            final cell = state.pathToNotification!.getParticle(table)
+                as c.NotificationTableCell;
 
-                    _scaffoldKey.currentState!.showBottomSheet(
-                      (context) => AppBottomSheet(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 28,
-                          ).copyWith(top: 46),
-                          child: Column(
-                            children: [
-                              CreatePopupTile(
-                                icon: Icons.menu,
-                                title: intl.group,
-                                onTap: () async {
-                                  navigator.pop();
+            final navigator = Navigator.of(context);
 
-                                  final tableBloc =
-                                      context.read<AnonymousTableBloc>();
-
-                                  final tableState =
-                                      tableBloc.state as AnonymousTableLoaded;
-
-                                  final table = tableState.tables[tableIndex];
-
-                                  final cells = path
-                                      .getParticles(table)
-                                      .whereType<c.GroupTableCell>()
-                                      .toList();
-
-                                  final cubit = GroupCreateCubit(cells);
-
-                                  final controller = showBottomSheet(
-                                    context: context,
-                                    builder: (context) {
-                                      return BlocProvider<
-                                          GroupCreateCubit>.value(
-                                        value: cubit,
-                                        child: AppBottomSheet(
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 40,
-                                              vertical: 42,
-                                            ),
-                                            child: CreateGroupBody(
-                                              tableIndex: tableIndex,
-                                              path: path,
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  );
-
-                                  await controller.closed;
-
-                                  if (cubit.state.error == null) {
-                                    tableBloc.add(
-                                      AnonymousTableCellCreate(
-                                        GroupTableCell(
-                                          title: cubit.state.groupName,
-                                        ),
-                                        path,
-                                        tableIndex,
-                                      ),
-                                    );
-                                  }
-
-                                  cubit.close();
-                                },
-                              ),
-                              const Gap(size: 12),
-                              CreatePopupTile(
-                                icon: Icons.edit,
-                                title: intl.note,
-                                onTap: () async {
-                                  navigator.pop();
-
-                                  final noteValidationCubit =
-                                      NoteValidationCubit(null);
-
-                                  final result =
-                                      await navigator.push<c.NoteTableCell>(
-                                    MaterialPageRoute(
-                                      builder: (context) => BlocProvider.value(
-                                        value: noteValidationCubit,
-                                        child: const NoteCellCreatePage(),
-                                      ),
-                                    ),
-                                  );
-
-                                  if (result != null) {
-                                    bloc.add(
-                                      AnonymousTableCellCreate(
-                                        result,
-                                        path,
-                                        tableIndex,
-                                      ),
-                                    );
-                                  }
-                                },
-                              ),
-                              const Gap(size: 12),
-                              CreatePopupTile(
-                                icon: Icons.access_time,
-                                title: intl.notification,
-                                onTap: () async {
-                                  navigator.pop();
-
-                                  final notificationValidationCubit =
-                                      NotificationValidationCubit(null);
-
-                                  final result = await navigator
-                                      .push<c.NotificationTableCell>(
-                                    MaterialPageRoute(
-                                      builder: (context) => BlocProvider.value(
-                                        value: notificationValidationCubit,
-                                        child:
-                                            const NotificationCellCreatePage(),
-                                      ),
-                                    ),
-                                  );
-
-                                  if (result != null) {
-                                    bloc.add(
-                                      AnonymousTableCellCreate(
-                                        result,
-                                        path,
-                                        tableIndex,
-                                      ),
-                                    );
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  backgroundColor: theme.primaryColor,
-                  child: Icon(
-                    Icons.add,
-                    color: theme.backgroundColor,
-                  ),
+            navigator.pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => TablesPage(
+                  tableIndex: state.tableIndex!,
+                  path: state.pathToNotification!.popPath(),
                 ),
               ),
-            ],
+            );
+
+            navigator.push(
+              MaterialPageRoute(
+                builder: (context) => NotificationCellViewPage(
+                  cell: cell,
+                  pathToNote: state.pathToNotification!,
+                  tableIndex: state.tableIndex!,
+                ),
+              ),
+            );
+          }
+        },
+        child: Scaffold(
+          key: _scaffoldKey,
+          endDrawer: _TablesDrawer(
+            tableIndex: tableIndex,
+          ),
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(50.0),
+            child: AppBar(
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    _scaffoldKey.currentState!.openEndDrawer();
+                  },
+                  icon: const Icon(Icons.menu),
+                ),
+              ],
+              title: PathNameWidget(
+                table: table,
+                tableIndex: tableIndex,
+                path: path,
+              ),
+            ),
+          ),
+          body: SafeArea(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                _TablesBody(
+                  path: path,
+                  table: table,
+                  tableIndex: tableIndex,
+                ),
+                Positioned(
+                  left: 15,
+                  bottom: 15,
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      final navigator = Navigator.of(context);
+
+                      _scaffoldKey.currentState!.showBottomSheet(
+                        (_context) => AppBottomSheet(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 28,
+                            ).copyWith(top: 46),
+                            child: Column(
+                              children: [
+                                CreatePopupTile(
+                                  icon: Icons.menu,
+                                  title: intl.group,
+                                  onTap: () async {
+                                    navigator.pop();
+
+                                    final tableBloc =
+                                        context.read<AnonymousTableBloc>();
+
+                                    final tableState =
+                                        tableBloc.state as AnonymousTableLoaded;
+
+                                    final table = tableState.tables[tableIndex];
+
+                                    final cells = path
+                                        .getParticles(table)
+                                        .whereType<c.GroupTableCell>()
+                                        .toList();
+
+                                    final cubit = GroupCreateCubit(cells);
+
+                                    final controller = showBottomSheet(
+                                      context: context,
+                                      builder: (context) {
+                                        return BlocProvider<
+                                            GroupCreateCubit>.value(
+                                          value: cubit,
+                                          child: AppBottomSheet(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 40,
+                                                vertical: 42,
+                                              ),
+                                              child: CreateGroupBody(
+                                                tableIndex: tableIndex,
+                                                path: path,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    );
+
+                                    await controller.closed;
+
+                                    if (cubit.state.error == null) {
+                                      tableBloc.add(
+                                        AnonymousTableCellCreate(
+                                          GroupTableCell(
+                                            title: cubit.state.groupName,
+                                          ),
+                                          path,
+                                          tableIndex,
+                                        ),
+                                      );
+                                    }
+
+                                    cubit.close();
+                                  },
+                                ),
+                                const Gap(size: 12),
+                                CreatePopupTile(
+                                  icon: Icons.edit,
+                                  title: intl.note,
+                                  onTap: () async {
+                                    navigator.pop();
+
+                                    final noteValidationCubit =
+                                        NoteValidationCubit(null);
+
+                                    final result =
+                                        await navigator.push<c.NoteTableCell>(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: noteValidationCubit,
+                                          child: const NoteCellCreatePage(),
+                                        ),
+                                      ),
+                                    );
+
+                                    if (result != null) {
+                                      bloc.add(
+                                        AnonymousTableCellCreate(
+                                          result,
+                                          path,
+                                          tableIndex,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                                const Gap(size: 12),
+                                CreatePopupTile(
+                                  icon: Icons.access_time,
+                                  title: intl.notification,
+                                  onTap: () async {
+                                    navigator.pop();
+
+                                    final notificationValidationCubit =
+                                        NotificationValidationCubit(null);
+
+                                    final result = await navigator
+                                        .push<c.NotificationTableCell>(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            BlocProvider.value(
+                                          value: notificationValidationCubit,
+                                          child:
+                                              const NotificationCellCreatePage(),
+                                        ),
+                                      ),
+                                    );
+
+                                    if (result != null) {
+                                      bloc.add(
+                                        AnonymousTableCellCreate(
+                                          result,
+                                          path,
+                                          tableIndex,
+                                        ),
+                                      );
+
+                                      final cellPath = path.addPath(
+                                          path.getParticles(table).length);
+
+                                      context
+                                          .read<LocalNotificationsBloc>()
+                                          .add(
+                                            LocalNotificationsAddNotification(
+                                              t.Notification(
+                                                time: result.time,
+                                                body: result.description.isEmpty
+                                                    ? intl.voidValue
+                                                    : result.description,
+                                                id: cellPath.getId(tableIndex),
+                                                title: result.title.isEmpty
+                                                    ? intl.voidValue
+                                                    : result.title,
+                                                pathToNotification: cellPath,
+                                              ),
+                                              tableIndex,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    backgroundColor: theme.primaryColor,
+                    child: Icon(
+                      Icons.add,
+                      color: theme.backgroundColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -420,6 +476,7 @@ class _TablesBody extends StatelessWidget {
                 cells: cells,
                 path: path,
                 tableIndex: tableIndex,
+                table: table,
               );
             },
           ),
@@ -432,6 +489,7 @@ class _TablesBody extends StatelessWidget {
 class _TableCellsList extends StatelessWidget {
   final List<c.TableCell> cells;
   final TableLink path;
+  final t.Table table;
   final int tableIndex;
 
   const _TableCellsList({
@@ -439,6 +497,7 @@ class _TableCellsList extends StatelessWidget {
     required this.cells,
     required this.path,
     required this.tableIndex,
+    required this.table,
   }) : super(key: key);
 
   @override
@@ -491,6 +550,17 @@ class _TableCellsList extends StatelessWidget {
                   AnonymousTableDeleteCell(
                     tableIndex,
                     path.addPath(index),
+                  ),
+                );
+
+                final notificationsBloc =
+                    context.read<LocalNotificationsBloc>();
+
+                notificationsBloc.add(
+                  LocalNotificationsCellDelete(
+                    table,
+                    path.addPath(index),
+                    tableIndex,
                   ),
                 );
               },
@@ -592,6 +662,37 @@ class _TableCellsList extends StatelessWidget {
                     );
 
                     newCell = result;
+
+                    if (result != null &&
+                        !result.time.isAtSameMomentAs(cell.time)) {
+                      final notificationsBloc =
+                          context.read<LocalNotificationsBloc>();
+
+                      notificationsBloc.add(
+                        LocalNotificationsCellDelete(
+                          table,
+                          path.addPath(index),
+                          tableIndex,
+                        ),
+                      );
+
+                      notificationsBloc.add(
+                        LocalNotificationsAddNotification(
+                          t.Notification(
+                            body: result.description.isEmpty
+                                ? intl.voidValue
+                                : result.description,
+                            id: path.addPath(index).getId(tableIndex),
+                            title: result.title.isEmpty
+                                ? intl.voidValue
+                                : result.title,
+                            pathToNotification: path.addPath(index),
+                            time: cell.time,
+                          ),
+                          tableIndex,
+                        ),
+                      );
+                    }
                   }
 
                   if (newCell != null) {
