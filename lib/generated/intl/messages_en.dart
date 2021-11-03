@@ -26,6 +26,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "alreadyCoolGuy":
             MessageLookupByLibrary.simpleMessage("Already in cool boys club?"),
         "anotherOne": MessageLookupByLibrary.simpleMessage("Another one..."),
+        "cannotDeleteSingle": MessageLookupByLibrary.simpleMessage(
+            "You cannot delete your single table left!"),
         "comfortable": MessageLookupByLibrary.simpleMessage("Comfortable"),
         "connected": MessageLookupByLibrary.simpleMessage(
             "You are connected to the internet!"),
@@ -78,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "You cannot remind something to yourself in past. :)"),
         "notificationsInitializationFailure": MessageLookupByLibrary.simpleMessage(
             "For what reason you creating notifications and not let me show them to you??"),
+        "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
             "Incredible every day tool with incredible performance."),
         "onboardingDesc2": MessageLookupByLibrary.simpleMessage(

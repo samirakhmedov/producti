@@ -164,9 +164,10 @@ class AnonymousTablesPage extends StatelessWidget {
 
                                     final cubit = GroupCreateCubit(cells);
 
-                                    final controller = showBottomSheet(
-                                      context: context,
-                                      builder: (context) {
+                                    final controller = _scaffoldKey
+                                        .currentState!
+                                        .showBottomSheet(
+                                      (context) {
                                         return BlocProvider<
                                             GroupCreateCubit>.value(
                                           value: cubit,
@@ -328,6 +329,8 @@ class _TablesDrawer extends StatelessWidget {
 
     final theme = ThemeHelper.getTheme(context);
 
+    final textTheme = theme.textTheme;
+
     return Drawer(
       elevation: 0.0,
       child: Container(
@@ -380,6 +383,73 @@ class _TablesDrawer extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
                       itemBuilder: (context, index) => InkWell(
+                        onLongPress: () async {
+                          if (state.tables.length == 1) {
+                            return await showDialog(
+                              context: context,
+                              builder: (context) => AppDialog(
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        intl.cannotDeleteSingle,
+                                        style: textTheme.bodyText1!.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        maxLines: null,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text(
+                                          intl.ok,
+                                          style: textTheme.bodyText1!.copyWith(
+                                            color: theme.primaryColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
+
+                          bool? agreement;
+
+                          await showDialog(
+                            context: context,
+                            builder: (context) => AppDialog(
+                              child: AppDialogQuestionBody(
+                                onSelect: (answer) => agreement = answer,
+                                options: [
+                                  intl.yes,
+                                  intl.no,
+                                ],
+                                title: intl.youSureToDelete,
+                              ),
+                            ),
+                          );
+
+                          if (agreement == null) return;
+                          if (!agreement!) return;
+
+                          if (tableIndex == index) {
+                            TableHelper.moveToTable(
+                              context,
+                              tableIndex + (tableIndex >= 1 ? -1 : 1),
+                            );
+                          }
+
+                          context.read<AnonymousTableBloc>().add(
+                                AnonymousTableDeleteTable(
+                                  tableIndex,
+                                ),
+                              );
+                        },
                         onTap: () {
                           Navigator.of(context).pop();
 

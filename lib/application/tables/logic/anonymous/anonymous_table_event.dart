@@ -100,4 +100,21 @@ class AnonymousTableDeleteCell extends AnonymousTableEvent {
     this.tableIndex,
     this.pathToCell,
   );
+
+  @override
+  List<Object> get props => [
+        pathToCell,
+        tableIndex,
+      ];
+}
+
+class AnonymousTableDeleteTable extends AnonymousTableEvent {
+  final int tableIndex;
+
+  const AnonymousTableDeleteTable(this.tableIndex);
+
+  @override
+  List<Object> get props => [
+        tableIndex,
+      ];
 }

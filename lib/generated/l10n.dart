@@ -719,6 +719,26 @@ class S {
       args: [],
     );
   }
+
+  /// `You cannot delete your single table left!`
+  String get cannotDeleteSingle {
+    return Intl.message(
+      'You cannot delete your single table left!',
+      name: 'cannotDeleteSingle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get ok {
+    return Intl.message(
+      'OK',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

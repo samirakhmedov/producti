@@ -139,6 +139,16 @@ class AnonymousTableBloc
       );
     }
 
+    if (event is AnonymousTableDeleteTable) {
+      final loadedState = state as AnonymousTableLoaded;
+
+      loadedState.tables.removeAt(event.tableIndex);
+
+      yield loadedState.copyWith(
+        tables: loadedState.tables,
+      );
+    }
+
     if (event is AnonymousTableSave) {
       final loadedState = state as AnonymousTableLoaded;
 
