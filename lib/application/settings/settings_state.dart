@@ -17,8 +17,10 @@ class SettingsState extends Equatable {
   List<Object> get props => [
         themeMode ?? 0,
         allowNotifications,
-        accentColor ?? 0,
-        language ?? 0,
+        accentColor?.alpha ?? 0,
+        accentColor?.green ?? 0,
+        accentColor?.blue ?? 0,
+        language?.languageCode ?? 0,
       ];
 
   factory SettingsState.fromJson(Map<String, dynamic> json) {

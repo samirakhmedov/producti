@@ -159,7 +159,9 @@ class NoteCellCreatePage extends StatelessWidget {
               const SliverToBoxAdapter(
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Icon(Icons.link),
+                  child: Icon(
+                    Icons.link,
+                  ),
                 ),
               ),
               BlocBuilder<NoteValidationCubit, NoteValidationState>(
@@ -249,7 +251,9 @@ class NoteCellCreatePage extends StatelessWidget {
                       },
                       child: Row(
                         children: [
-                          const Icon(Icons.add),
+                          const Icon(
+                            Icons.add,
+                          ),
                           const Gap(size: 7),
                           Text(
                             intl.addLink,

@@ -31,16 +31,7 @@ class _TextInputWidgetState extends State<TextInputWidget> {
 
     final textTheme = theme.textTheme;
 
-    final focus = FocusNode();
-
-    keyboardVisibility.onChange.listen((v) {
-      if (focus.hasFocus && !v) {
-        focus.unfocus();
-      }
-    });
-
     return TextField(
-      focusNode: focus,
       controller: widget.controller,
       onChanged: widget.onChange,
       cursorColor: theme.primaryColor,

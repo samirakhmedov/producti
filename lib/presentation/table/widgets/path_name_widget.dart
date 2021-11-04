@@ -69,8 +69,8 @@ class _PathNameWidgetState extends State<PathNameWidget> {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Expanded(
-          child: InkWell(
+        Flexible(
+          child: GestureDetector(
             onTap: () {
               setState(() {
                 _editTableName = true;
@@ -103,8 +103,8 @@ class _PathNameWidgetState extends State<PathNameWidget> {
             ),
         ],
         if (subTitle != null)
-          Expanded(
-            child: InkWell(
+          Flexible(
+            child: GestureDetector(
               onTap: () {
                 setState(() {
                   _editGroupName = true;
@@ -147,47 +147,65 @@ class _GroupNameEdit extends StatelessWidget {
 
     final textTheme = ThemeHelper.getTextTheme(context);
 
+    final tableBloc = context.read<AnonymousTableBloc>();
+
+    final cubit = GroupCreateCubit(
+      path
+          .getParticles(
+            table,
+          )
+          .whereType<GroupTableCell>()
+          .toList(),
+    );
+
+    final focus = FocusNode();
+
     return SizedBox(
       width: size.width * .86,
-      child: Builder(
-        builder: (context) {
-          final tableBloc = context.read<AnonymousTableBloc>();
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 26,
+            child: InlineTextField(
+              focusNode: focus,
+              autofocus: true,
+              onChange: (value) {
+                cubit.mutate(groupName: value);
 
-          final cubit = GroupCreateCubit(
-            path
-                .getParticles(
-                  table,
-                )
-                .whereType<GroupTableCell>()
-                .toList(),
-          );
+                cubit.mutate(showErrors: cubit.state.error != null);
+              },
+              onSubmit: (value) {
+                cubit.mutate(groupName: value);
 
-          final focus = FocusNode();
+                if (cubit.state.error != null) {
+                  cubit.mutate(showErrors: true);
 
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 26,
-                child: InlineTextField(
-                  focusNode: focus,
-                  autofocus: true,
-                  onChange: (value) {
-                    cubit.mutate(groupName: value);
+                  return focus.requestFocus();
+                }
 
-                    cubit.mutate(showErrors: cubit.state.error != null);
-                  },
-                  onSubmit: (value) {
-                    cubit.mutate(groupName: value);
+                tableBloc.add(
+                  AnonymousTableRenameCell(
+                    path,
+                    cubit.state.groupName,
+                    tableIndex,
+                  ),
+                );
 
-                    if (cubit.state.error != null) {
-                      cubit.mutate(showErrors: true);
+                cubit.close();
 
-                      return focus.requestFocus();
-                    }
-
+                onComplete?.call();
+              },
+              initialValue: path.getParticle(table).title,
+              textStyle: textTheme.headline3!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+              suffixWidget: InkWell(
+                onTap: () {
+                  if (cubit.state.error == null &&
+                      cubit.state.groupName.isNotEmpty) {
                     tableBloc.add(
                       AnonymousTableRenameCell(
                         path,
@@ -195,53 +213,31 @@ class _GroupNameEdit extends StatelessWidget {
                         tableIndex,
                       ),
                     );
-
-                    cubit.close();
-
-                    onComplete?.call();
-                  },
-                  initialValue: path.getParticle(table).title,
-                  textStyle: textTheme.headline3!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                  suffixWidget: InkWell(
-                    onTap: () {
-                      if (cubit.state.error == null &&
-                          cubit.state.groupName.isNotEmpty) {
-                        tableBloc.add(
-                          AnonymousTableRenameCell(
-                            path,
-                            cubit.state.groupName,
-                            tableIndex,
-                          ),
-                        );
-                      }
-
-                      cubit.close();
-
-                      onComplete?.call();
-                    },
-                    child: const Icon(
-                      Icons.check,
-                    ),
-                  ),
-                ),
-              ),
-              BlocBuilder<GroupCreateCubit, GroupCreateState>(
-                bloc: cubit,
-                builder: (context, state) {
-                  if (state.showErrors && state.error != null) {
-                    return FieldErrorIndicator(
-                      message: state.error!.translate(context),
-                    );
                   }
 
-                  return const SizedBox();
+                  cubit.close();
+
+                  onComplete?.call();
                 },
+                child: const Icon(
+                  Icons.check,
+                ),
               ),
-            ],
-          );
-        },
+            ),
+          ),
+          BlocBuilder<GroupCreateCubit, GroupCreateState>(
+            bloc: cubit,
+            builder: (context, state) {
+              if (state.showErrors && state.error != null) {
+                return FieldErrorIndicator(
+                  message: state.error!.translate(context),
+                );
+              }
+
+              return const SizedBox();
+            },
+          ),
+        ],
       ),
     );
   }
@@ -266,90 +262,86 @@ class _TableNameEdit extends StatelessWidget {
 
     final textTheme = ThemeHelper.getTextTheme(context);
 
+    final tableBloc = context.read<AnonymousTableBloc>();
+
+    final tableState = tableBloc.state as AnonymousTableLoaded;
+
+    final cubit = TableCreateCubit(tableState.tables);
+
+    final focus = FocusNode();
+
     return SizedBox(
       width: size.width * .86,
-      child: Builder(
-        builder: (context) {
-          final tableBloc = context.read<AnonymousTableBloc>();
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 26,
+            child: InlineTextField(
+              focusNode: focus,
+              autofocus: true,
+              onChange: (value) {
+                cubit.mutate(tableName: value);
 
-          final tableState = tableBloc.state as AnonymousTableLoaded;
+                cubit.mutate(showErrors: cubit.state.error != null);
+              },
+              onSubmit: (value) {
+                cubit.mutate(tableName: value);
 
-          final cubit = TableCreateCubit(tableState.tables);
+                if (cubit.state.error != null) {
+                  cubit.mutate(showErrors: true);
 
-          final focus = FocusNode();
+                  return focus.requestFocus();
+                }
 
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 26,
-                child: InlineTextField(
-                  focusNode: focus,
-                  autofocus: true,
-                  onChange: (value) {
-                    cubit.mutate(tableName: value);
+                tableBloc.add(
+                  AnonymousTableRenameTable(
+                    tableIndex,
+                    cubit.state.tableName,
+                  ),
+                );
 
-                    cubit.mutate(showErrors: cubit.state.error != null);
-                  },
-                  onSubmit: (value) {
-                    cubit.mutate(tableName: value);
-
-                    if (cubit.state.error != null) {
-                      cubit.mutate(showErrors: true);
-
-                      return focus.requestFocus();
-                    }
-
+                onComplete?.call();
+              },
+              initialValue: title,
+              textStyle: textTheme.headline3!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+              suffixWidget: GestureDetector(
+                onTap: () {
+                  if (cubit.state.error == null &&
+                      cubit.state.tableName.isNotEmpty) {
                     tableBloc.add(
                       AnonymousTableRenameTable(
                         tableIndex,
                         cubit.state.tableName,
                       ),
                     );
-
-                    onComplete?.call();
-                  },
-                  initialValue: title,
-                  textStyle: textTheme.headline3!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                  suffixWidget: InkWell(
-                    onTap: () {
-                      if (cubit.state.error == null &&
-                          cubit.state.tableName.isNotEmpty) {
-                        tableBloc.add(
-                          AnonymousTableRenameTable(
-                            tableIndex,
-                            cubit.state.tableName,
-                          ),
-                        );
-                      }
-
-                      onComplete?.call();
-                    },
-                    child: const Icon(
-                      Icons.check,
-                    ),
-                  ),
-                ),
-              ),
-              BlocBuilder<TableCreateCubit, TableCreateState>(
-                bloc: cubit,
-                builder: (context, state) {
-                  if (state.showErrors && state.error != null) {
-                    return FieldErrorIndicator(
-                      message: state.error!.translate(context),
-                    );
                   }
 
-                  return const SizedBox();
+                  onComplete?.call();
                 },
+                child: const Icon(
+                  Icons.check,
+                ),
               ),
-            ],
-          );
-        },
+            ),
+          ),
+          BlocBuilder<TableCreateCubit, TableCreateState>(
+            bloc: cubit,
+            builder: (context, state) {
+              if (state.showErrors && state.error != null) {
+                return FieldErrorIndicator(
+                  message: state.error!.translate(context),
+                );
+              }
+
+              return const SizedBox();
+            },
+          ),
+        ],
       ),
     );
   }

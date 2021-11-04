@@ -73,8 +73,9 @@ class _GroupTableCellTile extends StatelessWidget {
             Expanded(
               child: Text(cell.title),
             ),
-            const Icon(
+            Icon(
               Icons.menu,
+              color: theme.primaryColor,
             ),
             const Gap(),
           ],
@@ -214,7 +215,10 @@ class _NotificationTableCellTile extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Icon(Icons.access_time),
+                      Icon(
+                        Icons.access_time,
+                        color: theme.primaryColor,
+                      ),
                       const Gap(),
                       Text(
                         DateFormat('MMMM dd, kk:mm').format(cell.time),

@@ -101,32 +101,40 @@ class AnonymousTablesPage extends StatelessWidget {
           endDrawer: _TablesDrawer(
             tableIndex: tableIndex,
           ),
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(50.0),
-            child: AppBar(
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    _scaffoldKey.currentState!.openEndDrawer();
-                  },
-                  icon: const Icon(Icons.menu),
-                ),
-              ],
-              title: PathNameWidget(
+          appBar: AppBar(
+            centerTitle: true,
+            flexibleSpace: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ).copyWith(
+                top: MediaQuery.of(context).padding.top,
+              ),
+              child: PathNameWidget(
                 table: table,
                 tableIndex: tableIndex,
                 path: path,
               ),
             ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  _scaffoldKey.currentState!.openEndDrawer();
+                },
+                icon: const Icon(Icons.menu),
+              ),
+            ],
           ),
           body: SafeArea(
             child: Stack(
               alignment: Alignment.center,
               children: [
-                _TablesBody(
-                  path: path,
-                  table: table,
-                  tableIndex: tableIndex,
+                Padding(
+                  padding: const EdgeInsets.only(top: 60),
+                  child: _TablesBody(
+                    path: path,
+                    table: table,
+                    tableIndex: tableIndex,
+                  ),
                 ),
                 Positioned(
                   left: 15,
@@ -385,17 +393,23 @@ class _TablesDrawer extends StatelessWidget {
                       itemBuilder: (context, index) => InkWell(
                         onLongPress: () async {
                           if (state.tables.length == 1) {
-                            return await showDialog(
+                            return showDialog(
                               context: context,
                               builder: (context) => AppDialog(
                                 child: Column(
                                   children: [
+                                    const Expanded(
+                                      child: SizedBox(),
+                                    ),
                                     Expanded(
+                                      flex: 2,
                                       child: Text(
                                         intl.cannotDeleteSingle,
                                         style: textTheme.bodyText1!.copyWith(
                                           fontWeight: FontWeight.w500,
+                                          color: theme.primaryColor,
                                         ),
+                                        textAlign: TextAlign.center,
                                         maxLines: null,
                                       ),
                                     ),

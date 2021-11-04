@@ -92,9 +92,15 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
           initialRoute: AppRoutes.launch,
           theme: kLightTheme.copyWith(
             primaryColor: state.accentColor,
+            iconTheme: kLightTheme.iconTheme.copyWith(
+              color: state.accentColor,
+            ),
           ),
           darkTheme: kDarkTheme.copyWith(
             primaryColor: state.accentColor,
+            iconTheme: kDarkTheme.iconTheme.copyWith(
+              color: state.accentColor,
+            ),
           ),
         );
       },

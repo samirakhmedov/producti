@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:producti/application/settings/settings_cubit.dart';
 import 'package:producti/application/tables/pages/notification_validation/notification_validation_cubit.dart';
 import 'package:producti/data/core/error/error_codes.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
@@ -10,6 +11,7 @@ import 'package:producti/domain/table/values/link.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:producti/presentation/core/errors/error_code_ext.dart';
+import 'package:producti/application/settings/settings_ext.dart';
 
 class NotificationCellCreatePage extends StatelessWidget {
   final NoteTableCell? cell;
@@ -109,6 +111,11 @@ class NotificationCellCreatePage extends StatelessWidget {
                               maxTime: DateTime.now().add(
                                 const Duration(days: 3650),
                               ),
+                              locale: context
+                                  .read<SettingsCubit>()
+                                  .state
+                                  .language!
+                                  .toLocaleType(),
                               theme: DatePickerTheme(
                                 backgroundColor: theme.backgroundColor,
                                 cancelStyle: textTheme.caption!.copyWith(
@@ -137,13 +144,16 @@ class NotificationCellCreatePage extends StatelessWidget {
                               const Icon(Icons.access_time),
                               const Gap(),
                               if (state.dateTime == null)
-                                Text(
-                                  intl.pickDate,
-                                  style: textTheme.bodyText1!.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: ThemeHelper.isDarkMode(context)
-                                        ? kLightGray
-                                        : kGray,
+                                Expanded(
+                                  child: Text(
+                                    intl.pickDate,
+                                    style: textTheme.bodyText1!.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: ThemeHelper.isDarkMode(context)
+                                          ? kLightGray
+                                          : kGray,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                 )
                               else

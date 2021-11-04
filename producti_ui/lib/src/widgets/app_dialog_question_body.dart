@@ -15,22 +15,31 @@ class AppDialogQuestionBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = ThemeHelper.getTextTheme(context);
+    final theme = ThemeHelper.getTheme(context);
+
+    final textTheme = theme.textTheme;
 
     final navigator = Navigator.of(context);
 
     return Column(
       children: [
+        const Expanded(
+          child: SizedBox(),
+        ),
         Expanded(
+          flex: 2,
           child: Text(
             title,
             style: textTheme.bodyText1!.copyWith(
               fontWeight: FontWeight.w500,
+              color: theme.primaryColor,
             ),
+            textAlign: TextAlign.center,
             maxLines: null,
           ),
         ),
         Expanded(
+          flex: 1,
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,

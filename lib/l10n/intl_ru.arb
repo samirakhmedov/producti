@@ -47,7 +47,7 @@
     "group": "Группа",
     "note": "Заметка",
     "notification": "Уведомление",
-    "groupName": "Навзание группы",
+    "groupName": "Название группы",
     "groupAlreadyExists": "Группа уже существует!",
     "tooBigValue": "Слишком большой...",
     "noteCreation": "Создание заметки",
