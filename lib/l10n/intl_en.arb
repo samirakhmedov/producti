@@ -69,5 +69,9 @@
     "cannotDeleteSingle": "You cannot delete your single table left!",
     "ok": "OK",
     "notifications": "Notifications",
-    "color": "Accent color"
+    "color": "Accent color",
+    "language": "Language",
+    "english": "English",
+    "russian": "Russian",
+    "theme": "Theme"
 }

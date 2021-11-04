@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/application/settings/settings_cubit.dart';
 import 'package:producti/generated/l10n.dart';
+import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti/presentation/settings/widgets/color_picker.dart';
 import 'package:producti_ui/producti_ui.dart';
 
@@ -33,23 +34,6 @@ class SettingsPage extends StatelessWidget {
             ),
             child: ListView(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      intl.notifications,
-                      style: textTheme.bodyText2,
-                    ),
-                    AppSwitcher(
-                      value: state.allowNotifications,
-                      onTap: () {
-                        settings.mutate(
-                          allowNotifications: !state.allowNotifications,
-                        );
-                      },
-                    ),
-                  ],
-                ),
                 const Gap(),
                 Text(
                   intl.color,
@@ -62,6 +46,30 @@ class SettingsPage extends StatelessWidget {
                       accentColor: color,
                     );
                   },
+                ),
+                const Gap(),
+                AppListTile(
+                  title: intl.language,
+                  onTap: () {
+                    Navigator.of(context).pushNamed(AppRoutes.settingsLanguage);
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      intl.theme,
+                      style: textTheme.bodyText2,
+                    ),
+                    AppThemeSwitcher(
+                      value: state.themeMode!,
+                      onTap: (themeMode) {
+                        settings.mutate(
+                          themeMode: themeMode,
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),

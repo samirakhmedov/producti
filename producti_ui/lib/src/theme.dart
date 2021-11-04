@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ThemeHelper {
   static bool isDarkMode(BuildContext context) {
-    final brightness = MediaQuery.of(context).platformBrightness;
+    final brightness = Theme.of(context).brightness;
 
     return brightness == Brightness.dark;
   }
@@ -109,6 +109,9 @@ final kDarkTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     elevation: 0.0,
     color: Colors.transparent,
+    iconTheme: IconThemeData(
+      color: kWhite,
+    ),
   ),
   brightness: Brightness.dark,
   primaryColor: kMainDarkColor,
@@ -185,6 +188,13 @@ final kLightTheme = ThemeData(
   scaffoldBackgroundColor: _kBackgroundLight,
   iconTheme: const IconThemeData(
     color: kMainLightColor,
+  ),
+  appBarTheme: const AppBarTheme(
+    elevation: 0.0,
+    color: Colors.transparent,
+    iconTheme: IconThemeData(
+      color: kBlack,
+    ),
   ),
   primaryColor: kMainLightColor,
   primaryColorDark: kMainLightColor,

@@ -15,7 +15,9 @@ class CreatePopupTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = ThemeHelper.getTextTheme(context);
+    final theme = ThemeHelper.getTheme(context);
+
+    final textTheme = theme.textTheme;
 
     return InkWell(
       onTap: onTap,
@@ -37,6 +39,7 @@ class CreatePopupTile extends StatelessWidget {
                   Icon(
                     icon,
                     size: 25,
+                    color: theme.primaryColor,
                   ),
                   const Gap(size: 18),
                   Text(

@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "Этот e-mail уже был использован другим человеком!"),
+        "english": MessageLookupByLibrary.simpleMessage("Английский"),
         "failedToFetchUserData": MessageLookupByLibrary.simpleMessage(
             "Произошла какая то ошибка, не удалось запросить данные!"),
         "fast": MessageLookupByLibrary.simpleMessage("Быстро"),
@@ -65,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Слишком короткий пароль!"),
         "join": MessageLookupByLibrary.simpleMessage("Присоединяйся."),
+        "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "letHim":
             MessageLookupByLibrary.simpleMessage("Представление уже началось!"),
         "logOut": MessageLookupByLibrary.simpleMessage("Выйти"),
@@ -100,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Установить время напоминания..."),
         "rename": MessageLookupByLibrary.simpleMessage("Переименовать"),
         "repeatPassword": MessageLookupByLibrary.simpleMessage("Пароль снова"),
+        "russian": MessageLookupByLibrary.simpleMessage("Русский"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "signIn": MessageLookupByLibrary.simpleMessage("Вход"),
         "signInAnonim": MessageLookupByLibrary.simpleMessage(
@@ -111,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tableAlreadyExists":
             MessageLookupByLibrary.simpleMessage("Эта таблица уже существует!"),
         "tableName": MessageLookupByLibrary.simpleMessage("Название таблицы"),
+        "theme": MessageLookupByLibrary.simpleMessage("Тема"),
         "tooBigValue":
             MessageLookupByLibrary.simpleMessage("Слишком большой..."),
         "typeDescription":

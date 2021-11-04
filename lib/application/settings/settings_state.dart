@@ -35,6 +35,10 @@ class SettingsState extends Equatable {
             ),
       language:
           json['language'] == null ? null : Locale(json['language'] as String),
+      allowNotifications: json['allowNotifications'] as bool,
+      themeMode: _parseThemeModeFromString(
+        json['themeMode'] as String,
+      ),
     );
   }
 
@@ -65,4 +69,15 @@ class SettingsState extends Equatable {
       language: language ?? this.language,
     );
   }
+}
+
+ThemeMode _parseThemeModeFromString(String value) {
+  switch (value) {
+    case 'light':
+      return ThemeMode.light;
+    case 'dark':
+      return ThemeMode.dark;
+  }
+
+  return ThemeMode.light;
 }

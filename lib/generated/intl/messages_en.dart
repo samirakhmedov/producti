@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailAlreadyInUse": MessageLookupByLibrary.simpleMessage(
             "Email was already used by other greedy user!"),
+        "english": MessageLookupByLibrary.simpleMessage("English"),
         "failedToFetchUserData": MessageLookupByLibrary.simpleMessage(
             "Failed to fetch your data, something went wrong!"),
         "fast": MessageLookupByLibrary.simpleMessage("Fast"),
@@ -63,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Too short password!"),
         "join": MessageLookupByLibrary.simpleMessage("Just join it."),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
         "letHim": MessageLookupByLibrary.simpleMessage("Let him in, boys."),
         "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
@@ -96,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rename": MessageLookupByLibrary.simpleMessage("Rename"),
         "repeatPassword":
             MessageLookupByLibrary.simpleMessage("Repeat password"),
+        "russian": MessageLookupByLibrary.simpleMessage("Russian"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signInAnonim":
@@ -107,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tableAlreadyExists":
             MessageLookupByLibrary.simpleMessage("This table already created!"),
         "tableName": MessageLookupByLibrary.simpleMessage("Table name"),
+        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "tooBigValue":
             MessageLookupByLibrary.simpleMessage("Too big, sempai..."),
         "typeDescription":

@@ -69,5 +69,9 @@
     "cannotDeleteSingle": "Вы не можете удалить свою единственную таблицу!",
     "ok": "OK",
     "notifications": "Уведомления",
-    "color": "Оттенок"
+    "color": "Оттенок",
+    "language": "Язык",
+    "english": "Английский",
+    "russian": "Русский",
+    "theme": "Тема"
 }
