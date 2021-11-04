@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:producti/application/auth/logic/auth_bloc.dart';
+import 'package:producti/application/settings/settings_cubit.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
@@ -69,24 +70,34 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       listen: false,
     );
 
-    return MaterialApp(
-      routes: routes,
-      navigatorObservers: [
-        FirebaseAnalyticsObserver(analytics: analytics),
-      ],
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en', ''),
-        Locale('ru', ''),
-      ],
-      initialRoute: AppRoutes.launch,
-      theme: kLightTheme,
-      darkTheme: kDarkTheme,
+    return BlocBuilder<SettingsCubit, SettingsState>(
+      builder: (context, state) {
+        return MaterialApp(
+          routes: routes,
+          navigatorObservers: [
+            FirebaseAnalyticsObserver(analytics: analytics),
+          ],
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', ''),
+            Locale('ru', ''),
+          ],
+          locale: state.language,
+          themeMode: state.themeMode,
+          initialRoute: AppRoutes.launch,
+          theme: kLightTheme.copyWith(
+            primaryColor: state.accentColor,
+          ),
+          darkTheme: kDarkTheme.copyWith(
+            primaryColor: state.accentColor,
+          ),
+        );
+      },
     );
   }
 }

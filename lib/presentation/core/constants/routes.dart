@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:producti/presentation/auth/pages/auth_page.dart';
 import 'package:producti/presentation/launch/pages/launch_page.dart';
 import 'package:producti/presentation/launch/pages/onboarding_page.dart';
+import 'package:producti/presentation/settings/pages/settings_page.dart';
 import 'package:producti/presentation/table/pages/tables_page.dart';
 
 /// Helper, that holds
@@ -12,6 +13,7 @@ class AppRoutes {
   static const onboarding = '/onboarding';
   static const auth = '/auth';
   static const tables = '/tables';
+  static const settings = '/settings';
 }
 
 final routes = <String, WidgetBuilder>{
@@ -19,4 +21,5 @@ final routes = <String, WidgetBuilder>{
   AppRoutes.onboarding: (BuildContext context) => const OnboardingPage(),
   AppRoutes.auth: (BuildContext context) => const AuthPage(),
   AppRoutes.tables: (BuildContext context) => const TablesPage(),
+  AppRoutes.settings: (BuildContext context) => const SettingsPage(),
 };

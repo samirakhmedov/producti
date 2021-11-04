@@ -13,6 +13,8 @@ class UserAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ThemeHelper.getTheme(context);
+
     return Container(
       width: size,
       height: size,
@@ -28,8 +30,9 @@ class UserAvatar extends StatelessWidget {
         color: kLightGray,
       ),
       child: imageProvider == null
-          ? const Icon(
+          ? Icon(
               Icons.perm_identity_outlined,
+              color: theme.primaryColor,
             )
           : null,
     );

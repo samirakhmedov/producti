@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/launch/logic/launch_bloc.dart';
+import 'package:producti/application/settings/settings_cubit.dart';
 import 'package:producti/presentation/core/constants/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
@@ -12,7 +13,19 @@ class LaunchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = ThemeHelper.getTextTheme(context);
+    final theme = ThemeHelper.getTheme(context);
+
+    final textTheme = theme.textTheme;
+
+    final settings = context.read<SettingsCubit>();
+
+    settings.initialize(
+      Localizations.localeOf(context),
+      theme.primaryColor,
+      MediaQuery.of(context).platformBrightness == Brightness.light
+          ? ThemeMode.light
+          : ThemeMode.dark,
+    );
 
     Future.delayed(
       const Duration(seconds: 2),

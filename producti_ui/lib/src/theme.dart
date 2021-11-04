@@ -20,8 +20,8 @@ const _kBackgroundLight = Color(0xFFFAFAFA);
 const kBlack = Color(0xFF000000);
 const kWhite = Color(0xFFFFFFFF);
 
-const _kMainDarkColor = Color(0xFFE8AC13);
-const _kMainLightColor = Color(0xFF3889E8);
+const kMainDarkColor = Color(0xFFE8AC13);
+const kMainLightColor = Color(0xFF3889E8);
 
 const kDarkerGray = Color(0xFF666666);
 const kGray = Color(0xFFCCCCCC);
@@ -30,6 +30,14 @@ const kLighterGray = Color(0xFFEBEBEB);
 
 const kRed = Color(0xFFDF2C2C);
 const kGreen = Color(0xFF2CAE17);
+
+const colorList = [
+  Color(0xFFCE1515),
+  Color(0xFFF1D74C),
+  Color(0xFFA308CA),
+  Color(0xFF30F1AC),
+  Color(0xFF13C5BF),
+];
 
 const _kBiggerHeaderTextStyle = TextStyle(
   fontSize: 50,
@@ -96,20 +104,21 @@ final kDarkTheme = ThemeData(
   backgroundColor: _kBackgroundDark,
   scaffoldBackgroundColor: _kBackgroundDark,
   iconTheme: const IconThemeData(
-    color: _kMainDarkColor,
+    color: kMainDarkColor,
   ),
   appBarTheme: const AppBarTheme(
     elevation: 0.0,
     color: Colors.transparent,
   ),
-  primaryColor: _kMainDarkColor,
-  primaryColorDark: _kMainDarkColor,
+  brightness: Brightness.dark,
+  primaryColor: kMainDarkColor,
+  primaryColorDark: kMainDarkColor,
   textTheme: GoogleFonts.robotoTextTheme(
     TextTheme(
       /// Onboarding text, subhead text
 
       bodyText1: _kBodyText1TextStyle.copyWith(
-        color: _kMainDarkColor,
+        color: kMainDarkColor,
       ),
 
       /// Subhead text 2, group header
@@ -132,7 +141,7 @@ final kDarkTheme = ThemeData(
       /// Header on log in screens
 
       headline2: _kHeaderTextStyle.copyWith(
-        color: _kMainDarkColor,
+        color: kMainDarkColor,
       ),
 
       /// Same, but even board name
@@ -175,14 +184,15 @@ final kLightTheme = ThemeData(
   backgroundColor: _kBackgroundLight,
   scaffoldBackgroundColor: _kBackgroundLight,
   iconTheme: const IconThemeData(
-    color: _kMainLightColor,
+    color: kMainLightColor,
   ),
-  primaryColor: _kMainLightColor,
-  primaryColorDark: _kMainLightColor,
+  primaryColor: kMainLightColor,
+  primaryColorDark: kMainLightColor,
+  brightness: Brightness.light,
   textTheme: GoogleFonts.robotoTextTheme(
     TextTheme(
       bodyText1: _kBodyText1TextStyle.copyWith(
-        color: _kMainLightColor,
+        color: kMainLightColor,
       ),
       bodyText2: _kBodyText2TextStyle.copyWith(
         color: kBlack,
@@ -194,7 +204,7 @@ final kLightTheme = ThemeData(
         color: kDarkerGray,
       ),
       headline2: _kHeaderTextStyle.copyWith(
-        color: _kMainLightColor,
+        color: kMainLightColor,
       ),
       headline3: _kSubheadTextStyle.copyWith(
         color: kBlack,

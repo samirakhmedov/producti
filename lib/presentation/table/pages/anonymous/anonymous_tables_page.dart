@@ -500,6 +500,9 @@ class _TablesDrawer extends StatelessWidget {
             DrawerListTile(
               text: intl.settings,
               icon: Icons.settings,
+              onTap: () {
+                Navigator.of(context).pushNamed(AppRoutes.settings);
+              },
             ),
           ],
         ),

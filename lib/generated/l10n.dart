@@ -739,6 +739,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accent color`
+  String get color {
+    return Intl.message(
+      'Accent color',
+      name: 'color',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

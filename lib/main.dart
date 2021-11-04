@@ -12,6 +12,7 @@ import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/core/cubit/connection_cubit.dart';
 import 'package:producti/application/launch/logic/launch_bloc.dart';
 import 'package:producti/application/notifications/notifications_bloc.dart';
+import 'package:producti/application/settings/settings_cubit.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
 import 'package:producti/application/tables/logic/user/table_bloc.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
@@ -19,6 +20,7 @@ import 'package:producti/domain/table/table.dart';
 import 'package:producti/presentation/core/widgets/app_widget.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:producti_ui/producti_ui.dart';
 
 import 'injection.dart';
 
@@ -121,6 +123,9 @@ Future<void> main() async {
                 ),
                 BlocProvider<ConnectionCubit>(
                   create: (context) => sl.get<ConnectionCubit>(),
+                ),
+                BlocProvider<SettingsCubit>(
+                  create: (context) => sl.get<SettingsCubit>(),
                 ),
                 BlocProvider<LocalNotificationsBloc>(
                   create: (context) => sl.get<LocalNotificationsBloc>()

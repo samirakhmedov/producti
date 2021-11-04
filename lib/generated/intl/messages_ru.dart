@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "anotherOne": MessageLookupByLibrary.simpleMessage("Еще..."),
         "cannotDeleteSingle": MessageLookupByLibrary.simpleMessage(
             "Вы не можете удалить свою единственную таблицу!"),
+        "color": MessageLookupByLibrary.simpleMessage("Оттенок"),
         "comfortable": MessageLookupByLibrary.simpleMessage("Удобно"),
         "connected": MessageLookupByLibrary.simpleMessage(
             "Вы подключились к интернету!"),
@@ -82,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notification": MessageLookupByLibrary.simpleMessage("Уведомление"),
         "notificationInPast": MessageLookupByLibrary.simpleMessage(
             "Увы, вы не можете напомнить себе что то в прошлом. :("),
+        "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "notificationsInitializationFailure": MessageLookupByLibrary.simpleMessage(
             "Зачем ты создаешь напоминания и потом не даешь мне...напоминать??"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),

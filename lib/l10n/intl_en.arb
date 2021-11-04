@@ -67,5 +67,7 @@
     "notificationInPast": "You cannot remind something to yourself in past. :)",
     "pickDate": "Pick date here...",
     "cannotDeleteSingle": "You cannot delete your single table left!",
-    "ok": "OK"
+    "ok": "OK",
+    "notifications": "Notifications",
+    "color": "Accent color"
 }
