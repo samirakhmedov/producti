@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:producti_ui/producti_ui.dart';
-import 'package:producti_ui/src/constants.dart';
 
 class TextInputWidget extends StatefulWidget {
   final TextEditingController? controller;

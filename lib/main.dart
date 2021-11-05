@@ -20,7 +20,6 @@ import 'package:producti/domain/table/table.dart';
 import 'package:producti/presentation/core/widgets/app_widget.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:producti_ui/producti_ui.dart';
 
 import 'injection.dart';
 

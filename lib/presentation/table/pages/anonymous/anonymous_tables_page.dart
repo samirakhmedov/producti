@@ -11,6 +11,7 @@ import 'package:producti/domain/table/cells/table_cell.dart';
 import 'package:producti/domain/table/table.dart' as t;
 import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/generated/l10n.dart';
+import 'package:producti/presentation/core/constants/constants.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti/presentation/table/core/table_helper.dart';
 import 'package:producti/presentation/table/pages/cells/note/note_cell_create_page.dart';
@@ -20,6 +21,7 @@ import 'package:producti/presentation/table/pages/cells/notifications/notificati
 import 'package:producti/presentation/table/pages/tables_page.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_group_body.dart';
 import 'package:producti/presentation/table/widgets/anonymous/create_table_body.dart';
+import 'package:producti/presentation/table/widgets/anonymous/not_signed_in_drawer_header.dart';
 import 'package:producti/presentation/table/widgets/create_popup_tile.dart';
 import 'package:producti/presentation/table/widgets/path_name_widget.dart';
 import 'package:producti/presentation/table/widgets/table_cell_tile.dart';
@@ -101,40 +103,14 @@ class AnonymousTablesPage extends StatelessWidget {
           endDrawer: _TablesDrawer(
             tableIndex: tableIndex,
           ),
-          appBar: AppBar(
-            centerTitle: true,
-            flexibleSpace: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-              ).copyWith(
-                top: MediaQuery.of(context).padding.top,
-              ),
-              child: PathNameWidget(
-                table: table,
-                tableIndex: tableIndex,
-                path: path,
-              ),
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  _scaffoldKey.currentState!.openEndDrawer();
-                },
-                icon: const Icon(Icons.menu),
-              ),
-            ],
-          ),
           body: SafeArea(
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 60),
-                  child: _TablesBody(
-                    path: path,
-                    table: table,
-                    tableIndex: tableIndex,
-                  ),
+                _TablesBody(
+                  path: path,
+                  table: table,
+                  tableIndex: tableIndex,
                 ),
                 Positioned(
                   left: 15,
@@ -329,15 +305,13 @@ class _TablesDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final query = MediaQuery.of(context);
-
-    final size = query.size;
-
     final intl = S.of(context);
 
     final theme = ThemeHelper.getTheme(context);
 
     final textTheme = theme.textTheme;
+
+    final query = MediaQuery.of(context);
 
     return Drawer(
       elevation: 0.0,
@@ -345,43 +319,12 @@ class _TablesDrawer extends StatelessWidget {
         color: theme.backgroundColor,
         child: Column(
           children: [
-            Container(
-              height: size.height * 0.13,
-              width: double.maxFinite,
-              color: theme.backgroundColor,
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const UserAvatar(),
-                      const Gap(),
-                      Expanded(
-                        child: OptionText(
-                          textAlign: TextAlign.left,
-                          start: intl.doNotLoggedIn + ' ',
-                          end: intl.createAccount,
-                          onTap: () {
-                            final authBloc = context.read<AuthBloc>();
-
-                            authBloc.add(AuthSignOut());
-
-                            final navigator = Navigator.of(context);
-
-                            navigator.pushNamedAndRemoveUntil(
-                              AppRoutes.auth,
-                              (route) => false,
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+            if (kFinishedAuth)
+              const NotSignedInDrawerHeader()
+            else
+              SizedBox(
+                height: query.padding.top + 15,
               ),
-            ),
             const Gap(),
             Expanded(
               child: BlocBuilder<AnonymousTableBloc, AnonymousTableState>(
@@ -547,25 +490,50 @@ class _TablesBody extends StatelessWidget {
       size: query.size,
       child: Stack(
         children: [
-          Builder(
-            builder: (context) {
-              final cells = path.getParticles(table);
-
-              if (cells.isEmpty) {
-                return Center(
-                  child: EmptyWidget(
-                    description: intl.nothingToSee,
-                  ),
-                );
-              }
-
-              return _TableCellsList(
-                cells: cells,
-                path: path,
-                tableIndex: tableIndex,
+          Positioned(
+            top: 10,
+            left: 0,
+            right: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 45),
+              child: PathNameWidget(
                 table: table,
-              );
-            },
+                tableIndex: tableIndex,
+                path: path,
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+              onPressed: () {
+                Scaffold.of(context).openEndDrawer();
+              },
+              icon: const Icon(Icons.menu),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: Builder(
+              builder: (context) {
+                final cells = path.getParticles(table);
+
+                if (cells.isEmpty) {
+                  return Center(
+                    child: EmptyWidget(
+                      description: intl.nothingToSee,
+                    ),
+                  );
+                }
+
+                return _TableCellsList(
+                  cells: cells,
+                  path: path,
+                  tableIndex: tableIndex,
+                  table: table,
+                );
+              },
+            ),
           ),
         ],
       ),

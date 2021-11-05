@@ -22,7 +22,7 @@ class LaunchPage extends StatelessWidget {
     settings.initialize(
       Localizations.localeOf(context),
       theme.primaryColor,
-      MediaQuery.of(context).platformBrightness == Brightness.light
+      Theme.of(context).brightness == Brightness.light
           ? ThemeMode.light
           : ThemeMode.dark,
     );
@@ -36,6 +36,9 @@ class LaunchPage extends StatelessWidget {
         final state = launchBloc.state;
 
         final authState = authBloc.state;
+
+        /// I JUST DO NOT HAVE ENOUGH TIME
+        authBloc.add(AuthAnonymousEvent());
 
         Navigator.of(context).pushReplacementNamed(
           state.onboardingPassed

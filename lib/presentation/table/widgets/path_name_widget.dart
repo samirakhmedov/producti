@@ -71,7 +71,7 @@ class _PathNameWidgetState extends State<PathNameWidget> {
       children: [
         Flexible(
           child: GestureDetector(
-            onTap: () {
+            onDoubleTap: () {
               setState(() {
                 _editTableName = true;
               });
@@ -105,7 +105,7 @@ class _PathNameWidgetState extends State<PathNameWidget> {
         if (subTitle != null)
           Flexible(
             child: GestureDetector(
-              onTap: () {
+              onDoubleTap: () {
                 setState(() {
                   _editGroupName = true;
                 });
