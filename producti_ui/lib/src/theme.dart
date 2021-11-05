@@ -37,6 +37,8 @@ const colorList = [
   Color(0xFFA308CA),
   Color(0xFF30F1AC),
   Color(0xFF13C5BF),
+  kMainDarkColor,
+  kMainLightColor
 ];
 
 const _kBiggerHeaderTextStyle = TextStyle(
