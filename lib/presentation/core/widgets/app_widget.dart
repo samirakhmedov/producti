@@ -95,11 +95,21 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
             iconTheme: kLightTheme.iconTheme.copyWith(
               color: state.accentColor,
             ),
+            appBarTheme: kLightTheme.appBarTheme.copyWith(
+              iconTheme: kLightTheme.appBarTheme.iconTheme!.copyWith(
+                color: state.accentColor,
+              ),
+            ),
           ),
           darkTheme: kDarkTheme.copyWith(
             primaryColor: state.accentColor,
             iconTheme: kDarkTheme.iconTheme.copyWith(
               color: state.accentColor,
+            ),
+            appBarTheme: kDarkTheme.appBarTheme.copyWith(
+              iconTheme: kDarkTheme.appBarTheme.iconTheme!.copyWith(
+                color: state.accentColor,
+              ),
             ),
           ),
         );

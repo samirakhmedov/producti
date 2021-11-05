@@ -6,6 +6,7 @@ import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/presentation/table/pages/anonymous/anonymous_tables_page.dart';
 import 'package:producti/presentation/table/pages/user/user_tables_page.dart';
 import 'package:producti_ui/producti_ui.dart';
+import 'package:producti/domain/table/table.dart' as t;
 
 class TablesPage extends StatelessWidget {
   final int tableIndex;
@@ -26,7 +27,11 @@ class TablesPage extends StatelessWidget {
               builder: (context, state) {
                 if (state is AnonymousTableLoaded) {
                   return AnonymousTablesPage(
-                    table: state.tables[tableIndex],
+                    table: state.tables.length == tableIndex
+                        ? t.Table(
+                            title: '',
+                          )
+                        : state.tables[tableIndex],
                     tableIndex: tableIndex,
                     path: path ?? const TableLink([]),
                   );

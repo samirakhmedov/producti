@@ -9,6 +9,7 @@ import 'package:producti/generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/presentation/table/pages/cells/notifications/notification_cell_create_page.dart';
 import 'package:producti/presentation/table/widgets/table_cell_tile.dart';
+import 'package:producti/presentation/table/widgets/time_widget.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:producti/domain/notifications/notification.dart' as t;
@@ -133,18 +134,8 @@ class _NotificationCellViewPageState extends State<NotificationCellViewPage> {
             SliverPadding(
               padding: const EdgeInsets.only(bottom: 15),
               sliver: SliverToBoxAdapter(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(Icons.access_time),
-                    const Gap(),
-                    Text(
-                      DateFormat('dd.MM.yyyy, kk:mm').format(_cell.time),
-                      style: textTheme.bodyText1!.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
-                    )
-                  ],
+                child: TimeWidget(
+                  time: _cell.time,
                 ),
               ),
             ),

@@ -1,6 +1,6 @@
 part of 'notifications_bloc.dart';
 
-class LocalNotificationsState extends Equatable {
+class LocalNotificationsState {
   final TableLink? pathToNotification;
   final int? tableIndex;
   final Failure? failure;
@@ -10,9 +10,6 @@ class LocalNotificationsState extends Equatable {
     this.pathToNotification,
     this.failure,
   });
-
-  @override
-  List<Object> get props => [pathToNotification ?? 0, failure ?? 0];
 
   LocalNotificationsState copyWith({
     TableLink? pathToNotification,

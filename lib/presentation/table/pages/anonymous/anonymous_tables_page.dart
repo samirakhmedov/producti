@@ -73,7 +73,10 @@ class AnonymousTablesPage extends StatelessWidget {
       child: BlocListener<LocalNotificationsBloc, LocalNotificationsState>(
         listener: (context, state) {
           if (state.pathToNotification != null && state.tableIndex != null) {
-            final cell = state.pathToNotification!.getParticle(table)
+            final selectedTable =
+                (bloc.state as AnonymousTableLoaded).tables[state.tableIndex!];
+
+            final cell = state.pathToNotification!.getParticle(selectedTable)
                 as c.NotificationTableCell;
 
             final navigator = Navigator.of(context);

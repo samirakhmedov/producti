@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:producti/domain/table/cells/table_cell.dart' as t;
 import 'package:producti/generated/l10n.dart';
+import 'package:producti/presentation/table/widgets/time_widget.dart';
 import 'package:producti_ui/producti_ui.dart';
 
 class TableCellTile extends StatelessWidget {
@@ -211,20 +212,8 @@ class _NotificationTableCellTile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.access_time,
-                        color: theme.primaryColor,
-                      ),
-                      const Gap(),
-                      Text(
-                        DateFormat('MMMM dd, kk:mm').format(cell.time),
-                        style: textTheme.bodyText2,
-                      ),
-                    ],
+                  TimeWidget(
+                    time: cell.time,
                   ),
                   if (cell.links.isNotEmpty)
                     Icon(
