@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:producti/domain/table/cells/table_cell.dart' as t;
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/table/widgets/time_widget.dart';

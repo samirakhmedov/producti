@@ -82,39 +82,37 @@ class _NotificationCellViewPageState extends State<NotificationCellViewPage> {
                   ),
                 );
 
-                if (!result.time.isAtSameMomentAs(_cell.time)) {
-                  final notificationsBloc =
-                      context.read<LocalNotificationsBloc>();
+                final notificationsBloc =
+                    context.read<LocalNotificationsBloc>();
 
-                  final state = bloc.state as AnonymousTableLoaded;
+                final state = bloc.state as AnonymousTableLoaded;
 
-                  final currentTable = state.tables[widget.tableIndex];
+                final currentTable = state.tables[widget.tableIndex];
 
-                  notificationsBloc.add(
-                    LocalNotificationsCellDelete(
-                      currentTable,
-                      widget.pathToNote,
-                      widget.tableIndex,
+                notificationsBloc.add(
+                  LocalNotificationsCellDelete(
+                    currentTable,
+                    widget.pathToNote,
+                    widget.tableIndex,
+                  ),
+                );
+
+                notificationsBloc.add(
+                  LocalNotificationsAddNotification(
+                    t.Notification(
+                      body: result.description.isEmpty
+                          ? intl.voidValue
+                          : result.description,
+                      title:
+                          result.title.isEmpty ? intl.voidValue : result.title,
+                      id: widget.pathToNote.getId(widget.tableIndex),
+                      pathToNotification: widget.pathToNote,
+                      time: result.time,
                     ),
-                  );
+                    widget.tableIndex,
+                  ),
+                );
 
-                  notificationsBloc.add(
-                    LocalNotificationsAddNotification(
-                      t.Notification(
-                        body: result.description.isEmpty
-                            ? intl.voidValue
-                            : result.description,
-                        title: result.title.isEmpty
-                            ? intl.voidValue
-                            : result.title,
-                        id: widget.pathToNote.getId(widget.tableIndex),
-                        pathToNotification: widget.pathToNote,
-                        time: result.time,
-                      ),
-                      widget.tableIndex,
-                    ),
-                  );
-                }
                 setState(() {
                   _cell = result;
                 });

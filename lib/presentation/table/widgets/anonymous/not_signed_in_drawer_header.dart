@@ -3,7 +3,7 @@ import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti_ui/producti_ui.dart';
-import 'package:provider/src/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NotSignedInDrawerHeader extends StatelessWidget {
   const NotSignedInDrawerHeader({Key? key}) : super(key: key);
