@@ -325,7 +325,7 @@ class NotificationCellCreatePage extends StatelessWidget {
                                   hintText: index == 0
                                       ? intl.typeLink
                                       : intl.anotherOne,
-                                  initialValue: state.links[index].getOrCrash(),
+                                  initialValue: state.links[index].currentValue,
                                   onChange: (value) =>
                                       notificationValidationCubit.mutate(
                                     links: state.links..[index] = Link(value),

@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:producti/data/core/error/failure.dart';
 import 'package:producti/data/notifications/local_notification_repository.dart';

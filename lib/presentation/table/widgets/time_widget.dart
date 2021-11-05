@@ -19,6 +19,13 @@ class TimeWidget extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
+        if (time.isBefore(DateTime.now())) ...[
+          const Icon(
+            Icons.check,
+            color: kGreen,
+          ),
+          const Gap(),
+        ],
         const Icon(Icons.access_time),
         const Gap(),
         Text(
@@ -27,7 +34,8 @@ class TimeWidget extends StatelessWidget {
             fontWeight: FontWeight.w500,
             color: theme.primaryColor,
           ),
-        )
+          overflow: TextOverflow.ellipsis,
+        ),
       ],
     );
   }

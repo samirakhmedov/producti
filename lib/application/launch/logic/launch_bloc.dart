@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 
 part 'launch_state.dart';
 
-@injectable
+@singleton
 class LaunchBloc extends HydratedCubit<LaunchState> {
   LaunchBloc() : super(const LaunchState());
 
