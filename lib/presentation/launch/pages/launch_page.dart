@@ -19,6 +19,11 @@ class LaunchPage extends StatelessWidget {
 
     final settings = context.read<SettingsCubit>();
 
+    final authBloc = context.read<AuthBloc>();
+
+    /// I JUST DO NOT HAVE ENOUGH TIME
+    authBloc.add(AuthAnonymousEvent());
+
     settings.initialize(
       Localizations.localeOf(context),
       theme.primaryColor,
@@ -31,14 +36,10 @@ class LaunchPage extends StatelessWidget {
       const Duration(seconds: 2),
       () {
         final launchBloc = context.read<LaunchBloc>();
-        final authBloc = context.read<AuthBloc>();
 
         final state = launchBloc.state;
 
         final authState = authBloc.state;
-
-        /// I JUST DO NOT HAVE ENOUGH TIME
-        authBloc.add(AuthAnonymousEvent());
 
         Navigator.of(context).pushReplacementNamed(
           state.onboardingPassed
