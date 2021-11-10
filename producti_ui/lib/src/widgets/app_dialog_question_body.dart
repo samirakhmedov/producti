@@ -51,7 +51,9 @@ class AppDialogQuestionBody extends StatelessWidget {
                   navigator.pop();
                 },
                 text: options[0],
-                textStyle: textTheme.bodyText1!.copyWith(color: kGreen),
+                textStyle: textTheme.bodyText1!.copyWith(
+                  color: kGreen,
+                ),
               ),
               ClickableText(
                 onTap: () {

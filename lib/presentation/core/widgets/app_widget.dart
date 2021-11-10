@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -72,53 +75,66 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       listen: false,
     );
 
-    return ScreenUtilInit(
-      designSize: const Size(375, 667),
-      builder: () => BlocBuilder<SettingsCubit, SettingsState>(
-        builder: (context, state) {
-          return MaterialApp(
-            routes: routes,
-            navigatorObservers: [
-              FirebaseAnalyticsObserver(analytics: analytics),
-            ],
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('en', ''),
-              Locale('ru', ''),
-            ],
-            locale: state.language,
-            themeMode: state.themeMode,
-            initialRoute: AppRoutes.launch,
-            theme: kLightTheme.copyWith(
-              primaryColor: state.accentColor,
-              iconTheme: kLightTheme.iconTheme.copyWith(
-                color: state.accentColor,
-              ),
-              appBarTheme: kLightTheme.appBarTheme.copyWith(
-                iconTheme: kLightTheme.appBarTheme.iconTheme!.copyWith(
+    if (Platform.isAndroid) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
+    }
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        ScreenUtil.init(
+          constraints,
+          orientation: Orientation.portrait,
+          designSize: const Size(375, 667),
+        );
+
+        return BlocBuilder<SettingsCubit, SettingsState>(
+          builder: (context, state) {
+            return MaterialApp(
+              routes: routes,
+              navigatorObservers: [
+                FirebaseAnalyticsObserver(analytics: analytics),
+              ],
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en', ''),
+                Locale('ru', ''),
+              ],
+              locale: state.language,
+              themeMode: state.themeMode,
+              initialRoute: AppRoutes.launch,
+              theme: kLightTheme.copyWith(
+                primaryColor: state.accentColor,
+                iconTheme: kLightTheme.iconTheme.copyWith(
                   color: state.accentColor,
                 ),
-              ),
-            ),
-            darkTheme: kDarkTheme.copyWith(
-              primaryColor: state.accentColor,
-              iconTheme: kDarkTheme.iconTheme.copyWith(
-                color: state.accentColor,
-              ),
-              appBarTheme: kDarkTheme.appBarTheme.copyWith(
-                iconTheme: kDarkTheme.appBarTheme.iconTheme!.copyWith(
-                  color: state.accentColor,
+                appBarTheme: kLightTheme.appBarTheme.copyWith(
+                  iconTheme: kLightTheme.appBarTheme.iconTheme!.copyWith(
+                    color: state.accentColor,
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-      ),
+              darkTheme: kDarkTheme.copyWith(
+                primaryColor: state.accentColor,
+                iconTheme: kDarkTheme.iconTheme.copyWith(
+                  color: state.accentColor,
+                ),
+                appBarTheme: kDarkTheme.appBarTheme.copyWith(
+                  iconTheme: kDarkTheme.appBarTheme.iconTheme!.copyWith(
+                    color: state.accentColor,
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

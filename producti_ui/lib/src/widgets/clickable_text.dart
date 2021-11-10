@@ -24,9 +24,7 @@ class ClickableText extends StatelessWidget {
       onPressed: onTap,
       child: Text(
         text,
-        style: textStyle?.copyWith(
-              color: color ?? theme.primaryColor,
-            ) ??
+        style: textStyle ??
             textTheme.bodyText2!.copyWith(
               color: color ?? theme.primaryColor,
             ),
