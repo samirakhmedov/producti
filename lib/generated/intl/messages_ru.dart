@@ -83,10 +83,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "noteDetails": MessageLookupByLibrary.simpleMessage("Детали заметки"),
         "nothingToSee":
             MessageLookupByLibrary.simpleMessage("Здесь ничего нет..."),
-        "notification": MessageLookupByLibrary.simpleMessage("Уведомление"),
+        "notification": MessageLookupByLibrary.simpleMessage("Напоминание"),
+        "notificationCreation":
+            MessageLookupByLibrary.simpleMessage("Создание напоминания"),
         "notificationInPast": MessageLookupByLibrary.simpleMessage(
             "Увы, вы не можете напомнить себе что то в прошлом. :("),
-        "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Напоминания"),
         "notificationsInitializationFailure": MessageLookupByLibrary.simpleMessage(
             "Зачем ты создаешь напоминания и потом не даешь мне...напоминать??"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),

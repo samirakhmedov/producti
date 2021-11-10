@@ -19,7 +19,7 @@ class NotificationValidationState extends Equatable {
   List<Object> get props => [
         title,
         description,
-        links,
+        links.map((e) => e.currentValue).toList(),
         dateTime?.millisecondsSinceEpoch ?? 0,
         showErrors,
       ];

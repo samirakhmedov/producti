@@ -19,5 +19,5 @@ abstract class ValueObject<T> extends Equatable {
       );
 
   @override
-  List<Object?> get props => [_value];
+  List<Object?> get props => [_value, validatedValue];
 }

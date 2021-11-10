@@ -76,7 +76,7 @@ class NotificationCellCreatePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            intl.noteCreation,
+            intl.notificationCreation,
             style: textTheme.bodyText2!.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -104,11 +104,13 @@ class NotificationCellCreatePage extends StatelessWidget {
                       builder: (context, state) {
                         return InkWell(
                           onTap: () {
+                            final now = DateTime.now();
+
                             DatePicker.showDateTimePicker(
                               context,
                               showTitleActions: true,
-                              minTime: DateTime.now(),
-                              maxTime: DateTime.now().add(
+                              minTime: now,
+                              maxTime: now.add(
                                 const Duration(days: 3650),
                               ),
                               locale: context
@@ -133,9 +135,12 @@ class NotificationCellCreatePage extends StatelessWidget {
                                   dateTime: date,
                                 );
                               },
-                              currentTime:
-                                  notificationValidationCubit.state.dateTime ??
-                                      DateTime.now(),
+                              currentTime: (notificationValidationCubit
+                                          .state.dateTime
+                                          ?.isBefore(now) ??
+                                      true)
+                                  ? DateTime.now()
+                                  : notificationValidationCubit.state.dateTime,
                             );
                           },
                           child: Row(
@@ -282,6 +287,7 @@ class NotificationCellCreatePage extends StatelessWidget {
               ),
               BlocBuilder<NotificationValidationCubit,
                   NotificationValidationState>(
+                buildWhen: (previous, current) => true,
                 builder: (context, state) {
                   return SliverList(
                     delegate: SliverChildBuilderDelegate(
@@ -326,13 +332,19 @@ class NotificationCellCreatePage extends StatelessWidget {
                                       ? intl.typeLink
                                       : intl.anotherOne,
                                   initialValue: state.links[index].currentValue,
-                                  onChange: (value) =>
-                                      notificationValidationCubit.mutate(
-                                    links: state.links..[index] = Link(value),
-                                  ),
+                                  onChange: (value) {
+                                    final list = List.of(state.links);
+
+                                    list[index] = Link(value);
+
+                                    notificationValidationCubit.mutate(
+                                      links: list,
+                                    );
+                                  },
                                 ),
                               ),
                               if (state.showErrors) ...[
+                                const Gap(size: 6),
                                 link.validatedValue.fold(
                                   (failure) => FieldErrorIndicator(
                                     message:

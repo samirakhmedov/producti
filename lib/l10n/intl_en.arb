@@ -73,5 +73,6 @@
     "language": "Language",
     "english": "English",
     "russian": "Russian",
-    "theme": "Theme"
+    "theme": "Theme",
+    "notificationCreation": "Notification creation"
 }

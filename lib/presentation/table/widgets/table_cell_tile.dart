@@ -74,6 +74,9 @@ class _GroupTableCellTile extends StatelessWidget {
             Expanded(
               child: Text(
                 cell.title,
+                style: theme.textTheme.bodyText2!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -139,7 +142,8 @@ class _NoteTableCellTile extends StatelessWidget {
                         const VoidTextValue()
                       else
                         SizedBox(
-                          width: (size.width * .75).sp,
+                          width: (size.width *
+                              (.7 - (cell.links.isNotEmpty ? .07 : 0))),
                           child: Text(
                             cell.title,
                             style: textTheme.bodyText2!.copyWith(

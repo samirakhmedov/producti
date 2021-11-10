@@ -27,14 +27,15 @@ class NotificationValidationCubit extends Cubit<NotificationValidationState> {
     List<Link>? links,
     DateTime? dateTime,
     bool? showErrors,
-  }) =>
-      emit(
-        state.copyWith(
-          title: title,
-          description: description,
-          links: links,
-          showErrors: showErrors,
-          dateTime: dateTime,
-        ),
-      );
+  }) {
+    emit(
+      state.copyWith(
+        title: title,
+        description: description,
+        links: links,
+        showErrors: showErrors,
+        dateTime: dateTime,
+      ),
+    );
+  }
 }

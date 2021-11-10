@@ -342,46 +342,6 @@ class _TablesDrawer extends StatelessWidget {
                       shrinkWrap: true,
                       itemBuilder: (context, index) => InkWell(
                         onLongPress: () async {
-                          if (state.tables.length == 1) {
-                            return showDialog(
-                              context: context,
-                              builder: (context) => AppDialog(
-                                child: Column(
-                                  children: [
-                                    const Expanded(
-                                      child: SizedBox(),
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(
-                                        intl.cannotDeleteSingle,
-                                        style: textTheme.bodyText1!.copyWith(
-                                          fontWeight: FontWeight.w500,
-                                          color: theme.primaryColor,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                        maxLines: null,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: InkWell(
-                                        onTap: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text(
-                                          intl.ok,
-                                          style: textTheme.bodyText1!.copyWith(
-                                            color: theme.primaryColor,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          }
-
                           bool? agreement;
 
                           await showDialog(

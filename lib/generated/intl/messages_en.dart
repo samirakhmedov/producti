@@ -80,6 +80,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nothingToSee":
             MessageLookupByLibrary.simpleMessage("Nothing to see here..."),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
+        "notificationCreation":
+            MessageLookupByLibrary.simpleMessage("Notification creation"),
         "notificationInPast": MessageLookupByLibrary.simpleMessage(
             "You cannot remind something to yourself in past. :)"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),

@@ -33,6 +33,7 @@ class _FieldErrorIndicatorState extends State<FieldErrorIndicator> {
         child: Text(
           widget.message,
           style: style,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
     );

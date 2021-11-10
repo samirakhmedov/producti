@@ -165,6 +165,7 @@ class NoteCellCreatePage extends StatelessWidget {
                 ),
               ),
               BlocBuilder<NoteValidationCubit, NoteValidationState>(
+                buildWhen: (previous, current) => true,
                 builder: (context, state) {
                   return SliverList(
                     delegate: SliverChildBuilderDelegate(
@@ -209,10 +210,15 @@ class NoteCellCreatePage extends StatelessWidget {
                                       ? intl.typeLink
                                       : intl.anotherOne,
                                   initialValue: state.links[index].currentValue,
-                                  onChange: (value) =>
-                                      noteValidationCubit.mutate(
-                                    links: state.links..[index] = Link(value),
-                                  ),
+                                  onChange: (value) {
+                                    final list = List.of(state.links);
+
+                                    list[index] = Link(value);
+
+                                    noteValidationCubit.mutate(
+                                      links: list,
+                                    );
+                                  },
                                 ),
                               ),
                               if (state.showErrors) ...[

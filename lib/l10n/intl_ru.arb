@@ -46,7 +46,7 @@
     "tableName": "Название таблицы",
     "group": "Группа",
     "note": "Заметка",
-    "notification": "Уведомление",
+    "notification": "Напоминание",
     "groupName": "Название группы",
     "groupAlreadyExists": "Группа уже существует!",
     "tooBigValue": "Слишком большой...",
@@ -68,10 +68,11 @@
     "pickDate": "Установить время напоминания...",
     "cannotDeleteSingle": "Вы не можете удалить свою единственную таблицу!",
     "ok": "OK",
-    "notifications": "Уведомления",
+    "notifications": "Напоминания",
     "color": "Оттенок",
     "language": "Язык",
     "english": "Английский",
     "russian": "Русский",
-    "theme": "Тема"
+    "theme": "Тема",
+    "notificationCreation": "Создание напоминания"
 }
