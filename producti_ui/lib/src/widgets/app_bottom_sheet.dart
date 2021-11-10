@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:producti_ui/producti_ui.dart';
 
 class AppBottomSheet extends StatelessWidget {
@@ -39,8 +40,8 @@ class AppBottomSheet extends StatelessWidget {
           children: [
             if (child != null) child!,
             Positioned(
-              right: 16,
-              top: 16,
+              right: 16.sp,
+              top: 16.sp,
               child: InkWell(
                 onTap: () => Navigator.of(context).pop(),
                 child: Icon(

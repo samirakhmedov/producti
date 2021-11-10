@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class ClickableText extends StatelessWidget {
   final String text;
   final Color? color;
+  final TextStyle? textStyle;
   final void Function()? onTap;
 
   const ClickableText({
@@ -10,6 +11,7 @@ class ClickableText extends StatelessWidget {
     required this.text,
     this.onTap,
     this.color,
+    this.textStyle,
   }) : super(key: key);
 
   @override
@@ -22,9 +24,12 @@ class ClickableText extends StatelessWidget {
       onPressed: onTap,
       child: Text(
         text,
-        style: textTheme.bodyText2!.copyWith(
-          color: color ?? theme.primaryColor,
-        ),
+        style: textStyle?.copyWith(
+              color: color ?? theme.primaryColor,
+            ) ??
+            textTheme.bodyText2!.copyWith(
+              color: color ?? theme.primaryColor,
+            ),
       ),
     );
   }

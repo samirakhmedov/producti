@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:producti/presentation/launch/pages/onboarding_page.dart';
 import 'package:producti_ui/producti_ui.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TabDataView extends StatelessWidget {
   final TabData data;
@@ -30,7 +31,7 @@ class TabDataView extends StatelessWidget {
         const Gap(size: 30),
         SvgPicture.asset(
           data.imagePath,
-          height: 115,
+          height: 115.sp,
         ),
         const Gap(size: 30),
         Text(

@@ -34,7 +34,11 @@ import 'injection.dart';
 /// Yeah.
 ///
 /// List of learned things:
-/// 1. WidgetsBinding.instance!.scheduleWarmUpFrame()
+/// 1. [WidgetsBinding].instance!.scheduleWarmUpFrame()
+/// 2. [PointerSignalResolver].register
+/// 3. [RawAutocomplete]
+/// 4. [ObserverList]
+/// 5. [Feedback]
 
 Future<void> main() async {
   /// Initialises and connects all [BindingBase] instances to Flutter Engine.

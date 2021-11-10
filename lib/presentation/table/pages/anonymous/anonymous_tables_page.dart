@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:producti/application/notifications/notifications_bloc.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
@@ -127,7 +128,7 @@ class AnonymousTablesPage extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 28,
-                              ).copyWith(top: 46),
+                              ).copyWith(top: 46.sp),
                               child: Column(
                                 children: [
                                   CreatePopupTile(
@@ -580,52 +581,6 @@ class _TableCellsList extends StatelessWidget {
           key: Key(index.toString()),
           actionPane: const SlidableDrawerActionPane(),
           actions: [
-            IconSlideAction(
-              caption: intl.delete,
-              color: kRed,
-              icon: Icons.delete,
-              foregroundColor: theme.backgroundColor,
-              onTap: () async {
-                if (cell is c.GroupTableCell && cell.children.isNotEmpty) {
-                  bool? agreement;
-
-                  await showDialog(
-                    context: context,
-                    builder: (context) => AppDialog(
-                      child: AppDialogQuestionBody(
-                        onSelect: (answer) => agreement = answer,
-                        options: [
-                          intl.yes,
-                          intl.no,
-                        ],
-                        title: intl.youSureToDelete,
-                      ),
-                    ),
-                  );
-
-                  if (agreement == null) return;
-                  if (!agreement!) return;
-                }
-
-                bloc.add(
-                  AnonymousTableDeleteCell(
-                    tableIndex,
-                    path.addPath(index),
-                  ),
-                );
-
-                final notificationsBloc =
-                    context.read<LocalNotificationsBloc>();
-
-                notificationsBloc.add(
-                  LocalNotificationsCellDelete(
-                    table,
-                    path.addPath(index),
-                    tableIndex,
-                  ),
-                );
-              },
-            ),
             if (cell is c.GroupTableCell)
               IconSlideAction(
                 caption: intl.rename,
@@ -766,6 +721,52 @@ class _TableCellsList extends StatelessWidget {
                   }
                 },
               ),
+            IconSlideAction(
+              caption: intl.delete,
+              color: kRed,
+              icon: Icons.delete,
+              foregroundColor: theme.backgroundColor,
+              onTap: () async {
+                if (cell is c.GroupTableCell && cell.children.isNotEmpty) {
+                  bool? agreement;
+
+                  await showDialog(
+                    context: context,
+                    builder: (context) => AppDialog(
+                      child: AppDialogQuestionBody(
+                        onSelect: (answer) => agreement = answer,
+                        options: [
+                          intl.yes,
+                          intl.no,
+                        ],
+                        title: intl.youSureToDelete,
+                      ),
+                    ),
+                  );
+
+                  if (agreement == null) return;
+                  if (!agreement!) return;
+                }
+
+                bloc.add(
+                  AnonymousTableDeleteCell(
+                    tableIndex,
+                    path.addPath(index),
+                  ),
+                );
+
+                final notificationsBloc =
+                    context.read<LocalNotificationsBloc>();
+
+                notificationsBloc.add(
+                  LocalNotificationsCellDelete(
+                    table,
+                    path.addPath(index),
+                    tableIndex,
+                  ),
+                );
+              },
+            ),
           ],
           child: TableCellTile(
             cell: cell,

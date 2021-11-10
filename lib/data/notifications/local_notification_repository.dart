@@ -78,10 +78,15 @@ class LocalNotificationRepository extends NotificationRepository {
   }) async {
     final time = notification.time;
 
+    final title = notification.title;
+    final body = notification.body;
+
     return _flutterLocalNotificationsPlugin.zonedSchedule(
       notification.id,
-      notification.title,
-      notification.body,
+      title.length > 40 ? title.substring(0, 38) + '...' : title,
+      body.length > 40 ? body.substring(0, 38) + '...' : body,
+
+      /// Material guidelines accepted.
       TZDateTime.utc(
         time.year,
         time.month,

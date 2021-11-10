@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ThemeHelper {
   static bool isDarkMode(BuildContext context) {
@@ -41,48 +42,48 @@ const colorList = [
   kMainLightColor
 ];
 
-const _kBiggerHeaderTextStyle = TextStyle(
-  fontSize: 50,
+final _kBiggerHeaderTextStyle = TextStyle(
+  fontSize: 50.sp,
 );
 
-const _kPinCodeTextStyle = TextStyle(
-  fontSize: 48,
+final _kPinCodeTextStyle = TextStyle(
+  fontSize: 48.sp,
 );
 
-const _kHeaderTextStyle = TextStyle(
-  fontSize: 35,
+final _kHeaderTextStyle = TextStyle(
+  fontSize: 35.sp,
 );
 
-const _kSubheadTextStyle = TextStyle(
-  fontSize: 24,
+final _kSubheadTextStyle = TextStyle(
+  fontSize: 24.sp,
 );
 
-const _kBodyText1TextStyle = TextStyle(
-  fontSize: 18,
+final _kBodyText1TextStyle = TextStyle(
+  fontSize: 18.sp,
 );
 
-const _kBodyText2TextStyle = TextStyle(
-  fontSize: 16,
+final _kBodyText2TextStyle = TextStyle(
+  fontSize: 16.sp,
 );
 
-const _kCaptionTextStyle = TextStyle(
-  fontSize: 14,
+final _kCaptionTextStyle = TextStyle(
+  fontSize: 14.sp,
 );
 
-const _kSettingsOptionTextStyle = TextStyle(
-  fontSize: 13,
+final _kSettingsOptionTextStyle = TextStyle(
+  fontSize: 13.sp,
 );
 
-const _kSubtitleTextStyle = TextStyle(
-  fontSize: 12,
+final _kSubtitleTextStyle = TextStyle(
+  fontSize: 12.sp,
 );
 
-const _kSettingsOptionDescriptionTextStyle = TextStyle(
-  fontSize: 11,
+final _kSettingsOptionDescriptionTextStyle = TextStyle(
+  fontSize: 11.sp,
 );
 
-const _kSmallTextStyle = TextStyle(
-  fontSize: 10,
+final _kSmallTextStyle = TextStyle(
+  fontSize: 10.sp,
 );
 
 const _kInputDecorationTheme = InputDecorationTheme(

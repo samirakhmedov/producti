@@ -44,28 +44,24 @@ class AppDialogQuestionBody extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              InkWell(
+              ClickableText(
                 onTap: () {
                   onSelect(true);
 
                   navigator.pop();
                 },
-                child: Text(
-                  options[0],
-                  style: textTheme.bodyText1!.copyWith(color: kGreen),
-                ),
+                text: options[0],
+                textStyle: textTheme.bodyText1!.copyWith(color: kGreen),
               ),
-              InkWell(
+              ClickableText(
                 onTap: () {
                   onSelect(false);
 
                   navigator.pop();
                 },
-                child: Text(
-                  options[1],
-                  style: textTheme.bodyText1!.copyWith(
-                    color: kRed,
-                  ),
+                text: options[1],
+                textStyle: textTheme.bodyText1!.copyWith(
+                  color: kRed,
                 ),
               ),
             ],

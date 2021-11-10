@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/launch/logic/launch_bloc.dart';
@@ -55,7 +56,9 @@ class LaunchPage extends StatelessWidget {
       body: Center(
         child: Text(
           kAppName,
-          style: GoogleFonts.tajawal().merge(textTheme.headline1),
+          style: GoogleFonts.tajawal().merge(
+            textTheme.headline1,
+          ),
         ),
       ),
     );

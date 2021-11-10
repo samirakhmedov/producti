@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:producti/domain/table/cells/table_cell.dart' as t;
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/table/widgets/time_widget.dart';
@@ -71,7 +72,10 @@ class _GroupTableCellTile extends StatelessWidget {
           children: [
             const Gap(),
             Expanded(
-              child: Text(cell.title),
+              child: Text(
+                cell.title,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             Icon(
               Icons.menu,
@@ -126,7 +130,7 @@ class _NoteTableCellTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const _Dot(),
@@ -134,10 +138,14 @@ class _NoteTableCellTile extends StatelessWidget {
                       if (cell.title.isEmpty)
                         const VoidTextValue()
                       else
-                        Text(
-                          cell.title,
-                          style: textTheme.bodyText2!.copyWith(
-                            fontWeight: FontWeight.bold,
+                        SizedBox(
+                          width: (size.width * .75).sp,
+                          child: Text(
+                            cell.title,
+                            style: textTheme.bodyText2!.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                     ],

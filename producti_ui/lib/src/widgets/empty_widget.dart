@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:producti_ui/producti_ui.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmptyWidget extends StatelessWidget {
   final String? description;
@@ -22,7 +23,7 @@ class EmptyWidget extends StatelessWidget {
       children: [
         SvgPicture.asset(
           _getImagePath(context),
-          height: 115,
+          height: 115.sp,
         ),
         if (description != null) ...[
           const Gap(size: 12),

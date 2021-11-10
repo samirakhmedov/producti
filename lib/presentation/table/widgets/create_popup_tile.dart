@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:producti_ui/producti_ui.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CreatePopupTile extends StatelessWidget {
   final void Function()? onTap;
@@ -23,7 +24,7 @@ class CreatePopupTile extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.maxFinite,
-        height: 50,
+        height: 50.sp,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: ThemeHelper.isDarkMode(context) ? kBlack : kWhite,
@@ -38,7 +39,7 @@ class CreatePopupTile extends StatelessWidget {
                 children: [
                   Icon(
                     icon,
-                    size: 25,
+                    size: 25.sp,
                     color: theme.primaryColor,
                   ),
                   const Gap(size: 18),
