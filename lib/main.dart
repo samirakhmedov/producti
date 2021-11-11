@@ -64,6 +64,8 @@ Future<void> main() async {
   Hive.registerAdapter(NoteTableCellAdapter());
   Hive.registerAdapter(NotificationTableCellAdapter());
   Hive.registerAdapter(GroupTableCellAdapter());
+  Hive.registerAdapter(CheckListTableCellAdapter());
+  Hive.registerAdapter(CheckTileTableCellAdapter());
 
   /// Afterwards, creates [Storage] instance for
   /// [HydratedBloc], where all [Bloc] states will

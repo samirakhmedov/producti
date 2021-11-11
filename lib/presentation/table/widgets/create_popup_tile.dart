@@ -24,7 +24,7 @@ class CreatePopupTile extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.maxFinite,
-        height: 50.sp,
+        height: 42.sp,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           color: ThemeHelper.isDarkMode(context) ? kBlack : kWhite,
@@ -56,7 +56,7 @@ class CreatePopupTile extends StatelessWidget {
                 color: ThemeHelper.isDarkMode(context)
                     ? kDarkerGray
                     : kLighterGray,
-                size: 7,
+                size: 14,
               ),
             ],
           ),

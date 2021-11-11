@@ -43,6 +43,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.notificationsInitializationFailure;
       case ErrorCode.notificationInPast:
         return intl.notificationInPast;
+      case ErrorCode.noTiles:
+        return intl.noTiles;
     }
   }
 }

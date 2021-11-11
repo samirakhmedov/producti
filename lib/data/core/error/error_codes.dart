@@ -17,4 +17,5 @@ enum ErrorCode {
   tooBigValue,
   notificationsInitializationFailure,
   notificationInPast,
+  noTiles,
 }

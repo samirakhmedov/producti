@@ -809,6 +809,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Check list cannot be empty...`
+  String get noTiles {
+    return Intl.message(
+      'Check list cannot be empty...',
+      name: 'noTiles',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check list create`
+  String get checkListCreate {
+    return Intl.message(
+      'Check list create',
+      name: 'checkListCreate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add check`
+  String get addCheck {
+    return Intl.message(
+      'Add check',
+      name: 'addCheck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check list`
+  String get checkList {
+    return Intl.message(
+      'Check list',
+      name: 'checkList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type task`
+  String get typeCheck {
+    return Intl.message(
+      'Type task',
+      name: 'typeCheck',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check list details`
+  String get checkListDetails {
+    return Intl.message(
+      'Check list details',
+      name: 'checkListDetails',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

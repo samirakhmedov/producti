@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addCheck": MessageLookupByLibrary.simpleMessage("Add check"),
         "addLink": MessageLookupByLibrary.simpleMessage("Add link"),
         "addOne": MessageLookupByLibrary.simpleMessage("Add one"),
         "alreadyCoolGuy":
@@ -29,6 +30,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "anotherOne": MessageLookupByLibrary.simpleMessage("Another one..."),
         "cannotDeleteSingle": MessageLookupByLibrary.simpleMessage(
             "You cannot delete your single table left!"),
+        "checkList": MessageLookupByLibrary.simpleMessage("Check list"),
+        "checkListCreate":
+            MessageLookupByLibrary.simpleMessage("Check list create"),
+        "checkListDetails":
+            MessageLookupByLibrary.simpleMessage("Check list details"),
         "color": MessageLookupByLibrary.simpleMessage("Accent color"),
         "comfortable": MessageLookupByLibrary.simpleMessage("Comfortable"),
         "connected": MessageLookupByLibrary.simpleMessage(
@@ -70,6 +76,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no": MessageLookupByLibrary.simpleMessage("No."),
+        "noTiles": MessageLookupByLibrary.simpleMessage(
+            "Check list cannot be empty..."),
         "notConnectedToInternet": MessageLookupByLibrary.simpleMessage(
             "You have no connection to internet!"),
         "notPartOfParty": MessageLookupByLibrary.simpleMessage(
@@ -116,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "tooBigValue":
             MessageLookupByLibrary.simpleMessage("Too big, sempai..."),
+        "typeCheck": MessageLookupByLibrary.simpleMessage("Type task"),
         "typeDescription":
             MessageLookupByLibrary.simpleMessage("Type description here..."),
         "typeLink": MessageLookupByLibrary.simpleMessage("Type link here..."),

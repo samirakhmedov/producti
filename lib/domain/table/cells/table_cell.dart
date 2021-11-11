@@ -7,6 +7,7 @@ import 'package:producti/domain/core/hive_constants.dart';
 part 'group_table_cell.dart';
 part 'note_table_cell.dart';
 part 'notification_table_cell.dart';
+part 'check_list_table_cell.dart';
 
 part 'table_cell.g.dart';
 
@@ -21,6 +22,7 @@ abstract class TableCell extends Equatable {
   factory TableCell.fromJson(Map<String, dynamic> json) {
     if (json.containsKey('children')) return GroupTableCell.fromJson(json);
     if (json.containsKey('date')) return NotificationTableCell.fromJson(json);
+    if (json.containsKey('checkList')) return CheckListTableCell.fromJson(json);
 
     return NoteTableCell.fromJson(json);
   }

@@ -74,5 +74,11 @@
     "english": "Английский",
     "russian": "Русский",
     "theme": "Тема",
-    "notificationCreation": "Создание напоминания"
+    "notificationCreation": "Создание напоминания",
+    "noTiles": "Список задач не может быть пуст...",
+    "checkListCreate": "Создание списка задач",
+    "addCheck": "Добавить задачу",
+    "checkList": "Список задач",
+    "typeCheck": "Задача...",
+    "checkListDetails": "Детали списка задач"
 }

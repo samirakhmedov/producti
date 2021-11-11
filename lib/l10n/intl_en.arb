@@ -74,5 +74,11 @@
     "english": "English",
     "russian": "Russian",
     "theme": "Theme",
-    "notificationCreation": "Notification creation"
+    "notificationCreation": "Notification creation",
+    "noTiles": "Check list cannot be empty...",
+    "checkListCreate": "Check list create",
+    "addCheck": "Add check",
+    "checkList": "Check list",
+    "typeCheck": "Type task",
+    "checkListDetails": "Check list details"
 }

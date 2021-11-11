@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addCheck": MessageLookupByLibrary.simpleMessage("Добавить задачу"),
         "addLink": MessageLookupByLibrary.simpleMessage("Добавить ссылку"),
         "addOne": MessageLookupByLibrary.simpleMessage("Добавить"),
         "alreadyCoolGuy":
@@ -29,6 +30,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "anotherOne": MessageLookupByLibrary.simpleMessage("Еще..."),
         "cannotDeleteSingle": MessageLookupByLibrary.simpleMessage(
             "Вы не можете удалить свою единственную таблицу!"),
+        "checkList": MessageLookupByLibrary.simpleMessage("Список задач"),
+        "checkListCreate":
+            MessageLookupByLibrary.simpleMessage("Создание списка задач"),
+        "checkListDetails":
+            MessageLookupByLibrary.simpleMessage("Детали списка задач"),
         "color": MessageLookupByLibrary.simpleMessage("Оттенок"),
         "comfortable": MessageLookupByLibrary.simpleMessage("Удобно"),
         "connected": MessageLookupByLibrary.simpleMessage(
@@ -73,6 +79,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "logOut": MessageLookupByLibrary.simpleMessage("Выйти"),
         "next": MessageLookupByLibrary.simpleMessage("Далее"),
         "no": MessageLookupByLibrary.simpleMessage("Нет."),
+        "noTiles": MessageLookupByLibrary.simpleMessage(
+            "Список задач не может быть пуст..."),
         "notConnectedToInternet": MessageLookupByLibrary.simpleMessage(
             "У вас нету подключения к интернету!"),
         "notPartOfParty": MessageLookupByLibrary.simpleMessage(
@@ -120,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
         "tooBigValue":
             MessageLookupByLibrary.simpleMessage("Слишком большой..."),
+        "typeCheck": MessageLookupByLibrary.simpleMessage("Задача..."),
         "typeDescription":
             MessageLookupByLibrary.simpleMessage("А тут описание..."),
         "typeLink": MessageLookupByLibrary.simpleMessage("Ссылочки..."),

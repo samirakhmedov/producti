@@ -14,11 +14,8 @@ import 'package:producti/presentation/core/errors/error_code_ext.dart';
 import 'package:producti/application/settings/settings_ext.dart';
 
 class NotificationCellCreatePage extends StatelessWidget {
-  final NoteTableCell? cell;
-
   const NotificationCellCreatePage({
     Key? key,
-    this.cell,
   }) : super(key: key);
 
   Future<bool> _onPop(BuildContext context,

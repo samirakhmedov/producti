@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:producti/domain/table/cells/table_cell.dart' as t;
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/table/widgets/time_widget.dart';
@@ -17,6 +16,13 @@ class TableCellTile extends StatelessWidget {
     if (cell is t.GroupTableCell) {
       return _GroupTableCellTile(
         cell as t.GroupTableCell,
+        onTap: onTap,
+      );
+    }
+
+    if (cell is t.CheckListTableCell) {
+      return _CheckListTableCell(
+        cell as t.CheckListTableCell,
         onTap: onTap,
       );
     }
@@ -84,7 +90,6 @@ class _GroupTableCellTile extends StatelessWidget {
               Icons.menu,
               color: theme.primaryColor,
             ),
-            const Gap(),
           ],
         ),
       ),
@@ -175,6 +180,92 @@ class _NoteTableCellTile extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CheckListTableCell extends StatelessWidget {
+  final t.CheckListTableCell cell;
+  final void Function()? onTap;
+
+  const _CheckListTableCell(this.cell, {Key? key, this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = ThemeHelper.getTheme(context);
+    final textTheme = theme.textTheme;
+    final size = MediaQuery.of(context).size;
+
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 12,
+        ),
+        decoration: BoxDecoration(
+          border: Border(
+            left: BorderSide(
+              color: theme.primaryColor,
+              width: 3,
+            ),
+          ),
+        ),
+        width: size.width,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    cell.title,
+                    style: textTheme.bodyText2!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Icon(
+                    Icons.list_rounded,
+                    color: theme.primaryColor,
+                  ),
+                ],
+              ),
+              ...cell.checkList.map(
+                (e) => Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 4,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const _Dot(),
+                      const Gap(),
+                      Text(
+                        e.title,
+                        style: theme.textTheme.bodyText2!.copyWith(
+                          decoration: e.value
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                        ),
+                      ),
+                      const Gap(),
+                      if (e.value)
+                        const Icon(
+                          Icons.check,
+                          color: kGreen,
+                        ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),

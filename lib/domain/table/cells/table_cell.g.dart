@@ -119,3 +119,71 @@ class NotificationTableCellAdapter extends TypeAdapter<NotificationTableCell> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+class CheckListTableCellAdapter extends TypeAdapter<CheckListTableCell> {
+  @override
+  final int typeId = 4;
+
+  @override
+  CheckListTableCell read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return CheckListTableCell(
+      checkList: (fields[1] as List).cast<CheckTileTableCell>(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, CheckListTableCell obj) {
+    writer
+      ..writeByte(1)
+      ..writeByte(1)
+      ..write(obj.checkList);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CheckListTableCellAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class CheckTileTableCellAdapter extends TypeAdapter<CheckTileTableCell> {
+  @override
+  final int typeId = 5;
+
+  @override
+  CheckTileTableCell read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return CheckTileTableCell(
+      value: fields[1] as bool,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, CheckTileTableCell obj) {
+    writer
+      ..writeByte(1)
+      ..writeByte(1)
+      ..write(obj.value);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CheckTileTableCellAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
