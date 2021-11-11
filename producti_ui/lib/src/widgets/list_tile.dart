@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DrawerListTile extends StatelessWidget {
   final IconData? icon;
@@ -22,7 +23,7 @@ class DrawerListTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 35,
+        height: 40.sp,
         width: double.maxFinite,
         color: selected ? theme.primaryColor : theme.backgroundColor,
         child: Stack(

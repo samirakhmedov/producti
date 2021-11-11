@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
 import 'package:producti/application/tables/pages/group_create/group_create_cubit.dart';
 import 'package:producti/application/tables/pages/table_create/table_create_cubit.dart';
@@ -67,22 +68,21 @@ class _PathNameWidgetState extends State<PathNameWidget> {
 
     return Row(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Flexible(
-          child: GestureDetector(
-            onDoubleTap: () {
-              setState(() {
-                _editTableName = true;
-              });
-            },
-            child: Center(
-              child: Text(
-                title,
-                overflow: TextOverflow.ellipsis,
-                style: textTheme.headline3!.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+        GestureDetector(
+          onDoubleTap: () {
+            setState(() {
+              _editTableName = true;
+            });
+          },
+          child: Center(
+            child: Text(
+              title,
+              overflow: TextOverflow.ellipsis,
+              style: textTheme.headline3!.copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.sp,
               ),
             ),
           ),
@@ -92,6 +92,7 @@ class _PathNameWidgetState extends State<PathNameWidget> {
             " > ",
             style: textTheme.headline3!.copyWith(
               fontWeight: FontWeight.bold,
+              fontSize: 20.sp,
             ),
           ),
           if (widget.path.path.length >= 2)
@@ -99,24 +100,24 @@ class _PathNameWidgetState extends State<PathNameWidget> {
               "... > ",
               style: textTheme.headline3!.copyWith(
                 fontWeight: FontWeight.bold,
+                fontSize: 20.sp,
               ),
             ),
         ],
         if (subTitle != null)
-          Flexible(
-            child: GestureDetector(
-              onDoubleTap: () {
-                setState(() {
-                  _editGroupName = true;
-                });
-              },
-              child: Center(
-                child: Text(
-                  subTitle,
-                  overflow: TextOverflow.ellipsis,
-                  style: textTheme.headline3!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+          GestureDetector(
+            onDoubleTap: () {
+              setState(() {
+                _editGroupName = true;
+              });
+            },
+            child: Center(
+              child: Text(
+                subTitle,
+                overflow: TextOverflow.ellipsis,
+                style: textTheme.headline3!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.sp,
                 ),
               ),
             ),
@@ -201,6 +202,7 @@ class _GroupNameEdit extends StatelessWidget {
               initialValue: path.getParticle(table).title,
               textStyle: textTheme.headline3!.copyWith(
                 fontWeight: FontWeight.bold,
+                fontSize: 20.sp,
               ),
               suffixWidget: InkWell(
                 onTap: () {
@@ -271,7 +273,7 @@ class _TableNameEdit extends StatelessWidget {
     final focus = FocusNode();
 
     return SizedBox(
-      width: size.width * .86,
+      width: size.width * .83,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -308,6 +310,7 @@ class _TableNameEdit extends StatelessWidget {
               initialValue: title,
               textStyle: textTheme.headline3!.copyWith(
                 fontWeight: FontWeight.bold,
+                fontSize: 20.sp,
               ),
               suffixWidget: GestureDetector(
                 onTap: () {

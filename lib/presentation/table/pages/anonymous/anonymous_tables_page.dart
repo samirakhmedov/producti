@@ -482,8 +482,30 @@ class _TablesBody extends StatelessWidget {
       size: query.size,
       child: Stack(
         children: [
+          if (!path.isEmpty)
+            Positioned(
+              left: 5,
+              top: 5,
+              child: IconButton(
+                onPressed: () {
+                  final newPath = path.popPath();
+
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => TablesPage(
+                        tableIndex: tableIndex,
+                        path: newPath.isEmpty ? null : newPath,
+                      ),
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                ),
+              ),
+            ),
           Positioned(
-            top: 10,
+            top: 15,
             left: 0,
             right: 0,
             child: Padding(
