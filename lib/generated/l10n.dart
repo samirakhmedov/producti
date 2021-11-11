@@ -670,31 +670,41 @@ class S {
     );
   }
 
-  /// `Yes.`
+  /// `Yes`
   String get yes {
     return Intl.message(
-      'Yes.',
+      'Yes',
       name: 'yes',
       desc: '',
       args: [],
     );
   }
 
-  /// `No.`
+  /// `No`
   String get no {
     return Intl.message(
-      'No.',
+      'No',
       name: 'no',
       desc: '',
       args: [],
     );
   }
 
-  /// `Are you sure you want to delete that element? All their children would be deleted also.`
+  /// `Are you sure you want to delete that element?`
   String get youSureToDelete {
     return Intl.message(
-      'Are you sure you want to delete that element? All their children would be deleted also.',
+      'Are you sure you want to delete that element?',
       name: 'youSureToDelete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete that element? All their children would be deleted also.`
+  String get youSureToDeleteGroup {
+    return Intl.message(
+      'Are you sure you want to delete that element? All their children would be deleted also.',
+      name: 'youSureToDeleteGroup',
       desc: '',
       args: [],
     );
@@ -865,6 +875,16 @@ class S {
     return Intl.message(
       'Check list details',
       name: 'checkListDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date field is empty!`
+  String get voidDateValue {
+    return Intl.message(
+      'Date field is empty!',
+      name: 'voidDateValue',
       desc: '',
       args: [],
     );

@@ -61,9 +61,10 @@
     "edit": "Edit",
     "delete": "Delete",
     "rename": "Rename",
-    "yes": "Yes.",
-    "no": "No.",
-    "youSureToDelete": "Are you sure you want to delete that element? All their children would be deleted also.",
+    "yes": "Yes",
+    "no": "No",
+    "youSureToDelete": "Are you sure you want to delete that element?",
+    "youSureToDeleteGroup": "Are you sure you want to delete that element? All their children would be deleted also.",
     "notificationInPast": "You cannot remind something to yourself in past. :)",
     "pickDate": "Pick date here...",
     "cannotDeleteSingle": "You cannot delete your single table left!",
@@ -80,5 +81,6 @@
     "addCheck": "Add check",
     "checkList": "Check list",
     "typeCheck": "Type task",
-    "checkListDetails": "Check list details"
+    "checkListDetails": "Check list details",
+    "voidDateValue": "Date field is empty!"
 }

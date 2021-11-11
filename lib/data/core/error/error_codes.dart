@@ -18,4 +18,5 @@ enum ErrorCode {
   notificationsInitializationFailure,
   notificationInPast,
   noTiles,
+  voidDateValue,
 }

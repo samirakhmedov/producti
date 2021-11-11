@@ -43,7 +43,7 @@ class NotificationValidationState extends Equatable {
   ErrorCode? get error {
     if (title.isEmpty && description.isEmpty) return ErrorCode.voidValue;
 
-    if (dateTime == null) return ErrorCode.voidValue;
+    if (dateTime == null) return ErrorCode.voidDateValue;
 
     if (dateTime?.isBefore(DateTime.now()) ?? false) {
       return ErrorCode.notificationInPast;

@@ -78,7 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Представление уже началось!"),
         "logOut": MessageLookupByLibrary.simpleMessage("Выйти"),
         "next": MessageLookupByLibrary.simpleMessage("Далее"),
-        "no": MessageLookupByLibrary.simpleMessage("Нет."),
+        "no": MessageLookupByLibrary.simpleMessage("Нет"),
         "noTiles": MessageLookupByLibrary.simpleMessage(
             "Список задач не может быть пуст..."),
         "notConnectedToInternet": MessageLookupByLibrary.simpleMessage(
@@ -140,11 +140,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Вы не зарегестрированы на этом устройстве!"),
         "userRemoved": MessageLookupByLibrary.simpleMessage(
             "Этого пользователь был удален из системы. Создайте нового."),
+        "voidDateValue":
+            MessageLookupByLibrary.simpleMessage("Время не заполнено!"),
         "voidValue": MessageLookupByLibrary.simpleMessage("Пустое поле"),
         "wrongPassword":
             MessageLookupByLibrary.simpleMessage("Неверный пароль!"),
-        "yes": MessageLookupByLibrary.simpleMessage("Да."),
+        "yes": MessageLookupByLibrary.simpleMessage("Да"),
         "youSureToDelete": MessageLookupByLibrary.simpleMessage(
+            "Вы уверены, что хотите удалить данный элемент?"),
+        "youSureToDeleteGroup": MessageLookupByLibrary.simpleMessage(
             "Вы уверены, что хотите удалить данный элемент? Все дочерние элементы будут тоже удалены.")
       };
 }

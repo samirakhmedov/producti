@@ -45,6 +45,8 @@ extension ErrorCodeExt on ErrorCode {
         return intl.notificationInPast;
       case ErrorCode.noTiles:
         return intl.noTiles;
+      case ErrorCode.voidDateValue:
+        return intl.voidDateValue;
     }
   }
 }

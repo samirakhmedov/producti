@@ -378,7 +378,7 @@ class _TablesDrawer extends StatelessWidget {
                                   intl.yes,
                                   intl.no,
                                 ],
-                                title: intl.youSureToDelete,
+                                title: intl.youSureToDeleteGroup,
                               ),
                             ),
                           );
@@ -762,7 +762,7 @@ class _TableCellsList extends StatelessWidget {
                           intl.yes,
                           intl.no,
                         ],
-                        title: intl.youSureToDelete,
+                        title: intl.youSureToDeleteGroup,
                       ),
                     ),
                   );

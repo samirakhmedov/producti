@@ -75,7 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "letHim": MessageLookupByLibrary.simpleMessage("Let him in, boys."),
         "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
-        "no": MessageLookupByLibrary.simpleMessage("No."),
+        "no": MessageLookupByLibrary.simpleMessage("No"),
         "noTiles": MessageLookupByLibrary.simpleMessage(
             "Check list cannot be empty..."),
         "notConnectedToInternet": MessageLookupByLibrary.simpleMessage(
@@ -135,11 +135,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "No local account to sign in automatically!"),
         "userRemoved": MessageLookupByLibrary.simpleMessage(
             "This user was removed from system. Create new one."),
+        "voidDateValue":
+            MessageLookupByLibrary.simpleMessage("Date field is empty!"),
         "voidValue": MessageLookupByLibrary.simpleMessage("Field is empty"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Not correct password for this account!"),
-        "yes": MessageLookupByLibrary.simpleMessage("Yes."),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "youSureToDelete": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete that element?"),
+        "youSureToDeleteGroup": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete that element? All their children would be deleted also.")
       };
 }
