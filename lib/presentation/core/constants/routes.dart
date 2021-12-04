@@ -5,6 +5,7 @@ import 'package:producti/presentation/launch/pages/launch_page.dart';
 import 'package:producti/presentation/launch/pages/onboarding_page.dart';
 import 'package:producti/presentation/settings/pages/settings_language_page.dart';
 import 'package:producti/presentation/settings/pages/settings_page.dart';
+import 'package:producti/presentation/table/pages/showcase/table_showcase_page.dart';
 import 'package:producti/presentation/table/pages/tables_page.dart';
 
 /// Helper, that holds
@@ -16,6 +17,7 @@ class AppRoutes {
   static const tables = '/tables';
   static const settings = '/settings';
   static const settingsLanguage = '/settings/language';
+  static const showcase = '/showcase';
 }
 
 final routes = <String, WidgetBuilder>{
@@ -26,4 +28,5 @@ final routes = <String, WidgetBuilder>{
   AppRoutes.settings: (BuildContext context) => const SettingsPage(),
   AppRoutes.settingsLanguage: (BuildContext context) =>
       const SettingsLanguagePage(),
+  AppRoutes.showcase: (BuildContext context) => const TableShowcasePage(),
 };

@@ -364,7 +364,6 @@ class _TablesDrawer extends StatelessWidget {
                   if (state is AnonymousTableLoaded) {
                     return ListView.separated(
                       padding: EdgeInsets.zero,
-                      shrinkWrap: true,
                       itemBuilder: (context, index) => InkWell(
                         onLongPress: () async {
                           bool? agreement;
@@ -578,7 +577,6 @@ class _TableCellsList extends StatelessWidget {
 
     return ReorderableListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 30),
-      shrinkWrap: true,
       itemBuilder: (context, index) {
         final cell = cells[index];
 

@@ -43,9 +43,11 @@ class LaunchPage extends StatelessWidget {
 
         Navigator.of(context).pushReplacementNamed(
           state.onboardingPassed
-              ? authState is AuthLoggedIn || authState is AuthAnonymousState
-                  ? AppRoutes.tables
-                  : AppRoutes.auth
+              ? state.showcaseShown
+                  ? authState is AuthLoggedIn || authState is AuthAnonymousState
+                      ? AppRoutes.tables
+                      : AppRoutes.auth
+                  : AppRoutes.showcase
               : AppRoutes.onboarding,
         );
       },

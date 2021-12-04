@@ -12,7 +12,6 @@ class ColorPicker extends StatelessWidget {
       height: 50,
       child: ListView.separated(
         itemCount: colorList.length,
-        shrinkWrap: true,
         scrollDirection: Axis.horizontal,
         separatorBuilder: (context, index) => const Gap(size: 25),
         itemBuilder: (context, index) => InkWell(
