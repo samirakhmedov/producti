@@ -889,6 +889,416 @@ class S {
       args: [],
     );
   }
+
+  /// `Do something`
+  String get doSomething {
+    return Intl.message(
+      'Do something',
+      name: 'doSomething',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You awesome`
+  String get youAwesome {
+    return Intl.message(
+      'You awesome',
+      name: 'youAwesome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Another note`
+  String get anotherNote {
+    return Intl.message(
+      'Another note',
+      name: 'anotherNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Another group`
+  String get anotherGroup {
+    return Intl.message(
+      'Another group',
+      name: 'anotherGroup',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wow`
+  String get wow {
+    return Intl.message(
+      'Wow',
+      name: 'wow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are ready to work with Producti!\n\nEnjoy!`
+  String get youAreReady {
+    return Intl.message(
+      'You are ready to work with Producti!\n\nEnjoy!',
+      name: 'youAreReady',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome to Producti!\n\nBefore you start your producitve day, I must teach you, how to work with app.\n\nSo, listen, please, carefully.`
+  String get welcome {
+    return Intl.message(
+      'Welcome to Producti!\n\nBefore you start your producitve day, I must teach you, how to work with app.\n\nSo, listen, please, carefully.',
+      name: 'welcome',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `"Add" button`
+  String get addButtonTitle {
+    return Intl.message(
+      '"Add" button',
+      name: 'addButtonTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First button you to press. Will show you all cell types on next window...`
+  String get addButtonDescription {
+    return Intl.message(
+      'First button you to press. Will show you all cell types on next window...',
+      name: 'addButtonDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cell types`
+  String get bottomSheetContentTitle {
+    return Intl.message(
+      'Cell types',
+      name: 'bottomSheetContentTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There it is. After tap you gonna go to individual menu of each cell to create it. There are...`
+  String get bottomSheetContentDescription {
+    return Intl.message(
+      'There it is. After tap you gonna go to individual menu of each cell to create it. There are...',
+      name: 'bottomSheetContentDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cell, that allows you add another cells inside him.`
+  String get bottomSheetGroupDescription {
+    return Intl.message(
+      'Cell, that allows you add another cells inside him.',
+      name: 'bottomSheetGroupDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cell with title and body. Can store any your text. Also, you can save links inside of him.`
+  String get bottomSheetNoteDescription {
+    return Intl.message(
+      'Cell with title and body. Can store any your text. Also, you can save links inside of him.',
+      name: 'bottomSheetNoteDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Same note, but with time when you would get a notification!`
+  String get bottomSheetNotificationDescription {
+    return Intl.message(
+      'Same note, but with time when you would get a notification!',
+      name: 'bottomSheetNotificationDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cell with title and...check list. A list of items which you can easily create and mark done.`
+  String get bottomSheetCheckListDescription {
+    return Intl.message(
+      'Cell with title and...check list. A list of items which you can easily create and mark done.',
+      name: 'bottomSheetCheckListDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Beatiful, right?`
+  String get allCellsTitle {
+    return Intl.message(
+      'Beatiful, right?',
+      name: 'allCellsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This is how notes, group, notification and check list looks like...`
+  String get allCellsDescription {
+    return Intl.message(
+      'This is how notes, group, notification and check list looks like...',
+      name: 'allCellsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Actions on main screen`
+  String get cellSwipeRightTitle {
+    return Intl.message(
+      'Actions on main screen',
+      name: 'cellSwipeRightTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can swipe any cell on your screen right and do several stuff...`
+  String get cellSwipeRightDescription {
+    return Intl.message(
+      'You can swipe any cell on your screen right and do several stuff...',
+      name: 'cellSwipeRightDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit action`
+  String get firstSlideActionTitle {
+    return Intl.message(
+      'Edit action',
+      name: 'firstSlideActionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Automatically redirects you to edit page of selected cell.`
+  String get firstSlideActionDescription {
+    return Intl.message(
+      'Automatically redirects you to edit page of selected cell.',
+      name: 'firstSlideActionDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete action`
+  String get secondSlideActionTitle {
+    return Intl.message(
+      'Delete action',
+      name: 'secondSlideActionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `BURN HIM TO THE GROUND.`
+  String get secondSlideActionDescription {
+    return Intl.message(
+      'BURN HIM TO THE GROUND.',
+      name: 'secondSlideActionDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group cell actions`
+  String get groupCellRightSwipeTitle {
+    return Intl.message(
+      'Group cell actions',
+      name: 'groupCellRightSwipeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `But actions on group cell is actually different.`
+  String get groupCellRightSwipeDescription {
+    return Intl.message(
+      'But actions on group cell is actually different.',
+      name: 'groupCellRightSwipeDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group editing`
+  String get groupFirstActionTitle {
+    return Intl.message(
+      'Group editing',
+      name: 'groupFirstActionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Group cell you only can rename on special menu`
+  String get groupFirstActionDescription {
+    return Intl.message(
+      'Group cell you only can rename on special menu',
+      name: 'groupFirstActionDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current table rename`
+  String get simplePathNameTitle {
+    return Intl.message(
+      'Current table rename',
+      name: 'simplePathNameTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Double tap on table name to change title.`
+  String get simplePathNameDescription {
+    return Intl.message(
+      'Double tap on table name to change title.',
+      name: 'simplePathNameDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current group rename`
+  String get complexPathNameTitle {
+    return Intl.message(
+      'Current group rename',
+      name: 'complexPathNameTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Double tap on table name to change title of group you view.`
+  String get complexPathNameDescription {
+    return Intl.message(
+      'Double tap on table name to change title of group you view.',
+      name: 'complexPathNameDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open drawer`
+  String get drawerOpenButtonTitle {
+    return Intl.message(
+      'Open drawer',
+      name: 'drawerOpenButtonTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To open drawer, tap there.`
+  String get drawerOpenButtonDescription {
+    return Intl.message(
+      'To open drawer, tap there.',
+      name: 'drawerOpenButtonDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There it is.`
+  String get drawerTitle {
+    return Intl.message(
+      'There it is.',
+      name: 'drawerTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `And what you can do...`
+  String get drawerDescription {
+    return Intl.message(
+      'And what you can do...',
+      name: 'drawerDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tables list`
+  String get tablesListTitle {
+    return Intl.message(
+      'Tables list',
+      name: 'tablesListTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View all your tables.`
+  String get tablesListDescription {
+    return Intl.message(
+      'View all your tables.',
+      name: 'tablesListDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Table creation`
+  String get addTableTitle {
+    return Intl.message(
+      'Table creation',
+      name: 'addTableTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You also can tap there and create new table...`
+  String get addTableDescription {
+    return Intl.message(
+      'You also can tap there and create new table...',
+      name: 'addTableDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settingsTitle {
+    return Intl.message(
+      'Settings',
+      name: 'settingsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `And there you can switch theme, color accent, language and so on...`
+  String get settingsDescription {
+    return Intl.message(
+      'And there you can switch theme, color accent, language and so on...',
+      name: 'settingsDescription',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

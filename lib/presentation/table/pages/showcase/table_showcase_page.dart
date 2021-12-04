@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:producti/application/launch/logic/launch_bloc.dart';
 import 'package:producti/domain/table/cells/table_cell.dart' as c;
 import 'package:producti/domain/table/table.dart' as t;
 import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/generated/l10n.dart';
+import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti/presentation/table/widgets/app_showcase_widget.dart';
 import 'package:producti/presentation/table/widgets/create_popup_tile.dart';
 import 'package:producti/presentation/table/widgets/path_name_widget.dart';
 import 'package:producti/presentation/table/widgets/table_cell_tile.dart';
 import 'package:producti_ui/producti_ui.dart';
+import 'package:provider/src/provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:showcaseview/showcaseview.dart';
 
@@ -45,25 +48,9 @@ class _TableShowcaseContent extends StatefulWidget {
 }
 
 class _TableShowcaseContentState extends State<_TableShowcaseContent> {
-  final t.Table _showcaseTable = t.Table(
-    title: 'Main',
-    cells: [
-      c.NoteTableCell(title: 'Do something', description: 'you awesome'),
-      c.NoteTableCell(
-        title: 'Another note',
-        links: const [
-          'https://firebaselogging-pa.googleapis.com/v1/firelog/legacy/batchlog'
-        ],
-      ),
-      c.GroupTableCell(
-        title: 'Another note',
-      ),
-      c.NotificationTableCell(
-        time: DateTime.now(),
-        description: 'Wow',
-      ),
-    ],
-  );
+  late final t.Table _showcaseTable;
+
+  TableLink _tableLink = const TableLink([]);
 
   final GlobalKey _one = GlobalKey();
   final GlobalKey _two = GlobalKey();
@@ -76,51 +63,171 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
   final GlobalKey _nine = GlobalKey();
   final GlobalKey _ten = GlobalKey();
   final GlobalKey _eleven = GlobalKey();
+  final GlobalKey _twelve = GlobalKey();
+  final GlobalKey _thirteen = GlobalKey();
+  final GlobalKey _fourteen = GlobalKey();
+  final GlobalKey _fiveteen = GlobalKey();
+  final GlobalKey _sixteen = GlobalKey();
+  final GlobalKey _seventeen = GlobalKey();
+  final GlobalKey _eighteen = GlobalKey();
+  final GlobalKey _nineteen = GlobalKey();
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  bool _isOpened = false;
+  bool _isBottomSheetOpened = false;
+  bool _isDrawerOpened = false;
 
-  final _slidableController = SlidableController();
+  void _openBottomSheet() {
+    setState(() {
+      _isBottomSheetOpened = !_isBottomSheetOpened;
+    });
+  }
 
   void _openDrawer() {
     setState(() {
-      _isOpened = !_isOpened;
+      _isDrawerOpened = !_isDrawerOpened;
     });
   }
 
   @override
   void didChangeDependencies() {
+    final intl = S.of(context);
+
+    _showcaseTable = t.Table(
+      title: 'Main',
+      cells: [
+        c.NoteTableCell(
+          title: intl.doSomething,
+          description: intl.youAwesome,
+        ),
+        c.NoteTableCell(
+          title: intl.anotherNote,
+          links: const ['https://pub.dev/packages/showcaseview'],
+        ),
+        c.GroupTableCell(
+          title: intl.anotherGroup,
+        ),
+        c.NotificationTableCell(
+          time: DateTime.now(),
+          description: intl.wow,
+        ),
+        c.CheckListTableCell(
+          title: intl.checkList,
+          checkList: [
+            c.CheckTileTableCell(
+              title: intl.wow,
+            ),
+            c.CheckTileTableCell(
+              title: intl.ok,
+              value: true,
+            ),
+          ],
+        ),
+      ],
+    );
+
     final theme = ThemeHelper.getTheme(context);
 
     final query = MediaQuery.of(context);
 
     widget.completeStream.listen((index) {
-      if (index == 0) {
-        _openDrawer();
+      switch (index) {
+        case 0:
+          _openBottomSheet();
 
-        Future.delayed(const Duration(seconds: 1)).then(
-          (value) => ShowCaseWidget.of(context)!.startShowCase([_two]),
-        );
-      } else if (index == 1) {
-        ShowCaseWidget.of(context)!.startShowCase([_three, _four, _five, _six]);
-      } else if (index == 2) {
-        _openDrawer();
+          Future.delayed(const Duration(seconds: 1)).then(
+            (value) => ShowCaseWidget.of(context)!.startShowCase([_two]),
+          );
+          break;
+        case 1:
+          ShowCaseWidget.of(context)!
+              .startShowCase([_three, _four, _five, _six]);
+          break;
+        case 2:
+          _openBottomSheet();
 
-        Future.delayed(const Duration(seconds: 1)).then(
-          (value) => ShowCaseWidget.of(context)!.startShowCase([_seven]),
-        );
-      } else if (index == 3) {
-        setState(() {
-          _showcaseTable.cells = [_showcaseTable.cells.first];
-        });
+          Future.delayed(const Duration(seconds: 1)).then(
+            (value) => ShowCaseWidget.of(context)!.startShowCase([_seven]),
+          );
+          break;
+        case 3:
+          setState(() {
+            _showcaseTable.cells = [_showcaseTable.cells.first];
+          });
 
-        _slidableController.activeState?.open();
+          ShowCaseWidget.of(context)!.startShowCase([_eight, _nine, _ten]);
+          break;
+        case 4:
+          setState(() {
+            _showcaseTable.addCell(
+              c.GroupTableCell(
+                title: intl.anotherGroup,
+              ),
+              _tableLink,
+            );
+          });
 
-        Future.delayed(const Duration(seconds: 1)).then(
-          (value) => ShowCaseWidget.of(context)!
-              .startShowCase([_eight, _nine, _ten, _eleven]),
-        );
+          ShowCaseWidget.of(context)!.startShowCase([_eleven, _twelve]);
+          break;
+        case 5:
+          ShowCaseWidget.of(context)!.startShowCase([_thirteen]);
+          break;
+        case 6:
+          setState(() {
+            _tableLink = _tableLink.addPath(1);
+          });
+
+          ShowCaseWidget.of(context)!.startShowCase([_fourteen, _fiveteen]);
+          break;
+
+        case 7:
+          _openDrawer();
+
+          Future.delayed(const Duration(seconds: 2)).then(
+            (value) => ShowCaseWidget.of(context)!
+                .startShowCase([_sixteen, _seventeen, _eighteen, _nineteen]),
+          );
+
+          break;
+
+        case 8:
+          _openDrawer();
+
+          Future.delayed(const Duration(seconds: 2)).then(
+            (value) => showDialog(
+              context: context,
+              builder: (context) => Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: SizedBox.fromSize(
+                    size: query.size,
+                    child: Center(
+                      child: Text(
+                        intl.youAreReady,
+                        style: theme.textTheme.bodyText2!.copyWith(
+                          color: kWhite,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ).then(
+              (value) {
+                final launch = context.read<LaunchBloc>();
+
+                launch.mutate(showcaseShown: true);
+
+                Navigator.of(context).pushReplacementNamed(AppRoutes.tables);
+              },
+            ),
+          );
+
+          break;
       }
     });
 
@@ -137,10 +244,14 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
               child: SizedBox.fromSize(
                 size: query.size,
                 child: Center(
-                  child: Text(
-                    'intl.welcome',
-                    style: theme.textTheme.bodyText2!.copyWith(
-                      color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: Text(
+                      intl.welcome,
+                      style: theme.textTheme.bodyText2!.copyWith(
+                        color: kWhite,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
@@ -166,9 +277,6 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
 
     return Scaffold(
       key: _scaffoldKey,
-      // endDrawer: _TablesDrawer(
-      //   tableIndex: tableIndex,
-      // ),
       body: SafeArea(
         child: SizedBox(
           width: query.size.width,
@@ -181,13 +289,13 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                 child: SizedBox(
                   width: query.size.width,
                   child: _TableShowcaseBody(
-                    cells: _showcaseTable.cells,
+                    cells: _tableLink.getParticles(_showcaseTable),
                     allCellsKey: _seven,
-                    firstCellKey: _eight,
+                    noteCellKey: _eight,
                     firstSlideActionKey: _nine,
                     secondSlideActionKey: _ten,
-                    thirdSlideActionKey: _eleven,
-                    controller: _slidableController,
+                    groupCellKey: _eleven,
+                    groupSlideActionKey: _twelve,
                   ),
                 ),
               ),
@@ -195,8 +303,8 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                 left: 15,
                 bottom: 15,
                 child: AppShowcaseWidget(
-                  title: 'one',
-                  description: 'one',
+                  title: intl.addButtonTitle,
+                  description: intl.addButtonDescription,
                   globalKey: _one,
                   child: FloatingActionButton(
                     onPressed: () {},
@@ -213,24 +321,51 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                 right: 0,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 45),
-                  child: PathNameWidget(
-                    table: _showcaseTable,
-                    tableIndex: 0,
-                    path: const TableLink([]),
-                  ),
+                  child: StreamBuilder<int>(
+                      stream: widget.completeStream,
+                      builder: (context, snapshot) {
+                        if ((snapshot.data ?? -1) > 5) {
+                          return AppShowcaseWidget(
+                            title: intl.complexPathNameTitle,
+                            description: intl.complexPathNameDescription,
+                            globalKey: _fourteen,
+                            child: PathNameWidget(
+                              table: _showcaseTable,
+                              tableIndex: 0,
+                              path: _tableLink,
+                            ),
+                          );
+                        }
+
+                        return AppShowcaseWidget(
+                          title: intl.simplePathNameTitle,
+                          description: intl.simplePathNameDescription,
+                          globalKey: _thirteen,
+                          child: PathNameWidget(
+                            table: _showcaseTable,
+                            tableIndex: 0,
+                            path: _tableLink,
+                          ),
+                        );
+                      }),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(15.0),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
                 child: Align(
                   alignment: Alignment.topRight,
-                  child: Icon(Icons.menu),
+                  child: AppShowcaseWidget(
+                    title: intl.drawerOpenButtonTitle,
+                    description: intl.drawerOpenButtonDescription,
+                    globalKey: _fiveteen,
+                    child: const Icon(Icons.menu),
+                  ),
                 ),
               ),
               AnimatedPositioned(
                 duration: const Duration(milliseconds: 750),
                 curve: Curves.easeIn,
-                bottom: _isOpened ? 0 : -query.size.height * 0.37,
+                bottom: _isBottomSheetOpened ? 0 : -query.size.height * 0.37,
                 child: AppBottomSheet(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -238,15 +373,15 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                     ).copyWith(top: 46.sp),
                     child: AppShowcaseWidget(
                       globalKey: _two,
-                      title: 'Two',
-                      description: 'Two',
+                      title: intl.bottomSheetContentTitle,
+                      description: intl.bottomSheetContentDescription,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           AppShowcaseWidget(
                             globalKey: _three,
-                            title: 'Three',
-                            description: 'Three',
+                            title: intl.group,
+                            description: intl.bottomSheetGroupDescription,
                             child: CreatePopupTile(
                               icon: Icons.menu,
                               title: intl.group,
@@ -255,8 +390,8 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                           const Gap(size: 12),
                           AppShowcaseWidget(
                             globalKey: _four,
-                            title: 'Three',
-                            description: 'Three',
+                            title: intl.note,
+                            description: intl.bottomSheetNoteDescription,
                             child: CreatePopupTile(
                               icon: Icons.edit,
                               title: intl.note,
@@ -265,8 +400,9 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                           const Gap(size: 12),
                           AppShowcaseWidget(
                             globalKey: _five,
-                            title: 'Three',
-                            description: 'Three',
+                            title: intl.notification,
+                            description:
+                                intl.bottomSheetNotificationDescription,
                             child: CreatePopupTile(
                               icon: Icons.access_time,
                               title: intl.notification,
@@ -275,14 +411,76 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                           const Gap(size: 12),
                           AppShowcaseWidget(
                             globalKey: _six,
-                            title: 'Three',
-                            description: 'Three',
+                            title: intl.checkList,
+                            description: intl.bottomSheetCheckListDescription,
                             child: CreatePopupTile(
                               icon: Icons.list_rounded,
                               title: intl.checkList,
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 750),
+                curve: Curves.easeIn,
+                right: _isDrawerOpened ? 0 : -query.size.width * .8,
+                child: AppShowcaseWidget(
+                  globalKey: _sixteen,
+                  title: intl.drawerTitle,
+                  description: intl.drawerDescription,
+                  child: SizedBox(
+                    width: query.size.width * 0.8,
+                    height: query.size.height * .95,
+                    child: Drawer(
+                      elevation: 10.0,
+                      child: Container(
+                        color: theme.backgroundColor,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: query.padding.top + 15,
+                            ),
+                            const Gap(),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.topCenter,
+                                child: AppShowcaseWidget(
+                                  globalKey: _seventeen,
+                                  description: intl.tablesListDescription,
+                                  title: intl.tablesListTitle,
+                                  child: DrawerListTile(
+                                    text: _showcaseTable.title,
+                                    icon: Icons.grid_view_outlined,
+                                    selected: true,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            AppShowcaseWidget(
+                              globalKey: _eighteen,
+                              description: intl.addTableDescription,
+                              title: intl.addTableTitle,
+                              child: DrawerListTile(
+                                text: intl.addOne,
+                                icon: Icons.add,
+                              ),
+                            ),
+                            const AppDivider(),
+                            AppShowcaseWidget(
+                              globalKey: _nineteen,
+                              description: intl.settingsDescription,
+                              title: intl.settingsTitle,
+                              child: DrawerListTile(
+                                text: intl.settings,
+                                icon: Icons.settings,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -300,22 +498,21 @@ class _TableShowcaseBody extends StatelessWidget {
   final List<c.TableCell> cells;
 
   final GlobalKey allCellsKey;
-  final GlobalKey firstCellKey;
+  final GlobalKey noteCellKey;
   final GlobalKey firstSlideActionKey;
   final GlobalKey secondSlideActionKey;
-  final GlobalKey thirdSlideActionKey;
-
-  final SlidableController controller;
+  final GlobalKey groupCellKey;
+  final GlobalKey groupSlideActionKey;
 
   const _TableShowcaseBody({
     Key? key,
     required this.cells,
-    required this.controller,
-    required this.firstCellKey,
     required this.firstSlideActionKey,
     required this.secondSlideActionKey,
-    required this.thirdSlideActionKey,
     required this.allCellsKey,
+    required this.noteCellKey,
+    required this.groupCellKey,
+    required this.groupSlideActionKey,
   }) : super(key: key);
 
   @override
@@ -328,89 +525,115 @@ class _TableShowcaseBody extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: AppShowcaseWidget(
         globalKey: allCellsKey,
-        title: 'Title',
-        description: 'Description',
+        title: intl.allCellsTitle,
+        description: intl.allCellsDescription,
         child: cells.length == 1
-            ? Slidable(
-                actionPane: const SlidableDrawerActionPane(),
-                controller: controller,
-                actions: [
-                  IconSlideAction(
-                    key: firstSlideActionKey,
-                    caption: intl.rename,
-                    color: Colors.blue,
-                    icon: Icons.edit,
-                    foregroundColor: theme.backgroundColor,
-                    onTap: () async {},
-                  ),
-                  IconSlideAction(
-                    key: secondSlideActionKey,
-                    caption: intl.edit,
-                    color: Colors.blue,
-                    icon: Icons.edit,
-                    foregroundColor: theme.backgroundColor,
-                    onTap: () async {},
-                  ),
-                  IconSlideAction(
-                    key: thirdSlideActionKey,
-                    caption: intl.delete,
-                    color: kRed,
-                    icon: Icons.delete,
-                    foregroundColor: theme.backgroundColor,
-                    onTap: () async {},
-                  ),
-                ],
-                child: TableCellTile(
-                  cell: cells.single,
-                ),
-              )
-            : Column(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(
-                  cells.length,
-                  (index) {
-                    final cell = cells[index];
-
-                    return Slidable(
-                      key: Key(index.toString()),
-                      actionPane: const SlidableDrawerActionPane(),
-                      controller: index == 0 ? controller : null,
-                      actions: [
-                        if (cell is c.GroupTableCell)
-                          IconSlideAction(
-                            key: index == 0 ? firstSlideActionKey : null,
-                            caption: intl.rename,
-                            color: Colors.blue,
-                            icon: Icons.edit,
-                            foregroundColor: theme.backgroundColor,
-                            onTap: () async {},
-                          )
-                        else
-                          IconSlideAction(
-                            key: index == 0 ? secondSlideActionKey : null,
+            ? AppShowcaseWidget(
+                globalKey: noteCellKey,
+                title: intl.cellSwipeRightTitle,
+                description: intl.cellSwipeRightDescription,
+                child: SizedBox(
+                  height: 64,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: AppShowcaseWidget(
+                          globalKey: firstSlideActionKey,
+                          title: intl.firstSlideActionTitle,
+                          description: intl.firstSlideActionDescription,
+                          child: IconSlideAction(
                             caption: intl.edit,
                             color: Colors.blue,
                             icon: Icons.edit,
                             foregroundColor: theme.backgroundColor,
-                            onTap: () async {},
                           ),
-                        IconSlideAction(
-                          key: index == 0 ? thirdSlideActionKey : null,
-                          caption: intl.delete,
-                          color: kRed,
-                          icon: Icons.delete,
-                          foregroundColor: theme.backgroundColor,
-                          onTap: () async {},
                         ),
-                      ],
-                      child: TableCellTile(
-                        cell: cell,
-                        key: Key(index.toString()),
                       ),
-                    );
-                  },
+                      Flexible(
+                        child: AppShowcaseWidget(
+                          globalKey: secondSlideActionKey,
+                          title: intl.secondSlideActionTitle,
+                          description: intl.secondSlideActionDescription,
+                          child: IconSlideAction(
+                            caption: intl.delete,
+                            color: kRed,
+                            icon: Icons.delete,
+                            foregroundColor: theme.backgroundColor,
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 5,
+                        child: TableCellTile(
+                          cell: cells.single,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+              )
+            : cells.length == 2
+                ? Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TableCellTile(
+                        cell: cells[0],
+                      ),
+                      AppShowcaseWidget(
+                        globalKey: groupCellKey,
+                        title: intl.groupCellRightSwipeTitle,
+                        description: intl.groupCellRightSwipeDescription,
+                        child: SizedBox(
+                          height: 45,
+                          child: Row(
+                            children: [
+                              Flexible(
+                                child: AppShowcaseWidget(
+                                  globalKey: groupSlideActionKey,
+                                  title: intl.groupFirstActionTitle,
+                                  description: intl.groupFirstActionDescription,
+                                  child: IconSlideAction(
+                                    caption: intl.rename,
+                                    color: Colors.blue,
+                                    icon: Icons.edit,
+                                    foregroundColor: theme.backgroundColor,
+                                  ),
+                                ),
+                              ),
+                              Flexible(
+                                child: IconSlideAction(
+                                  caption: intl.delete,
+                                  color: kRed,
+                                  icon: Icons.delete,
+                                  foregroundColor: theme.backgroundColor,
+                                ),
+                              ),
+                              Flexible(
+                                flex: 5,
+                                child: TableCellTile(
+                                  cell: cells[1],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: List.generate(
+                      cells.length,
+                      (index) {
+                        final cell = cells[index];
+
+                        return TableCellTile(
+                          cell: cell,
+                          key: Key(index.toString()),
+                        );
+                      },
+                    ),
+                  ),
       ),
     );
   }

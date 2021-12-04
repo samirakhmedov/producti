@@ -18,6 +18,8 @@ class AppShowcaseWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = ThemeHelper.getTextTheme(context);
+
     return Showcase(
       key: globalKey,
       child: child,
@@ -26,6 +28,10 @@ class AppShowcaseWidget extends StatelessWidget {
       showArrow: false,
       animationDuration: const Duration(milliseconds: 1500),
       overlayPadding: const EdgeInsets.all(5),
+      titleTextStyle: textTheme.headline3,
+      descTextStyle: textTheme.bodyText1!.copyWith(
+        color: ThemeHelper.isDarkMode(context) ? kWhite : kBlack,
+      ),
       showcaseBackgroundColor:
           (ThemeHelper.isDarkMode(context) ? kMainDarkColor : kMainLightColor)
               .withAlpha(200),

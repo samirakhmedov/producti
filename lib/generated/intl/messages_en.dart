@@ -22,14 +22,44 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addButtonDescription": MessageLookupByLibrary.simpleMessage(
+            "First button you to press. Will show you all cell types on next window..."),
+        "addButtonTitle":
+            MessageLookupByLibrary.simpleMessage("\"Add\" button"),
         "addCheck": MessageLookupByLibrary.simpleMessage("Add check"),
         "addLink": MessageLookupByLibrary.simpleMessage("Add link"),
         "addOne": MessageLookupByLibrary.simpleMessage("Add one"),
+        "addTableDescription": MessageLookupByLibrary.simpleMessage(
+            "You also can tap there and create new table..."),
+        "addTableTitle": MessageLookupByLibrary.simpleMessage("Table creation"),
+        "allCellsDescription": MessageLookupByLibrary.simpleMessage(
+            "This is how notes, group, notification and check list looks like..."),
+        "allCellsTitle":
+            MessageLookupByLibrary.simpleMessage("Beatiful, right?"),
         "alreadyCoolGuy":
             MessageLookupByLibrary.simpleMessage("Already in cool boys club?"),
+        "anotherGroup": MessageLookupByLibrary.simpleMessage("Another group"),
+        "anotherNote": MessageLookupByLibrary.simpleMessage("Another note"),
         "anotherOne": MessageLookupByLibrary.simpleMessage("Another one..."),
+        "bottomSheetCheckListDescription": MessageLookupByLibrary.simpleMessage(
+            "Cell with title and...check list. A list of items which you can easily create and mark done."),
+        "bottomSheetContentDescription": MessageLookupByLibrary.simpleMessage(
+            "There it is. After tap you gonna go to individual menu of each cell to create it. There are..."),
+        "bottomSheetContentTitle":
+            MessageLookupByLibrary.simpleMessage("Cell types"),
+        "bottomSheetGroupDescription": MessageLookupByLibrary.simpleMessage(
+            "Cell, that allows you add another cells inside him."),
+        "bottomSheetNoteDescription": MessageLookupByLibrary.simpleMessage(
+            "Cell with title and body. Can store any your text. Also, you can save links inside of him."),
+        "bottomSheetNotificationDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "Same note, but with time when you would get a notification!"),
         "cannotDeleteSingle": MessageLookupByLibrary.simpleMessage(
             "You cannot delete your single table left!"),
+        "cellSwipeRightDescription": MessageLookupByLibrary.simpleMessage(
+            "You can swipe any cell on your screen right and do several stuff..."),
+        "cellSwipeRightTitle":
+            MessageLookupByLibrary.simpleMessage("Actions on main screen"),
         "checkList": MessageLookupByLibrary.simpleMessage("Check list"),
         "checkListCreate":
             MessageLookupByLibrary.simpleMessage("Check list create"),
@@ -37,6 +67,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Check list details"),
         "color": MessageLookupByLibrary.simpleMessage("Accent color"),
         "comfortable": MessageLookupByLibrary.simpleMessage("Comfortable"),
+        "complexPathNameDescription": MessageLookupByLibrary.simpleMessage(
+            "Double tap on table name to change title of group you view."),
+        "complexPathNameTitle":
+            MessageLookupByLibrary.simpleMessage("Current group rename"),
         "connected": MessageLookupByLibrary.simpleMessage(
             "You are connected to the internet!"),
         "create": MessageLookupByLibrary.simpleMessage("Create"),
@@ -47,6 +81,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Oops! Looks like you are out of interntet..."),
         "doNotLoggedIn":
             MessageLookupByLibrary.simpleMessage("You are not logged in!"),
+        "doSomething": MessageLookupByLibrary.simpleMessage("Do something"),
+        "drawerDescription":
+            MessageLookupByLibrary.simpleMessage("And what you can do..."),
+        "drawerOpenButtonDescription":
+            MessageLookupByLibrary.simpleMessage("To open drawer, tap there."),
+        "drawerOpenButtonTitle":
+            MessageLookupByLibrary.simpleMessage("Open drawer"),
+        "drawerTitle": MessageLookupByLibrary.simpleMessage("There it is."),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "effective": MessageLookupByLibrary.simpleMessage("Effective"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -56,6 +98,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "failedToFetchUserData": MessageLookupByLibrary.simpleMessage(
             "Failed to fetch your data, something went wrong!"),
         "fast": MessageLookupByLibrary.simpleMessage("Fast"),
+        "firstSlideActionDescription": MessageLookupByLibrary.simpleMessage(
+            "Automatically redirects you to edit page of selected cell."),
+        "firstSlideActionTitle":
+            MessageLookupByLibrary.simpleMessage("Edit action"),
         "funBegins": MessageLookupByLibrary.simpleMessage(
             "This is where the fun begins, boy."),
         "funContinues": MessageLookupByLibrary.simpleMessage(
@@ -63,6 +109,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "group": MessageLookupByLibrary.simpleMessage("Group"),
         "groupAlreadyExists":
             MessageLookupByLibrary.simpleMessage("This group already exists!"),
+        "groupCellRightSwipeDescription": MessageLookupByLibrary.simpleMessage(
+            "But actions on group cell is actually different."),
+        "groupCellRightSwipeTitle":
+            MessageLookupByLibrary.simpleMessage("Group cell actions"),
+        "groupFirstActionDescription": MessageLookupByLibrary.simpleMessage(
+            "Group cell you only can rename on special menu"),
+        "groupFirstActionTitle":
+            MessageLookupByLibrary.simpleMessage("Group editing"),
         "groupName": MessageLookupByLibrary.simpleMessage("Group name"),
         "hatePeople": MessageLookupByLibrary.simpleMessage("You hate people?"),
         "invalidEmail":
@@ -110,17 +164,31 @@ class MessageLookup extends MessageLookupByLibrary {
         "repeatPassword":
             MessageLookupByLibrary.simpleMessage("Repeat password"),
         "russian": MessageLookupByLibrary.simpleMessage("Russian"),
+        "secondSlideActionDescription":
+            MessageLookupByLibrary.simpleMessage("BURN HIM TO THE GROUND."),
+        "secondSlideActionTitle":
+            MessageLookupByLibrary.simpleMessage("Delete action"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "settingsDescription": MessageLookupByLibrary.simpleMessage(
+            "And there you can switch theme, color accent, language and so on..."),
+        "settingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signInAnonim":
             MessageLookupByLibrary.simpleMessage("Sign in anonimously."),
         "signInLongButtonText":
             MessageLookupByLibrary.simpleMessage("LET ME IIIIN"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign up"),
+        "simplePathNameDescription": MessageLookupByLibrary.simpleMessage(
+            "Double tap on table name to change title."),
+        "simplePathNameTitle":
+            MessageLookupByLibrary.simpleMessage("Current table rename"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "tableAlreadyExists":
             MessageLookupByLibrary.simpleMessage("This table already created!"),
         "tableName": MessageLookupByLibrary.simpleMessage("Table name"),
+        "tablesListDescription":
+            MessageLookupByLibrary.simpleMessage("View all your tables."),
+        "tablesListTitle": MessageLookupByLibrary.simpleMessage("Tables list"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "tooBigValue":
             MessageLookupByLibrary.simpleMessage("Too big, sempai..."),
@@ -138,9 +206,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "voidDateValue":
             MessageLookupByLibrary.simpleMessage("Date field is empty!"),
         "voidValue": MessageLookupByLibrary.simpleMessage("Field is empty"),
+        "welcome": MessageLookupByLibrary.simpleMessage(
+            "Welcome to Producti!\n\nBefore you start your producitve day, I must teach you, how to work with app.\n\nSo, listen, please, carefully."),
+        "wow": MessageLookupByLibrary.simpleMessage("Wow"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage(
             "Not correct password for this account!"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
+        "youAreReady": MessageLookupByLibrary.simpleMessage(
+            "You are ready to work with Producti!\n\nEnjoy!"),
+        "youAwesome": MessageLookupByLibrary.simpleMessage("You awesome"),
         "youSureToDelete": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete that element?"),
         "youSureToDeleteGroup": MessageLookupByLibrary.simpleMessage(
