@@ -28,10 +28,10 @@ class AppShowcaseWidget extends StatelessWidget {
       showArrow: false,
       animationDuration: const Duration(milliseconds: 1500),
       overlayPadding: const EdgeInsets.all(5),
-      titleTextStyle: textTheme.headline3,
-      descTextStyle: textTheme.bodyText1!.copyWith(
+      titleTextStyle: textTheme.bodyText1!.copyWith(
         color: ThemeHelper.isDarkMode(context) ? kWhite : kBlack,
       ),
+      descTextStyle: textTheme.bodyText2,
       showcaseBackgroundColor:
           (ThemeHelper.isDarkMode(context) ? kMainDarkColor : kMainLightColor)
               .withAlpha(200),

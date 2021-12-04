@@ -7,7 +7,7 @@ import 'package:producti/domain/table/table.dart' as t;
 import 'package:producti/domain/table/table_link.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
-import 'package:producti/presentation/table/widgets/app_showcase_widget.dart';
+import 'package:producti/presentation/table/widgets/showcase/app_showcase_widget.dart';
 import 'package:producti/presentation/table/widgets/create_popup_tile.dart';
 import 'package:producti/presentation/table/widgets/path_name_widget.dart';
 import 'package:producti/presentation/table/widgets/table_cell_tile.dart';
@@ -183,7 +183,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
         case 7:
           _openDrawer();
 
-          Future.delayed(const Duration(seconds: 2)).then(
+          Future.delayed(const Duration(seconds: 1)).then(
             (value) => ShowCaseWidget.of(context)!
                 .startShowCase([_sixteen, _seventeen, _eighteen, _nineteen]),
           );
@@ -193,7 +193,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
         case 8:
           _openDrawer();
 
-          Future.delayed(const Duration(seconds: 2)).then(
+          Future.delayed(const Duration(seconds: 1)).then(
             (value) => showDialog(
               context: context,
               builder: (context) => Material(
