@@ -12,6 +12,7 @@ import 'package:producti/application/auth/logic/auth_bloc.dart';
 import 'package:producti/application/settings/settings_cubit.dart';
 import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc.dart';
 import 'package:producti/generated/l10n.dart';
+import 'package:producti/presentation/core/constants/constants.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti_ui/producti_ui.dart';
 
@@ -93,6 +94,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
           builder: (context, state) {
             return MaterialApp(
               routes: routes,
+              title: kAppName,
               navigatorObservers: [
                 FirebaseAnalyticsObserver(analytics: analytics),
               ],
