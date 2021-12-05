@@ -25,6 +25,7 @@ class LocalNotificationRepository extends NotificationRepository {
     android: AndroidNotificationDetails(
       'com.ludev.producti.notifications',
       'main_notifications',
+      sound: RawResourceAndroidNotificationSound('notification'),
       importance: Importance.high,
     ),
     iOS: IOSNotificationDetails(),

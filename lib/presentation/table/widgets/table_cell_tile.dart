@@ -135,29 +135,20 @@ class _NoteTableCellTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const _Dot(),
-                      const Gap(),
-                      if (cell.title.isEmpty)
-                        const VoidTextValue()
-                      else
-                        SizedBox(
-                          width: (size.width *
-                              (.7 - (cell.links.isNotEmpty ? .07 : 0))),
-                          child: Text(
+                  const _Dot(),
+                  const Gap(),
+                  Expanded(
+                    child: cell.title.isEmpty
+                        ? const VoidTextValue()
+                        : Text(
                             cell.title,
                             style: textTheme.bodyText2!.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
                             overflow: TextOverflow.ellipsis,
                           ),
-                        ),
-                    ],
                   ),
                   if (cell.links.isNotEmpty)
                     Icon(

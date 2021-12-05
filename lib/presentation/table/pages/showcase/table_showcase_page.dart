@@ -373,8 +373,8 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                     ).copyWith(top: 46.sp),
                     child: AppShowcaseWidget(
                       globalKey: _two,
-                      title: intl.bottomSheetContentTitle,
-                      description: intl.bottomSheetContentDescription,
+                      title: '',
+                      description: '',
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -430,8 +430,8 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                 right: _isDrawerOpened ? 0 : -query.size.width * .8,
                 child: AppShowcaseWidget(
                   globalKey: _sixteen,
-                  title: intl.drawerTitle,
-                  description: intl.drawerDescription,
+                  title: '',
+                  description: '',
                   child: SizedBox(
                     width: query.size.width * 0.8,
                     height: query.size.height * .95,

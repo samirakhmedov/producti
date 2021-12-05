@@ -43,10 +43,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "anotherOne": MessageLookupByLibrary.simpleMessage("Another one..."),
         "bottomSheetCheckListDescription": MessageLookupByLibrary.simpleMessage(
             "Cell with title and...check list. A list of items which you can easily create and mark done."),
-        "bottomSheetContentDescription": MessageLookupByLibrary.simpleMessage(
-            "There it is. After tap you gonna go to individual menu of each cell to create it. There are..."),
-        "bottomSheetContentTitle":
-            MessageLookupByLibrary.simpleMessage("Cell types"),
         "bottomSheetGroupDescription": MessageLookupByLibrary.simpleMessage(
             "Cell, that allows you add another cells inside him."),
         "bottomSheetNoteDescription": MessageLookupByLibrary.simpleMessage(
@@ -82,13 +78,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "doNotLoggedIn":
             MessageLookupByLibrary.simpleMessage("You are not logged in!"),
         "doSomething": MessageLookupByLibrary.simpleMessage("Do something"),
-        "drawerDescription":
-            MessageLookupByLibrary.simpleMessage("And what you can do..."),
         "drawerOpenButtonDescription":
             MessageLookupByLibrary.simpleMessage("To open drawer, tap there."),
         "drawerOpenButtonTitle":
             MessageLookupByLibrary.simpleMessage("Open drawer"),
-        "drawerTitle": MessageLookupByLibrary.simpleMessage("There it is."),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "effective": MessageLookupByLibrary.simpleMessage("Effective"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),

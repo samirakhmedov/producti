@@ -980,26 +980,6 @@ class S {
     );
   }
 
-  /// `Cell types`
-  String get bottomSheetContentTitle {
-    return Intl.message(
-      'Cell types',
-      name: 'bottomSheetContentTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `There it is. After tap you gonna go to individual menu of each cell to create it. There are...`
-  String get bottomSheetContentDescription {
-    return Intl.message(
-      'There it is. After tap you gonna go to individual menu of each cell to create it. There are...',
-      name: 'bottomSheetContentDescription',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Cell, that allows you add another cells inside him.`
   String get bottomSheetGroupDescription {
     return Intl.message(
@@ -1215,26 +1195,6 @@ class S {
     return Intl.message(
       'To open drawer, tap there.',
       name: 'drawerOpenButtonDescription',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `There it is.`
-  String get drawerTitle {
-    return Intl.message(
-      'There it is.',
-      name: 'drawerTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `And what you can do...`
-  String get drawerDescription {
-    return Intl.message(
-      'And what you can do...',
-      name: 'drawerDescription',
       desc: '',
       args: [],
     );
