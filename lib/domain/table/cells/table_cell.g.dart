@@ -56,17 +56,20 @@ class NoteTableCellAdapter extends TypeAdapter<NoteTableCell> {
     return NoteTableCell(
       description: fields[0] as String,
       links: (fields[1] as List).cast<String>(),
+      title: fields[2] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, NoteTableCell obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.description)
       ..writeByte(1)
-      ..write(obj.links);
+      ..write(obj.links)
+      ..writeByte(2)
+      ..write(obj.title);
   }
 
   @override
@@ -94,19 +97,22 @@ class NotificationTableCellAdapter extends TypeAdapter<NotificationTableCell> {
       time: fields[0] as DateTime,
       description: fields[1] as String,
       links: (fields[2] as List).cast<String>(),
+      title: fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, NotificationTableCell obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.time)
       ..writeByte(1)
       ..write(obj.description)
       ..writeByte(2)
-      ..write(obj.links);
+      ..write(obj.links)
+      ..writeByte(3)
+      ..write(obj.title);
   }
 
   @override
@@ -132,15 +138,18 @@ class CheckListTableCellAdapter extends TypeAdapter<CheckListTableCell> {
     };
     return CheckListTableCell(
       checkList: (fields[1] as List).cast<CheckTileTableCell>(),
+      title: fields[0] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, CheckListTableCell obj) {
     writer
+      ..writeByte(2)
       ..writeByte(1)
-      ..writeByte(1)
-      ..write(obj.checkList);
+      ..write(obj.checkList)
+      ..writeByte(0)
+      ..write(obj.title);
   }
 
   @override

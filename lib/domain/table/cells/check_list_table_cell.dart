@@ -6,9 +6,12 @@ class CheckListTableCell extends TableCell {
   @HiveField(1)
   final List<CheckTileTableCell> checkList;
 
+  @HiveField(0)
+  final String title;
+
   CheckListTableCell({
     this.checkList = const [],
-    @HiveField(0) String title = '',
+    this.title = '',
   }) : super(title);
 
   factory CheckListTableCell.fromJson(Map<String, dynamic> json) {

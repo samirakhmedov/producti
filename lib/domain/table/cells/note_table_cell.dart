@@ -7,11 +7,13 @@ class NoteTableCell extends TableCell {
   final String description;
   @HiveField(1)
   final List<String> links;
+  @HiveField(2)
+  final String title;
 
   NoteTableCell({
     this.description = '',
     this.links = const [],
-    @HiveField(2) String title = '',
+    this.title = '',
   }) : super(title);
 
   @override
