@@ -10,6 +10,7 @@ import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti/presentation/table/widgets/showcase/app_showcase_widget.dart';
 import 'package:producti/presentation/table/widgets/create_popup_tile.dart';
 import 'package:producti/presentation/table/widgets/path_name_widget.dart';
+import 'package:producti/presentation/table/widgets/showcase/empty_showcase_widget.dart';
 import 'package:producti/presentation/table/widgets/table_cell_tile.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:provider/src/provider.dart';
@@ -371,10 +372,8 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                     padding: const EdgeInsets.symmetric(
                       horizontal: 28,
                     ).copyWith(top: 46.sp),
-                    child: AppShowcaseWidget(
+                    child: EmptyShowcaseWidget(
                       globalKey: _two,
-                      title: '',
-                      description: '',
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -428,10 +427,8 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                 duration: const Duration(milliseconds: 750),
                 curve: Curves.easeIn,
                 right: _isDrawerOpened ? 0 : -query.size.width * .8,
-                child: AppShowcaseWidget(
+                child: EmptyShowcaseWidget(
                   globalKey: _sixteen,
-                  title: '',
-                  description: '',
                   child: SizedBox(
                     width: query.size.width * 0.8,
                     height: query.size.height * .95,
