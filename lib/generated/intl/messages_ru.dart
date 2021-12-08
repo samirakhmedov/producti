@@ -181,6 +181,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplePathNameTitle":
             MessageLookupByLibrary.simpleMessage("Название таблицы"),
         "skip": MessageLookupByLibrary.simpleMessage("Пропустить"),
+        "skipShowcase":
+            MessageLookupByLibrary.simpleMessage("Пропустить обучение"),
         "tableAlreadyExists":
             MessageLookupByLibrary.simpleMessage("Эта таблица уже существует!"),
         "tableName": MessageLookupByLibrary.simpleMessage("Название таблицы"),

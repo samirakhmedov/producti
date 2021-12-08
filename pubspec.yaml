@@ -10,6 +10,7 @@ environment:
 dependencies:
   # Notifications
   flutter_local_notifications: ^9.0.2
+  flutter_native_timezone: ^2.0.0
 
   # URL
   url_launcher: ^6.0.12

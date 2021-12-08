@@ -119,5 +119,6 @@
     "addTableTitle": "Table creation",
     "addTableDescription": "You also can tap there and create new table...",
     "settingsTitle": "Settings",
-    "settingsDescription": "And there you can switch theme, color accent, language and so on..."
+    "settingsDescription": "And there you can switch theme, color accent, language and so on...",
+    "skipShowcase": "Skip showcase"
 }

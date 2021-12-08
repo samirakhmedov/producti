@@ -1259,6 +1259,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Skip showcase`
+  String get skipShowcase {
+    return Intl.message(
+      'Skip showcase',
+      name: 'skipShowcase',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

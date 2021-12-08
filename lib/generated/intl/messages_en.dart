@@ -176,6 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplePathNameTitle":
             MessageLookupByLibrary.simpleMessage("Current table rename"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "skipShowcase": MessageLookupByLibrary.simpleMessage("Skip showcase"),
         "tableAlreadyExists":
             MessageLookupByLibrary.simpleMessage("This table already created!"),
         "tableName": MessageLookupByLibrary.simpleMessage("Table name"),

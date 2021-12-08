@@ -238,30 +238,51 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
           context: context,
           builder: (context) => Material(
             color: Colors.transparent,
-            child: InkWell(
+            child: GestureDetector(
               onTap: () {
                 Navigator.of(context).pop();
+
+                ShowCaseWidget.of(context)!.startShowCase([_one]);
               },
               child: SizedBox.fromSize(
                 size: query.size,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: Text(
-                      intl.welcome,
-                      style: theme.textTheme.bodyText2!.copyWith(
-                        color: kWhite,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        child: Center(
+                          child: Text(
+                            intl.welcome,
+                            style: theme.textTheme.bodyText2!.copyWith(
+                              color: kWhite,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(14.0),
+                      child: ClickableText(
+                        text: intl.skipShowcase,
+                        color: theme.primaryColor,
+                        onTap: () {
+                          final launch = context.read<LaunchBloc>();
+
+                          launch.mutate(showcaseShown: true);
+
+                          Navigator.of(context)
+                              .pushReplacementNamed(AppRoutes.tables);
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
         );
-
-        ShowCaseWidget.of(context)!.startShowCase([_one]);
       },
     );
 

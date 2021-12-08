@@ -7,7 +7,9 @@ import 'package:producti/data/core/error/error_codes.dart';
 import 'package:producti/data/core/error/failure.dart';
 import 'package:producti/domain/notifications/notification.dart';
 import 'package:producti/domain/notifications/notification_repository.dart';
-import 'package:timezone/timezone.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tzdb;
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
 @lazySingleton
 class LocalNotificationRepository extends NotificationRepository {
@@ -50,6 +52,15 @@ class LocalNotificationRepository extends NotificationRepository {
       onSelectNotification: onSelectNotification,
     );
 
+    final String currentTimeZone =
+        await FlutterNativeTimezone.getLocalTimezone();
+
+    tzdb.initializeTimeZones();
+
+    tz.setLocalLocation(
+      tz.getLocation(currentTimeZone),
+    );
+
     if (!initializationResult!) {
       if (Platform.isIOS) {
         final permissionRequestResult =
@@ -88,7 +99,8 @@ class LocalNotificationRepository extends NotificationRepository {
       body.length > 40 ? body.substring(0, 38) + '...' : body,
 
       /// Material guidelines accepted.
-      TZDateTime.utc(
+      tz.TZDateTime(
+        tz.local,
         time.year,
         time.month,
         time.day,
