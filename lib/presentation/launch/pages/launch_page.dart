@@ -8,18 +8,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
 import 'package:producti_ui/producti_ui.dart';
 
-class LaunchPage extends StatelessWidget {
+class LaunchPage extends StatefulWidget {
   const LaunchPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final theme = ThemeHelper.getTheme(context);
+  State<LaunchPage> createState() => _LaunchPageState();
+}
 
-    final textTheme = theme.textTheme;
-
+class _LaunchPageState extends State<LaunchPage> {
+  @override
+  void didChangeDependencies() {
     final settings = context.read<SettingsCubit>();
 
     final authBloc = context.read<AuthBloc>();
+
+    final theme = ThemeHelper.getTheme(context);
 
     /// I JUST DO NOT HAVE ENOUGH TIME
     authBloc.add(AuthAnonymousEvent());
@@ -32,16 +35,16 @@ class LaunchPage extends StatelessWidget {
           : ThemeMode.dark,
     );
 
+    final launchBloc = context.read<LaunchBloc>();
+
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        final launchBloc = context.read<LaunchBloc>();
-
         final state = launchBloc.state;
 
         final authState = authBloc.state;
 
-        Navigator.of(context).pushReplacementNamed(
+        Navigator.of(context, rootNavigator: true).pushReplacementNamed(
           state.onboardingPassed
               ? state.showcaseShown
                   ? authState is AuthLoggedIn || authState is AuthAnonymousState
@@ -52,6 +55,14 @@ class LaunchPage extends StatelessWidget {
         );
       },
     );
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = ThemeHelper.getTheme(context);
+
+    final textTheme = theme.textTheme;
 
     return Scaffold(
       body: Center(

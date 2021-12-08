@@ -13,11 +13,10 @@ import 'package:producti/presentation/table/widgets/path_name_widget.dart';
 import 'package:producti/presentation/table/widgets/showcase/empty_showcase_widget.dart';
 import 'package:producti/presentation/table/widgets/table_cell_tile.dart';
 import 'package:producti_ui/producti_ui.dart';
-import 'package:provider/src/provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:showcaseview/showcaseview.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// TODO: Implement after s h o w c a s e
 class TableShowcasePage extends StatelessWidget {
   const TableShowcasePage({Key? key}) : super(key: key);
 
@@ -197,6 +196,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
           Future.delayed(const Duration(seconds: 1)).then(
             (value) => showDialog(
               context: context,
+              barrierColor: Colors.black.withOpacity(.7),
               builder: (context) => Material(
                 color: Colors.transparent,
                 child: InkWell(
@@ -234,16 +234,13 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
 
     WidgetsBinding.instance!.addPostFrameCallback(
       (_) async {
-        await showDialog(
+        final result = await showDialog<bool>(
           context: context,
-          builder: (context) => Material(
-            color: Colors.transparent,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).pop();
-
-                ShowCaseWidget.of(context)!.startShowCase([_one]);
-              },
+          barrierColor: Colors.black.withOpacity(.7),
+          builder: (context) => WillPopScope(
+            onWillPop: () async => false,
+            child: Material(
+              color: Colors.transparent,
               child: SizedBox.fromSize(
                 size: query.size,
                 child: Column(
@@ -263,17 +260,29 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(14.0),
+                      padding: const EdgeInsets.all(4.0),
+                      child: ClickableText(
+                        text: intl.goThroughShowcase,
+                        color: theme.primaryColor,
+                        onTap: () {
+                          Navigator.of(context).pop(true);
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 14.0),
                       child: ClickableText(
                         text: intl.skipShowcase,
-                        color: theme.primaryColor,
+                        textStyle: theme.textTheme.bodyText2!.copyWith(
+                          color: kRed,
+                        ),
                         onTap: () {
                           final launch = context.read<LaunchBloc>();
 
                           launch.mutate(showcaseShown: true);
 
                           Navigator.of(context)
-                              .pushReplacementNamed(AppRoutes.tables);
+                              .popAndPushNamed(AppRoutes.tables, result: false);
                         },
                       ),
                     ),
@@ -283,6 +292,8 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
             ),
           ),
         );
+
+        if (result ?? true) ShowCaseWidget.of(context)!.startShowCase([_one]);
       },
     );
 

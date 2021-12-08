@@ -100,6 +100,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Здесь начнется твое веселье, сладкий."),
         "funContinues": MessageLookupByLibrary.simpleMessage(
             "Здесь продолжится твое веселье, сладкий."),
+        "goThroughShowcase":
+            MessageLookupByLibrary.simpleMessage("Пройти обучение"),
         "group": MessageLookupByLibrary.simpleMessage("Группа"),
         "groupAlreadyExists":
             MessageLookupByLibrary.simpleMessage("Группа уже существует!"),
