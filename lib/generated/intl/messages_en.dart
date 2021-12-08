@@ -99,6 +99,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "This is where the fun begins, boy."),
         "funContinues": MessageLookupByLibrary.simpleMessage(
             "This is where the fun continues, boy."),
+        "goThroughShowcase":
+            MessageLookupByLibrary.simpleMessage("Show me all"),
         "group": MessageLookupByLibrary.simpleMessage("Group"),
         "groupAlreadyExists":
             MessageLookupByLibrary.simpleMessage("This group already exists!"),

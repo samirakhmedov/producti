@@ -120,5 +120,6 @@
     "addTableDescription": "По нажатию сюда вы перейдете на меню создания таблицы.",
     "settingsTitle": "Настройки",
     "settingsDescription": "А тут вы сможете кастомизировать тему, цвет и язык под себя...",
-    "skipShowcase": "Пропустить обучение"
+    "skipShowcase": "Пропустить обучение",
+    "goThroughShowcase": "Пройти обучение"
 }

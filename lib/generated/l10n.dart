@@ -1269,6 +1269,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Show me all`
+  String get goThroughShowcase {
+    return Intl.message(
+      'Show me all',
+      name: 'goThroughShowcase',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
