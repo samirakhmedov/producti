@@ -35,6 +35,8 @@ class _LaunchPageState extends State<LaunchPage> {
           : ThemeMode.dark,
     );
 
+    final navigator = Navigator.of(context);
+
     final launchBloc = context.read<LaunchBloc>();
 
     Future.delayed(
@@ -44,7 +46,7 @@ class _LaunchPageState extends State<LaunchPage> {
 
         final authState = authBloc.state;
 
-        Navigator.of(context, rootNavigator: true).pushReplacementNamed(
+        navigator.pushReplacementNamed(
           state.onboardingPassed
               ? state.showcaseShown
                   ? authState is AuthLoggedIn || authState is AuthAnonymousState

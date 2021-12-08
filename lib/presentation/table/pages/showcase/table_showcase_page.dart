@@ -48,7 +48,7 @@ class _TableShowcaseContent extends StatefulWidget {
 }
 
 class _TableShowcaseContentState extends State<_TableShowcaseContent> {
-  late final t.Table _showcaseTable;
+  t.Table? _showcaseTable;
 
   TableLink _tableLink = const TableLink([]);
 
@@ -93,209 +93,212 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
   void didChangeDependencies() {
     final intl = S.of(context);
 
-    _showcaseTable = t.Table(
-      title: 'Main',
-      cells: [
-        c.NoteTableCell(
-          title: intl.doSomething,
-          description: intl.youAwesome,
-        ),
-        c.NoteTableCell(
-          title: intl.anotherNote,
-          links: const ['https://pub.dev/packages/showcaseview'],
-        ),
-        c.GroupTableCell(
-          title: intl.anotherGroup,
-        ),
-        c.NotificationTableCell(
-          time: DateTime.now(),
-          description: intl.wow,
-        ),
-        c.CheckListTableCell(
-          title: intl.checkList,
-          checkList: [
-            c.CheckTileTableCell(
-              title: intl.wow,
-            ),
-            c.CheckTileTableCell(
-              title: intl.ok,
-              value: true,
-            ),
-          ],
-        ),
-      ],
-    );
-
-    final theme = ThemeHelper.getTheme(context);
-
-    final query = MediaQuery.of(context);
-
-    widget.completeStream.listen((index) {
-      switch (index) {
-        case 0:
-          _openBottomSheet();
-
-          Future.delayed(const Duration(seconds: 1)).then(
-            (value) => ShowCaseWidget.of(context)!.startShowCase([_two]),
-          );
-          break;
-        case 1:
-          ShowCaseWidget.of(context)!
-              .startShowCase([_three, _four, _five, _six]);
-          break;
-        case 2:
-          _openBottomSheet();
-
-          Future.delayed(const Duration(seconds: 1)).then(
-            (value) => ShowCaseWidget.of(context)!.startShowCase([_seven]),
-          );
-          break;
-        case 3:
-          setState(() {
-            _showcaseTable.cells = [_showcaseTable.cells.first];
-          });
-
-          ShowCaseWidget.of(context)!.startShowCase([_eight, _nine, _ten]);
-          break;
-        case 4:
-          setState(() {
-            _showcaseTable.addCell(
-              c.GroupTableCell(
-                title: intl.anotherGroup,
+    if (_showcaseTable == null) {
+      _showcaseTable = t.Table(
+        title: 'Main',
+        cells: [
+          c.NoteTableCell(
+            title: intl.doSomething,
+            description: intl.youAwesome,
+          ),
+          c.NoteTableCell(
+            title: intl.anotherNote,
+            links: const ['https://pub.dev/packages/showcaseview'],
+          ),
+          c.GroupTableCell(
+            title: intl.anotherGroup,
+          ),
+          c.NotificationTableCell(
+            time: DateTime.now(),
+            description: intl.wow,
+          ),
+          c.CheckListTableCell(
+            title: intl.checkList,
+            checkList: [
+              c.CheckTileTableCell(
+                title: intl.wow,
               ),
-              _tableLink,
+              c.CheckTileTableCell(
+                title: intl.ok,
+                value: true,
+              ),
+            ],
+          ),
+        ],
+      );
+
+      final theme = ThemeHelper.getTheme(context);
+
+      final query = MediaQuery.of(context);
+
+      widget.completeStream.listen((index) {
+        switch (index) {
+          case 0:
+            _openBottomSheet();
+
+            Future.delayed(const Duration(seconds: 1)).then(
+              (value) => ShowCaseWidget.of(context)!.startShowCase([_two]),
             );
-          });
+            break;
+          case 1:
+            ShowCaseWidget.of(context)!
+                .startShowCase([_three, _four, _five, _six]);
+            break;
+          case 2:
+            _openBottomSheet();
 
-          ShowCaseWidget.of(context)!.startShowCase([_eleven, _twelve]);
-          break;
-        case 5:
-          ShowCaseWidget.of(context)!.startShowCase([_thirteen]);
-          break;
-        case 6:
-          setState(() {
-            _tableLink = _tableLink.addPath(1);
-          });
+            Future.delayed(const Duration(seconds: 1)).then(
+              (value) => ShowCaseWidget.of(context)!.startShowCase([_seven]),
+            );
+            break;
+          case 3:
+            setState(() {
+              _showcaseTable!.cells = [_showcaseTable!.cells.first];
+            });
 
-          ShowCaseWidget.of(context)!.startShowCase([_fourteen, _fiveteen]);
-          break;
+            ShowCaseWidget.of(context)!.startShowCase([_eight, _nine, _ten]);
+            break;
+          case 4:
+            setState(() {
+              _showcaseTable!.addCell(
+                c.GroupTableCell(
+                  title: intl.anotherGroup,
+                ),
+                _tableLink,
+              );
+            });
 
-        case 7:
-          _openDrawer();
+            ShowCaseWidget.of(context)!.startShowCase([_eleven, _twelve]);
+            break;
+          case 5:
+            ShowCaseWidget.of(context)!.startShowCase([_thirteen]);
+            break;
+          case 6:
+            setState(() {
+              _tableLink = _tableLink.addPath(1);
+            });
 
-          Future.delayed(const Duration(seconds: 1)).then(
-            (value) => ShowCaseWidget.of(context)!
-                .startShowCase([_sixteen, _seventeen, _eighteen, _nineteen]),
-          );
+            ShowCaseWidget.of(context)!.startShowCase([_fourteen, _fiveteen]);
+            break;
 
-          break;
+          case 7:
+            _openDrawer();
 
-        case 8:
-          _openDrawer();
+            Future.delayed(const Duration(seconds: 1)).then(
+              (value) => ShowCaseWidget.of(context)!
+                  .startShowCase([_sixteen, _seventeen, _eighteen, _nineteen]),
+            );
 
-          Future.delayed(const Duration(seconds: 1)).then(
-            (value) => showDialog(
-              context: context,
-              barrierColor: Colors.black.withOpacity(.7),
-              builder: (context) => Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: SizedBox.fromSize(
-                    size: query.size,
-                    child: Center(
-                      child: Text(
-                        intl.youAreReady,
-                        style: theme.textTheme.bodyText2!.copyWith(
-                          color: kWhite,
+            break;
+
+          case 8:
+            _openDrawer();
+
+            Future.delayed(const Duration(seconds: 1)).then(
+              (value) => showDialog(
+                context: context,
+                barrierColor: Colors.black.withOpacity(.7),
+                builder: (context) => Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: SizedBox.fromSize(
+                      size: query.size,
+                      child: Center(
+                        child: Text(
+                          intl.youAreReady,
+                          style: theme.textTheme.bodyText2!.copyWith(
+                            color: kWhite,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                 ),
+              ).then(
+                (value) {
+                  final launch = context.read<LaunchBloc>();
+
+                  launch.mutate(showcaseShown: true);
+
+                  Navigator.of(context).pushReplacementNamed(AppRoutes.tables);
+                },
               ),
-            ).then(
-              (value) {
-                final launch = context.read<LaunchBloc>();
+            );
 
-                launch.mutate(showcaseShown: true);
+            break;
+        }
+      });
 
-                Navigator.of(context).pushReplacementNamed(AppRoutes.tables);
-              },
-            ),
-          );
-
-          break;
-      }
-    });
-
-    WidgetsBinding.instance!.addPostFrameCallback(
-      (_) async {
-        final result = await showDialog<bool>(
-          context: context,
-          barrierColor: Colors.black.withOpacity(.7),
-          builder: (context) => WillPopScope(
-            onWillPop: () async => false,
-            child: Material(
-              color: Colors.transparent,
-              child: SizedBox.fromSize(
-                size: query.size,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                        child: Center(
-                          child: Text(
-                            intl.welcome,
-                            style: theme.textTheme.bodyText2!.copyWith(
-                              color: kWhite,
+      WidgetsBinding.instance!.addPostFrameCallback(
+        (_) async {
+          final result = await showDialog<bool>(
+            context: context,
+            barrierColor: Colors.black.withOpacity(.7),
+            builder: (context) => WillPopScope(
+              onWillPop: () async => false,
+              child: Material(
+                color: Colors.transparent,
+                child: SizedBox.fromSize(
+                  size: query.size,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          child: Center(
+                            child: Text(
+                              intl.welcome,
+                              style: theme.textTheme.bodyText2!.copyWith(
+                                color: kWhite,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: ClickableText(
-                        text: intl.goThroughShowcase,
-                        color: theme.primaryColor,
-                        onTap: () {
-                          Navigator.of(context).pop(true);
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 14.0),
-                      child: ClickableText(
-                        text: intl.skipShowcase,
-                        textStyle: theme.textTheme.bodyText2!.copyWith(
-                          color: kRed,
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: ClickableText(
+                          text: intl.goThroughShowcase,
+                          color: theme.primaryColor,
+                          onTap: () {
+                            Navigator.of(context).pop(true);
+                          },
                         ),
-                        onTap: () {
-                          final launch = context.read<LaunchBloc>();
-
-                          launch.mutate(showcaseShown: true);
-
-                          Navigator.of(context)
-                              .popAndPushNamed(AppRoutes.tables, result: false);
-                        },
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 14.0),
+                        child: ClickableText(
+                          text: intl.skipShowcase,
+                          textStyle: theme.textTheme.bodyText2!.copyWith(
+                            color: kRed,
+                          ),
+                          onTap: () {
+                            final launch = context.read<LaunchBloc>();
+
+                            launch.mutate(showcaseShown: true);
+
+                            Navigator.of(context).popAndPushNamed(
+                                AppRoutes.tables,
+                                result: false);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        );
+          );
 
-        if (result ?? true) ShowCaseWidget.of(context)!.startShowCase([_one]);
-      },
-    );
+          if (result ?? true) ShowCaseWidget.of(context)!.startShowCase([_one]);
+        },
+      );
+    }
 
     super.didChangeDependencies();
   }
@@ -322,7 +325,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                 child: SizedBox(
                   width: query.size.width,
                   child: _TableShowcaseBody(
-                    cells: _tableLink.getParticles(_showcaseTable),
+                    cells: _tableLink.getParticles(_showcaseTable!),
                     allCellsKey: _seven,
                     noteCellKey: _eight,
                     firstSlideActionKey: _nine,
@@ -363,7 +366,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                             description: intl.complexPathNameDescription,
                             globalKey: _fourteen,
                             child: PathNameWidget(
-                              table: _showcaseTable,
+                              table: _showcaseTable!,
                               tableIndex: 0,
                               path: _tableLink,
                             ),
@@ -375,7 +378,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                           description: intl.simplePathNameDescription,
                           globalKey: _thirteen,
                           child: PathNameWidget(
-                            table: _showcaseTable,
+                            table: _showcaseTable!,
                             tableIndex: 0,
                             path: _tableLink,
                           ),
@@ -482,7 +485,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                                   description: intl.tablesListDescription,
                                   title: intl.tablesListTitle,
                                   child: DrawerListTile(
-                                    text: _showcaseTable.title,
+                                    text: _showcaseTable!.title,
                                     icon: Icons.grid_view_outlined,
                                     selected: true,
                                   ),
