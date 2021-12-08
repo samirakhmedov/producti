@@ -238,7 +238,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
           context: context,
           builder: (context) => Material(
             color: Colors.transparent,
-            child: GestureDetector(
+            child: InkWell(
               onTap: () {
                 Navigator.of(context).pop();
 
