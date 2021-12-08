@@ -27,36 +27,40 @@ class _LaunchPageState extends State<LaunchPage> {
     /// I JUST DO NOT HAVE ENOUGH TIME
     authBloc.add(AuthAnonymousEvent());
 
-    settings.initialize(
-      Localizations.localeOf(context),
-      theme.primaryColor,
-      Theme.of(context).brightness == Brightness.light
-          ? ThemeMode.light
-          : ThemeMode.dark,
-    );
-
     final navigator = Navigator.of(context);
 
     final launchBloc = context.read<LaunchBloc>();
 
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        final state = launchBloc.state;
+    if (settings.state.language == null) {
+      Future.delayed(
+        const Duration(seconds: 2),
+        () {
+          final state = launchBloc.state;
 
-        final authState = authBloc.state;
+          final authState = authBloc.state;
 
-        navigator.pushReplacementNamed(
-          state.onboardingPassed
-              ? state.showcaseShown
-                  ? authState is AuthLoggedIn || authState is AuthAnonymousState
-                      ? AppRoutes.tables
-                      : AppRoutes.auth
-                  : AppRoutes.showcase
-              : AppRoutes.onboarding,
-        );
-      },
-    );
+          navigator.pushReplacementNamed(
+            state.onboardingPassed
+                ? state.showcaseShown
+                    ? authState is AuthLoggedIn ||
+                            authState is AuthAnonymousState
+                        ? AppRoutes.tables
+                        : AppRoutes.auth
+                    : AppRoutes.showcase
+                : AppRoutes.onboarding,
+          );
+        },
+      );
+
+      settings.initialize(
+        Localizations.localeOf(context),
+        theme.primaryColor,
+        Theme.of(context).brightness == Brightness.light
+            ? ThemeMode.light
+            : ThemeMode.dark,
+      );
+    }
+
     super.didChangeDependencies();
   }
 
