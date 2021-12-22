@@ -8,6 +8,7 @@ import 'package:producti/data/core/error/error_codes.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
 import 'package:producti/domain/table/values/link.dart';
 import 'package:producti/generated/l10n.dart';
+import 'package:producti/presentation/core/constants/date_formatters.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:producti/presentation/core/errors/error_code_ext.dart';
 import 'package:producti/application/settings/settings_ext.dart';
@@ -133,9 +134,10 @@ class NotificationCellCreatePage extends StatelessWidget {
                                     );
                               },
                               currentTime: (() {
-                                final dateTime = context.select<
-                                    NotificationValidationCubit,
-                                    DateTime?>((value) => value.state.dateTime);
+                                final dateTime = context
+                                    .read<NotificationValidationCubit>()
+                                    .state
+                                    .dateTime;
 
                                 return dateTime?.isBefore(now) ?? true
                                     ? now
@@ -163,8 +165,7 @@ class NotificationCellCreatePage extends StatelessWidget {
                                 )
                               else
                                 Text(
-                                  DateFormat('dd.MM.yyyy, kk:mm')
-                                      .format(state.dateTime!),
+                                  dateFormat.format(state.dateTime!),
                                   style: textTheme.bodyText1!.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: ThemeHelper.isDarkMode(context)

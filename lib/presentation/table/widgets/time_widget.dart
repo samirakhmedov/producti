@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:producti/presentation/core/constants/date_formatters.dart';
 import 'package:producti_ui/producti_ui.dart';
 
 class TimeWidget extends StatelessWidget {
@@ -29,7 +30,7 @@ class TimeWidget extends StatelessWidget {
         const Icon(Icons.access_time),
         const Gap(),
         Text(
-          DateFormat('dd.MM.yyyy, kk:mm').format(time),
+          dateFormat.format(time),
           style: textTheme.bodyText1!.copyWith(
             fontWeight: FontWeight.w500,
             color: theme.primaryColor,
