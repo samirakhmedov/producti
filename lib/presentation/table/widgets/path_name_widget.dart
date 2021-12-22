@@ -148,8 +148,6 @@ class _GroupNameEdit extends StatelessWidget {
 
     final textTheme = ThemeHelper.getTextTheme(context);
 
-    final tableBloc = context.read<AnonymousTableBloc>();
-
     final cubit = GroupCreateCubit(
       path
           .getParticles(
@@ -187,13 +185,13 @@ class _GroupNameEdit extends StatelessWidget {
                   return focus.requestFocus();
                 }
 
-                tableBloc.add(
-                  AnonymousTableRenameCell(
-                    path,
-                    cubit.state.groupName,
-                    tableIndex,
-                  ),
-                );
+                context.read<AnonymousTableBloc>().add(
+                      AnonymousTableRenameCell(
+                        path,
+                        cubit.state.groupName,
+                        tableIndex,
+                      ),
+                    );
 
                 cubit.close();
 
@@ -208,13 +206,13 @@ class _GroupNameEdit extends StatelessWidget {
                 onTap: () {
                   if (cubit.state.error == null &&
                       cubit.state.groupName.isNotEmpty) {
-                    tableBloc.add(
-                      AnonymousTableRenameCell(
-                        path,
-                        cubit.state.groupName,
-                        tableIndex,
-                      ),
-                    );
+                    context.read<AnonymousTableBloc>().add(
+                          AnonymousTableRenameCell(
+                            path,
+                            cubit.state.groupName,
+                            tableIndex,
+                          ),
+                        );
                   }
 
                   cubit.close();
@@ -264,11 +262,10 @@ class _TableNameEdit extends StatelessWidget {
 
     final textTheme = ThemeHelper.getTextTheme(context);
 
-    final tableBloc = context.read<AnonymousTableBloc>();
+    final tables = context
+        .select<AnonymousTableLoaded, List<t.Table>>((value) => value.tables);
 
-    final tableState = tableBloc.state as AnonymousTableLoaded;
-
-    final cubit = TableCreateCubit(tableState.tables);
+    final cubit = TableCreateCubit(tables);
 
     final focus = FocusNode();
 
@@ -298,12 +295,12 @@ class _TableNameEdit extends StatelessWidget {
                   return focus.requestFocus();
                 }
 
-                tableBloc.add(
-                  AnonymousTableRenameTable(
-                    tableIndex,
-                    cubit.state.tableName,
-                  ),
-                );
+                context.read<AnonymousTableBloc>().add(
+                      AnonymousTableRenameTable(
+                        tableIndex,
+                        cubit.state.tableName,
+                      ),
+                    );
 
                 onComplete?.call();
               },
@@ -316,12 +313,12 @@ class _TableNameEdit extends StatelessWidget {
                 onTap: () {
                   if (cubit.state.error == null &&
                       cubit.state.tableName.isNotEmpty) {
-                    tableBloc.add(
-                      AnonymousTableRenameTable(
-                        tableIndex,
-                        cubit.state.tableName,
-                      ),
-                    );
+                    context.read<AnonymousTableBloc>().add(
+                          AnonymousTableRenameTable(
+                            tableIndex,
+                            cubit.state.tableName,
+                          ),
+                        );
                   }
 
                   onComplete?.call();

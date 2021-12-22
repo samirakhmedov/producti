@@ -6,17 +6,18 @@ import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/table/core/table_helper.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:producti/presentation/core/errors/error_code_ext.dart';
+import 'package:producti/domain/table/table.dart' as t;
 
 class CreateTableBody extends StatelessWidget {
   const CreateTableBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final tableBloc = context.read<AnonymousTableBloc>();
+    final tables = context
+        .select<AnonymousTableLoaded, List<t.Table>>((value) => value.tables);
 
-    final tableState = tableBloc.state as AnonymousTableLoaded;
+    final cubit = TableCreateCubit(tables);
 
-    final cubit = TableCreateCubit(tableState.tables);
     final intl = S.of(context);
 
     return Column(
@@ -60,6 +61,8 @@ class CreateTableBody extends StatelessWidget {
 
             cubit.close();
 
+            final tableBloc = context.read<AnonymousTableBloc>();
+
             tableBloc.add(
               AnonymousTableCreate(
                 createState.tableName,
@@ -70,7 +73,7 @@ class CreateTableBody extends StatelessWidget {
 
             Navigator.of(context).pop();
 
-            TableHelper.moveToTable(context, tableState.tables.length);
+            TableHelper.moveToTable(context, tables.length);
           },
           text: intl.create,
         ),

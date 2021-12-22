@@ -18,24 +18,24 @@ class CreateGroupBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<GroupCreateCubit>();
     final intl = S.of(context);
 
     return Column(
       children: [
         TextInputWidget(
-          onChange: (value) => cubit.mutate(groupName: value),
+          onChange: (value) =>
+              context.read<GroupCreateCubit>().mutate(groupName: value),
           hintText: intl.groupName,
           prefixIcon: Icons.grid_view_outlined,
           controller: TextEditingController(
-            text: cubit.state.groupName,
+            text: context
+                .select<GroupCreateState, String>((value) => value.groupName),
           ),
         ),
         const Gap(
           size: 20,
         ),
         BlocBuilder<GroupCreateCubit, GroupCreateState>(
-          bloc: cubit,
           builder: (context, state) {
             if (state.showErrors && state.error != null) {
               return Column(
@@ -55,6 +55,8 @@ class CreateGroupBody extends StatelessWidget {
         ),
         LongButton(
           onTap: () async {
+            final cubit = context.read<GroupCreateCubit>();
+
             final createState = cubit.state;
 
             if (createState.error != null && !createState.showErrors) {

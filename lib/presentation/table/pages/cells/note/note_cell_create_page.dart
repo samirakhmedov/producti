@@ -55,8 +55,6 @@ class NoteCellCreatePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final noteValidationCubit = context.read<NoteValidationCubit>();
-
     final theme = ThemeHelper.getTheme(context);
 
     final textTheme = theme.textTheme;
@@ -64,7 +62,10 @@ class NoteCellCreatePage extends StatelessWidget {
     final intl = S.of(context);
 
     return WillPopScope(
-      onWillPop: () async => _onPop(context, noteValidationCubit),
+      onWillPop: () async => _onPop(
+        context,
+        context.read<NoteValidationCubit>(),
+      ),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -74,7 +75,10 @@ class NoteCellCreatePage extends StatelessWidget {
             ),
           ),
           leading: InkWell(
-            onTap: () => _onPop(context, noteValidationCubit),
+            onTap: () => _onPop(
+              context,
+              context.read<NoteValidationCubit>(),
+            ),
             child: const Icon(
               Icons.arrow_back,
             ),
@@ -103,10 +107,12 @@ class NoteCellCreatePage extends StatelessWidget {
                       ),
                       hintText: intl.typeTitle,
                       autofocus: true,
-                      initialValue: noteValidationCubit.state.title,
-                      onChange: (value) => noteValidationCubit.mutate(
-                        title: value,
-                      ),
+                      initialValue: context.select<NoteValidationState, String>(
+                          (value) => value.title),
+                      onChange: (value) =>
+                          context.read<NoteValidationCubit>().mutate(
+                                title: value,
+                              ),
                     ),
                   ),
                 ),
@@ -120,10 +126,12 @@ class NoteCellCreatePage extends StatelessWidget {
                   ),
                   hintText: intl.typeDescription,
                   multiline: true,
-                  initialValue: noteValidationCubit.state.description,
-                  onChange: (value) => noteValidationCubit.mutate(
-                    description: value,
-                  ),
+                  initialValue: context.select<NoteValidationState, String>(
+                      (value) => value.description),
+                  onChange: (value) =>
+                      context.read<NoteValidationCubit>().mutate(
+                            description: value,
+                          ),
                 ),
               ),
               SliverPadding(
@@ -173,6 +181,9 @@ class NoteCellCreatePage extends StatelessWidget {
                           key: Key(index.toString()),
                           direction: DismissDirection.startToEnd,
                           onDismissed: (direction) {
+                            final noteValidationCubit =
+                                context.read<NoteValidationCubit>();
+
                             final links =
                                 List.of(noteValidationCubit.state.links);
 
@@ -212,9 +223,9 @@ class NoteCellCreatePage extends StatelessWidget {
 
                                     list[index] = Link(value);
 
-                                    noteValidationCubit.mutate(
-                                      links: list,
-                                    );
+                                    context.read<NoteValidationCubit>().mutate(
+                                          links: list,
+                                        );
                                   },
                                 ),
                               ),
@@ -244,6 +255,9 @@ class NoteCellCreatePage extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: InkWell(
                       onTap: () {
+                        final noteValidationCubit =
+                            context.read<NoteValidationCubit>();
+
                         final links = List.of(noteValidationCubit.state.links);
 
                         links.add(const Link(''));

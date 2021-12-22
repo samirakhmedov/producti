@@ -18,23 +18,19 @@ class SignInPage extends StatelessWidget {
 
     final intl = S.of(context);
 
-    final cubit = context.read<AuthPageCubit>();
-
-    final auth = context.read<AuthBloc>();
-
     final _email = TextEditingController();
     final _password = TextEditingController();
 
     _email.addListener(() {
-      cubit.mutate(
-        email: Email(_email.text),
-      );
+      context.read<AuthPageCubit>().mutate(
+            email: Email(_email.text),
+          );
     });
 
     _password.addListener(() {
-      cubit.mutate(
-        password: Password(_password.text),
-      );
+      context.read<AuthPageCubit>().mutate(
+            password: Password(_password.text),
+          );
     });
 
     return Column(
@@ -98,14 +94,14 @@ class SignInPage extends StatelessWidget {
         OptionText(
           start: intl.notPartOfParty,
           end: ' ${intl.join}',
-          onTap: () => cubit.togglePage(),
+          onTap: () => context.read<AuthPageCubit>().togglePage(),
         ),
         const Gap(size: 6),
         OptionText(
           start: intl.hatePeople,
           end: ' ${intl.signInAnonim}',
           onTap: () {
-            auth.add(AuthAnonymousEvent());
+            context.read<AuthBloc>().add(AuthAnonymousEvent());
           },
         ),
       ],

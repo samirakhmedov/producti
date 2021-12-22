@@ -56,9 +56,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
     /// The application is not currently visible to the user, not responding to
     /// user input, and running in the background.
     if (state == AppLifecycleState.paused) {
-      final authBloc = context.read<AuthBloc>();
-
-      if (authBloc.state is AuthLoggedIn) {
+      if (context.read<AuthBloc>().state is AuthLoggedIn) {
       } else {
         final anonymous = context.read<AnonymousTableBloc>();
 

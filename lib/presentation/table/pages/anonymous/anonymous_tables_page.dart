@@ -66,9 +66,8 @@ class AnonymousTablesPage extends StatelessWidget {
                 onTap: () async {
                   navigator.pop();
 
-                  final tableBloc = context.read<AnonymousTableBloc>();
-
-                  final tableState = tableBloc.state as AnonymousTableLoaded;
+                  final tableState = context.read<AnonymousTableBloc>().state
+                      as AnonymousTableLoaded;
 
                   final table = tableState.tables[tableIndex];
 
@@ -102,15 +101,15 @@ class AnonymousTablesPage extends StatelessWidget {
                   await controller.closed;
 
                   if (cubit.state.error == null) {
-                    tableBloc.add(
-                      AnonymousTableCellCreate(
-                        GroupTableCell(
-                          title: cubit.state.groupName,
-                        ),
-                        path,
-                        tableIndex,
-                      ),
-                    );
+                    context.read<AnonymousTableBloc>().add(
+                          AnonymousTableCellCreate(
+                            GroupTableCell(
+                              title: cubit.state.groupName,
+                            ),
+                            path,
+                            tableIndex,
+                          ),
+                        );
                   }
 
                   cubit.close();
@@ -239,8 +238,6 @@ class AnonymousTablesPage extends StatelessWidget {
 
     final intl = S.of(context);
 
-    final bloc = context.read<AnonymousTableBloc>();
-
     return WillPopScope(
       onWillPop: () async {
         if (!path.isEmpty) {
@@ -263,8 +260,9 @@ class AnonymousTablesPage extends StatelessWidget {
       child: BlocListener<LocalNotificationsBloc, LocalNotificationsState>(
         listener: (context, state) {
           if (state.pathToNotification != null && state.tableIndex != null) {
-            final selectedTable =
-                (bloc.state as AnonymousTableLoaded).tables[state.tableIndex!];
+            final selectedTable = (context.read<AnonymousTableBloc>().state
+                    as AnonymousTableLoaded)
+                .tables[state.tableIndex!];
 
             final cell = state.pathToNotification!.getParticle(selectedTable)
                 as c.NotificationTableCell;
@@ -314,7 +312,7 @@ class AnonymousTablesPage extends StatelessWidget {
                         context,
                         _scaffoldKey,
                         intl,
-                        bloc,
+                        context.read<AnonymousTableBloc>(),
                       ),
                       backgroundColor: theme.primaryColor,
                       child: Icon(
@@ -571,7 +569,6 @@ class _TableCellsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final intl = S.of(context);
-    final bloc = context.read<AnonymousTableBloc>();
 
     final theme = ThemeHelper.getTheme(context);
 
@@ -769,23 +766,20 @@ class _TableCellsList extends StatelessWidget {
                   if (!agreement!) return;
                 }
 
-                bloc.add(
-                  AnonymousTableDeleteCell(
-                    tableIndex,
-                    path.addPath(index),
-                  ),
-                );
+                context.read<AnonymousTableBloc>().add(
+                      AnonymousTableDeleteCell(
+                        tableIndex,
+                        path.addPath(index),
+                      ),
+                    );
 
-                final notificationsBloc =
-                    context.read<LocalNotificationsBloc>();
-
-                notificationsBloc.add(
-                  LocalNotificationsCellDelete(
-                    table,
-                    path.addPath(index),
-                    tableIndex,
-                  ),
-                );
+                context.read<LocalNotificationsBloc>().add(
+                      LocalNotificationsCellDelete(
+                        table,
+                        path.addPath(index),
+                        tableIndex,
+                      ),
+                    );
               },
             ),
           ],

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -59,9 +58,6 @@ class NotificationCellCreatePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notificationValidationCubit =
-        context.read<NotificationValidationCubit>();
-
     final theme = ThemeHelper.getTheme(context);
 
     final textTheme = theme.textTheme;
@@ -69,7 +65,8 @@ class NotificationCellCreatePage extends StatelessWidget {
     final intl = S.of(context);
 
     return WillPopScope(
-      onWillPop: () async => _onPop(context, notificationValidationCubit),
+      onWillPop: () async =>
+          _onPop(context, context.read<NotificationValidationCubit>()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -79,7 +76,8 @@ class NotificationCellCreatePage extends StatelessWidget {
             ),
           ),
           leading: InkWell(
-            onTap: () => _onPop(context, notificationValidationCubit),
+            onTap: () =>
+                _onPop(context, context.read<NotificationValidationCubit>()),
             child: const Icon(
               Icons.arrow_back,
             ),
@@ -128,16 +126,21 @@ class NotificationCellCreatePage extends StatelessWidget {
                                 ),
                               ),
                               onChanged: (date) {
-                                notificationValidationCubit.mutate(
-                                  dateTime: date,
-                                );
+                                context
+                                    .read<NotificationValidationCubit>()
+                                    .mutate(
+                                      dateTime: date,
+                                    );
                               },
-                              currentTime: (notificationValidationCubit
-                                          .state.dateTime
-                                          ?.isBefore(now) ??
-                                      true)
-                                  ? DateTime.now()
-                                  : notificationValidationCubit.state.dateTime,
+                              currentTime: (() {
+                                final dateTime = context.select<
+                                    NotificationValidationState,
+                                    DateTime?>((value) => value.dateTime);
+
+                                return dateTime?.isBefore(now) ?? true
+                                    ? now
+                                    : dateTime;
+                              })(),
                             );
                           },
                           child: Row(
@@ -224,10 +227,13 @@ class NotificationCellCreatePage extends StatelessWidget {
                       ),
                       hintText: intl.typeTitle,
                       autofocus: true,
-                      initialValue: notificationValidationCubit.state.title,
-                      onChange: (value) => notificationValidationCubit.mutate(
-                        title: value,
-                      ),
+                      initialValue:
+                          context.select<NotificationValidationState, String>(
+                              (value) => value.title),
+                      onChange: (value) =>
+                          context.read<NotificationValidationCubit>().mutate(
+                                title: value,
+                              ),
                     ),
                   ),
                 ),
@@ -241,10 +247,13 @@ class NotificationCellCreatePage extends StatelessWidget {
                   ),
                   hintText: intl.typeDescription,
                   multiline: true,
-                  initialValue: notificationValidationCubit.state.description,
-                  onChange: (value) => notificationValidationCubit.mutate(
-                    description: value,
-                  ),
+                  initialValue:
+                      context.select<NotificationValidationState, String>(
+                          (value) => value.description),
+                  onChange: (value) =>
+                      context.read<NotificationValidationCubit>().mutate(
+                            description: value,
+                          ),
                 ),
               ),
               SliverPadding(
@@ -297,6 +306,9 @@ class NotificationCellCreatePage extends StatelessWidget {
                           key: Key(index.toString()),
                           direction: DismissDirection.startToEnd,
                           onDismissed: (direction) {
+                            final notificationValidationCubit =
+                                context.read<NotificationValidationCubit>();
+
                             final links = List.of(
                                 notificationValidationCubit.state.links);
 
@@ -336,9 +348,11 @@ class NotificationCellCreatePage extends StatelessWidget {
 
                                     list[index] = Link(value);
 
-                                    notificationValidationCubit.mutate(
-                                      links: list,
-                                    );
+                                    context
+                                        .read<NotificationValidationCubit>()
+                                        .mutate(
+                                          links: list,
+                                        );
                                   },
                                 ),
                               ),
@@ -369,6 +383,9 @@ class NotificationCellCreatePage extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: InkWell(
                       onTap: () {
+                        final notificationValidationCubit =
+                            context.read<NotificationValidationCubit>();
+
                         final links =
                             List.of(notificationValidationCubit.state.links);
 

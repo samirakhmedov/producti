@@ -17,27 +17,36 @@ class LaunchPage extends StatefulWidget {
 
 class _LaunchPageState extends State<LaunchPage> {
   @override
-  void didChangeDependencies() {
-    final settings = context.read<SettingsCubit>();
+  void initState() {
+    super.initState();
 
-    final authBloc = context.read<AuthBloc>();
+    WidgetsBinding.instance!.addPersistentFrameCallback((timeStamp) {
+      final theme = ThemeHelper.getTheme(context);
 
-    final theme = ThemeHelper.getTheme(context);
+      final navigator = Navigator.of(context);
 
-    /// I JUST DO NOT HAVE ENOUGH TIME
-    authBloc.add(AuthAnonymousEvent());
+      /// I JUST DO NOT HAVE ENOUGH TIME
 
-    final navigator = Navigator.of(context);
+      context.read<AuthBloc>().add(AuthAnonymousEvent());
 
-    final launchBloc = context.read<LaunchBloc>();
+      final settings = context.read<SettingsCubit>();
 
-    if (settings.state.language == null) {
+      if (settings.state.language == null) {
+        settings.initialize(
+          Localizations.localeOf(context),
+          theme.primaryColor,
+          Theme.of(context).brightness == Brightness.light
+              ? ThemeMode.light
+              : ThemeMode.dark,
+        );
+      }
+
       Future.delayed(
         const Duration(seconds: 2),
         () {
-          final state = launchBloc.state;
+          final state = context.read<LaunchBloc>().state;
 
-          final authState = authBloc.state;
+          final authState = context.read<AuthBloc>().state;
 
           navigator.pushReplacementNamed(
             state.onboardingPassed
@@ -51,17 +60,7 @@ class _LaunchPageState extends State<LaunchPage> {
           );
         },
       );
-
-      settings.initialize(
-        Localizations.localeOf(context),
-        theme.primaryColor,
-        Theme.of(context).brightness == Brightness.light
-            ? ThemeMode.light
-            : ThemeMode.dark,
-      );
-    }
-
-    super.didChangeDependencies();
+    });
   }
 
   @override

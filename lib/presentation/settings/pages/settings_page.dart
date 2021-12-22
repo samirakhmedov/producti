@@ -15,8 +15,6 @@ class SettingsPage extends StatelessWidget {
 
     final textTheme = ThemeHelper.getTextTheme(context);
 
-    final settings = context.read<SettingsCubit>();
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -42,9 +40,9 @@ class SettingsPage extends StatelessWidget {
                 const Gap(),
                 ColorPicker(
                   onSelect: (color) {
-                    settings.mutate(
-                      accentColor: color,
-                    );
+                    context.read<SettingsCubit>().mutate(
+                          accentColor: color,
+                        );
                   },
                 ),
                 const Gap(),
@@ -64,9 +62,9 @@ class SettingsPage extends StatelessWidget {
                     AppThemeSwitcher(
                       value: state.themeMode!,
                       onTap: (themeMode) {
-                        settings.mutate(
-                          themeMode: themeMode,
-                        );
+                        context.read<SettingsCubit>().mutate(
+                              themeMode: themeMode,
+                            );
                       },
                     ),
                   ],

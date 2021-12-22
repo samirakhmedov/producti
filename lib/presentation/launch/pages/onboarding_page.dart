@@ -32,9 +32,7 @@ class OnboardingPage extends StatelessWidget {
   }
 
   void _next(BuildContext context) {
-    final bloc = context.read<LaunchBloc>();
-
-    bloc.mutate(onboardingPassed: true);
+    context.read<LaunchBloc>().mutate(onboardingPassed: true);
 
     Navigator.of(context).pushReplacementNamed(
       /// I JUST DO NOT HAVE ENOUGH TIME

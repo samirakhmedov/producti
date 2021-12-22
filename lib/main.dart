@@ -39,6 +39,8 @@ import 'injection.dart';
 /// 3. [RawAutocomplete]
 /// 4. [ObserverList]
 /// 5. [Feedback]
+///
+/// Go on.
 
 Future<void> main() async {
   /// Initialises and connects all [BindingBase] instances to Flutter Engine.

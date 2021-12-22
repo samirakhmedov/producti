@@ -23,30 +23,26 @@ class _SignUpPageState extends State<SignUpPage> {
 
     final intl = S.of(context);
 
-    final cubit = context.read<AuthPageCubit>();
-
     final _email = TextEditingController();
     final _password = TextEditingController();
     final _repeatPassword = TextEditingController();
 
-    final auth = context.read<AuthBloc>();
-
     _email.addListener(() {
-      cubit.mutate(
-        email: Email(_email.text),
-      );
+      context.read<AuthPageCubit>().mutate(
+            email: Email(_email.text),
+          );
     });
 
     _password.addListener(() {
-      cubit.mutate(
-        password: Password(_password.text),
-      );
+      context.read<AuthPageCubit>().mutate(
+            password: Password(_password.text),
+          );
     });
 
     _repeatPassword.addListener(() {
-      cubit.mutate(
-        repeatPassword: Password(_repeatPassword.text),
-      );
+      context.read<AuthPageCubit>().mutate(
+            repeatPassword: Password(_repeatPassword.text),
+          );
     });
 
     return Column(
@@ -137,14 +133,14 @@ class _SignUpPageState extends State<SignUpPage> {
         OptionText(
           start: intl.alreadyCoolGuy,
           end: ' ${intl.letHim}',
-          onTap: () => cubit.togglePage(),
+          onTap: () => context.read<AuthPageCubit>().togglePage(),
         ),
         const Gap(size: 6),
         OptionText(
           start: intl.hatePeople,
           end: ' ${intl.signInAnonim}',
           onTap: () {
-            auth.add(AuthAnonymousEvent());
+            context.read<AuthBloc>().add(AuthAnonymousEvent());
           },
         ),
       ],

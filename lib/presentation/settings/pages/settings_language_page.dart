@@ -20,8 +20,6 @@ class SettingsLanguagePage extends StatelessWidget {
 
     final textTheme = ThemeHelper.getTextTheme(context);
 
-    final settings = context.read<SettingsCubit>();
-
     final list = [
       _LanguageSelection(
         const Locale('en', ''),
@@ -52,9 +50,9 @@ class SettingsLanguagePage extends StatelessWidget {
           return AppListTile(
             title: selection.text,
             onTap: () {
-              settings.mutate(
-                language: selection.locale,
-              );
+              context.read<SettingsCubit>().mutate(
+                    language: selection.locale,
+                  );
             },
           );
         },
