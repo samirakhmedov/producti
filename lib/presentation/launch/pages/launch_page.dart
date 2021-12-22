@@ -20,7 +20,7 @@ class _LaunchPageState extends State<LaunchPage> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance!.addPersistentFrameCallback((timeStamp) {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       final theme = ThemeHelper.getTheme(context);
 
       final navigator = Navigator.of(context);

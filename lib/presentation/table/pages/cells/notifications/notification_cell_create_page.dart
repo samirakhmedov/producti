@@ -134,8 +134,8 @@ class NotificationCellCreatePage extends StatelessWidget {
                               },
                               currentTime: (() {
                                 final dateTime = context.select<
-                                    NotificationValidationState,
-                                    DateTime?>((value) => value.dateTime);
+                                    NotificationValidationCubit,
+                                    DateTime?>((value) => value.state.dateTime);
 
                                 return dateTime?.isBefore(now) ?? true
                                     ? now
@@ -228,8 +228,8 @@ class NotificationCellCreatePage extends StatelessWidget {
                       hintText: intl.typeTitle,
                       autofocus: true,
                       initialValue:
-                          context.select<NotificationValidationState, String>(
-                              (value) => value.title),
+                          context.select<NotificationValidationCubit, String>(
+                              (value) => value.state.title),
                       onChange: (value) =>
                           context.read<NotificationValidationCubit>().mutate(
                                 title: value,
@@ -248,8 +248,8 @@ class NotificationCellCreatePage extends StatelessWidget {
                   hintText: intl.typeDescription,
                   multiline: true,
                   initialValue:
-                      context.select<NotificationValidationState, String>(
-                          (value) => value.description),
+                      context.select<NotificationValidationCubit, String>(
+                          (value) => value.state.description),
                   onChange: (value) =>
                       context.read<NotificationValidationCubit>().mutate(
                             description: value,

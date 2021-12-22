@@ -108,8 +108,8 @@ class CheckListCellCreatePage extends StatelessWidget {
                       hintText: intl.typeTitle,
                       autofocus: true,
                       initialValue:
-                          context.select<CheckListValidationState, String>(
-                              (value) => value.title),
+                          context.select<CheckListValidationCubit, String>(
+                              (value) => value.state.title),
                       onChange: (value) =>
                           context.read<CheckListValidationCubit>().mutate(
                                 title: value,

@@ -13,8 +13,8 @@ class CreateTableBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tables = context
-        .select<AnonymousTableLoaded, List<t.Table>>((value) => value.tables);
+    final tables = context.select<AnonymousTableBloc, List<t.Table>>(
+        (value) => (value.state as AnonymousTableLoaded).tables);
 
     final cubit = TableCreateCubit(tables);
 

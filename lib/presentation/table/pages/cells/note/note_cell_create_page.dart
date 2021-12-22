@@ -107,8 +107,8 @@ class NoteCellCreatePage extends StatelessWidget {
                       ),
                       hintText: intl.typeTitle,
                       autofocus: true,
-                      initialValue: context.select<NoteValidationState, String>(
-                          (value) => value.title),
+                      initialValue: context.select<NoteValidationCubit, String>(
+                          (value) => value.state.title),
                       onChange: (value) =>
                           context.read<NoteValidationCubit>().mutate(
                                 title: value,
@@ -126,8 +126,8 @@ class NoteCellCreatePage extends StatelessWidget {
                   ),
                   hintText: intl.typeDescription,
                   multiline: true,
-                  initialValue: context.select<NoteValidationState, String>(
-                      (value) => value.description),
+                  initialValue: context.select<NoteValidationCubit, String>(
+                      (value) => value.state.description),
                   onChange: (value) =>
                       context.read<NoteValidationCubit>().mutate(
                             description: value,
