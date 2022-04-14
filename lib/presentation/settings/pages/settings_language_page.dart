@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/application/settings/settings_cubit.dart';
 import 'package:producti/generated/l10n.dart';
 import 'package:producti_ui/producti_ui.dart';
-import 'package:provider/src/provider.dart';
 
 class _LanguageSelection {
   final Locale locale;

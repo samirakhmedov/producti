@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +13,7 @@ import 'package:producti/application/tables/logic/anonymous/anonymous_table_bloc
 import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/constants.dart';
 import 'package:producti/presentation/core/constants/routes.dart';
-import 'package:producti_ui/producti_ui.dart';
+import 'package:producti/presentation/core/widgets/theme/app_theme_widget.dart';
 
 /// Root app widget.
 ///
@@ -88,51 +87,29 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
           designSize: const Size(375, 667),
         );
 
-        return BlocBuilder<SettingsCubit, SettingsState>(
-          builder: (context, state) {
-            return MaterialApp(
-              routes: routes,
-              title: kAppName,
-              navigatorObservers: [
-                FirebaseAnalyticsObserver(analytics: analytics),
-              ],
-              localizationsDelegates: const [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale('en', ''),
-                Locale('ru', ''),
-              ],
-              locale: state.language,
-              themeMode: state.themeMode,
-              initialRoute: AppRoutes.launch,
-              theme: kLightTheme.copyWith(
-                primaryColor: state.accentColor,
-                iconTheme: kLightTheme.iconTheme.copyWith(
-                  color: state.accentColor,
-                ),
-                appBarTheme: kLightTheme.appBarTheme.copyWith(
-                  iconTheme: kLightTheme.appBarTheme.iconTheme!.copyWith(
-                    color: state.accentColor,
-                  ),
-                ),
-              ),
-              darkTheme: kDarkTheme.copyWith(
-                primaryColor: state.accentColor,
-                iconTheme: kDarkTheme.iconTheme.copyWith(
-                  color: state.accentColor,
-                ),
-                appBarTheme: kDarkTheme.appBarTheme.copyWith(
-                  iconTheme: kDarkTheme.appBarTheme.iconTheme!.copyWith(
-                    color: state.accentColor,
-                  ),
-                ),
-              ),
-            );
-          },
+        final language = context.select<SettingsCubit, Locale?>(
+          (value) => value.state.language,
+        );
+
+        return MaterialApp(
+          routes: routes,
+          title: kAppName,
+          builder: (context, widget) => AppThemeWidget(child: widget!),
+          navigatorObservers: [
+            FirebaseAnalyticsObserver(analytics: analytics),
+          ],
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en', ''),
+            Locale('ru', ''),
+          ],
+          locale: language,
+          initialRoute: AppRoutes.launch,
         );
       },
     );
