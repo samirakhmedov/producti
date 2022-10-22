@@ -1,7 +1,6 @@
 part of 'table_cell.dart';
 
 @HiveType(typeId: HiveConstants.notificationTableCellId)
-@immutable
 class NotificationTableCell extends TableCell {
   @HiveField(0)
   final DateTime time;
@@ -9,14 +8,12 @@ class NotificationTableCell extends TableCell {
   final String description;
   @HiveField(2)
   final List<String> links;
-  @HiveField(3)
-  final String title;
 
   NotificationTableCell({
     required this.time,
     this.description = '',
     this.links = const [],
-    this.title = '',
+    @HiveField(3) String title = '',
   }) : super(title);
 
   @override

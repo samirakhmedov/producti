@@ -48,15 +48,22 @@ class _LaunchPageState extends State<LaunchPage> {
 
           final authState = context.read<AuthBloc>().state;
 
+          String route = AppRoutes.auth;
+
+          if (authState is AuthLoggedIn || authState is AuthAnonymousState) {
+            route = AppRoutes.tables;
+          }
+
+          if (!state.showcaseShown) {
+            route = AppRoutes.showcase;
+          }
+
+          if (!state.onboardingPassed) {
+            route = AppRoutes.onboarding;
+          }
+
           navigator.pushReplacementNamed(
-            state.onboardingPassed
-                ? state.showcaseShown
-                    ? authState is AuthLoggedIn ||
-                            authState is AuthAnonymousState
-                        ? AppRoutes.tables
-                        : AppRoutes.auth
-                    : AppRoutes.showcase
-                : AppRoutes.onboarding,
+            route,
           );
         },
       );

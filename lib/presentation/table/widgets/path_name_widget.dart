@@ -262,8 +262,13 @@ class _TableNameEdit extends StatelessWidget {
 
     final textTheme = ThemeHelper.getTextTheme(context);
 
-    final tables = context
-        .select<AnonymousTableLoaded, List<t.Table>>((value) => value.tables);
+    final tables = context.select<AnonymousTableBloc, List<t.Table>>((value) {
+      final state = value.state;
+
+      if (state is AnonymousTableLoaded) return state.tables;
+
+      return [];
+    });
 
     final cubit = TableCreateCubit(tables);
 

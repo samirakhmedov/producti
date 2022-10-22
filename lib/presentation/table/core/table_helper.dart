@@ -8,15 +8,17 @@ class TableHelper {
 
     navigator.popUntil((route) => false);
 
-    navigator.push(
-      MaterialPageRoute(
-        builder: (context) => TablesPage(
-          tableIndex: tableIndex,
-        ),
-        settings: const RouteSettings(
-          name: AppRoutes.tables,
-        ),
+    final route = MaterialPageRoute(
+      builder: (context) => TablesPage(
+        tableIndex: tableIndex,
+      ),
+      settings: const RouteSettings(
+        name: AppRoutes.tables,
       ),
     );
+
+    if (navigator.canPop()) navigator.pushReplacement(route);
+
+    navigator.push(route);
   }
 }

@@ -25,11 +25,11 @@ class AuthRepositoryImpl extends AuthRepository {
     await _storage.write(key: key, value: password);
   }
 
-  Future<String> _getPassword(String uid) async {
-    final key = _getPasswordKey(uid);
+  // Future<String> _getPassword(String uid) async {
+  //   final key = _getPasswordKey(uid);
 
-    return _storage.read(key: key) as Future<String>;
-  }
+  //   return _storage.read(key: key) as Future<String>;
+  // }
 
   @override
   Future<Either<Failure, User>> register({

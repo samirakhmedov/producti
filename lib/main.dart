@@ -92,7 +92,7 @@ Future<void> main() async {
   /// depending what run config is current (release or other)
   final crashlytics = sl.get<FirebaseCrashlytics>();
 
-  await crashlytics.setCrashlyticsCollectionEnabled(kReleaseMode);
+  crashlytics.setCrashlyticsCollectionEnabled(kReleaseMode);
 
   runZonedGuarded(
     () {

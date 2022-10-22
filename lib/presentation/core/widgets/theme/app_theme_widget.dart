@@ -15,22 +15,28 @@ class AppThemeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Brightness platformBrightness =
-        MediaQuery.platformBrightnessOf(context);
-    final bool useDarkTheme = platformBrightness == ui.Brightness.dark;
-
-    ThemeData? theme;
-
-    if (useDarkTheme) {
-      theme = kDarkTheme;
-    }
-
-    theme ??= kLightTheme;
-
     return BlocBuilder<SettingsCubit, SettingsState>(
       builder: (context, state) {
+        ThemeData? theme;
+
+        final themeMode = state.themeMode;
+
+        if (themeMode == null || themeMode == ThemeMode.system) {
+          final Brightness platformBrightness =
+              MediaQuery.platformBrightnessOf(context);
+          final bool useDarkTheme = platformBrightness == ui.Brightness.dark;
+
+          if (useDarkTheme) {
+            theme = kDarkTheme;
+          }
+
+          theme ??= kLightTheme;
+        } else {
+          theme = themeMode == ThemeMode.dark ? kDarkTheme : kLightTheme;
+        }
+
         return Theme(
-          data: theme!.copyWith(
+          data: theme.copyWith(
             primaryColor: state.accentColor,
             iconTheme: kLightTheme.iconTheme.copyWith(
               color: state.accentColor,

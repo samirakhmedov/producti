@@ -1,17 +1,12 @@
 part of 'table_cell.dart';
 
 @HiveType(typeId: HiveConstants.groupTableCellId)
-@immutable
 class GroupTableCell extends TableCell {
   @HiveField(0)
   List<TableCell> children;
 
-  @override
-  @HiveField(1)
-  String title;
-
   GroupTableCell({
-    required this.title,
+    @HiveField(1) String title = '',
     this.children = const [],
   }) : super(title);
 

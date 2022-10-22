@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 
 import 'package:producti/domain/core/hive_constants.dart';
@@ -8,17 +7,12 @@ import 'package:producti/domain/table/table_link.dart';
 part 'table.g.dart';
 
 @HiveType(typeId: HiveConstants.tableId)
-@immutable
 class Table extends t.TableCell {
-  @override
-  @HiveField(0)
-  String title;
-
   @HiveField(1, defaultValue: [])
   List<t.TableCell> cells;
 
   Table({
-    required this.title,
+    @HiveField(0) String title = '',
     this.cells = const [],
   }) : super(title);
 

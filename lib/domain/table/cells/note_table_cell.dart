@@ -1,19 +1,16 @@
 part of 'table_cell.dart';
 
 @HiveType(typeId: HiveConstants.noteTableCellId)
-@immutable
 class NoteTableCell extends TableCell {
   @HiveField(0)
   final String description;
   @HiveField(1)
   final List<String> links;
-  @HiveField(2)
-  final String title;
 
   NoteTableCell({
     this.description = '',
     this.links = const [],
-    this.title = '',
+    @HiveField(2) String title = '',
   }) : super(title);
 
   @override

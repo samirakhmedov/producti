@@ -57,7 +57,7 @@ class AnonymousTablesPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 28,
-          ).copyWith(top: 46.sp),
+          ).copyWith(top: 42.sp),
           child: Column(
             children: [
               CreatePopupTile(

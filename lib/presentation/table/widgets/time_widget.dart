@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:producti/presentation/core/constants/date_formatters.dart';
 import 'package:producti_ui/producti_ui.dart';
 

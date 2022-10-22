@@ -406,7 +406,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 28,
-                    ).copyWith(top: 46.sp),
+                    ).copyWith(top: 42.sp),
                     child: EmptyShowcaseWidget(
                       globalKey: _two,
                       child: Column(
@@ -421,7 +421,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                               title: intl.group,
                             ),
                           ),
-                          const Gap(size: 12),
+                          Gap(size: 12.sp),
                           AppShowcaseWidget(
                             globalKey: _four,
                             title: intl.note,
@@ -431,7 +431,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                               title: intl.note,
                             ),
                           ),
-                          const Gap(size: 12),
+                          Gap(size: 12.sp),
                           AppShowcaseWidget(
                             globalKey: _five,
                             title: intl.notification,
@@ -442,7 +442,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                               title: intl.notification,
                             ),
                           ),
-                          const Gap(size: 12),
+                          Gap(size: 12.sp),
                           AppShowcaseWidget(
                             globalKey: _six,
                             title: intl.checkList,

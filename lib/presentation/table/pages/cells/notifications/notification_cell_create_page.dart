@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:producti/application/settings/settings_cubit.dart';
 import 'package:producti/application/tables/pages/notification_validation/notification_validation_cubit.dart';
 import 'package:producti/data/core/error/error_codes.dart';

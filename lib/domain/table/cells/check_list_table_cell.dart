@@ -1,17 +1,13 @@
 part of 'table_cell.dart';
 
 @HiveType(typeId: HiveConstants.checkListTableCellId)
-@immutable
 class CheckListTableCell extends TableCell {
   @HiveField(1)
   final List<CheckTileTableCell> checkList;
 
-  @HiveField(0)
-  final String title;
-
   CheckListTableCell({
     this.checkList = const [],
-    this.title = '',
+    @HiveField(0) String title = '',
   }) : super(title);
 
   factory CheckListTableCell.fromJson(Map<String, dynamic> json) {
@@ -51,7 +47,6 @@ class CheckListTableCell extends TableCell {
 }
 
 @HiveType(typeId: HiveConstants.checkTileTableCellId)
-@immutable
 class CheckTileTableCell extends TableCell {
   @HiveField(1)
   final bool value;

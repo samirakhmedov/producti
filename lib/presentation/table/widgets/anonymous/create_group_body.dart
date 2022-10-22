@@ -28,8 +28,7 @@ class CreateGroupBody extends StatelessWidget {
           hintText: intl.groupName,
           prefixIcon: Icons.grid_view_outlined,
           controller: TextEditingController(
-            text: context
-                .select<GroupCreateState, String>((value) => value.groupName),
+            text: context.read<GroupCreateCubit>().state.groupName,
           ),
         ),
         const Gap(

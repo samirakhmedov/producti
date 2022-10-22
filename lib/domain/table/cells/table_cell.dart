@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:producti/domain/core/hive_constants.dart';
 
@@ -11,8 +10,7 @@ part 'check_list_table_cell.dart';
 
 part 'table_cell.g.dart';
 
-@immutable
-abstract class TableCell extends Equatable {
+abstract class TableCell with EquatableMixin {
   String title;
 
   TableCell(this.title);
