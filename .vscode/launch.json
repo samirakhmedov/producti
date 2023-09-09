@@ -5,28 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "producti",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "producti (profile mode)",
+            "name": "Producti Debug",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "debug",
         },
         {
-            "name": "producti_ui",
-            "cwd": "producti_ui",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "producti_ui (profile mode)",
-            "cwd": "producti_ui",
+            "name": "Producti Release",
+
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
-        }
+            "flutterMode": "release"
+        },
+        {
+            "name": "Producti Profile",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+        },
     ]
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:producti/application/settings/settings_cubit.dart';
 import 'package:producti/application/tables/pages/notification_validation/notification_validation_cubit.dart';
 import 'package:producti/data/core/error/error_codes.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
@@ -10,15 +8,13 @@ import 'package:producti/generated/l10n.dart';
 import 'package:producti/presentation/core/constants/date_formatters.dart';
 import 'package:producti_ui/producti_ui.dart';
 import 'package:producti/presentation/core/errors/error_code_ext.dart';
-import 'package:producti/application/settings/settings_ext.dart';
 
 class NotificationCellCreatePage extends StatelessWidget {
   const NotificationCellCreatePage({
     Key? key,
   }) : super(key: key);
 
-  Future<bool> _onPop(BuildContext context,
-      NotificationValidationCubit notificationValidationCubit) async {
+  Future<bool> _onPop(BuildContext context, NotificationValidationCubit notificationValidationCubit) async {
     final intl = S.of(context);
 
     if (notificationValidationCubit.state.error != null) {
@@ -65,8 +61,7 @@ class NotificationCellCreatePage extends StatelessWidget {
     final intl = S.of(context);
 
     return WillPopScope(
-      onWillPop: () async =>
-          _onPop(context, context.read<NotificationValidationCubit>()),
+      onWillPop: () async => _onPop(context, context.read<NotificationValidationCubit>()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -76,8 +71,7 @@ class NotificationCellCreatePage extends StatelessWidget {
             ),
           ),
           leading: InkWell(
-            onTap: () =>
-                _onPop(context, context.read<NotificationValidationCubit>()),
+            onTap: () => _onPop(context, context.read<NotificationValidationCubit>()),
             child: const Icon(
               Icons.arrow_back,
             ),
@@ -94,56 +88,10 @@ class NotificationCellCreatePage extends StatelessWidget {
                 sliver: SliverToBoxAdapter(
                   child: SizedBox(
                     height: 24,
-                    child: BlocBuilder<NotificationValidationCubit,
-                        NotificationValidationState>(
+                    child: BlocBuilder<NotificationValidationCubit, NotificationValidationState>(
                       builder: (context, state) {
                         return InkWell(
-                          onTap: () {
-                            final now = DateTime.now();
-
-                            DatePicker.showDateTimePicker(
-                              context,
-                              showTitleActions: true,
-                              minTime: now,
-                              maxTime: now.add(
-                                const Duration(days: 3650),
-                              ),
-                              locale: context
-                                  .read<SettingsCubit>()
-                                  .state
-                                  .language!
-                                  .toLocaleType(),
-                              theme: DatePickerTheme(
-                                backgroundColor: theme.backgroundColor,
-                                cancelStyle: textTheme.caption!.copyWith(
-                                  color: kRed,
-                                ),
-                                doneStyle: textTheme.caption!.copyWith(
-                                  color: theme.primaryColor,
-                                ),
-                                itemStyle: textTheme.bodyText1!.copyWith(
-                                  color: theme.primaryColor,
-                                ),
-                              ),
-                              onChanged: (date) {
-                                context
-                                    .read<NotificationValidationCubit>()
-                                    .mutate(
-                                      dateTime: date,
-                                    );
-                              },
-                              currentTime: (() {
-                                final dateTime = context
-                                    .read<NotificationValidationCubit>()
-                                    .state
-                                    .dateTime;
-
-                                return dateTime?.isBefore(now) ?? true
-                                    ? now
-                                    : dateTime;
-                              })(),
-                            );
-                          },
+                          onTap: () {},
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -155,9 +103,7 @@ class NotificationCellCreatePage extends StatelessWidget {
                                     intl.pickDate,
                                     style: textTheme.bodyText1!.copyWith(
                                       fontWeight: FontWeight.w500,
-                                      color: ThemeHelper.isDarkMode(context)
-                                          ? kLightGray
-                                          : kGray,
+                                      color: ThemeHelper.isDarkMode(context) ? kLightGray : kGray,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
@@ -167,9 +113,7 @@ class NotificationCellCreatePage extends StatelessWidget {
                                   dateFormat.format(state.dateTime!),
                                   style: textTheme.bodyText1!.copyWith(
                                     fontWeight: FontWeight.w500,
-                                    color: ThemeHelper.isDarkMode(context)
-                                        ? kLightGray
-                                        : kGray,
+                                    color: ThemeHelper.isDarkMode(context) ? kLightGray : kGray,
                                   ),
                                 )
                             ],
@@ -183,14 +127,10 @@ class NotificationCellCreatePage extends StatelessWidget {
               SliverPadding(
                 padding: const EdgeInsets.only(bottom: 7),
                 sliver: SliverToBoxAdapter(
-                  child: BlocBuilder<NotificationValidationCubit,
-                      NotificationValidationState>(
+                  child: BlocBuilder<NotificationValidationCubit, NotificationValidationState>(
                     builder: (context, state) {
                       if (state.showErrors &&
-                          [
-                            ErrorCode.voidDateValue,
-                            ErrorCode.notificationInPast
-                          ].contains(state.error)) {
+                          [ErrorCode.voidDateValue, ErrorCode.notificationInPast].contains(state.error)) {
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,20 +160,15 @@ class NotificationCellCreatePage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                       hintStyle: textTheme.headline3!.copyWith(
-                        color: ThemeHelper.isDarkMode(context)
-                            ? kLightGray
-                            : kGray,
+                        color: ThemeHelper.isDarkMode(context) ? kLightGray : kGray,
                         fontWeight: FontWeight.bold,
                       ),
                       hintText: intl.typeTitle,
                       autofocus: true,
-                      initialValue:
-                          context.select<NotificationValidationCubit, String>(
-                              (value) => value.state.title),
-                      onChange: (value) =>
-                          context.read<NotificationValidationCubit>().mutate(
-                                title: value,
-                              ),
+                      initialValue: context.select<NotificationValidationCubit, String>((value) => value.state.title),
+                      onChange: (value) => context.read<NotificationValidationCubit>().mutate(
+                            title: value,
+                          ),
                     ),
                   ),
                 ),
@@ -247,27 +182,20 @@ class NotificationCellCreatePage extends StatelessWidget {
                   ),
                   hintText: intl.typeDescription,
                   multiline: true,
-                  initialValue:
-                      context.select<NotificationValidationCubit, String>(
-                          (value) => value.state.description),
-                  onChange: (value) =>
-                      context.read<NotificationValidationCubit>().mutate(
-                            description: value,
-                          ),
+                  initialValue: context.select<NotificationValidationCubit, String>((value) => value.state.description),
+                  onChange: (value) => context.read<NotificationValidationCubit>().mutate(
+                        description: value,
+                      ),
                 ),
               ),
               SliverPadding(
                 padding: const EdgeInsets.only(bottom: 7),
                 sliver: SliverToBoxAdapter(
-                  child: BlocBuilder<NotificationValidationCubit,
-                      NotificationValidationState>(
+                  child: BlocBuilder<NotificationValidationCubit, NotificationValidationState>(
                     builder: (context, state) {
                       if (state.showErrors &&
                           state.error != null &&
-                          ![
-                            ErrorCode.voidLinkValue,
-                            ErrorCode.notificationInPast
-                          ].contains(state.error)) {
+                          ![ErrorCode.voidLinkValue, ErrorCode.notificationInPast].contains(state.error)) {
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,8 +221,7 @@ class NotificationCellCreatePage extends StatelessWidget {
                   child: Icon(Icons.link),
                 ),
               ),
-              BlocBuilder<NotificationValidationCubit,
-                  NotificationValidationState>(
+              BlocBuilder<NotificationValidationCubit, NotificationValidationState>(
                 buildWhen: (previous, current) => true,
                 builder: (context, state) {
                   return SliverList(
@@ -306,11 +233,9 @@ class NotificationCellCreatePage extends StatelessWidget {
                           key: Key(index.toString()),
                           direction: DismissDirection.startToEnd,
                           onDismissed: (direction) {
-                            final notificationValidationCubit =
-                                context.read<NotificationValidationCubit>();
+                            final notificationValidationCubit = context.read<NotificationValidationCubit>();
 
-                            final links = List.of(
-                                notificationValidationCubit.state.links);
+                            final links = List.of(notificationValidationCubit.state.links);
 
                             links.removeAt(index);
 
@@ -333,24 +258,18 @@ class NotificationCellCreatePage extends StatelessWidget {
                                     decoration: TextDecoration.underline,
                                   ),
                                   hintStyle: textTheme.caption!.copyWith(
-                                    color: ThemeHelper.isDarkMode(context)
-                                        ? kLightGray
-                                        : kGray,
+                                    color: ThemeHelper.isDarkMode(context) ? kLightGray : kGray,
                                     fontWeight: FontWeight.bold,
                                   ),
                                   textInputType: TextInputType.url,
-                                  hintText: index == 0
-                                      ? intl.typeLink
-                                      : intl.anotherOne,
+                                  hintText: index == 0 ? intl.typeLink : intl.anotherOne,
                                   initialValue: state.links[index].currentValue,
                                   onChange: (value) {
                                     final list = List.of(state.links);
 
                                     list[index] = Link(value);
 
-                                    context
-                                        .read<NotificationValidationCubit>()
-                                        .mutate(
+                                    context.read<NotificationValidationCubit>().mutate(
                                           links: list,
                                         );
                                   },
@@ -360,8 +279,7 @@ class NotificationCellCreatePage extends StatelessWidget {
                                 const Gap(size: 6),
                                 link.validatedValue.fold(
                                   (failure) => FieldErrorIndicator(
-                                    message:
-                                        failure.messageCode.translate(context),
+                                    message: failure.messageCode.translate(context),
                                   ),
                                   (_) => const SizedBox(),
                                 ),
@@ -383,11 +301,9 @@ class NotificationCellCreatePage extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: InkWell(
                       onTap: () {
-                        final notificationValidationCubit =
-                            context.read<NotificationValidationCubit>();
+                        final notificationValidationCubit = context.read<NotificationValidationCubit>();
 
-                        final links =
-                            List.of(notificationValidationCubit.state.links);
+                        final links = List.of(notificationValidationCubit.state.links);
 
                         links.add(const Link(''));
 

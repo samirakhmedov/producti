@@ -137,18 +137,17 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
             _openBottomSheet();
 
             Future.delayed(const Duration(seconds: 1)).then(
-              (value) => ShowCaseWidget.of(context)!.startShowCase([_two]),
+              (value) => ShowCaseWidget.of(context).startShowCase([_two]),
             );
             break;
           case 1:
-            ShowCaseWidget.of(context)!
-                .startShowCase([_three, _four, _five, _six]);
+            ShowCaseWidget.of(context).startShowCase([_three, _four, _five, _six]);
             break;
           case 2:
             _openBottomSheet();
 
             Future.delayed(const Duration(seconds: 1)).then(
-              (value) => ShowCaseWidget.of(context)!.startShowCase([_seven]),
+              (value) => ShowCaseWidget.of(context).startShowCase([_seven]),
             );
             break;
           case 3:
@@ -156,7 +155,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
               _showcaseTable!.cells = [_showcaseTable!.cells.first];
             });
 
-            ShowCaseWidget.of(context)!.startShowCase([_eight, _nine, _ten]);
+            ShowCaseWidget.of(context).startShowCase([_eight, _nine, _ten]);
             break;
           case 4:
             setState(() {
@@ -168,25 +167,24 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
               );
             });
 
-            ShowCaseWidget.of(context)!.startShowCase([_eleven, _twelve]);
+            ShowCaseWidget.of(context).startShowCase([_eleven, _twelve]);
             break;
           case 5:
-            ShowCaseWidget.of(context)!.startShowCase([_thirteen]);
+            ShowCaseWidget.of(context).startShowCase([_thirteen]);
             break;
           case 6:
             setState(() {
               _tableLink = _tableLink.addPath(1);
             });
 
-            ShowCaseWidget.of(context)!.startShowCase([_fourteen, _fiveteen]);
+            ShowCaseWidget.of(context).startShowCase([_fourteen, _fiveteen]);
             break;
 
           case 7:
             _openDrawer();
 
             Future.delayed(const Duration(seconds: 1)).then(
-              (value) => ShowCaseWidget.of(context)!
-                  .startShowCase([_sixteen, _seventeen, _eighteen, _nineteen]),
+              (value) => ShowCaseWidget.of(context).startShowCase([_sixteen, _seventeen, _eighteen, _nineteen]),
             );
 
             break;
@@ -233,7 +231,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
         }
       });
 
-      WidgetsBinding.instance!.addPostFrameCallback(
+      WidgetsBinding.instance.addPostFrameCallback(
         (_) async {
           final result = await showDialog<bool>(
             context: context,
@@ -282,9 +280,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
 
                             launch.mutate(showcaseShown: true);
 
-                            Navigator.of(context).popAndPushNamed(
-                                AppRoutes.tables,
-                                result: false);
+                            Navigator.of(context).popAndPushNamed(AppRoutes.tables, result: false);
                           },
                         ),
                       ),
@@ -295,7 +291,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
             ),
           );
 
-          if (result ?? true) ShowCaseWidget.of(context)!.startShowCase([_one]);
+          if (result ?? true) ShowCaseWidget.of(context).startShowCase([_one]);
         },
       );
     }
@@ -435,8 +431,7 @@ class _TableShowcaseContentState extends State<_TableShowcaseContent> {
                           AppShowcaseWidget(
                             globalKey: _five,
                             title: intl.notification,
-                            description:
-                                intl.bottomSheetNotificationDescription,
+                            description: intl.bottomSheetNotificationDescription,
                             child: CreatePopupTile(
                               icon: Icons.access_time,
                               title: intl.notification,
@@ -573,9 +568,10 @@ class _TableShowcaseBody extends StatelessWidget {
                           globalKey: firstSlideActionKey,
                           title: intl.firstSlideActionTitle,
                           description: intl.firstSlideActionDescription,
-                          child: IconSlideAction(
-                            caption: intl.edit,
-                            color: Colors.blue,
+                          child: SlidableAction(
+                            onPressed: (ctx) {},
+                            label: intl.edit,
+                            backgroundColor: Colors.blue,
                             icon: Icons.edit,
                             foregroundColor: theme.backgroundColor,
                           ),
@@ -586,9 +582,10 @@ class _TableShowcaseBody extends StatelessWidget {
                           globalKey: secondSlideActionKey,
                           title: intl.secondSlideActionTitle,
                           description: intl.secondSlideActionDescription,
-                          child: IconSlideAction(
-                            caption: intl.delete,
-                            color: kRed,
+                          child: SlidableAction(
+                            onPressed: (ctx) {},
+                            label: intl.delete,
+                            backgroundColor: kRed,
                             icon: Icons.delete,
                             foregroundColor: theme.backgroundColor,
                           ),
@@ -624,18 +621,20 @@ class _TableShowcaseBody extends StatelessWidget {
                                   globalKey: groupSlideActionKey,
                                   title: intl.groupFirstActionTitle,
                                   description: intl.groupFirstActionDescription,
-                                  child: IconSlideAction(
-                                    caption: intl.rename,
-                                    color: Colors.blue,
+                                  child: SlidableAction(
+                                    onPressed: (ctx) {},
+                                    label: intl.rename,
+                                    backgroundColor: Colors.blue,
                                     icon: Icons.edit,
                                     foregroundColor: theme.backgroundColor,
                                   ),
                                 ),
                               ),
                               Flexible(
-                                child: IconSlideAction(
-                                  caption: intl.delete,
-                                  color: kRed,
+                                child: SlidableAction(
+                                  onPressed: (ctx) {},
+                                  label: intl.delete,
+                                  backgroundColor: kRed,
                                   icon: Icons.delete,
                                   foregroundColor: theme.backgroundColor,
                                 ),

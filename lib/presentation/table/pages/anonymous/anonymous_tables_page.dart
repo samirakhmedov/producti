@@ -66,15 +66,11 @@ class AnonymousTablesPage extends StatelessWidget {
                 onTap: () async {
                   navigator.pop();
 
-                  final tableState = context.read<AnonymousTableBloc>().state
-                      as AnonymousTableLoaded;
+                  final tableState = context.read<AnonymousTableBloc>().state as AnonymousTableLoaded;
 
                   final table = tableState.tables[tableIndex];
 
-                  final cells = path
-                      .getParticles(table)
-                      .whereType<c.GroupTableCell>()
-                      .toList();
+                  final cells = path.getParticles(table).whereType<c.GroupTableCell>().toList();
 
                   final cubit = GroupCreateCubit(cells);
 
@@ -151,8 +147,7 @@ class AnonymousTablesPage extends StatelessWidget {
                 onTap: () async {
                   navigator.pop();
 
-                  final notificationValidationCubit =
-                      NotificationValidationCubit(null);
+                  final notificationValidationCubit = NotificationValidationCubit(null);
 
                   final result = await navigator.push<c.NotificationTableCell>(
                     MaterialPageRoute(
@@ -172,20 +167,15 @@ class AnonymousTablesPage extends StatelessWidget {
                       ),
                     );
 
-                    final cellPath =
-                        path.addPath(path.getParticles(table).length);
+                    final cellPath = path.addPath(path.getParticles(table).length);
 
                     context.read<LocalNotificationsBloc>().add(
                           LocalNotificationsAddNotification(
                             t.Notification(
                               time: result.time,
-                              body: result.description.isEmpty
-                                  ? intl.voidValue
-                                  : result.description,
+                              body: result.description.isEmpty ? intl.voidValue : result.description,
                               id: cellPath.getId(tableIndex),
-                              title: result.title.isEmpty
-                                  ? intl.voidValue
-                                  : result.title,
+                              title: result.title.isEmpty ? intl.voidValue : result.title,
                               pathToNotification: cellPath,
                             ),
                             tableIndex,
@@ -260,12 +250,10 @@ class AnonymousTablesPage extends StatelessWidget {
       child: BlocListener<LocalNotificationsBloc, LocalNotificationsState>(
         listener: (context, state) {
           if (state.pathToNotification != null && state.tableIndex != null) {
-            final selectedTable = (context.read<AnonymousTableBloc>().state
-                    as AnonymousTableLoaded)
-                .tables[state.tableIndex!];
+            final selectedTable =
+                (context.read<AnonymousTableBloc>().state as AnonymousTableLoaded).tables[state.tableIndex!];
 
-            final cell = state.pathToNotification!.getParticle(selectedTable)
-                as c.NotificationTableCell;
+            final cell = state.pathToNotification!.getParticle(selectedTable) as c.NotificationTableCell;
 
             final navigator = Navigator.of(context);
 
@@ -581,208 +569,197 @@ class _TableCellsList extends StatelessWidget {
 
         return Slidable(
           key: Key(index.toString()),
-          actionPane: const SlidableDrawerActionPane(),
-          actions: [
-            if (cell is c.GroupTableCell)
-              IconSlideAction(
-                caption: intl.rename,
-                color: Colors.blue,
-                icon: Icons.edit,
-                foregroundColor: theme.backgroundColor,
-                onTap: () async {
-                  final tableBloc = context.read<AnonymousTableBloc>();
+          endActionPane: ActionPane(
+            motion: const ScrollMotion(),
+            children: [
+              if (cell is c.GroupTableCell)
+                SlidableAction(
+                  label: intl.rename,
+                  backgroundColor: Colors.blue,
+                  icon: Icons.edit,
+                  foregroundColor: theme.backgroundColor,
+                  onPressed: (context) async {
+                    final tableBloc = context.read<AnonymousTableBloc>();
 
-                  final tableState = tableBloc.state as AnonymousTableLoaded;
+                    final tableState = tableBloc.state as AnonymousTableLoaded;
 
-                  final table = tableState.tables[tableIndex];
+                    final table = tableState.tables[tableIndex];
 
-                  final cells = path
-                      .getParticles(table)
-                      .whereType<c.GroupTableCell>()
-                      .toList();
+                    final cells = path.getParticles(table).whereType<c.GroupTableCell>().toList();
 
-                  final cubit =
-                      GroupCreateCubit(cells, initialName: cell.title);
+                    final cubit = GroupCreateCubit(cells, initialName: cell.title);
 
-                  final controller = showBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return BlocProvider<GroupCreateCubit>.value(
-                        value: cubit,
-                        child: AppBottomSheet(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 40,
-                              vertical: 42,
+                    final controller = showBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return BlocProvider<GroupCreateCubit>.value(
+                          value: cubit,
+                          child: AppBottomSheet(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 40,
+                                vertical: 42,
+                              ),
+                              child: CreateGroupBody(
+                                tableIndex: tableIndex,
+                                path: path,
+                              ),
                             ),
-                            child: CreateGroupBody(
-                              tableIndex: tableIndex,
-                              path: path,
-                            ),
+                          ),
+                        );
+                      },
+                    );
+
+                    await controller.closed;
+
+                    if (cubit.state.error == null) {
+                      tableBloc.add(
+                        AnonymousTableRenameCell(
+                          path.addPath(index),
+                          cubit.state.groupName,
+                          tableIndex,
+                        ),
+                      );
+                    }
+
+                    cubit.close();
+                  },
+                )
+              else
+                SlidableAction(
+                  label: intl.edit,
+                  backgroundColor: Colors.blue,
+                  icon: Icons.edit,
+                  foregroundColor: theme.backgroundColor,
+                  onPressed: (context) async {
+                    c.TableCell? newCell;
+
+                    if (cell is c.CheckListTableCell) {
+                      final noteValidationCubit = CheckListValidationCubit(cell);
+
+                      final result = await Navigator.of(context).push<CheckListTableCell>(
+                        MaterialPageRoute(
+                          builder: (context) => BlocProvider.value(
+                            value: noteValidationCubit,
+                            child: const CheckListCellCreatePage(),
                           ),
                         ),
                       );
-                    },
-                  );
 
-                  await controller.closed;
+                      newCell = result;
+                    }
 
-                  if (cubit.state.error == null) {
-                    tableBloc.add(
-                      AnonymousTableRenameCell(
-                        path.addPath(index),
-                        cubit.state.groupName,
-                        tableIndex,
-                      ),
-                    );
-                  }
+                    if (cell is c.NoteTableCell) {
+                      final noteValidationCubit = NoteValidationCubit(cell);
 
-                  cubit.close();
-                },
-              )
-            else
-              IconSlideAction(
-                caption: intl.edit,
-                color: Colors.blue,
-                icon: Icons.edit,
+                      final result = await Navigator.of(context).push<c.NoteTableCell>(
+                        MaterialPageRoute(
+                          builder: (context) => BlocProvider.value(
+                            value: noteValidationCubit,
+                            child: const NoteCellCreatePage(),
+                          ),
+                        ),
+                      );
+
+                      newCell = result;
+                    }
+
+                    if (cell is c.NotificationTableCell) {
+                      final noteValidationCubit = NotificationValidationCubit(cell);
+
+                      final result = await Navigator.of(context).push<c.NotificationTableCell>(
+                        MaterialPageRoute(
+                          builder: (context) => BlocProvider.value(
+                            value: noteValidationCubit,
+                            child: const NotificationCellCreatePage(),
+                          ),
+                        ),
+                      );
+
+                      newCell = result;
+
+                      if (result != null) {
+                        final notificationsBloc = context.read<LocalNotificationsBloc>();
+
+                        notificationsBloc.add(
+                          LocalNotificationsCellDelete(
+                            table,
+                            path.addPath(index),
+                            tableIndex,
+                          ),
+                        );
+
+                        notificationsBloc.add(
+                          LocalNotificationsAddNotification(
+                            t.Notification(
+                              body: result.description.isEmpty ? intl.voidValue : result.description,
+                              id: path.addPath(index).getId(tableIndex),
+                              title: result.title.isEmpty ? intl.voidValue : result.title,
+                              pathToNotification: path.addPath(index),
+                              time: cell.time,
+                            ),
+                            tableIndex,
+                          ),
+                        );
+                      }
+                    }
+
+                    if (newCell != null) {
+                      context.read<AnonymousTableBloc>().add(
+                            AnonymousTableChangeCell(
+                              tableIndex: tableIndex,
+                              pathToNote: path.addPath(index),
+                              newCell: newCell,
+                            ),
+                          );
+                    }
+                  },
+                ),
+              SlidableAction(
+                label: intl.delete,
+                backgroundColor: kRed,
+                icon: Icons.delete,
                 foregroundColor: theme.backgroundColor,
-                onTap: () async {
-                  c.TableCell? newCell;
+                onPressed: (context) async {
+                  if (cell is c.GroupTableCell && cell.children.isNotEmpty) {
+                    bool? agreement;
 
-                  if (cell is c.CheckListTableCell) {
-                    final noteValidationCubit = CheckListValidationCubit(cell);
-
-                    final result =
-                        await Navigator.of(context).push<CheckListTableCell>(
-                      MaterialPageRoute(
-                        builder: (context) => BlocProvider.value(
-                          value: noteValidationCubit,
-                          child: const CheckListCellCreatePage(),
+                    await showDialog(
+                      context: context,
+                      builder: (context) => AppDialog(
+                        child: AppDialogQuestionBody(
+                          onSelect: (answer) => agreement = answer,
+                          options: [
+                            intl.yes,
+                            intl.no,
+                          ],
+                          title: intl.youSureToDeleteGroup,
                         ),
                       ),
                     );
 
-                    newCell = result;
+                    if (agreement == null) return;
+                    if (!agreement!) return;
                   }
 
-                  if (cell is c.NoteTableCell) {
-                    final noteValidationCubit = NoteValidationCubit(cell);
-
-                    final result =
-                        await Navigator.of(context).push<c.NoteTableCell>(
-                      MaterialPageRoute(
-                        builder: (context) => BlocProvider.value(
-                          value: noteValidationCubit,
-                          child: const NoteCellCreatePage(),
+                  context.read<AnonymousTableBloc>().add(
+                        AnonymousTableDeleteCell(
+                          tableIndex,
+                          path.addPath(index),
                         ),
-                      ),
-                    );
+                      );
 
-                    newCell = result;
-                  }
-
-                  if (cell is c.NotificationTableCell) {
-                    final noteValidationCubit =
-                        NotificationValidationCubit(cell);
-
-                    final result = await Navigator.of(context)
-                        .push<c.NotificationTableCell>(
-                      MaterialPageRoute(
-                        builder: (context) => BlocProvider.value(
-                          value: noteValidationCubit,
-                          child: const NotificationCellCreatePage(),
-                        ),
-                      ),
-                    );
-
-                    newCell = result;
-
-                    if (result != null) {
-                      final notificationsBloc =
-                          context.read<LocalNotificationsBloc>();
-
-                      notificationsBloc.add(
+                  context.read<LocalNotificationsBloc>().add(
                         LocalNotificationsCellDelete(
                           table,
                           path.addPath(index),
                           tableIndex,
                         ),
                       );
-
-                      notificationsBloc.add(
-                        LocalNotificationsAddNotification(
-                          t.Notification(
-                            body: result.description.isEmpty
-                                ? intl.voidValue
-                                : result.description,
-                            id: path.addPath(index).getId(tableIndex),
-                            title: result.title.isEmpty
-                                ? intl.voidValue
-                                : result.title,
-                            pathToNotification: path.addPath(index),
-                            time: cell.time,
-                          ),
-                          tableIndex,
-                        ),
-                      );
-                    }
-                  }
-
-                  if (newCell != null) {
-                    context.read<AnonymousTableBloc>().add(
-                          AnonymousTableChangeCell(
-                            tableIndex: tableIndex,
-                            pathToNote: path.addPath(index),
-                            newCell: newCell,
-                          ),
-                        );
-                  }
                 },
               ),
-            IconSlideAction(
-              caption: intl.delete,
-              color: kRed,
-              icon: Icons.delete,
-              foregroundColor: theme.backgroundColor,
-              onTap: () async {
-                if (cell is c.GroupTableCell && cell.children.isNotEmpty) {
-                  bool? agreement;
-
-                  await showDialog(
-                    context: context,
-                    builder: (context) => AppDialog(
-                      child: AppDialogQuestionBody(
-                        onSelect: (answer) => agreement = answer,
-                        options: [
-                          intl.yes,
-                          intl.no,
-                        ],
-                        title: intl.youSureToDeleteGroup,
-                      ),
-                    ),
-                  );
-
-                  if (agreement == null) return;
-                  if (!agreement!) return;
-                }
-
-                context.read<AnonymousTableBloc>().add(
-                      AnonymousTableDeleteCell(
-                        tableIndex,
-                        path.addPath(index),
-                      ),
-                    );
-
-                context.read<LocalNotificationsBloc>().add(
-                      LocalNotificationsCellDelete(
-                        table,
-                        path.addPath(index),
-                        tableIndex,
-                      ),
-                    );
-              },
-            ),
-          ],
+            ],
+          ),
           child: TableCellTile(
             cell: cell,
             key: Key(index.toString()),

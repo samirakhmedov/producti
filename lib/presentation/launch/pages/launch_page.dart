@@ -17,57 +17,53 @@ class LaunchPage extends StatefulWidget {
 
 class _LaunchPageState extends State<LaunchPage> {
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    final theme = ThemeHelper.getTheme(context);
 
-    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-      final theme = ThemeHelper.getTheme(context);
+    final navigator = Navigator.of(context);
 
-      final navigator = Navigator.of(context);
+    /// I JUST DO NOT HAVE ENOUGH TIME
 
-      /// I JUST DO NOT HAVE ENOUGH TIME
+    context.read<AuthBloc>().add(AuthAnonymousEvent());
 
-      context.read<AuthBloc>().add(AuthAnonymousEvent());
+    final settings = context.read<SettingsCubit>();
 
-      final settings = context.read<SettingsCubit>();
-
-      if (settings.state.language == null) {
-        settings.initialize(
-          Localizations.localeOf(context),
-          theme.primaryColor,
-          Theme.of(context).brightness == Brightness.light
-              ? ThemeMode.light
-              : ThemeMode.dark,
-        );
-      }
-
-      Future.delayed(
-        const Duration(seconds: 2),
-        () {
-          final state = context.read<LaunchBloc>().state;
-
-          final authState = context.read<AuthBloc>().state;
-
-          String route = AppRoutes.auth;
-
-          if (authState is AuthLoggedIn || authState is AuthAnonymousState) {
-            route = AppRoutes.tables;
-          }
-
-          if (!state.showcaseShown) {
-            route = AppRoutes.showcase;
-          }
-
-          if (!state.onboardingPassed) {
-            route = AppRoutes.onboarding;
-          }
-
-          navigator.pushReplacementNamed(
-            route,
-          );
-        },
+    if (settings.state.language == null) {
+      settings.initialize(
+        Localizations.localeOf(context),
+        theme.primaryColor,
+        Theme.of(context).brightness == Brightness.light ? ThemeMode.light : ThemeMode.dark,
       );
-    });
+    }
+
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        final state = context.read<LaunchBloc>().state;
+
+        final authState = context.read<AuthBloc>().state;
+
+        String route = AppRoutes.auth;
+
+        if (authState is AuthLoggedIn || authState is AuthAnonymousState) {
+          route = AppRoutes.tables;
+        }
+
+        if (!state.showcaseShown) {
+          route = AppRoutes.showcase;
+        }
+
+        if (!state.onboardingPassed) {
+          route = AppRoutes.onboarding;
+        }
+
+        navigator.pushReplacementNamed(
+          route,
+        );
+      },
+    );
+
+    super.didChangeDependencies();
   }
 
   @override

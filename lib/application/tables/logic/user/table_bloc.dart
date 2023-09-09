@@ -20,29 +20,30 @@ class TableBloc extends Bloc<TableEvent, TableState> {
     this._remoteTableRepository,
     this._localTableRepository,
     this._connection,
-  ) : super(TableInitial());
+  ) : super(TableInitial()) {
+    on<TableEvent>((event, emit) async {
+      if (event is TableLoad) {
+        if (_connection.connected) {
+          emit(TableLoadingState());
 
-  @override
-  Stream<TableState> mapEventToState(TableEvent event) async* {
-    if (event is TableLoad) {
-      if (_connection.connected) {
-        yield TableLoadingState();
+          final result = await _remoteTableRepository.loadData(event.uid);
 
-        final result = await _remoteTableRepository.loadData(event.uid);
+          emit(
+            await result.fold(
+              (failure) async {
+                final tables = _localTableRepository.loadData();
 
-        yield await result.fold(
-          (failure) async {
-            final tables = _localTableRepository.loadData();
+                return TableLoadedState(tables, failure: failure);
+              },
+              (tables) => TableLoadedState(tables),
+            ),
+          );
+        } else {
+          final tables = _localTableRepository.loadData();
 
-            return TableLoadedState(tables, failure: failure);
-          },
-          (tables) => TableLoadedState(tables),
-        );
-      } else {
-        final tables = _localTableRepository.loadData();
-
-        yield TableLoadedState(tables);
+          emit(TableLoadedState(tables));
+        }
       }
-    }
+    });
   }
 }

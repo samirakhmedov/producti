@@ -21,7 +21,7 @@ abstract class AppModule {
   FirebaseCrashlytics get crashlytics => FirebaseCrashlytics.instance;
 
   @singleton
-  FirebaseAnalytics get analytics => FirebaseAnalytics();
+  FirebaseAnalytics get analytics => FirebaseAnalytics.instance;
 
   @singleton
   FlutterSecureStorage get secureStorage => const FlutterSecureStorage();
@@ -30,17 +30,14 @@ abstract class AppModule {
   Connectivity get connectivity => Connectivity();
 
   @singleton
-  FlutterLocalNotificationsPlugin get localNotifications =>
-      FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin get localNotifications => FlutterLocalNotificationsPlugin();
 
   @singleton
-  IOSFlutterLocalNotificationsPlugin get localNotificationsIOS =>
-      IOSFlutterLocalNotificationsPlugin();
+  IOSFlutterLocalNotificationsPlugin get localNotificationsIOS => IOSFlutterLocalNotificationsPlugin();
 
   @preResolve
   Future<Box<Table>> get tablesBox => Hive.openBox<Table>('APP_TABLES');
 
   @preResolve
-  Future<Box<List<String>>> get constantsBox =>
-      Hive.openBox<List<String>>('APP_CONSTANTS');
+  Future<Box<List<String>>> get constantsBox => Hive.openBox<List<String>>('APP_CONSTANTS');
 }

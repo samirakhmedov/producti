@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:producti_ui/producti_ui.dart';
 import 'package:showcaseview/showcaseview.dart';
 
 class EmptyShowcaseWidget extends StatelessWidget {
@@ -16,13 +15,10 @@ class EmptyShowcaseWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Showcase.withWidget(
       key: globalKey,
-      child: child,
       container: const SizedBox(),
       height: 0,
       width: 0,
-      showcaseBackgroundColor:
-          (ThemeHelper.isDarkMode(context) ? kMainDarkColor : kMainLightColor)
-              .withAlpha(200),
+      child: child,
     );
   }
 }

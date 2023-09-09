@@ -24,6 +24,8 @@ class TableCreateState extends Equatable {
     if (tables.any((element) => element.title == tableName)) {
       return ErrorCode.tableAlreadyExists;
     }
+
+    return null;
   }
 
   TableCreateState copyWith({
