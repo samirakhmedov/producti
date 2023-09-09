@@ -24,6 +24,8 @@ class GroupCreateState extends Equatable {
     if (cells.any((element) => element.title == groupName)) {
       return ErrorCode.groupAlreadyExists;
     }
+
+    return null;
   }
 
   GroupCreateState copyWith({

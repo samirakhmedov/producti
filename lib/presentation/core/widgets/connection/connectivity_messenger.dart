@@ -14,11 +14,10 @@ class ConnectivityMessenger {
         onComplete: () {
           overlayEntry.remove();
         },
-        hasConnection:
-            connection.state.connectionStatus == ConnectionStatus.connected,
+        hasConnection: connection.state.connectionStatus == ConnectionStatus.connected,
       ),
     );
 
-    Overlay.of(context)!.insert(overlayEntry);
+    Overlay.of(context).insert(overlayEntry);
   }
 }

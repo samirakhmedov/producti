@@ -17,38 +17,38 @@ class ConnectivityPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _position = TimelineTween<_AnimationProps>()
-      ..addScene(
+    final position = MovieTween()
+      ..scene(
         begin: Duration.zero,
         duration: const Duration(
           seconds: 2,
         ),
         curve: Curves.easeIn,
-      ).animate(
+      ).tween(
         _AnimationProps.one,
-        tween: Tween<double>(begin: 0, end: 1),
+        Tween<double>(begin: 0, end: 1),
       )
-      ..addScene(
+      ..scene(
         begin: const Duration(
           seconds: 3,
         ),
         duration: const Duration(seconds: 1),
         curve: Curves.easeIn,
-      ).animate(
+      ).tween(
         _AnimationProps.one,
-        tween: Tween<double>(begin: 1, end: 0),
+        Tween<double>(begin: 1, end: 0),
       );
 
     final query = MediaQuery.of(context);
 
-    return PlayAnimation<TimelineValue<_AnimationProps>>(
-      tween: _position,
+    return PlayAnimationBuilder<Movie>(
+      tween: position,
       duration: const Duration(seconds: 3),
-      onComplete: onComplete,
-      builder: (context, child, value) {
+      onCompleted: onComplete,
+      builder: (context, movie, child) {
         return Positioned(
           left: 0,
-          top: 75 * value.get(_AnimationProps.one) - (30 + query.padding.top),
+          top: 75 * movie.get(_AnimationProps.one) - (30 + query.padding.top),
           child: child!,
         );
       },

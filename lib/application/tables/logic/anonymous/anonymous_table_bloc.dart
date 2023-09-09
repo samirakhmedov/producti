@@ -10,149 +10,164 @@ part 'anonymous_table_event.dart';
 part 'anonymous_table_state.dart';
 
 @lazySingleton
-class AnonymousTableBloc
-    extends Bloc<AnonymousTableEvent, AnonymousTableState> {
+class AnonymousTableBloc extends Bloc<AnonymousTableEvent, AnonymousTableState> {
   final LocalTableRepository _localTableRepository;
 
   AnonymousTableBloc(
     this._localTableRepository,
   ) : super(AnonymousTableInitial()) {
-    add(AnonymousTableLoad());
-  }
+    on<AnonymousTableEvent>(
+      (event, emit) async {
+        if (event is AnonymousTableLoad) {
+          final result = _localTableRepository.loadData();
 
-  @override
-  Stream<AnonymousTableState> mapEventToState(
-      AnonymousTableEvent event) async* {
-    if (event is AnonymousTableLoad) {
-      final result = _localTableRepository.loadData();
+          emit(AnonymousTableLoaded(result));
+        }
 
-      yield AnonymousTableLoaded(result);
-    }
+        if (event is AnonymousTableCreate) {
+          final loadedState = state as AnonymousTableLoaded;
 
-    if (event is AnonymousTableCreate) {
-      final loadedState = state as AnonymousTableLoaded;
-
-      yield loadedState.copyWith(
-        tables: List.of(loadedState.tables)
-          ..add(
-            Table(
-              title: event.name,
+          emit(
+            loadedState.copyWith(
+              tables: List.of(loadedState.tables)
+                ..add(
+                  Table(
+                    title: event.name,
+                  ),
+                ),
             ),
-          ),
-      );
-    }
+          );
+        }
 
-    if (event is AnonymousTableCellCreate) {
-      final loadedState = state as AnonymousTableLoaded;
+        if (event is AnonymousTableCellCreate) {
+          final loadedState = state as AnonymousTableLoaded;
 
-      final currentTable = loadedState.tables[event.tableIndex];
+          final currentTable = loadedState.tables[event.tableIndex];
 
-      currentTable.addCell(
-        event.cell,
-        event.path,
-      );
+          currentTable.addCell(
+            event.cell,
+            event.path,
+          );
 
-      yield loadedState.copyWith(
-        tables: loadedState.tables,
-      );
-    }
+          emit(
+            loadedState.copyWith(
+              tables: loadedState.tables,
+            ),
+          );
+        }
 
-    if (event is AnonymousTableReorderCells) {
-      final loadedState = state as AnonymousTableLoaded;
+        if (event is AnonymousTableReorderCells) {
+          final loadedState = state as AnonymousTableLoaded;
 
-      final currentTable = loadedState.tables[event.tableIndex];
+          final currentTable = loadedState.tables[event.tableIndex];
 
-      currentTable.reorderCells(
-        event.oldIndex,
-        event.newIndex,
-        event.path,
-      );
+          currentTable.reorderCells(
+            event.oldIndex,
+            event.newIndex,
+            event.path,
+          );
 
-      yield loadedState.copyWith(
-        tables: loadedState.tables,
-      );
-    }
+          emit(
+            loadedState.copyWith(
+              tables: loadedState.tables,
+            ),
+          );
+        }
 
-    if (event is AnonymousTableChangeCell) {
-      final loadedState = state as AnonymousTableLoaded;
+        if (event is AnonymousTableChangeCell) {
+          final loadedState = state as AnonymousTableLoaded;
 
-      final currentTable = loadedState.tables[event.tableIndex];
+          final currentTable = loadedState.tables[event.tableIndex];
 
-      final newPathList = List.of(event.pathToNote.path);
+          final newPathList = List.of(event.pathToNote.path);
 
-      newPathList.removeLast();
+          newPathList.removeLast();
 
-      final pathToGroup = TableLink(newPathList);
+          final pathToGroup = TableLink(newPathList);
 
-      if (pathToGroup.isEmpty) {
-        currentTable.cells[event.pathToNote.path.last] = event.newCell;
-      } else {
-        final group = pathToGroup.getParticle(currentTable) as t.GroupTableCell;
+          if (pathToGroup.isEmpty) {
+            currentTable.cells[event.pathToNote.path.last] = event.newCell;
+          } else {
+            final group = pathToGroup.getParticle(currentTable) as t.GroupTableCell;
 
-        group.children[event.pathToNote.path.last] = event.newCell;
-      }
+            group.children[event.pathToNote.path.last] = event.newCell;
+          }
 
-      yield loadedState.copyWith(
-        tables: loadedState.tables,
-      );
-    }
+          emit(
+            loadedState.copyWith(
+              tables: loadedState.tables,
+            ),
+          );
+        }
 
-    if (event is AnonymousTableRenameTable) {
-      final loadedState = state as AnonymousTableLoaded;
+        if (event is AnonymousTableRenameTable) {
+          final loadedState = state as AnonymousTableLoaded;
 
-      final currentTable = loadedState.tables[event.tableIndex];
+          final currentTable = loadedState.tables[event.tableIndex];
 
-      currentTable.title = event.tableName;
+          currentTable.title = event.tableName;
 
-      yield loadedState.copyWith(
-        tables: loadedState.tables,
-      );
-    }
+          emit(
+            loadedState.copyWith(
+              tables: loadedState.tables,
+            ),
+          );
+        }
 
-    if (event is AnonymousTableRenameCell) {
-      final loadedState = state as AnonymousTableLoaded;
+        if (event is AnonymousTableRenameCell) {
+          final loadedState = state as AnonymousTableLoaded;
 
-      final currentTable = loadedState.tables[event.tableIndex];
+          final currentTable = loadedState.tables[event.tableIndex];
 
-      final cell = event.path.getParticle(currentTable);
+          final cell = event.path.getParticle(currentTable);
 
-      cell.title = event.name;
+          cell.title = event.name;
 
-      yield loadedState.copyWith(
-        tables: loadedState.tables,
-      );
-    }
+          emit(
+            loadedState.copyWith(
+              tables: loadedState.tables,
+            ),
+          );
+        }
 
-    if (event is AnonymousTableDeleteCell) {
-      final loadedState = state as AnonymousTableLoaded;
+        if (event is AnonymousTableDeleteCell) {
+          final loadedState = state as AnonymousTableLoaded;
 
-      final currentTable = loadedState.tables[event.tableIndex];
+          final currentTable = loadedState.tables[event.tableIndex];
 
-      final parentGroupLink = event.pathToCell.popPath();
+          final parentGroupLink = event.pathToCell.popPath();
 
-      final cells = parentGroupLink.getParticles(currentTable);
+          final cells = parentGroupLink.getParticles(currentTable);
 
-      cells.removeAt(event.pathToCell.path.last);
+          cells.removeAt(event.pathToCell.path.last);
 
-      yield loadedState.copyWith(
-        tables: loadedState.tables,
-      );
-    }
+          emit(
+            loadedState.copyWith(
+              tables: loadedState.tables,
+            ),
+          );
+        }
 
-    if (event is AnonymousTableDeleteTable) {
-      final loadedState = state as AnonymousTableLoaded;
+        if (event is AnonymousTableDeleteTable) {
+          final loadedState = state as AnonymousTableLoaded;
 
-      loadedState.tables.removeAt(event.tableIndex);
+          loadedState.tables.removeAt(event.tableIndex);
 
-      yield loadedState.copyWith(
-        tables: loadedState.tables,
-      );
-    }
+          emit(
+            loadedState.copyWith(
+              tables: loadedState.tables,
+            ),
+          );
+        }
 
-    if (event is AnonymousTableSave) {
-      final loadedState = state as AnonymousTableLoaded;
+        if (event is AnonymousTableSave) {
+          final loadedState = state as AnonymousTableLoaded;
 
-      await _localTableRepository.updateData(loadedState.tables);
-    }
+          await _localTableRepository.updateData(loadedState.tables);
+        }
+      },
+    );
+
+    add(AnonymousTableLoad());
   }
 }

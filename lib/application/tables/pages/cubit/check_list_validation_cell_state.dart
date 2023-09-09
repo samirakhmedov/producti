@@ -26,6 +26,8 @@ class CheckListValidationState extends Equatable {
     if (tiles.any((element) => element.validatedValue.isLeft())) {
       return ErrorCode.voidLinkValue;
     }
+
+    return null;
   }
 
   CheckListTableCell toCell() => CheckListTableCell(

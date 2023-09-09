@@ -22,19 +22,21 @@ class AppShowcaseWidget extends StatelessWidget {
 
     return Showcase(
       key: globalKey,
-      child: child,
       title: title,
       description: description,
       showArrow: false,
-      animationDuration: const Duration(milliseconds: 1500),
-      overlayPadding: const EdgeInsets.all(5),
+      movingAnimationDuration: const Duration(milliseconds: 1500),
+      scaleAnimationDuration: const Duration(milliseconds: 1500),
+      titlePadding: const EdgeInsets.all(5),
+      targetPadding: const EdgeInsets.all(5),
+      tooltipPadding: const EdgeInsets.all(5),
+      descriptionPadding: const EdgeInsets.all(5),
       titleTextStyle: textTheme.bodyText1!.copyWith(
         color: ThemeHelper.isDarkMode(context) ? kWhite : kBlack,
       ),
+      tooltipBackgroundColor: (ThemeHelper.isDarkMode(context) ? kMainDarkColor : kMainLightColor).withAlpha(200),
       descTextStyle: textTheme.bodyText2,
-      showcaseBackgroundColor:
-          (ThemeHelper.isDarkMode(context) ? kMainDarkColor : kMainLightColor)
-              .withAlpha(200),
+      child: child,
     );
   }
 }

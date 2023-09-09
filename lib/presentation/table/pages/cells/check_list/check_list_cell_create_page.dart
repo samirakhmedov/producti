@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:producti/application/tables/pages/cubit/check_list_validation_cell_cubit.dart';
@@ -14,8 +13,7 @@ class CheckListCellCreatePage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  Future<bool> _onPop(BuildContext context,
-      CheckListValidationCubit checkListValidationCubit) async {
+  Future<bool> _onPop(BuildContext context, CheckListValidationCubit checkListValidationCubit) async {
     final intl = S.of(context);
 
     if (checkListValidationCubit.state.error != null) {
@@ -100,20 +98,15 @@ class CheckListCellCreatePage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                       hintStyle: textTheme.headline3!.copyWith(
-                        color: ThemeHelper.isDarkMode(context)
-                            ? kLightGray
-                            : kGray,
+                        color: ThemeHelper.isDarkMode(context) ? kLightGray : kGray,
                         fontWeight: FontWeight.bold,
                       ),
                       hintText: intl.typeTitle,
                       autofocus: true,
-                      initialValue:
-                          context.select<CheckListValidationCubit, String>(
-                              (value) => value.state.title),
-                      onChange: (value) =>
-                          context.read<CheckListValidationCubit>().mutate(
-                                title: value,
-                              ),
+                      initialValue: context.select<CheckListValidationCubit, String>((value) => value.state.title),
+                      onChange: (value) => context.read<CheckListValidationCubit>().mutate(
+                            title: value,
+                          ),
                     ),
                   ),
                 ),
@@ -121,12 +114,9 @@ class CheckListCellCreatePage extends StatelessWidget {
               SliverPadding(
                 padding: const EdgeInsets.only(bottom: 7),
                 sliver: SliverToBoxAdapter(
-                  child: BlocBuilder<CheckListValidationCubit,
-                      CheckListValidationState>(
+                  child: BlocBuilder<CheckListValidationCubit, CheckListValidationState>(
                     builder: (context, state) {
-                      if (state.showErrors &&
-                          state.error != null &&
-                          state.error != ErrorCode.voidLinkValue) {
+                      if (state.showErrors && state.error != null && state.error != ErrorCode.voidLinkValue) {
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,11 +156,9 @@ class CheckListCellCreatePage extends StatelessWidget {
                           key: Key(index.toString()),
                           direction: DismissDirection.startToEnd,
                           onDismissed: (direction) {
-                            final noteValidationCubit =
-                                context.read<CheckListValidationCubit>();
+                            final noteValidationCubit = context.read<CheckListValidationCubit>();
 
-                            final links =
-                                List.of(noteValidationCubit.state.tiles);
+                            final links = List.of(noteValidationCubit.state.tiles);
 
                             links.removeAt(index);
 
@@ -191,25 +179,18 @@ class CheckListCellCreatePage extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                                   hintStyle: textTheme.caption!.copyWith(
-                                    color: ThemeHelper.isDarkMode(context)
-                                        ? kLightGray
-                                        : kGray,
+                                    color: ThemeHelper.isDarkMode(context) ? kLightGray : kGray,
                                     fontWeight: FontWeight.bold,
                                   ),
                                   textInputType: TextInputType.url,
-                                  hintText: index == 0
-                                      ? intl.typeCheck
-                                      : intl.anotherOne,
+                                  hintText: index == 0 ? intl.typeCheck : intl.anotherOne,
                                   initialValue: state.tiles[index].currentValue,
                                   onChange: (value) {
                                     final list = List.of(state.tiles);
 
-                                    list[index] =
-                                        CheckTile(value, tile.initialValue);
+                                    list[index] = CheckTile(value, tile.initialValue);
 
-                                    context
-                                        .read<CheckListValidationCubit>()
-                                        .mutate(
+                                    context.read<CheckListValidationCubit>().mutate(
                                           tiles: list,
                                         );
                                   },
@@ -218,8 +199,7 @@ class CheckListCellCreatePage extends StatelessWidget {
                               if (state.showErrors) ...[
                                 tile.validatedValue.fold(
                                   (failure) => FieldErrorIndicator(
-                                    message:
-                                        failure.messageCode.translate(context),
+                                    message: failure.messageCode.translate(context),
                                   ),
                                   (_) => const SizedBox(),
                                 ),
@@ -241,8 +221,7 @@ class CheckListCellCreatePage extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: InkWell(
                       onTap: () {
-                        final noteValidationCubit =
-                            context.read<CheckListValidationCubit>();
+                        final noteValidationCubit = context.read<CheckListValidationCubit>();
 
                         final links = List.of(noteValidationCubit.state.tiles);
 

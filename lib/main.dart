@@ -18,6 +18,7 @@ import 'package:producti/application/tables/logic/user/table_bloc.dart';
 import 'package:producti/domain/table/cells/table_cell.dart';
 import 'package:producti/domain/table/table.dart';
 import 'package:producti/presentation/core/widgets/app_widget.dart';
+// ignore: unnecessary_import
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -105,8 +106,7 @@ Future<void> main() async {
       ///
       /// After that adds some more time to frame for
       /// warming up and preparing for next frame.
-      WidgetsBinding.instance!
-        // ignore: invalid_use_of_protected_member
+      WidgetsBinding.instance
         ..scheduleAttachRootWidget(
           MultiRepositoryProvider(
             providers: [

@@ -23,6 +23,8 @@ class NoteValidationState extends Equatable {
     if (links.any((element) => element.validatedValue.isLeft())) {
       return ErrorCode.invalidLink;
     }
+
+    return null;
   }
 
   @override

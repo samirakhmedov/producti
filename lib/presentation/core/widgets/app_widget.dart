@@ -34,7 +34,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
   void initState() {
     /// Registeres this widget in [WidgetsBinding], that calls callbacks
     /// of that specific [BaseBinding].
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
 
     super.initState();
   }
@@ -45,7 +45,7 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
     /// widgets in [WidgetsBinding].
     ///
     /// No longer reacts on binding callbacks.
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
 
     super.dispose();
   }
@@ -79,39 +79,34 @@ class _AppWidgetState extends State<AppWidget> with WidgetsBindingObserver {
       ]);
     }
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        ScreenUtil.init(
-          constraints,
-          orientation: Orientation.portrait,
-          designSize: const Size(375, 667),
-        );
+    ScreenUtil.init(
+      context,
+      designSize: const Size(375, 667),
+    );
 
-        final language = context.select<SettingsCubit, Locale?>(
-          (value) => value.state.language,
-        );
+    final language = context.select<SettingsCubit, Locale?>(
+      (value) => value.state.language,
+    );
 
-        return MaterialApp(
-          routes: routes,
-          title: kAppName,
-          builder: (context, widget) => AppThemeWidget(child: widget!),
-          navigatorObservers: [
-            FirebaseAnalyticsObserver(analytics: analytics),
-          ],
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [
-            Locale('en', ''),
-            Locale('ru', ''),
-          ],
-          locale: language,
-          initialRoute: AppRoutes.launch,
-        );
-      },
+    return MaterialApp(
+      routes: routes,
+      title: kAppName,
+      builder: (context, widget) => AppThemeWidget(child: widget!),
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: analytics),
+      ],
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('ru', ''),
+      ],
+      locale: language,
+      initialRoute: AppRoutes.launch,
     );
   }
 }
